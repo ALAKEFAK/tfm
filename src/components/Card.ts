@@ -19,7 +19,18 @@ export const Card = Vue.component("card", {
     },
     methods: {
         onCardPlay(out: any) {
-            const playCardData = [["0", ...out[0]]]
+            const wf = this.player.waitingFor;
+            if ( ! wf) return;
+
+            var playCardIdx = -1;
+            for (var idx = 0; idx <= wf.options.length; idx++) {
+                if (wf.options[idx].title === "Play project card") {
+                    playCardIdx = idx;
+                    break;
+                }
+            }
+            if (playCardIdx < 0) return;
+            const playCardData = [[playCardIdx.toString(), ...out[0]]]
             sendPlayerInput(this.$root, this.player.id, playCardData)
         },
         getPlayCardInput: function () {
@@ -28,7 +39,7 @@ export const Card = Vue.component("card", {
             if ( ! this.allow_to_play) return false;
             
             const wf = this.player.waitingFor;
-            if (wf.title != "Take action for action phase, select one available action.") return false;
+            if ( ! wf || wf.title != "Take action for action phase, select one available action.") return false;
 
             var playCardOption = wf.options.filter((option: any) => option.title === "Play project card");
 
