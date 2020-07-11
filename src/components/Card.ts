@@ -1,106 +1,51 @@
 
 import Vue from "vue";
-
-import { IProjectCard } from "../cards/IProjectCard";
-import { ICard } from "../cards/ICard";
-import { BeginnerCorporation } from "../cards/corporation/BeginnerCorporation";
-import { ALL_PRELUDE_CORPORATIONS,
-         ALL_CORPORATION_CARDS,
-         ALL_CORP_ERA_CORPORATION_CARDS,
-         ALL_PROJECT_CARDS,
-         ALL_CORP_ERA_PROJECT_CARDS,
-         ALL_PRELUDE_CARDS,
-         ALL_PRELUDE_PROJECTS_CARDS,
-         ALL_PROMO_CORPORATIONS,
-         ALL_VENUS_CORPORATIONS,
-         ALL_VENUS_PROJECTS_CARDS,
-         ALL_COLONIES_PROJECTS_CARDS,
-         ALL_TURMOIL_PROJECTS_CARDS,
-         ALL_PROMO_PROJECTS_CARDS
-         } from "../Dealer";
-import { HTML_DATA } from "../HTML_data";
 import { CardModel } from "../models/CardModel";
+import { getCardContent, getCorporationCardByName, getProjectCardByName } from "./CardUtils";
+import { sendPlayerInput } from "./ApiClient";
 
-
-function getCorporationCardByName(cardName: string): ICard | undefined {
-    if (cardName === (new BeginnerCorporation()).name) {
-        return new BeginnerCorporation();
-    }
-    let cardFactory = ALL_CORPORATION_CARDS.find((cardFactory) => cardFactory.cardName === cardName);
-    if (cardFactory !== undefined) {
-        return new cardFactory.factory();
-    }
-    cardFactory = ALL_CORP_ERA_CORPORATION_CARDS.find((cardFactory) => cardFactory.cardName === cardName);
-    if (cardFactory !== undefined) {
-        return new cardFactory.factory();
-    }
-    cardFactory = ALL_PRELUDE_CORPORATIONS.find((cardFactory) => cardFactory.cardName === cardName);
-    if (cardFactory !== undefined) {
-        return new cardFactory.factory();
-    }
-    cardFactory = ALL_VENUS_CORPORATIONS.find((cardFactory) => cardFactory.cardName === cardName);
-    if (cardFactory !== undefined) {
-        return new cardFactory.factory();
-    }
-    cardFactory = ALL_PROMO_CORPORATIONS.find((cardFactory) => cardFactory.cardName === cardName);
-    if (cardFactory !== undefined) {
-        return new cardFactory.factory();
-    }
-    return undefined;
-}
-
-export function getProjectCardByName(cardName: string): IProjectCard | undefined {
-    let cardFactory = ALL_PRELUDE_CARDS.find((cardFactory) => cardFactory.cardName === cardName);
-    if (cardFactory !== undefined) {
-        return new cardFactory.factory();
-    }
-    cardFactory = ALL_PRELUDE_PROJECTS_CARDS.find((cf) => cf.cardName === cardName);
-    if (cardFactory !== undefined) {
-        return new cardFactory.factory();
-    }
-    cardFactory = ALL_VENUS_PROJECTS_CARDS.find((cf) => cf.cardName === cardName);
-    if (cardFactory !== undefined) {
-        return new cardFactory.factory();
-    }
-    cardFactory = ALL_COLONIES_PROJECTS_CARDS.find((cf) => cf.cardName === cardName);
-    if (cardFactory !== undefined) {
-        return new cardFactory.factory();
-    }
-    cardFactory = ALL_PROJECT_CARDS.find((cf) => cf.cardName === cardName);
-    if (cardFactory !== undefined) {
-        return new cardFactory.factory();
-    }
-    cardFactory = ALL_CORP_ERA_PROJECT_CARDS.find((cf) => cf.cardName === cardName);
-    if (cardFactory !== undefined) {
-        return new cardFactory.factory();
-    }
-    cardFactory = ALL_TURMOIL_PROJECTS_CARDS.find((cf) => cf.cardName === cardName);
-    if (cardFactory !== undefined) {
-        return new cardFactory.factory();
-    }
-    cardFactory = ALL_PROMO_PROJECTS_CARDS.find((cf) => cf.cardName === cardName);
-    if (cardFactory !== undefined) {
-        return new cardFactory.factory();
-    }    
-    return undefined;
-}
-
-function getCardContent(cardName: string): string | undefined {
-    let htmlData : string | undefined = '';
-    htmlData = HTML_DATA.get(cardName);
-    if (htmlData !== undefined) {
-        htmlData = htmlData.replace('##RESOURCES##', '');
-    }    
-    return htmlData;
-}
 
 export const Card = Vue.component("card", {
     props: [
         "card",
         "resources",
-        "player"
+        "player",
+        "allow_to_play"
     ],
+    data: function() {
+        return {
+            showHowToPayDialog: false
+        }
+    },
     methods: {
+        onCardPlay(out: any) {
+            const playCardData = [["0", ...out[0]]]
+            console.log(playCardData);
+            sendPlayerInput(this.$root, this.player.id, playCardData)
+        },
+        getPlayCardInput: function () {
+            if (this.player === undefined) return false;
+
+            if ( ! this.allow_to_play) return false;
+            
+            const wf = this.player.waitingFor;
+            if (wf.title != "Take action for action phase, select one available action.") return false;
+
+            var playCardOption = wf.options.filter((option: any) => option.title === "Play project card");
+
+            if (playCardOption.length < 1) return false;
+            playCardOption = playCardOption[0];
+            return playCardOption
+        },
+        isCardAllowedToPlay: function (): boolean {
+            const playCardOption = this.getPlayCardInput();
+
+            if ( ! playCardOption) return false;
+
+            const availableCards: Array<CardModel> = playCardOption.cards.map((icard: CardModel) => icard.name);
+
+            return availableCards.includes(this.card.name)
+        },
         getCardContent: function() {
             return getCardContent(this.card.name);
         },
@@ -121,6 +66,20 @@ export const Card = Vue.component("card", {
     },
     template: `
     <div :class="getCardCssClass(card)">
+        <div class="card-play-cont" v-if="isCardAllowedToPlay()">
+            <button class="btn btn-success card-play-button" v-if=" ! showHowToPayDialog" v-on:click="showHowToPayDialog=true">Play!</button>
+            <div v-if="showHowToPayDialog" class="card-show-how-to-pay-dialog">
+                <select-how-to-pay-for-card 
+                    :player="player"
+                    :playerinput="getPlayCardInput()"
+                    :onsave="onCardPlay"
+                    :showsave="true"
+                    :showtitle="false"
+                    :force_card="card"
+                ></select-how-to-pay-for-card>
+            </div>
+
+        </div>
         <div class="card_resources_counter" v-if="card.resources">RES:<span class="card_resources_counter--number"> {{ card.resources }}</span></div>
         <div class="card-content-wrapper" v-i18n v-html=this.getCardContent()></div>
     </div>

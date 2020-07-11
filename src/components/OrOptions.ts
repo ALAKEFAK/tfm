@@ -32,13 +32,17 @@ export const OrOptions = Vue.component("or-options", {
             children.push(createElement('label', [createElement("div", $t(this.playerinput.title))]))
         }
         const optionElements: Array<VNode> = [];
+        let hideOption = false;
         this.playerinput.options.forEach((option: any, idx: number) => {
             const domProps: {[key: string]: any} = {
                 name: "selectOption" + unique,
                 type: "radio",
                 value: String(idx)
             };
-            const displayStyle: string = this.$data.selectedOption === idx ? "block" : "none";
+
+            if (option.title === "Play project card") hideOption = true;
+
+            const displayStyle: string = (this.$data.selectedOption === idx && ! hideOption) ? "block" : "none";
             const subchildren: Array<VNode> = [];
             if (this.$data.selectedOption === idx) {
                 domProps.checked = true;
@@ -55,12 +59,27 @@ export const OrOptions = Vue.component("or-options", {
                 copy.unshift(String(idx));
                 this.onsave([copy]);
             }, false, false));
-            subchildren.push(createElement("div", { style: { display: displayStyle, marginLeft: "30px" } }, [this.$data.childComponents[this.$data.childComponents.length - 1]]));
+            subchildren.push(createElement(
+                "div", 
+                {style: { display: displayStyle, marginLeft: "30px"}}, 
+                [this.$data.childComponents[this.$data.childComponents.length - 1]]
+            ));
+
             optionElements.push(subchildren[subchildren.length - 1]);
-            children.push(createElement("div", subchildren));
-            if (this.showsave && this.$data.selectedOption === idx) {
-                children.push(createElement("div", { style: {"margin": "5px 30px 10px"}, "class": "wf-action"}, [createElement("button", { domProps: { className: "btn btn-primary" }, on: { click: () => { this.saveData(); } } }, "Save")]));
+
+            if ( ! hideOption) {
+                children.push(createElement("div", subchildren));
             }
+
+            if ( ! hideOption && this.showsave && this.$data.selectedOption === idx) {
+                children.push(createElement(
+                    "div", 
+                    {style: {"margin": "5px 30px 10px"}, "class": "wf-action"}, 
+                    [createElement("button", {domProps: {className: "btn btn-primary"}, 
+                    on: { click: () => { this.saveData(); } } }, "Save")]
+                ));
+            }
+            hideOption = false;
         });
         return createElement("div", {"class": "wf-options"}, children);
     }

@@ -13,6 +13,7 @@ import { SelectPlayer } from "./SelectPlayer";
 import { SelectSpace } from "./SelectSpace";
 import { $t } from "../directives/i18n";
 import { SelectPartyPlayer } from "./SelectPartyPlayer";
+import { sendPlayerInput } from "./ApiClient";
 
 var ui_update_timeout_id: number | undefined = undefined;
 
@@ -82,36 +83,14 @@ export const WaitingFor = Vue.component("waiting-for", {
             (this as any).waitForUpdate();
             return createElement("div", $t("Not your turn to take any actions"));
         }
-        const input = new PlayerInputFactory().getPlayerInput(createElement, this.players, this.player, this.waitingfor, (out: Array<Array<string>>) => {
-            const xhr = new XMLHttpRequest();
-            xhr.open("POST", "/player/input?id=" + (this.$parent as any).player.id);
-            xhr.responseType = "json";
-            xhr.onload = () => {
-                if (xhr.status === 200) {
-                    const root = (this.$root as any);
-                    root.screen = "empty";
-                    root.player = xhr.response;
-                    root.playerkey++;
-                    root.screen = "player-home";
-                    if (root.player.phase == "end" && window.location.pathname !== "/the-end") {
-                        (window as any).location = (window as any).location;
-                    }
-
-                } else if (xhr.status === 400 && xhr.responseType === 'json') {
-                    const element: HTMLElement | null = document.getElementById("dialog-default");
-                    const message: HTMLElement | null = document.getElementById("dialog-default-message");
-                    if (message !== null && element !== null && (element as HTMLDialogElement).showModal !== undefined) {
-                        message.innerHTML = xhr.response.message;
-                        (element as HTMLDialogElement).showModal();
-                    } else {
-                        alert(xhr.response.message);
-                    }
-                } else {
-                    alert("Error sending input");
-                }
-            }
-            xhr.send(JSON.stringify(out));  
-        }, true, true);
+        const input = new PlayerInputFactory().getPlayerInput(
+            createElement, 
+            this.players, 
+            this.player, 
+            this.waitingfor, (out: Array<Array<string>>) => {sendPlayerInput(this.$root, this.player.id, out)}, 
+            true, 
+            true
+        );
 
         return createElement("div", {"class": "wf-root"}, [input])
     }

@@ -13,15 +13,15 @@ interface SelectHowToPayForCardModel {
 }
 
 import { HowToPay } from "../inputs/HowToPay";
-import { getProjectCardByName, Card } from "./Card";
+import { getProjectCardByName } from "./CardUtils";
 import { Tags } from "../cards/Tags";
 import { PaymentWidgetMixin } from "./PaymentWidgetMixin";
 
 export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card", {
-    props: ["player", "playerinput", "onsave", "showsave", "showtitle"],
+    props: ["player", "playerinput", "onsave", "showsave", "showtitle", "force_card"],
     data: function () {
         return {
-            card: this.playerinput.cards[0],
+            card: this.force_card || this.playerinput.cards[0],
             cost: 0,
             heat: 0,
             megaCredits: 0,
@@ -31,9 +31,6 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
             floaters: 0,
             warning: undefined
         } as SelectHowToPayForCardModel;
-    },
-    components: {
-        "card": Card
     },
     mixins: [PaymentWidgetMixin],
     mounted: function () {
@@ -291,7 +288,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
 
   <div v-if="showtitle === true">{{playerinput.title}}</div>
 
-  <label v-for="availableCard in playerinput.cards" class="payments_cards">
+  <label v-for="availableCard in playerinput.cards" class="payments_cards" v-if=" ! force_card">
     <input class="hidden" type="radio" v-model="card" v-on:change="cardChanged()" :value="availableCard" />
     <card class="cardbox" :card="availableCard"></card>
   </label>
