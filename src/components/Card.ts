@@ -20,7 +20,6 @@ export const Card = Vue.component("card", {
     methods: {
         onCardPlay(out: any) {
             const playCardData = [["0", ...out[0]]]
-            console.log(playCardData);
             sendPlayerInput(this.$root, this.player.id, playCardData)
         },
         getPlayCardInput: function () {
@@ -69,6 +68,7 @@ export const Card = Vue.component("card", {
         <div class="card-play-cont" v-if="isCardAllowedToPlay()">
             <button class="btn btn-success card-play-button" v-if=" ! showHowToPayDialog" v-on:click="showHowToPayDialog=true">Play!</button>
             <div v-if="showHowToPayDialog" class="card-show-how-to-pay-dialog">
+                <div class="close-btn" v-on:click="showHowToPayDialog=false">✖</div>
                 <select-how-to-pay-for-card 
                     :player="player"
                     :playerinput="getPlayCardInput()"

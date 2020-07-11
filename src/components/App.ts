@@ -13,6 +13,7 @@ export const mainAppSettings = {
         screen: "empty",
         playerkey: 0,
         componentsVisibility: {},
+        showHowToPayDialog: false,
         game: {
             players: []
         }
