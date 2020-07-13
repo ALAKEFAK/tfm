@@ -170,6 +170,9 @@ export const PlayerHome = Vue.component("player-home", {
                     <div v-for="card in player.cardsInHand" :key="card.name" class="cardbox">
                         <card :card="card" :allow_to_play="true" :player="player"></card>
                     </div>
+                    <div v-if="player.selfReplicatingRobotsCardTarget" :key="player.selfReplicatingRobotsCardTarget.name" class="cardbox">
+                        <card :card="player.selfReplicatingRobotsCardTarget" :allow_to_play="true" :player="player" :is_self_replicating_robot_target="true"></card>
+                    </div>
                 </div>
 
                 <div class="player_home_block player_home_block--cards">

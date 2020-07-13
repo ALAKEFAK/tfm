@@ -10,7 +10,8 @@ export const Card = Vue.component("card", {
         "card",
         "resources",
         "player",
-        "allow_to_play"
+        "allow_to_play",
+        "is_self_replicating_robot_target"
     ],
     data: function() {
         return {
@@ -71,15 +72,19 @@ export const Card = Vue.component("card", {
             if (wasActivated) {
                 cssClass += " cards-action-was-used"
             }
+            if (this.is_self_replicating_robot_target) {
+                cssClass += " card-self-replicating-robot-target"
+            }
             return cssClass;
         }
     },
     template: `
     <div :class="getCardCssClass(card)">
+        <i class="card-self-replicating-robot-target-icon" v-if="is_self_replicating_robot_target"></i>
         <div class="card-play-cont" v-if="isCardAllowedToPlay()">
             <button class="btn btn-success card-play-button" v-if=" ! showHowToPayDialog" v-on:click="showHowToPayDialog=true">Play!</button>
             <div v-if="showHowToPayDialog" class="card-show-how-to-pay-dialog">
-                <div class="close-btn" v-on:click="showHowToPayDialog=false">✖</div>
+                <button class="btn btn-lg btn-error close-btn" v-on:click="showHowToPayDialog=false"><i class="icon icon-cross"></i></button>
                 <select-how-to-pay-for-card 
                     :player="player"
                     :playerinput="getPlayCardInput()"

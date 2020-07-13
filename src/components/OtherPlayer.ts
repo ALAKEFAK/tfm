@@ -61,6 +61,10 @@ export const OtherPlayer = Vue.component("other-player", {
                             <card :card="card" :player="player"></card>
                         </div>
 
+                        <div v-if="player.selfReplicatingRobotsCardTarget" :key="player.selfReplicatingRobotsCardTarget.name" class="cardbox">
+                            <card :card="player.selfReplicatingRobotsCardTarget" :allow_to_play="false" :player="player" :is_self_replicating_robot_target="true"></card>
+                        </div>
+
                         <stacked-cards :cards="getCardsByType(player.playedCards, [getAutomatedCardType(), getPreludeCardType()])" :player="player"></stacked-cards>
                         <stacked-cards :cards="getCardsByType(player.playedCards, [getEventCardType()])" :player="player"></stacked-cards>
                     </div>
