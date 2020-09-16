@@ -200,6 +200,11 @@ function loadGame(req: http.IncomingMessage, res: http.ServerResponse): void {
       const gameReq = JSON.parse(body);
 
       let game_id = gameReq.game_id;
+      let nbrSavesToDelete = gameReq.nbrSavesToDelete;
+
+      if (nbrSavesToDelete > 0) {
+        Database.getInstance().deleteGameNbrSaves(game_id, nbrSavesToDelete);
+      }
 
       const player = new Player("test", Color.BLUE, false, 0);
       const player2 = new Player("test2", Color.RED, false, 0);
