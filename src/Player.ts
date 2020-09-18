@@ -2047,7 +2047,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
     private allOtherPlayersPassed(game: Game): boolean {
       const passedPlayers = game.getPassedPlayers();
-      if ((game.getPlayers().length - passedPlayers.size) > 1) return false;
+      if ((game.getPlayers().length - passedPlayers.size) !== 1) return false;
       if (passedPlayers.has(this.id)) return false;
       return true;
     }
