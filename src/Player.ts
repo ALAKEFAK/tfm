@@ -401,6 +401,60 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
   };
 
+  // Returns true when the player has the supplied units in its inventory.
+  public hasUnits(units: Units): boolean {
+    return this.megaCredits - units.megacredits >= 0 &&
+      this.steel - units.steel >= 0 &&
+      this.titanium - units.titanium >= 0 &&
+      this.plants - units.plants >= 0 &&
+      this.energy - units.energy >= 0 &&
+      this.heat - units.heat >= 0;
+  }
+
+  public deductUnits(units: Units) {
+    this.megaCredits -= units.megacredits;
+    this.steel -= units.steel;
+    this.titanium -= units.titanium;
+    this.plants -= units.plants;
+    this.energy -= units.energy;
+    this.heat -= units.heat;
+  }
+
+  public canAdjustProduction(units: Units): boolean {
+    return this.getProduction(Resources.MEGACREDITS) + units.megacredits >= -5 &&
+      this.getProduction(Resources.STEEL) + units.steel >= 0 &&
+      this.getProduction(Resources.TITANIUM) + units.titanium >= 0 &&
+      this.getProduction(Resources.PLANTS) + units.plants >= 0 &&
+      this.getProduction(Resources.ENERGY) + units.energy >= 0 &&
+      this.getProduction(Resources.HEAT) + units.heat >= 0;
+  }
+
+  public adjustProduction(units: Units, game?: Game, fromPlayer?: Player) {
+    if (units.megacredits !== undefined) {
+      this.addProduction(Resources.MEGACREDITS, units.megacredits, game, fromPlayer);
+    }
+
+    if (units.steel !== undefined) {
+      this.addProduction(Resources.STEEL, units.steel, game, fromPlayer);
+    }
+
+    if (units.titanium !== undefined) {
+      this.addProduction(Resources.TITANIUM, units.titanium, game, fromPlayer);
+    }
+
+    if (units.plants !== undefined) {
+      this.addProduction(Resources.PLANTS, units.plants, game, fromPlayer);
+    }
+
+    if (units.energy !== undefined) {
+      this.addProduction(Resources.ENERGY, units.energy, game, fromPlayer);
+    }
+
+    if (units.heat !== undefined) {
+      this.addProduction(Resources.HEAT, units.heat, game, fromPlayer);
+    }
+  }
+
   public getActionsThisGeneration(): Set<CardName> {
     return this.actionsThisGeneration;
   }
@@ -756,14 +810,6 @@ export class Player implements ISerializable<SerializedPlayer> {
     return false;
   }
 
-  public getCard(cards: Array<IProjectCard>, cardName: string): IProjectCard {
-    const foundCard = cards.find((card) => card.name === cardName);
-    if (foundCard === undefined) {
-      throw new Error('Card not found');
-    }
-    return foundCard;
-  }
-
   private runInputCb(result: PlayerInput | undefined): void {
     if (result !== undefined) {
       this.game.defer(new DeferredAction(this, () => result));
@@ -800,7 +846,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   // This is only public for a test. It's not great.
-  // TODO(kberg): Fix taht.
+  // TODO(kberg): Fix that.
   public runInput(input: ReadonlyArray<ReadonlyArray<string>>, pi: PlayerInput): void {
     if (pi instanceof AndOptions) {
       this.checkInputLength(input, pi.options.length);
@@ -841,8 +887,17 @@ export class Player implements ISerializable<SerializedPlayer> {
       this.runInputCb(pi.cb());
     } else if (pi instanceof SelectHowToPayForProjectCard) {
       this.checkInputLength(input, 1, 2);
-      const foundCard: IProjectCard = this.getCard(pi.cards, input[0][0]);
+      const cardName = input[0][0];
+      const _data = PlayerInput.getCard(pi.cards, cardName);
+      const foundCard: IProjectCard = _data.card;
       const howToPay: HowToPay = this.parseHowToPayJSON(input[0][1]);
+      const reserveUnits = pi.reserveUnits[_data.idx];
+      if (reserveUnits.steel + howToPay.steel > this.steel) {
+        throw new Error(`${reserveUnits.steel} units of steel must be reserved for ${cardName}`);
+      }
+      if (reserveUnits.titanium + howToPay.titanium > this.titanium) {
+        throw new Error(`${reserveUnits.titanium} units of titanium must be reserved for ${cardName}`);
+      }
       this.runInputCb(pi.cb(foundCard, howToPay));
     } else if (pi instanceof SelectCard) {
       this.checkInputLength(input, 1);
@@ -854,7 +909,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       }
       const mappedCards: Array<ICard> = [];
       for (const cardName of input[0]) {
-        mappedCards.push(this.getCard(pi.cards, cardName));
+        mappedCards.push(PlayerInput.getCard(pi.cards, cardName).card);
         if (pi.enabled?.[pi.cards.findIndex((card) => card.name === cardName)] === false) {
           throw new Error('Selected unavailable card');
         }
@@ -1707,7 +1762,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   // TODO(sienmich): use options parameter
   public canAfford(cost: number, canUseSteel: boolean = false, canUseTitanium: boolean = false, canUseFloaters: boolean = false, canUseMicrobes : boolean = false, reserveUnits: Units = Units.EMPTY): boolean {
     // Check if player has the reserveUnits - required resources
-    if (!Units.hasUnits(reserveUnits, this)) {
+    if (!this.hasUnits(reserveUnits)) {
       return false;
     }
 
