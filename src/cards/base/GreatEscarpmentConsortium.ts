@@ -7,7 +7,6 @@ import {CardName} from '../../CardName';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {all} from '../Options';
 
 export class GreatEscarpmentConsortium extends Card implements IProjectCard {
   constructor() {
@@ -21,13 +20,23 @@ export class GreatEscarpmentConsortium extends Card implements IProjectCard {
         cardNumber: '061',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
-            pb.minus().steel(-1, {all}).br;
+            pb.minus().steel(-1).any.br;
             pb.plus().steel(1);
           });
         }),
         description: 'Requires that you have steel production. Decrease any steel production 1 step and increase your own 1 step.',
       },
     });
+  }
+
+  public warning?: string;
+
+  public canPlay(player: Player): boolean {
+    this.warning = undefined;
+    if (super.canPlay(player) && player.game.someoneElseHasResourceProduction(Resources.STEEL, 1, player) === false) {
+      this.warning = 'You will have to decrease your own steel production because no other player has enough.';
+    }
+    return player.getProduction(Resources.STEEL) >= 1;
   }
 
   public play(player: Player) {

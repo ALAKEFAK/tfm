@@ -1,19 +1,17 @@
-import {expect} from 'chai';
 import {Player} from '../src/Player';
-import {DEFAULT_GAME_OPTIONS, Game, GameOptions} from '../src/Game';
+import {Game, GameOptions} from '../src/Game';
 import * as constants from '../src/constants';
+import {SpaceType} from '../src/SpaceType';
+import {BoardName} from '../src/boards/BoardName';
+import {RandomMAOptionType} from '../src/RandomMAOptionType';
 import {ISpace} from '../src/boards/ISpace';
+import {AgendaStyle} from '../src/turmoil/PoliticalAgendas';
 import {Phase} from '../src/Phase';
 import {IParty} from '../src/turmoil/parties/IParty';
 import {Turmoil} from '../src/turmoil/Turmoil';
 import {TurmoilPolicy} from '../src/turmoil/TurmoilPolicy';
+import {ShuffleTileOptionType} from '../src/boards/ShuffleTileOptionType';
 import {LogMessage} from '../src/LogMessage';
-import {Log} from '../src/Log';
-import {PlayerInput} from '../src/PlayerInput';
-import {DeferredAction} from '../src/deferredActions/DeferredAction';
-import {Greens} from '../src/turmoil/parties/Greens';
-import {PoliticalAgendas} from '../src/turmoil/PoliticalAgendas';
-import {Reds} from '../src/turmoil/parties/Reds';
 
 export class TestingUtils {
   // Returns the oceans created during this operation which may not reflect all oceans.
@@ -23,29 +21,14 @@ export class TestingUtils {
       toValue = constants.MAX_OCEAN_TILES;
     }
 
-    while (player.game.board.getOceansOnBoard() < toValue) {
-      oceans.push(TestingUtils.addOcean(player));
+    for (const space of player.game.board.getSpaces(SpaceType.OCEAN, player)) {
+      if (space.tile !== undefined) continue;
+      if (player.game.board.getOceansOnBoard() >= toValue) break;
+      player.game.addOceanTile(player, space.id);
+      oceans.push(space);
     }
     return oceans;
   };
-
-  public static addGreenery(player: Player): ISpace {
-    const space = player.game.board.getAvailableSpacesForGreenery(player)[0];
-    player.game.addGreenery(player, space.id);
-    return space;
-  }
-
-  public static addOcean(player: Player): ISpace {
-    const space = player.game.board.getAvailableSpacesForOcean(player)[0];
-    player.game.addOceanTile(player, space.id);
-    return space;
-  }
-
-  public static addCity(player: Player): ISpace {
-    const space = player.game.board.getAvailableSpacesForCity(player)[0];
-    player.game.addCityTile(player, space.id);
-    return space;
-  }
 
   public static resetBoard(game: Game): void {
     game.board.spaces.forEach((space) => {
@@ -56,12 +39,45 @@ export class TestingUtils {
 
   public static setCustomGameOptions(options: Partial<GameOptions> = {}): GameOptions {
     const defaultOptions = {
-      ...DEFAULT_GAME_OPTIONS,
+      draftVariant: false,
+      initialDraftVariant: false,
+      corporateEra: true,
+      randomMA: RandomMAOptionType.NONE,
+      preludeExtension: false,
       venusNextExtension: true,
+      coloniesExtension: false,
       turmoilExtension: true,
+      boardName: BoardName.ORIGINAL,
+      showOtherPlayersVP: false,
+      customCorporationsList: [],
+      solarPhaseOption: false,
+      shuffleTileOption: ShuffleTileOptionType.NONE,
+      promoCardsOption: false,
+      communityCardsOption: false,
+      undoOption: false,
       showTimers: false,
+      startingCorporations: 2,
       includeVenusMA: true,
+      soloTR: false,
+      clonedGamedId: undefined,
+      cardsBlackList: [],
+      aresExtension: false,
       aresHazards: false,
+      fastModeOption: false,
+      removeNegativeGlobalEventsOption: false,
+      customColoniesList: [],
+      requiresVenusTrackCompletion: false,
+      politicalAgendasExtension: AgendaStyle.STANDARD,
+      moonExpansion: false,
+      requiresMoonTrackCompletion: false,
+      requiresPassword: true,
+      trajectoryExtension: false,
+      escapeVelocityMode: false,
+      escapeVelocityThreshold: undefined,
+      escapeVelocityPeriod: undefined,
+      escapeVelocityPenalty: undefined,
+      rebalancedExtension: false,
+      showAllGlobalEvents: false,
     };
 
     return Object.assign(defaultOptions, options);
@@ -94,12 +110,6 @@ export class TestingUtils {
     return action.execute();
   }
 
-  public static queueAction(player: Player, action: PlayerInput | undefined) {
-    if (action !== undefined) {
-      player.game.defer(new DeferredAction(player, () => action));
-    }
-  }
-
   public static forceGenerationEnd(game: Game) {
     while (game.deferredActions.pop() !== undefined) {};
     game.getPlayers().forEach((player) => player.pass());
@@ -108,20 +118,8 @@ export class TestingUtils {
 
   // Provides a readable version of a log message for easier testing.
   public static formatLogMessage(message: LogMessage): string {
-    return Log.applyData(message, (datum) => datum.value);
-  }
-
-  public static testRedsCosts(cb: () => boolean, player: Player, initialMegacredits: number, passingDelta: number) {
-    const turmoil = player.game.turmoil!;
-    turmoil.rulingParty = new Greens();
-    PoliticalAgendas.setNextAgenda(turmoil, player.game);
-    player.megaCredits = initialMegacredits;
-    expect(cb(), 'Greens in power').is.true;
-    turmoil.rulingParty = new Reds();
-    PoliticalAgendas.setNextAgenda(turmoil, player.game);
-    player.megaCredits = initialMegacredits + passingDelta - 1;
-    expect(cb(), 'Reds in power, not enough money').is.false;
-    player.megaCredits = initialMegacredits + passingDelta;
-    expect(cb(), 'Reds in power, enough money').is.true;
+    return message.message.replace(/\$\{(\d{1,2})\}/gi, (_match, idx) => {
+      return message.data[idx].value;
+    });
   }
 }

@@ -8,26 +8,23 @@ import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('LocalHeatTrapping', () => {
+describe('LocalHeatTrapping', function() {
   let card : LocalHeatTrapping; let player : Player;
 
-  beforeEach(() => {
+  beforeEach(function() {
     card = new LocalHeatTrapping();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Cannot play without 5 heat', () => {
-    player.cardsInHand = [card];
-    expect(player.getPlayableCards()).is.empty;
+  it('Can\'t play without 5 heat', function() {
+    expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play - no animal targets', () => {
+  it('Should play - no animal targets', function() {
     player.heat = 5;
-    player.megaCredits = 1;
-    player.cardsInHand = [card];
-    expect(player.getPlayableCards()).does.include(card);
+    expect(card.canPlay(player)).is.true;
 
     card.play(player);
     player.playedCards.push(card);
@@ -35,7 +32,7 @@ describe('LocalHeatTrapping', () => {
     expect(player.heat).to.eq(0);
   });
 
-  it('Should play - single animal target', () => {
+  it('Should play - single animal target', function() {
     player.heat = 5;
     const pets = new Pets();
     player.playedCards.push(card, pets);
@@ -52,7 +49,7 @@ describe('LocalHeatTrapping', () => {
     expect(player.getResourcesOnCard(pets)).to.eq(2);
   });
 
-  it('Should play - multiple animal targets', () => {
+  it('Should play - multiple animal targets', function() {
     player.heat = 5;
     const pets = new Pets();
     const fish = new Fish();
@@ -64,16 +61,13 @@ describe('LocalHeatTrapping', () => {
     expect(player.getResourcesOnCard(fish)).to.eq(2);
   });
 
-  it('Cannot play as Helion if not enough heat left after paying for card', () => {
+  it('Can\'t play as Helion if not enough heat left after paying for card', function() {
     const corp = new Helion();
     corp.play(player);
     player.corporationCard = corp;
 
     player.megaCredits = 0;
     player.heat = 5; // have to pay for card with 1 heat
-    player.cardsInHand = [card];
-    expect(player.getPlayableCards()).does.not.include(card);
-    player.megaCredits = 1;
-    expect(player.getPlayableCards()).does.include(card);
+    expect(card.canPlay(player)).is.not.true;
   });
 });

@@ -15,7 +15,6 @@ import {StealResources} from '../../deferredActions/StealResources';
 import {Size} from '../render/Size';
 import {Phase} from '../../Phase';
 import {Card} from '../Card';
-import {all} from '../Options';
 
 export class TheDarksideofTheMoonSyndicate extends Card implements CorporationCard {
   constructor() {
@@ -33,13 +32,13 @@ export class TheDarksideofTheMoonSyndicate extends Card implements CorporationCa
           b.text('You start with 40 M€ and 2 syndicate fleets on this card.', Size.SMALL, false, false).br;
           b.titanium(1).arrow(Size.SMALL).syndicateFleet()
             .slash(Size.SMALL)
-            .syndicateFleet().arrow(Size.SMALL).text('steal', Size.TINY).megacredits(8, {all}).br;
+            .syndicateFleet().arrow(Size.SMALL).text('steal', Size.TINY).megacredits(8).any.br;
           b.text('Action: Spend 1 titanium to add 1 syndicate fleet on this card OR remove 1 syndicate fleet from this card to steal 8M€ from any opponent.', Size.TINY, false, false).br;
           b
             .effect('When you place a tile on the Moon, steal 2 M€ from opponents for each of their tiles next to yours.', (eb) => {
-              eb.emptyTile('normal', {size: Size.SMALL, secondaryTag: Tags.MOON})
+              eb.emptyTile('normal', Size.SMALL).secondaryTag(Tags.MOON)
                 .startEffect
-                .text('STEAL').megacredits(2, {all}).slash().emptyTile('normal', {size: Size.SMALL}).emptyTile('normal', {size: Size.SMALL, all});
+                .text('STEAL').megacredits(2).any.slash().emptyTile('normal', Size.SMALL).emptyTile('normal', Size.SMALL).any;
             });
         }),
       },
@@ -96,9 +95,7 @@ export class TheDarksideofTheMoonSyndicate extends Card implements CorporationCa
       const costs = new Multiset<Player>();
       MoonExpansion.moonData(game).moon.getAdjacentSpaces(space).forEach((space) => {
         if (space.tile !== undefined && space.player !== undefined && space.player !== activePlayer) {
-          if (!space.player.megaCreditsAreProtected()) {
-            costs.add(space.player, 2);
-          }
+          costs.add(space.player, 2);
         }
       });
       costs.entries().forEach(([target, qty]) => {

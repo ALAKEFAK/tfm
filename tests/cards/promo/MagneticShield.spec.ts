@@ -16,14 +16,16 @@ describe('MagneticShield', function() {
   });
 
   it('Can\'t play if not enough power tags available', function() {
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    player.playedCards.push(new PowerPlant());
+    player.playedCards.push(new PowerPlant());
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
     player.playedCards.push(new PowerPlant());
     player.playedCards.push(new PowerPlant());
     player.playedCards.push(new PowerPlant());
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     card.play(player);
     expect(player.getTerraformRating()).to.eq(24);

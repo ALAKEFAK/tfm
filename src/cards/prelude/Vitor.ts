@@ -60,19 +60,9 @@ export class Vitor extends Card implements CorporationCard {
   }
 
   public onCardPlayed(player: Player, card: IProjectCard) {
-    if (!player.isCorporation(this.name)) {
-      return;
+    if (player.isCorporation(this.name) && card.getVictoryPoints !== undefined && card.getVictoryPoints(player) >= 0) {
+      player.megaCredits += 3;
     }
-    const victoryPoints = card.metadata.victoryPoints;
-    if (victoryPoints === undefined) return;
-    if (typeof(victoryPoints) === 'number') {
-      if (victoryPoints <= 0) return;
-    } else {
-      // victoryPoints type is CardRenderDynamicVictoryPoints
-      if (victoryPoints.points <= 0) return;
-    }
-
-    player.megaCredits += 3;
   }
 
   public play(_player: Player) {

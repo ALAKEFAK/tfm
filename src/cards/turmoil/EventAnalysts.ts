@@ -7,7 +7,6 @@ import {Player} from '../../Player';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
-import {Turmoil} from '../../turmoil/Turmoil';
 
 export class EventAnalysts extends Card implements IProjectCard {
   constructor() {
@@ -22,14 +21,16 @@ export class EventAnalysts extends Card implements IProjectCard {
         description: 'Requires that Scientists are ruling or that you have 2 delegates there.',
         cardNumber: 'T05',
         renderData: CardRenderer.builder((b) => b.effect('You have +1 influence.', (be) => {
-          be.startEffect.influence();
+          be.startEffect.influence(1);
         })),
       },
     });
   }
 
   public play(player: Player) {
-    Turmoil.getTurmoil(player.game).addInfluenceBonus(player);
+    if (player.game.turmoil) {
+      player.game.turmoil.addInfluenceBonus(player);
+    }
     return undefined;
   }
 }

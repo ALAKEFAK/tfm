@@ -15,9 +15,8 @@ export class Airliners extends Card implements IProjectCard {
       cost: 11,
       name: CardName.AIRLINERS,
       cardType: CardType.AUTOMATED,
-      requirements: CardRequirements.builder((b) => b.floaters(3)),
-      victoryPoints: 1,
 
+      requirements: CardRequirements.builder((b) => b.floaters(3)),
       metadata: {
         cardNumber: 'C01',
         description: 'Requires that you have 3 floaters. Increase your M€ production 2 steps. Add 2 floaters to ANY card.',
@@ -25,6 +24,7 @@ export class Airliners extends Card implements IProjectCard {
           b.production((pb) => pb.megacredits(2)).br;
           b.floaters(2).asterix();
         }),
+        victoryPoints: 1,
       },
     });
   }
@@ -33,5 +33,8 @@ export class Airliners extends Card implements IProjectCard {
     player.addProduction(Resources.MEGACREDITS, 2);
     player.game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {count: 2}));
     return undefined;
+  }
+  public getVictoryPoints() {
+    return 1;
   }
 }

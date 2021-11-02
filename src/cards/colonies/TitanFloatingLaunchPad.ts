@@ -23,23 +23,23 @@ export class TitanFloatingLaunchPad extends Card implements IProjectCard, IResou
       name: CardName.TITAN_FLOATING_LAUNCHPAD,
       cardType: CardType.ACTIVE,
       resourceType: ResourceType.FLOATER,
-      victoryPoints: 1,
 
       metadata: {
         cardNumber: 'C44',
         renderData: CardRenderer.builder((b) => {
           b.action(undefined, (eb) => {
-            eb.empty().startAction.floaters(1, {secondaryTag: Tags.JOVIAN}).nbsp.or();
+            eb.empty().startAction.floaters(1).secondaryTag(Tags.JOVIAN).nbsp.or();
           }).br;
           b.action('Add 1 floater to ANY JOVIAN CARD or spend 1 floater here to trade for free.', (eb) => {
             eb.floaters(1).startAction.trade();
           }).br.br;
-          b.floaters(2, {secondaryTag: Tags.JOVIAN});
+          b.floaters(2).secondaryTag(Tags.JOVIAN);
         }),
         description: {
           text: 'Add two floaters to ANY JOVIAN CARD.',
           align: 'left',
         },
+        victoryPoints: 1,
       },
     });
   }
@@ -53,12 +53,16 @@ export class TitanFloatingLaunchPad extends Card implements IProjectCard, IResou
   public action(player: Player) {
     const openColonies = player.game.colonies.filter((colony) => colony.isActive && colony.visitor === undefined);
 
-    if (this.resourceCount === 0 || openColonies.length === 0 || player.getFleetSize() <= player.tradesThisGeneration) {
+    if (this.resourceCount === 0 || openColonies.length === 0 || player.getFleetSize() <= player.tradesThisGeneration || player.hasTradedThisTurn) {
       player.game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {restrictedTag: Tags.JOVIAN, title: 'Add 1 floater to a Jovian card'}));
       return undefined;
     }
 
     return new OrOptions(
+      new SelectOption('Add 1 floater to a Jovian card', 'Add floater', () => {
+        player.game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {restrictedTag: Tags.JOVIAN}));
+        return undefined;
+      }),
       new SelectOption('Remove 1 floater on this card to trade for free', 'Remove floater', () => {
         const coloniesModel: Array<ColonyModel> = player.game.getColoniesModel(openColonies);
 
@@ -82,15 +86,15 @@ export class TitanFloatingLaunchPad extends Card implements IProjectCard, IResou
 
         return undefined;
       }),
-      new SelectOption('Add 1 floater to a Jovian card', 'Add floater', () => {
-        player.game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {restrictedTag: Tags.JOVIAN}));
-        return undefined;
-      }),
     );
   }
 
   public play(player: Player) {
     player.game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {count: 2, restrictedTag: Tags.JOVIAN}));
     return undefined;
+  }
+
+  public getVictoryPoints(): number {
+    return 1;
   }
 }

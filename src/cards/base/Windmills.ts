@@ -18,7 +18,6 @@ export class Windmills extends Card implements IProjectCard {
       tags: [Tags.ENERGY, Tags.BUILDING],
       cost: 6,
       productionBox: Units.of({energy: 1}),
-      victoryPoints: 1,
 
       requirements: CardRequirements.builder((b) => b.oxygen(7)),
       metadata: {
@@ -27,6 +26,7 @@ export class Windmills extends Card implements IProjectCard {
           b.production((pb) => pb.energy(1));
         }),
         description: 'Requires 7% oxygen. Increase your Energy production 1 step.',
+        victoryPoints: 1,
       },
     });
   }
@@ -34,5 +34,8 @@ export class Windmills extends Card implements IProjectCard {
   public play(player: Player): PlayerInput | undefined {
     player.addProduction(Resources.ENERGY, 1);
     return undefined;
+  }
+  public getVictoryPoints() {
+    return 1;
   }
 }

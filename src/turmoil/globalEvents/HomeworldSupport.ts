@@ -5,13 +5,6 @@ import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {Tags} from '../../cards/Tags';
 import {Turmoil} from '../Turmoil';
-import {CardRenderer} from '../../cards/render/CardRenderer';
-import {Size} from '../../cards/render/Size';
-import {played} from '../../cards/Options';
-
-const RENDER_DATA = CardRenderer.builder((b) => {
-  b.megacredits(2).slash().earth(1, {played}).influence({size: Size.SMALL});
-});
 
 export class HomeworldSupport implements IGlobalEvent {
     public name = GlobalEventName.HOMEWORLD_SUPPORT;
@@ -26,5 +19,4 @@ export class HomeworldSupport implements IGlobalEvent {
         }
       });
     }
-    public renderData = RENDER_DATA;
 }

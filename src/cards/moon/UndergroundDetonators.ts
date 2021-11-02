@@ -11,7 +11,6 @@ export class UndergroundDetonators extends Card {
       name: CardName.UNDERGROUND_DETONATORS,
       cardType: CardType.EVENT,
       cost: 9,
-      tr: {moonMining: 1},
 
       metadata: {
         description: 'Gain 1 steel and 1 titanium. Raise the Mining Rate 1 step.',

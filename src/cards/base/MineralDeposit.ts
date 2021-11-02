@@ -4,7 +4,6 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {digit} from '../Options';
 
 export class MineralDeposit extends Card implements IProjectCard {
   constructor() {
@@ -15,7 +14,7 @@ export class MineralDeposit extends Card implements IProjectCard {
 
       metadata: {
         cardNumber: '062',
-        renderData: CardRenderer.builder((b) => b.steel(5, {digit})),
+        renderData: CardRenderer.builder((b) => b.steel(5).digit),
         description: 'Gain 5 steel.',
       },
     });

@@ -1,4 +1,4 @@
-#player-home, #spectator-home {
+#player-home {
     padding-left: 20px;
     padding-top: 20px;
     background: linear-gradient(transparent, #000), url(assets/stars.jpg);
@@ -189,9 +189,17 @@
     padding-left: 8px;
 }
 
+
 .tag-cards {
     background-image: url("./assets/sidebar/preferences_cards.png");
     background-color: #000 !important;
+    background-position: 0px;
+}
+.tag-escape {
+    background-image: url(./assets/expansion_icons/expansion_icon_escapeVelocity.png);
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
     background-position: 0px;
 }
 .tag-vp {
@@ -648,46 +656,6 @@
             background-image: url(assets/ma/venuphile.png);
         }
 
-        .ma-name--economizer {
-            background-image: url(assets/ma/economizer.png);
-        }
-
-        .ma-name--pioneer {
-            background-image: url(assets/ma/pioneer.png);
-        }
-
-        .ma-name--land-specialist {
-            background-image: url(assets/ma/land-specialist.png);
-        }
-
-        .ma-name--martian {
-            background-image: url(assets/ma/martian.png);
-        }
-
-        .ma-name--businessperson {
-            background-image: url(assets/ma/businessperson.png);
-        }
-
-        .ma-name--cosmic-settler {
-            background-image: url(assets/ma/cosmic-settler.png);
-        }
-
-        .ma-name--botanist {
-            background-image: url(assets/ma/botanist.png);
-        }
-
-        .ma-name--coordinator {
-            background-image: url(assets/ma/coordinator.png);
-        }
-
-        .ma-name--zoologist {
-            background-image: url(assets/ma/zoologist.png);
-        }
-
-        .ma-name--manufacturer {
-            background-image: url(assets/ma/manufacturer.png);
-        }
-
         .ma-description {
             display: inline-block;
             width: 140px;
@@ -698,6 +666,120 @@
             line-height: 15px;
             text-align: center;
 
+        }
+
+        // Trajectory Milestones and Awards
+
+        .ma-name--urban-planner {
+            background-image: url(assets/ma/urban-planner.png);
+        }
+
+        .ma-name--edge-dancer {
+            background-image: url(assets/ma/edge-dancer.png);
+        }
+
+        .ma-name--equatorial {
+            background-image: url(assets/ma/equatorial.png);
+        }
+
+        .ma-name--highlander {
+            background-image: url(assets/ma/highlander.png);
+        }
+
+        .ma-name--adapter {
+            background-image: url(assets/ma/adapter.png);
+        }
+
+        .ma-name--importer {
+            background-image: url(assets/ma/importer.png);
+        }
+
+        .ma-name--coordinator {
+            background-image: url(assets/ma/coordinator.png);
+        }
+
+        .ma-name--biologist {
+            background-image: url(assets/ma/biologist.png);
+        }
+
+        .ma-name--energetic {
+            background-image: url(assets/ma/energetic.png);
+        }
+
+        .ma-name--front-runner {
+            background-image: url(assets/ma/front-runner.png);
+        }
+        
+        .ma-name--morning-star {
+            background-image: url(assets/ma/morning-star.png);
+        }
+        
+        .ma-name--terran {
+            background-image: url(assets/ma/terran.png);
+        }
+        
+        .ma-name--astronomer {
+            background-image: url(assets/ma/astronomer.png);
+        }
+
+        .ma-name--spacefarer {
+            background-image: url(assets/ma/spacefarer.png);
+        }
+        
+        .ma-name--irrigator {
+            background-image: url(assets/ma/irrigator.png);
+        }
+        
+        .ma-name--pioneer {
+            background-image: url(assets/ma/pioneer.png);
+        }
+        
+        .ma-name--minimalist {
+            background-image: url(assets/ma/minimalist.png);
+        }
+        
+        .ma-name--farmer {
+            background-image: url(assets/ma/farmer.png);
+        }
+
+        .ma-name--smith {
+            background-image: url(assets/ma/smith.png);
+        }
+
+        .ma-name--collector {
+            background-image: url(assets/ma/collector.png);
+        }
+
+        .ma-name--colonizer {
+            background-image: url(assets/ma/colonizer.png);
+        }
+
+        .ma-name--setter {
+            background-image: url(assets/ma/setter.png);
+        }
+
+        .ma-name--sapling {
+            background-image: url(assets/ma/sapling.png);
+        }
+
+        .ma-name--naturalist {
+            background-image: url(assets/ma/naturalist.png);
+        }
+
+        .ma-name--originalist {
+            background-image: url(assets/ma/originalist.png);
+        }
+
+        .ma-name--microeconomist {
+            background-image: url(assets/ma/microeconomist.png);
+        }
+
+        .ma-name--distributer {
+            background-image: url(assets/ma/distributer.png);
+        }
+        
+        .ma-name--tropicalist {
+            background-image: url(assets/ma/tropicalist.png);
         }
     }
 
@@ -784,6 +866,7 @@
     }
     .accordion-body {
         padding-left: 40px;
+        max-height: 60rem !important;
     }
 }
 
@@ -899,7 +982,7 @@
         cursor: pointer;
         margin-top: 12px;
         border-radius: 0 0 20px 0;
-
+        
         img {
             width: 20px;
         }
@@ -953,7 +1036,7 @@
         font-weight: bold;
         margin-top: 12px;
         font-size: 16px;
-    }
+    } 
 }
 
 .hiding-card-button {
@@ -1015,4 +1098,15 @@
         font-family: Prototype;
         color: #000;
     }
+}
+
+.unlock-account {
+    font-size: 25px;
+    text-align: center;
+    padding: 15px 100px 40px 100px;
+    margin-bottom: 40px;
+}
+.password-warning {
+    font-size: large;
+    padding-bottom: 40px;
 }

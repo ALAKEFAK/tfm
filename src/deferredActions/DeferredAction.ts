@@ -5,6 +5,7 @@ export enum Priority {
   COST, // Cost of a blue card action. Must happen before the effects.
   OPPONENT_TRIGGER, // Any effect from one of your opponent's card that triggers during your turn.
   DISCARD_BEFORE_DRAW, // When you must discard before you can draw. Mars University, Sponsored Academies.
+  SELECT_MINING_GUILD_BONUS, // When you must discard before you can draw. Mars University, Sponsored Academies.
   DRAW_CARDS,
   BUILD_COLONY,
   INCREASE_COLONY_TRACK,

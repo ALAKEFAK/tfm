@@ -12,11 +12,11 @@ describe('SupportedResearch', function() {
     const redPlayer = TestPlayers.RED.newPlayer();
     const gameOptions = TestingUtils.setCustomGameOptions();
     const game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
 
     const scientists = game.turmoil!.getPartyByName(PartyName.SCIENTISTS)!;
     scientists.delegates.push(player.id, player.id);
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     card.play(player);
     expect(player.cardsInHand).has.lengthOf(2);

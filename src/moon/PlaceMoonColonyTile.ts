@@ -5,19 +5,14 @@ import {MoonExpansion} from './MoonExpansion';
 
 export class PlaceMoonColonyTile implements DeferredAction {
   public priority = Priority.DEFAULT;
-
   constructor(
     public player: Player,
     public title: string = 'Select a space on the Moon for a colony tile.',
   ) {}
 
-  protected getSpaces() {
-    const moonData = MoonExpansion.moonData(this.player.game);
-    return moonData.moon.getAvailableSpacesOnLand(this.player);
-  }
-
   public execute() {
-    const spaces = this.getSpaces();
+    const moonData = MoonExpansion.moonData(this.player.game);
+    const spaces = moonData.moon.getAvailableSpacesOnLand(this.player);
 
     if (spaces.length === 0) {
       return undefined;

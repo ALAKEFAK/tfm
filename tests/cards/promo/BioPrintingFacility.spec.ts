@@ -37,7 +37,6 @@ describe('BioPrintingFacility', function() {
   it('Should act - single target', function() {
     const smallanimals = new SmallAnimals();
     player.playedCards.push(smallanimals);
-    player.energy = 2;
 
     const action = card.action(player);
     expect(action instanceof OrOptions).is.true;
@@ -54,7 +53,6 @@ describe('BioPrintingFacility', function() {
     const smallanimals = new SmallAnimals();
     const fish = new Fish();
     player.playedCards.push(smallanimals, fish);
-    player.energy = 2;
 
     const action = card.action(player);
     expect(action instanceof OrOptions).is.true;

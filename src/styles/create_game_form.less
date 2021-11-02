@@ -27,8 +27,9 @@
 }
 
 .create-game-player {
-    padding: 25px;
-    margin: 10px 0px 10px 15px
+    padding: 15px;
+    margin: 10px 0px 10px 15px;
+    border-radius: 10px;
 }
 
 .create-game-solo-player {
@@ -44,7 +45,7 @@
     margin-bottom: 10px;
 }
 
-.create-game--block {
+.create-game--block {	 
     margin: 16px 16px 0 18px;
     padding: 20px;
     border-radius: 10px;
@@ -66,11 +67,14 @@
     padding: 0 0 25px 25px;
 }
 
-.create-game-corporations-count {
-    width: 80px;
-    margin-right: 10px;
-    height: 40px;
-    padding-left: 30px;
+.startingCorps-checkbox {
+    background: none !important;
+    margin: 0 -10px !important;
+}
+
+.corporation-count {
+    display: inline !important;
+    margin: 0 10px 0 -5px !important;
 }
 
 .player-handicap {
@@ -101,9 +105,9 @@
     background:rgba(148, 148, 148, 0.5);
     height: 3px;
     line-height: 3px;
-    width: 100%;
+    width: 100%;	
     margin-top: 16px;
-    margin-bottom: 8px;
+    margin-bottom: 8px;	
 }
 
 .create-game-subsection-label {
@@ -203,6 +207,18 @@
 .create-game-page-column .create-game-elysium {
     color: @board-elysium;
 }
+.create-game-page-column .create-game-amazonis {
+    color: @board-amazonis;
+}
+.create-game-page-column .create-game-arabia_terra {
+    color: @board-arabia_terra;
+}
+.create-game-page-column .create-game-vastitas_borealis {
+    color: @board-vastitas_borealis;
+}
+.create-game-page-column .create-game-terra_cimmeria {
+    color: @board-terra_cimmeria;
+}
 .create-game-page-column .create-game-random {
     color: rgb(106,106,106);
 }
@@ -272,13 +288,13 @@
     margin-top: 10px;
 }
 
-.create-game-page-color-row div > input[type="radio"] {
+.create-game-page-color-row > input[type="radio"] {
     opacity: 0;
     position: fixed;
     width: 0;
 }
 
-.create-game-page-color-row div > label {
+.create-game-page-color-row > label {
     display: inline-block;
     width: 40px;
     height: 40px;
@@ -289,12 +305,12 @@
     margin: 0px 0px;
     cursor: pointer;
 }
-
+  
 .create-game-page-color-row label:hover {
     background-color:rgba(0,0,0,.1)
 }
 
-
+  
 .create-game-page-color-row input[type="radio"]:checked + label {
     background-color: rgba(0,0,0,.3);
 }
@@ -340,7 +356,7 @@
 .agendas-text {
     font-size: 22px;
 }
-
+  
 .create-game-colorbox {
     width: 24px;
     height: 24px;

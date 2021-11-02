@@ -7,7 +7,6 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
 import {MoonCard} from './MoonCard';
 
-// TODO(kberg): Add a test for how this card operates with Reds. It will be a good verification.
 export class AlgaeBioreactors extends MoonCard {
   constructor() {
     super({
@@ -16,7 +15,6 @@ export class AlgaeBioreactors extends MoonCard {
       tags: [Tags.PLANT],
       cost: 9,
       productionBox: Units.of({plants: -1}),
-      tr: {moonColony: 1, oxygen: 1},
 
       metadata: {
         description: 'Decrease your plant production 1 step. Raise the Colony Rate 1 step and oxygen 1%.',

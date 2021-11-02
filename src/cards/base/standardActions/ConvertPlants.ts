@@ -34,14 +34,14 @@ export class ConvertPlants extends StandardActionCard {
     if (player.game.getOxygenLevel() === MAX_OXYGEN_LEVEL) {
       return true;
     }
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) {
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
       return player.canAfford(REDS_RULING_POLICY_COST);
     }
     return true;
   }
 
   public action(player: Player) {
-    return new SelectSpace(
+    const convertPlant = new SelectSpace(
       `Convert ${player.plantsNeededForGreenery} plants into greenery`,
       player.game.board.getAvailableSpacesForGreenery(player),
       (space: ISpace) => {
@@ -51,5 +51,12 @@ export class ConvertPlants extends StandardActionCard {
         return undefined;
       },
     );
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
+      if (player.game.getOxygenLevel() < MAX_OXYGEN_LEVEL) {
+        convertPlant.title += ' (Reds are ruling)';
+        convertPlant.buttonDanger = true;
+      }
+    }
+    return convertPlant;
   }
 }

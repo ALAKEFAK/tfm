@@ -7,7 +7,6 @@ import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
-import {played} from '../Options';
 
 export class Shuttles extends Card implements IProjectCard {
   constructor() {
@@ -16,7 +15,6 @@ export class Shuttles extends Card implements IProjectCard {
       name: CardName.SHUTTLES,
       tags: [Tags.SPACE],
       cost: 10,
-      victoryPoints: 1,
 
       requirements: CardRequirements.builder((b) => b.oxygen(5)),
       cardDiscount: {tag: Tags.SPACE, amount: 2},
@@ -24,7 +22,7 @@ export class Shuttles extends Card implements IProjectCard {
         cardNumber: '166',
         renderData: CardRenderer.builder((b) => {
           b.effect('When you play a Space card, you pay 2 M€ less for it.', (eb) => {
-            eb.space({played}).startEffect.megacredits(-2);
+            eb.space().played.startEffect.megacredits(-2);
           }).br;
           b.production((pb) => {
             pb.minus().energy(1).nbsp;
@@ -35,11 +33,12 @@ export class Shuttles extends Card implements IProjectCard {
           text: 'Requires 5% oxygen. Decrease your Energy production 1 step and increase your M€ production 2 steps.',
           align: 'left',
         },
+        victoryPoints: 1,
       },
     });
   }
   public canPlay(player: Player): boolean {
-    return player.getProduction(Resources.ENERGY) >= 1;
+    return super.canPlay(player) && player.getProduction(Resources.ENERGY) >= 1;
   }
 
 
@@ -53,5 +52,8 @@ export class Shuttles extends Card implements IProjectCard {
     player.addProduction(Resources.ENERGY, -1);
     player.addProduction(Resources.MEGACREDITS, 2);
     return undefined;
+  }
+  public getVictoryPoints() {
+    return 1;
   }
 }

@@ -8,11 +8,13 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {PlaceMoonRoadTile} from '../../moon/PlaceMoonRoadTile';
 import {Units} from '../../Units';
 import {SpaceType} from '../../SpaceType';
+import {IProjectCard} from '../IProjectCard';
+import {IMoonCard} from './IMoonCard';
 import {TileType} from '../../TileType';
 import {MoonCard} from './MoonCard';
 import {AltSecondaryTag} from '../render/CardRenderItem';
 
-export class MareSerenitatisMine extends MoonCard {
+export class MareSerenitatisMine extends MoonCard implements IProjectCard, IMoonCard {
   constructor() {
     super({
       name: CardName.MARE_SERENITATIS_MINE,
@@ -20,8 +22,6 @@ export class MareSerenitatisMine extends MoonCard {
       tags: [Tags.MOON, Tags.BUILDING],
       cost: 21,
       productionBox: Units.of({steel: 1, titanium: 1}),
-      reserveUnits: Units.of({steel: 1, titanium: 2}),
-      tr: {moonMining: 1, moonLogistics: 1},
 
       metadata: {
         description: 'Spend 2 titanium and 1 steel. Increase your steel and titanium production 1 step ' +
@@ -30,10 +30,11 @@ export class MareSerenitatisMine extends MoonCard {
         renderData: CardRenderer.builder((b) => {
           b.minus().titanium(2).minus().steel(1).br;
           b.production((pb) => pb.steel(1).titanium(1)).br;
-          b.moonMine({secondaryTag: AltSecondaryTag.MOON_MINING_RATE}).asterix().nbsp.moonRoad({secondaryTag: AltSecondaryTag.MOON_MINING_RATE}).asterix();
+          b.moonMine().secondaryTag(AltSecondaryTag.MOON_MINING_RATE).asterix().nbsp.moonRoad().secondaryTag(AltSecondaryTag.MOON_MINING_RATE).asterix();
         }),
       },
     }, {
+      reserveUnits: Units.of({titanium: 2, steel: 1}),
       tilesBuilt: [TileType.MOON_MINE, TileType.MOON_ROAD],
     });
   }

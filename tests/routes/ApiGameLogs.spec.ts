@@ -75,8 +75,8 @@ describe('ApiGameLogs', function() {
     ApiGameLogs.INSTANCE.get(req, res.hide(), ctx);
     const messages = JSON.parse(res.content);
     expect(messages.length).gt(1);
-    expect(messages[messages.length - 1].message).eq('Generation ${0}');
-    expect(messages[messages.length - 1].data[0].value).eq('1');
+    expect(messages[messages.length - 3].message).eq('Generation ${0}');
+    expect(messages[messages.length - 3].data[0].value).eq('1');
   });
 
   it('pulls logs for missing generation', () => {

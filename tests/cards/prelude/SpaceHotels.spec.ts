@@ -14,12 +14,12 @@ describe('SpaceHotels', function() {
 
   it('Can\'t play', function() {
     player.playedCards.push(card);
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
     player.playedCards.push(card, card);
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     card.play(player);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(4);

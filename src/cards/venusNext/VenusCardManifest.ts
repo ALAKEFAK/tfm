@@ -56,7 +56,6 @@ import {VenusSoils} from './VenusSoils';
 import {VenusWaystation} from './VenusWaystation';
 import {Viron} from './Viron';
 import {WaterToVenus} from './WaterToVenus';
-import {AirScrappingStandardProjectVariant} from './AirScrappingStandardProjectVariant';
 
 export const VENUS_CARD_MANIFEST = new CardManifest({
   module: GameModule.Venus,
@@ -113,7 +112,6 @@ export const VENUS_CARD_MANIFEST = new CardManifest({
   ],
   standardProjects: [
     {cardName: CardName.AIR_SCRAPPING_STANDARD_PROJECT, Factory: AirScrappingStandardProject},
-    {cardName: CardName.AIR_SCRAPPING_STANDARD_PROJECT_VARIANT, Factory: AirScrappingStandardProjectVariant},
   ],
 
   corporationCards: [

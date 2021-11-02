@@ -14,7 +14,6 @@ export class VestaShipyard extends Card implements IProjectCard {
       name: CardName.VESTA_SHIPYARD,
       tags: [Tags.JOVIAN, Tags.SPACE],
       cost: 15,
-      victoryPoints: 1,
 
       metadata: {
         cardNumber: '057',
@@ -22,8 +21,12 @@ export class VestaShipyard extends Card implements IProjectCard {
           b.production((pb) => pb.titanium(1));
         }),
         description: 'Increase your titanium production 1 step.',
+        victoryPoints: 1,
       },
     });
+  }
+  public getVictoryPoints(): number {
+    return 1;
   }
   public play(player: Player): undefined {
     player.addProduction(Resources.TITANIUM, 1);

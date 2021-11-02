@@ -7,7 +7,6 @@ import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {CorporationCard} from '../corporation/CorporationCard';
 import {IActionCard} from '../ICard';
-import {all} from '../Options';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tags} from '../Tags';
@@ -20,15 +19,13 @@ export class LunaHyperloopCorporation extends Card implements IActionCard, Corpo
       tags: [Tags.MOON, Tags.BUILDING],
       startingMegaCredits: 38,
 
-      victoryPoints: 'special',
-
       metadata: {
         description: 'You start with 38 M€ and 4 steel.',
         cardNumber: '',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(38).steel(4).br;
           b.action('Gain 1 M€ for each road tile on the Moon.', (eb) => {
-            eb.empty().startAction.megacredits(1).slash().moonRoad({all});
+            eb.empty().startAction.megacredits(1).slash().moonRoad().any;
           }).br,
           b.vpText('1 VP for each road tile on the Moon.').br;
         }),

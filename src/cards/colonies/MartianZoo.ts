@@ -9,7 +9,6 @@ import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../Resources';
-import {all, played} from '../Options';
 
 export class MartianZoo extends Card implements IProjectCard, IResourceCard {
   constructor() {
@@ -19,14 +18,13 @@ export class MartianZoo extends Card implements IProjectCard, IResourceCard {
       name: CardName.MARTIAN_ZOO,
       cardType: CardType.ACTIVE,
       resourceType: ResourceType.ANIMAL,
-      requirements: CardRequirements.builder((b) => b.cities(2, {all})),
-      victoryPoints: 1,
 
+      requirements: CardRequirements.builder((b) => b.cities(2).any()),
       metadata: {
         cardNumber: 'C24',
         renderData: CardRenderer.builder((b) => {
           b.effect('When you play an Earth tag, place an animal here.', (eb) => {
-            eb.earth(1, {played}).startEffect.animals(1);
+            eb.earth().played.startEffect.animals(1);
           }).br;
           b.action('Gain 1M€ per animal here.', (eb) => {
             eb.empty().startAction.megacredits(1).slash().animals(1);
@@ -36,6 +34,7 @@ export class MartianZoo extends Card implements IProjectCard, IResourceCard {
           text: 'Requires 2 city tiles in play.',
           align: 'left',
         },
+        victoryPoints: 1,
       },
     });
   }
@@ -59,5 +58,9 @@ export class MartianZoo extends Card implements IProjectCard, IResourceCard {
 
   public play() {
     return undefined;
+  }
+
+  public getVictoryPoints(): number {
+    return 1;
   }
 }

@@ -9,14 +9,16 @@
     display: inline-block;
     width: 40px;
     text-align: right;
+    margin-right: 10px;
   }
   >ul {
     list-style: none;
     >li {
-      font-size: @font_size_big;
+      font-size: 30px;
       display: flex;
       flex-flow: row;
       align-items: center;
+      padding: 10px 0 10px 0;
     }
   }
   .color-square {
@@ -85,13 +87,25 @@
       background-color: #49597a;
     }
     &.board-tharsis{
-      background-color: rgb(202, 117, 64);
+      background-color: @board-tharsis;
     }
     &.board-hellas{
-      background-color: rgb(55,111,156);
+      background-color: @board-hellas;
     }
     &.board-elysium{
-      background-color: rgb(31,121,32);
+      background-color: @board-elysium;
+    }
+    &.board-amazonis{
+      background-color: @board-amazonis;
+    }
+    &.board-arabia_terra{
+      background-color: @board-arabia_terra;
+    }
+    &.board-vastitas_borealis{
+      background-color: @board-vastitas_borealis;
+    }
+    &.board-terra_cimmeria{
+      background-color: @board-terra_cimmeria;
     }
     &.board-other{
       background-color: rgb(106,106,106);;

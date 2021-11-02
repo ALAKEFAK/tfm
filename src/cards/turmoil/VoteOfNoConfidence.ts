@@ -2,11 +2,12 @@ import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
+import {PartyHooks} from '../../turmoil/parties/PartyHooks';
+import {PartyName} from '../../turmoil/parties/PartyName';
+import {REDS_RULING_POLICY_COST} from '../../constants';
 import {Card} from '../Card';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Turmoil} from '../../turmoil/Turmoil';
-import {all} from '../Options';
 
 export class VoteOfNoConfidence extends Card implements IProjectCard {
   constructor() {
@@ -14,13 +15,12 @@ export class VoteOfNoConfidence extends Card implements IProjectCard {
       name: CardName.VOTE_OF_NO_CONFIDENCE,
       cardType: CardType.EVENT,
       cost: 5,
-      tr: {tr: 1},
 
       requirements: CardRequirements.builder((b) => b.partyLeaders()),
       metadata: {
         cardNumber: 'T16',
         renderData: CardRenderer.builder((b) => {
-          b.minus().chairman({all}).asterix();
+          b.minus().chairman().any.asterix();
           b.nbsp.plus().partyLeaders().br;
           b.tr(1);
         }),
@@ -31,20 +31,34 @@ export class VoteOfNoConfidence extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player): boolean {
-    const turmoil = Turmoil.getTurmoil(player.game);
-    if (!turmoil.hasAvailableDelegates(player.id)) return false;
+    if (!super.canPlay(player)) {
+      return false;
+    }
+    if (player.game.turmoil !== undefined) {
+      if (!player.game.turmoil.hasAvailableDelegates(player.id)) return false;
 
-    return turmoil.chairman === 'NEUTRAL';
+      const chairmanIsNeutral = player.game.turmoil.chairman === 'NEUTRAL';
+      if (chairmanIsNeutral === false) {
+        return false;
+      }
+
+      if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
+        return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST);
+      }
+      return true;
+    }
+    return false;
   }
 
   public play(player: Player) {
-    const turmoil = Turmoil.getTurmoil(player.game);
-    turmoil.chairman = player.id;
-    const index = turmoil.delegateReserve.indexOf(player.id);
-    if (index > -1) {
-      turmoil.delegateReserve.splice(index, 1);
+    if (player.game.turmoil !== undefined) {
+            player.game.turmoil.chairman! = player.id;
+            const index = player.game.turmoil.delegateReserve.indexOf(player.id);
+            if (index > -1) {
+              player.game.turmoil.delegateReserve.splice(index, 1);
+            }
+            player.increaseTerraformRating();
     }
-    player.increaseTerraformRating();
     return undefined;
   }
 }

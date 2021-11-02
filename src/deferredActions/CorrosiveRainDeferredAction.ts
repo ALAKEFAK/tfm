@@ -37,7 +37,7 @@ export class CorrosiveRainDeferredAction implements DeferredAction {
         return undefined;
       },
     );
-    selectAction.options.push(payMC, removeFloaters);
+    selectAction.options.push(removeFloaters, payMC);
 
     return selectAction;
   }

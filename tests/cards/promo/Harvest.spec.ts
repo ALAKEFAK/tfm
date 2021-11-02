@@ -5,27 +5,34 @@ import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('Harvest', function() {
-  let card : Harvest; let player : Player; let game : Game;
+  let card : Harvest; let player : Player; let player2 : Player; let game : Game;
 
   beforeEach(function() {
     card = new Harvest();
     player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
-
-    const landSpaces = game.board.getAvailableSpacesOnLand(player).slice(0, 2);
-    landSpaces.forEach((space) => game.addGreenery(player, space.id));
+    player2 = TestPlayers.RED.newPlayer();
+    game = Game.newInstance('foobar', [player, player2], player);
   });
 
-  it('Cannot play', function() {
-    expect(player.canPlayIgnoringCost(card)).is.false;
+  it('Can\'t play', function() {
+    // Can't play with no greenery
+    expect(card.canPlay(player)).is.not.true;
+
+    // Can't play with one greenery
+    const landSpace = game.board.getAvailableSpacesOnLand(player)[0];
+    game.addGreenery(player, landSpace.id);
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
-    const landSpace = game.board.getAvailableSpacesOnLand(player)[0];
-    game.addGreenery(player, landSpace.id);
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    // Can play with three greenery tiles
+    const landSpaces = game.board.getAvailableSpacesOnLand(player);
+    game.addGreenery(player, landSpaces[0].id);
+    game.addGreenery(player, landSpaces[1].id);
+    game.addGreenery(player, landSpaces[2].id);
+    expect(card.canPlay(player)).is.true;
 
+    expect(player.megaCredits).to.eq(0);
     card.play(player);
     expect(player.megaCredits).to.eq(12);
   });

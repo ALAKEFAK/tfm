@@ -194,12 +194,12 @@ describe('Colony', function() {
   it('Should let player build a colony only if they can afford it', function() {
     expect(isBuildColonyStandardProjectAvailable(player)).to.be.false;
 
-    player.megaCredits = 17;
+    player.megaCredits = 18;
     expect(isBuildColonyStandardProjectAvailable(player)).to.be.true;
   });
 
   it('Shouldn\'t let players build a colony if they already have one', function() {
-    player.megaCredits = 17;
+    player.megaCredits = 18;
 
     luna.addColony(player2);
     expect(isBuildColonyStandardProjectAvailable(player)).to.be.true;
@@ -209,7 +209,7 @@ describe('Colony', function() {
   });
 
   it('Shouldn\'t let players build a colony if colony tile is full', function() {
-    player.megaCredits = 17;
+    player.megaCredits = 18;
     expect(luna.isColonyFull()).to.be.false;
 
     luna.addColony(player2);

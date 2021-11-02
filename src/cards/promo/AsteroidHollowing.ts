@@ -1,7 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {IActionCard, IResourceCard} from '../ICard';
 import {Card} from '../Card';
-import {VictoryPoints} from '../ICard';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {ResourceType} from '../../ResourceType';
@@ -9,6 +8,7 @@ import {Tags} from '../Tags';
 import {Player} from '../../Player';
 import {Resources} from '../../Resources';
 import {CardRenderer} from '../render/CardRenderer';
+import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
 export class AsteroidHollowing extends Card implements IActionCard, IProjectCard, IResourceCard {
   constructor() {
@@ -19,8 +19,6 @@ export class AsteroidHollowing extends Card implements IActionCard, IProjectCard
       cost: 16,
       resourceType: ResourceType.ASTEROID,
 
-      victoryPoints: VictoryPoints.resource(1, 2),
-
       metadata: {
         cardNumber: 'X15',
         renderData: CardRenderer.builder((b) => {
@@ -29,6 +27,7 @@ export class AsteroidHollowing extends Card implements IActionCard, IProjectCard
           }).br;
           b.vpText('1VP for each 2 asteroids on this card.');
         }),
+        victoryPoints: CardRenderDynamicVictoryPoints.asteroids(1, 2),
       },
     });
   }
@@ -48,5 +47,9 @@ export class AsteroidHollowing extends Card implements IActionCard, IProjectCard
     player.addResourceTo(this, {log: true});
 
     return undefined;
+  }
+
+  public getVictoryPoints(): number {
+    return Math.floor(this.resourceCount / 2);
   }
 }

@@ -10,7 +10,6 @@ import {Units} from '../../Units';
 import {MoonCard} from './MoonCard';
 import {PlaceSpecialMoonTile} from '../../moon/PlaceSpecialMoonTile';
 import {CardRequirements} from '../CardRequirements';
-import {digit} from '../Options';
 
 export class LunaTrainStation extends MoonCard {
   constructor() {
@@ -21,9 +20,6 @@ export class LunaTrainStation extends MoonCard {
       cost: 20,
       productionBox: Units.of({megacredits: 4}),
       requirements: CardRequirements.builder((b) => b.logisticRate(5)),
-      reserveUnits: Units.of({steel: 2}),
-      tr: {moonLogistics: 1},
-      victoryPoints: 'special',
 
       metadata: {
         description: 'Requires a Logistic Rate of 5 or higher. Spend 2 steel. ' +
@@ -31,12 +27,14 @@ export class LunaTrainStation extends MoonCard {
         '2 VP FOR EACH ROAD TILE ADJACENT TO THIS TILE.',
         cardNumber: 'M15',
         renderData: CardRenderer.builder((b) => {
-          b.minus().steel(2, {digit});
+          b.minus().steel(2).digit;
           b.production((pb) => pb.megacredits(4));
           b.tile(TileType.LUNA_TRAIN_STATION, true).moonLogisticsRate();
         }),
         victoryPoints: CardRenderDynamicVictoryPoints.moonRoadTile(2, true),
       },
+    }, {
+      reserveUnits: Units.of({steel: 2}),
     });
   }
 

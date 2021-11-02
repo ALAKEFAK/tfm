@@ -10,24 +10,22 @@ import {TileType} from '../../TileType';
 import {AltSecondaryTag} from '../render/CardRenderItem';
 
 export class MoonRoadStandardProject extends StandardProjectCard implements IMoonCard {
-  constructor(properties = {
-    name: CardName.MOON_ROAD_STANDARD_PROJECT,
-    cost: 18,
-    reserveUnits: Units.of({steel: 1}),
-    tr: {moonLogistics: 1},
-
-    metadata: {
-      cardNumber: '',
-      renderData: CardRenderer.builder((b) =>
-        b.standardProject('Spend 18 M€ and 1 steel to place a road on the moon and raise the Logistics Rate 1 step.', (eb) => {
-          eb.megacredits(18).steel(1).startAction.moonRoad({secondaryTag: AltSecondaryTag.MOON_LOGISTICS_RATE});
-        }),
-      ),
-    },
-  }) {
-    super(properties);
+  constructor() {
+    super({
+      name: CardName.MOON_ROAD_STANDARD_PROJECT,
+      cost: 18,
+      metadata: {
+        cardNumber: '',
+        renderData: CardRenderer.builder((b) =>
+          b.standardProject('Spend 18 M€ and 1 steel to place a road on the moon and raise the Logistics Rate 1 step.', (eb) => {
+            eb.megacredits(18).steel(1).startAction.moonRoad().secondaryTag(AltSecondaryTag.MOON_LOGISTICS_RATE);
+          }),
+        ),
+      },
+    });
   }
 
+  public reserveUnits = Units.of({steel: 1});
   public tilesBuilt = [TileType.MOON_ROAD];
 
   protected discount(player: Player): number {

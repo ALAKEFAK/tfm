@@ -16,18 +16,17 @@ export class SphereHabitats extends MoonCard {
       cardType: CardType.AUTOMATED,
       tags: [Tags.CITY, Tags.MOON],
       cost: 14,
-      reserveUnits: Units.of({titanium: 1}),
-      tr: {moonColony: 1},
 
       metadata: {
         description: 'Spend 1 titanium. Place a colony tile on the Moon and raise the Colony Rate 1 step.',
         cardNumber: 'M07',
         renderData: CardRenderer.builder((b) => {
           b.minus().titanium(1).br;
-          b.moonColony({secondaryTag: AltSecondaryTag.MOON_COLONY_RATE});
+          b.moonColony().secondaryTag(AltSecondaryTag.MOON_COLONY_RATE);
         }),
       },
     }, {
+      reserveUnits: Units.of({titanium: 1}),
       tilesBuilt: [TileType.MOON_COLONY],
     });
   };

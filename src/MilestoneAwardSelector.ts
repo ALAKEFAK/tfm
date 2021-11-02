@@ -1,4 +1,4 @@
-import {ARABIA_TERRA_AWARDS, ARES_AWARDS, Awards, ELYSIUM_AWARDS, HELLAS_AWARDS, MOON_AWARDS, ORIGINAL_AWARDS, VENUS_AWARDS} from './awards/Awards';
+import {ARES_AWARDS, Awards, ELYSIUM_AWARDS, HELLAS_AWARDS, MOON_AWARDS, ORIGINAL_AWARDS, TRAJECTORY_AWARDS, VENUS_AWARDS} from './awards/Awards';
 import {Banker} from './awards/Banker';
 import {Benefactor} from './awards/Benefactor';
 import {Celebrity} from './awards/Celebrity';
@@ -16,6 +16,19 @@ import {Miner} from './awards/Miner';
 import {Scientist} from './awards/Scientist';
 import {SpaceBaron} from './awards/SpaceBaron';
 import {Thermalist} from './awards/Thermalist';
+import {Adapter} from './awards/trajectoryAwards/Adapter';
+import {Biologist} from './awards/trajectoryAwards/Biologist';
+import {Coordinator} from './awards/trajectoryAwards/Coordinator';
+import {Distributer} from './awards/trajectoryAwards/Distributer';
+import {EdgeDancer} from './awards/trajectoryAwards/EdgeDancer';
+import {Energetic} from './awards/trajectoryAwards/Energetic';
+import {Equatorial} from './awards/trajectoryAwards/Equatorial';
+import {Highlander} from './awards/trajectoryAwards/Highlander';
+import {Importer} from './awards/trajectoryAwards/Importer';
+import {Microeconomist} from './awards/trajectoryAwards/Microeconomist';
+import {Naturalist} from './awards/trajectoryAwards/Naturalist';
+import {Originalist} from './awards/trajectoryAwards/Originalist';
+import {UrbanPlanner} from './awards/trajectoryAwards/UrbanPlanner';
 import {Venuphile} from './awards/Venuphile';
 import {BoardName} from './boards/BoardName';
 import {GameOptions} from './Game';
@@ -28,8 +41,9 @@ import {Gardener} from './milestones/Gardener';
 import {Generalist} from './milestones/Generalist';
 import {Hoverlord} from './milestones/Hoverlord';
 import {IMilestone} from './milestones/IMilestone';
+import {Legend} from './milestones/Legend';
 import {Mayor} from './milestones/Mayor';
-import {ARABIA_TERRA_MILESTONES, ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, Milestones, MOON_MILESTONES, ORIGINAL_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
+import {ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, Milestones, MOON_MILESTONES, ORIGINAL_MILESTONES, TRAJECTORY_MILESTONES, TRAJECTORY_VENUS_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
 import {Networker} from './milestones/Networker';
 import {Planner} from './milestones/Planner';
 import {PolarExplorer} from './milestones/PolarExplorer';
@@ -37,6 +51,21 @@ import {RimSettler} from './milestones/RimSettler';
 import {Specialist} from './milestones/Specialist';
 import {Tactician} from './milestones/Tactician';
 import {Terraformer} from './milestones/Terraformer';
+import {Astronomer} from './milestones/trajectoryMilestones/Astronomer';
+import {Collector} from './milestones/trajectoryMilestones/Collector';
+import {Colonizer} from './milestones/trajectoryMilestones/Colonizer';
+import {Farmer} from './milestones/trajectoryMilestones/Farmer';
+import {FrontRunner} from './milestones/trajectoryMilestones/FrontRunner';
+import {Irrigator} from './milestones/trajectoryMilestones/Irrigator';
+import {Minimalist} from './milestones/trajectoryMilestones/Minimalist';
+import {MorningStar} from './milestones/trajectoryMilestones/MorningStar';
+import {Pioneer} from './milestones/trajectoryMilestones/Pioneer';
+import {Sapling} from './milestones/trajectoryMilestones/Sapling';
+import {Setter} from './milestones/trajectoryMilestones/Setter';
+import {Smith} from './milestones/trajectoryMilestones/Smith';
+import {Spacefarer} from './milestones/trajectoryMilestones/Spacefarer';
+import {Terran} from './milestones/trajectoryMilestones/Terran';
+import {Tropicalist} from './milestones/trajectoryMilestones/tropicalist';
 import {Tycoon} from './milestones/Tycoon';
 import {FullMoon} from './moon/FullMoon';
 import {Lunarchitect} from './moon/Lunarchitect';
@@ -116,7 +145,7 @@ export namespace MilestoneAwardSelector {
       bind(Gardener, EstateDealer, 5);
       bind(Builder, Magnate, 5);
       bind(Tycoon, Magnate, 5);
-      bind(PolarExplorer, DesertSettler, 5);
+      bind(PolarExplorer, DesertSettler, 8);
       bind(Hoverlord, Excentric, 5);
       bind(Hoverlord, Venuphile, 5);
       bind(DesertSettler, EstateDealer, 5);
@@ -176,6 +205,196 @@ export namespace MilestoneAwardSelector {
       bind(Terraformer, DesertSettler, 1);
       bind(Terraformer, EstateDealer, 1);
       bind(Gardener, Ecologist, 1);
+
+      // Trajectory Milestones and Awards Synergy
+
+      bind(Irrigator, Mayor, 4);
+      bind(Irrigator, Gardener, 4);
+      bind(Irrigator, PolarExplorer, 4);
+      bind(Irrigator, Landlord, 4);
+      bind(Irrigator, DesertSettler, 5);
+      bind(Irrigator, EstateDealer, 9);
+      bind(Irrigator, Cultivator, 4);
+      bind(Irrigator, Equatorial, 4);
+      bind(Irrigator, Naturalist, 3);
+
+      bind(Astronomer, Generalist, 1);
+      bind(Astronomer, Specialist, 1);
+      bind(Astronomer, Tycoon, 2);
+      bind(Astronomer, Diversifier, 4);
+      bind(Astronomer, RimSettler, 6);
+      bind(Astronomer, Magnate, 1);
+      bind(Astronomer, SpaceBaron, 1);
+      bind(Astronomer, Venuphile, 4);
+
+      bind(Spacefarer, Generalist, 1);
+      bind(Spacefarer, Specialist, 1);
+      bind(Spacefarer, Tycoon, 2);
+      bind(Spacefarer, RimSettler, 4);
+      bind(Spacefarer, Magnate, 1);
+      bind(Spacefarer, SpaceBaron, 9);
+      bind(Spacefarer, Astronomer, 3);
+
+      bind(FrontRunner, Ecologist, 1);
+      bind(FrontRunner, Tycoon, 1);
+      bind(FrontRunner, Diversifier, 1);
+      bind(FrontRunner, Tactician, 1);
+
+      bind(Pioneer, Mayor, 8);
+      bind(Pioneer, Gardener, 8);
+      bind(Pioneer, PolarExplorer, 8);
+      bind(Pioneer, Landlord, 6);
+      bind(Pioneer, DesertSettler, 6);
+      bind(Pioneer, EstateDealer, 4);
+      bind(Pioneer, EdgeDancer, 4);
+      bind(Pioneer, Equatorial, 4);
+      bind(Pioneer, Highlander, 4);
+
+      bind(Terran, Specialist, 3);
+      bind(Terran, Tycoon, 2);
+      bind(Terran, Magnate, 1);
+      bind(Terran, Astronomer, 7);
+
+      bind(MorningStar, Tycoon, 1);
+      bind(MorningStar, Hoverlord, 4);
+      bind(MorningStar, Venuphile, 9);
+      bind(MorningStar, Astronomer, 7);
+
+      bind(Farmer, Gardener, 3);
+      bind(Farmer, Generalist, 1);
+      bind(Farmer, Ecologist, 4);
+      bind(Farmer, Landlord, 2);
+      bind(Farmer, DesertSettler, 2);
+      bind(Farmer, EstateDealer, 2);
+      bind(Farmer, Cultivator, 4);
+      bind(Farmer, Irrigator, 1);
+      bind(Farmer, Pioneer, 1);
+
+      bind(EdgeDancer, Mayor, 2);
+      bind(EdgeDancer, Gardener, 4);
+      bind(EdgeDancer, PolarExplorer, 5);
+      bind(EdgeDancer, DesertSettler, 5);
+      bind(EdgeDancer, EstateDealer, 1);
+      bind(EdgeDancer, Cultivator, 4);
+      bind(EdgeDancer, Irrigator, 1);
+      bind(EdgeDancer, Farmer, 3);
+      bind(EdgeDancer, Equatorial, 4);
+      bind(EdgeDancer, Highlander, 4);
+      bind(EdgeDancer, Naturalist, 4);
+
+      bind(Energetic, Specialist, 1);
+      bind(Energetic, Energizer, 6);
+      bind(Energetic, Thermalist, 6);
+      bind(Energetic, Industrialist, 7);
+      bind(Energetic, Contractor, 4);
+
+      bind(Biologist, Cultivator, 4);
+      bind(Biologist, Ecologist, 4);
+      bind(Biologist, Excentric, 4);
+
+      bind(UrbanPlanner, Mayor, 6);
+      bind(UrbanPlanner, Gardener, 6);
+      bind(UrbanPlanner, Landlord, 7);
+      bind(UrbanPlanner, DesertSettler, 1);
+      bind(UrbanPlanner, EstateDealer, 1);
+      bind(UrbanPlanner, Cultivator, 7);
+      bind(UrbanPlanner, Irrigator, 1);
+      bind(UrbanPlanner, Pioneer, 2);
+
+      bind(Coordinator, Terraformer, 3);
+      bind(Coordinator, Legend, 5);
+      bind(Coordinator, Benefactor, 4);
+
+      bind(Importer, Energizer, 1);
+
+      bind(Highlander, Mayor, 4);
+      bind(Highlander, Gardener, 4);
+      bind(Highlander, Landlord, 8);
+      bind(Highlander, DesertSettler, 6);
+      bind(Highlander, Cultivator, 8);
+      bind(Highlander, Naturalist, 4);
+
+      bind(Equatorial, Landlord, 8);
+      bind(Equatorial, EstateDealer, 4);
+      bind(Equatorial, Cultivator, 8);
+      bind(Equatorial, Highlander, 4);
+      bind(Equatorial, Naturalist, 4);
+
+      bind(Adapter, Ecologist, 2);
+      bind(Adapter, Tactician, 3);
+      bind(Adapter, Scientist, 5);
+      bind(Adapter, Biologist, 5);
+
+      bind(Smith, Generalist, 2);
+      bind(Smith, Specialist, 5);
+      bind(Smith, RimSettler, 3);
+      bind(Smith, Miner, 8);
+      bind(Smith, Industrialist, 5);
+      bind(Smith, Colonizer, 1);
+      bind(Smith, Importer, 1);
+      bind(Smith, Distributer, 2);
+
+      bind(Collector, Ecologist, 6);
+      bind(Collector, Diversifier, 3);
+      bind(Collector, Hoverlord, 6);
+      bind(Collector, Excentric, 8);
+      bind(Collector, Venuphile, 4);
+      bind(Collector, Biologist, 3);
+
+      bind(Colonizer, Generalist, 1);
+      bind(Colonizer, Minimalist, 6);
+      bind(Colonizer, Smith, 1);
+      bind(Colonizer, Collector, 1);
+
+      bind(Setter, Tycoon, 6);
+      bind(Setter, Legend, 6);
+      bind(Setter, Tactician, 2);
+      bind(Setter, Magnate, 2);
+
+      bind(Sapling, Gardener, 8);
+      bind(Sapling, PolarExplorer, 4);
+      bind(Sapling, Irrigator, 3);
+      bind(Sapling, Pioneer, 3);
+      bind(Sapling, Farmer, 8);
+      bind(Sapling, EdgeDancer, 4);
+      bind(Sapling, Equatorial, 4);
+      bind(Sapling, Highlander, 4);
+      bind(Sapling, Naturalist, 4);
+
+      bind(Naturalist, Terraformer, 3);
+      bind(Naturalist, Gardener, 2);
+      bind(Naturalist, Generalist, 2);
+      bind(Naturalist, Specialist, 1);
+      bind(Naturalist, Landlord, 4);
+      bind(Naturalist, Thermalist, 6);
+      bind(Naturalist, DesertSettler, 1);
+      bind(Naturalist, EstateDealer, 1);
+      bind(Naturalist, Benefactor, 5);
+      bind(Naturalist, Cultivator, 3);
+      bind(Naturalist, EdgeDancer, 3);
+      bind(Naturalist, Highlander, 3);
+      bind(Naturalist, Equatorial, 3);
+
+      bind(Microeconomist, Planner, 2);
+      bind(Microeconomist, Tycoon, 2);
+      bind(Microeconomist, Excentric, 2);
+      bind(Microeconomist, Biologist, 2);
+
+      bind(Distributer, Generalist, 3);
+
+      bind(Originalist, Benefactor, 2);
+
+      bind(Tropicalist, Mayor, 6);
+      bind(Tropicalist, Gardener, 6);
+      bind(Tropicalist, Gardener, 6);
+      bind(Tropicalist, DesertSettler, 2);
+      bind(Tropicalist, Irrigator, 6);
+      bind(Tropicalist, EdgeDancer, 2);
+      bind(Tropicalist, Highlander, 4);
+      bind(Tropicalist, EstateDealer, 6);
+      bind(Tropicalist, Pioneer, 9);
+      bind(Tropicalist, Equatorial, 9);
+
       return synergies;
     }
   }
@@ -241,6 +460,10 @@ export namespace MilestoneAwardSelector {
     case RandomMAOptionType.NONE:
       switch (gameOptions.boardName) {
       case BoardName.ORIGINAL:
+      case BoardName.AMAZONIS:
+      case BoardName.ARABIA_TERRA:
+      case BoardName.VASTITAS_BOREALIS:
+      case BoardName.TERRA_CIMMERIA:
         drawnMilestonesAndAwards.milestones.push(...ORIGINAL_MILESTONES);
         drawnMilestonesAndAwards.awards.push(...ORIGINAL_AWARDS);
         break;
@@ -251,10 +474,6 @@ export namespace MilestoneAwardSelector {
       case BoardName.ELYSIUM:
         drawnMilestonesAndAwards.milestones.push(...ELYSIUM_MILESTONES);
         drawnMilestonesAndAwards.awards.push(...ELYSIUM_AWARDS);
-        break;
-      case BoardName.ARABIA_TERRA:
-        drawnMilestonesAndAwards.milestones.push(...ARABIA_TERRA_MILESTONES);
-        drawnMilestonesAndAwards.awards.push(...ARABIA_TERRA_AWARDS);
         break;
       }
       if (includeVenus) {
@@ -322,8 +541,20 @@ export namespace MilestoneAwardSelector {
       candidateMilestones.push(...MOON_MILESTONES.map(toName));
       candidateAwards.push(...MOON_AWARDS.map(toName));
     }
+    if (gameOptions.trajectoryExtension) {
+      // Remove Specialist if Trajectory is in use
+      const index = candidateMilestones.indexOf(Specialist.name);
+      if (index > -1) {
+        candidateMilestones.splice(index, 1);
+      }
 
-    // TODO(kberg): Find a way to add the Arabia Terra milestones and awards in.
+      candidateMilestones.push(...TRAJECTORY_MILESTONES.map(toName));
+      candidateAwards.push(...TRAJECTORY_AWARDS.map(toName));
+
+      if (gameOptions.venusNextExtension) {
+        candidateMilestones.push(...TRAJECTORY_VENUS_MILESTONES.map(toName));
+      }
+    }
     const shuffledMilestones = shuffle(candidateMilestones);
     const shuffledAwards = shuffle(candidateAwards);
 

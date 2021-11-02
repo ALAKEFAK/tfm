@@ -2,13 +2,12 @@ import {IActionCard, IResourceCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {Card} from '../Card';
-import {VictoryPoints} from '../ICard';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {ResourceType} from '../../ResourceType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {digit} from '../Options';
+import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
 export class PhysicsComplex extends Card implements IActionCard, IProjectCard, IResourceCard {
   constructor() {
@@ -17,24 +16,26 @@ export class PhysicsComplex extends Card implements IActionCard, IProjectCard, I
       name: CardName.PHYSICS_COMPLEX,
       tags: [Tags.SCIENCE, Tags.BUILDING],
       cost: 12,
-
       resourceType: ResourceType.SCIENCE,
-      victoryPoints: VictoryPoints.resource(2, 1),
 
       metadata: {
         cardNumber: '095',
         renderData: CardRenderer.builder((b) => {
           b.action('Spend 6 Energy to add a science resource to this card.', (eb) => {
-            eb.energy(6, {digit}).startAction.science();
+            eb.energy(6).digit.startAction.science();
           }).br;
           b.vpText('2 VP for each science resource on this card.');
         }),
+        victoryPoints: CardRenderDynamicVictoryPoints.science(2, 2),
       },
     });
   }
 
     public resourceCount: number = 0;
 
+    public getVictoryPoints(): number {
+      return 2 * this.resourceCount;
+    }
     public play() {
       return undefined;
     }

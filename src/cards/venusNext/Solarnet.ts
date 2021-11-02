@@ -14,14 +14,13 @@ export class Solarnet extends Card {
       cost: 7,
 
       requirements: CardRequirements.builder((b) => b.tag(Tags.VENUS).tag(Tags.EARTH).tag(Tags.JOVIAN)),
-      victoryPoints: 1,
-
       metadata: {
         cardNumber: '245',
         renderData: CardRenderer.builder((b) => {
           b.cards(2);
         }),
         description: 'Requires Venus, Earth and Jovian tags. Draw 2 cards.',
+        victoryPoints: 1,
       },
     });
   };
@@ -29,5 +28,8 @@ export class Solarnet extends Card {
   public play(player: Player) {
     player.drawCard(2);
     return undefined;
+  }
+  public getVictoryPoints() {
+    return 1;
   }
 }

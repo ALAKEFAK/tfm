@@ -23,7 +23,7 @@ export class EcologyExperts extends PreludeCard {
     });
   }
   public getRequirementBonus(player: Player): number {
-    if (player.lastCardPlayed === this.name) {
+    if (player.lastCardPlayed !== undefined && player.lastCardPlayed.name === this.name) {
       // Magic number high enough to always ignore requirements.
       return 50;
     }
@@ -31,7 +31,10 @@ export class EcologyExperts extends PreludeCard {
   }
   public play(player: Player) {
     player.addProduction(Resources.PLANTS, 1);
-    player.game.defer(new PlayProjectCard(player));
+    // If you are Pharmacy Union, play the card first, lose mc later.
+    // If you are any one else, gain the benefit or whatever frist, play the card later.
+    const priority = (player.corporationCard?.name === CardName.PHARMACY_UNION) ? -1 : 100;
+    player.game.defer(new PlayProjectCard(player), priority);
     return undefined;
   }
 }

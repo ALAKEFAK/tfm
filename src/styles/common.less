@@ -13,11 +13,11 @@ body {
 .btn {
     color: @text_action !important;
     background: @bg_action !important;
-    border-color: @boder_action !important;
+    border-color: @border_action !important;
 }
 .btn-tiny {
-    background: #5755d9;
-    border-color: #4b48d6;
+    background: @bg_action;
+    border-color: @border_action;
     color: #fff;
     cursor: pointer;
     height: 1.5rem;
@@ -31,6 +31,10 @@ body {
     height: 50px;
     font-size: 20px;
     margin: 10px 0 30px 0;
+}
+.btn-dangerous {
+    background-color: @bg_dangerous_action !important;
+    border-color: @border_dangerous_action !important;;
 }
 .btn-rounded {
     border-radius: 8px;
@@ -89,8 +93,15 @@ a:active {
 }
 
 @font-face {
+    name: Prototype;
     font-family: Prototype;
     src: url(./assets/Prototype.ttf);
+}
+
+@font-face {
+    name: Ubuntu;
+    font-family: Ubuntu;
+    src: url(https://fonts.gstatic.com/s/ubuntu/v15/4iCs6KVjbNBYlgoKfw72nU6AFw.woff2);
 }
 
 body {
@@ -207,6 +218,7 @@ h2 {
     position: fixed;
 }
 
+@import "./language_switcher.less";
 @import "./cards.less";
 @import "./cards_v2.less";
 @import "./language_hacks.less";
@@ -214,6 +226,7 @@ h2 {
 @import "./board_items_positions.less";
 @import "./globs.less";
 @import "./game_home.less";
+@import "./spectator_home.less";
 @import "./game_end.less";
 @import "./resources.less";
 @import "./start_screen.less";

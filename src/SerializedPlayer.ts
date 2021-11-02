@@ -1,4 +1,4 @@
-import {PlayerId} from './Player';
+import {Password, PlayerId} from './Player';
 import {CardName} from './CardName';
 import {Color} from './Color';
 import {SerializedCard} from './SerializedCard';
@@ -6,6 +6,7 @@ import {SerializedTimer} from './SerializedTimer';
 
 export interface SerializedPlayer {
     actionsTakenThisRound: number;
+    actionsTakenThisGame: number;
     actionsThisGeneration: Array<CardName>;
     beginner: boolean;
     canUseHeatAsMegaCredits: boolean;
@@ -22,12 +23,14 @@ export interface SerializedPlayer {
     dealtPreludeCards: Array<CardName>;
     dealtProjectCards: Array<CardName>;
     draftedCards: Array<CardName>;
+    endGenerationScores: Array<number>;
     energy: number;
     energyProduction: number;
     fleetSize: number;
     handicap: number;
     hasIncreasedTerraformRatingThisGeneration: boolean;
     hasTurmoilScienceTagBonus: boolean;
+    hasWarnedOfUnusedDelegate: boolean;
     heat: number;
     heatProduction: number;
     id: string;
@@ -37,10 +40,12 @@ export interface SerializedPlayer {
     name: string;
     needsToDraft: boolean | undefined;
     oceanBonus: number;
+    password?: Password | undefined;
     pickedCorporationCard: CardName | undefined;
     plantProduction: number;
     plants: number;
     plantsNeededForGreenery: number;
+    heatNeededForTemperature: number;
     playedCards: Array<SerializedCard>;
     politicalAgendasActionUsedCount: number;
     preludeCardsInHand: Array<CardName>;
@@ -56,7 +61,7 @@ export interface SerializedPlayer {
     titanium: number;
     titaniumProduction: number;
     titaniumValue: number;
-    // TODO(kberg): change tradesThisTurn to tradeThisGeneration later
-    tradesThisTurn: number;
+    tradesThisGeneration: number;
+    hasTradedThisTurn: boolean;
     turmoilPolicyActionUsed: boolean;
 }

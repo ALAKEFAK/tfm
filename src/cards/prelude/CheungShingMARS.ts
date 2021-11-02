@@ -8,7 +8,6 @@ import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
-import {played} from '../Options';
 
 export class CheungShingMARS extends Card implements CorporationCard {
   constructor() {
@@ -28,7 +27,7 @@ export class CheungShingMARS extends Card implements CorporationCard {
           b.production((pb) => pb.megacredits(3)).nbsp.megacredits(44);
           b.corpBox('effect', (ce) => {
             ce.effect('When you play a building tag, you pay 2 M€ less for it.', (eb) => {
-              eb.building(1, {played}).startEffect.megacredits(-2);
+              eb.building().played.startEffect.megacredits(-2);
             });
           });
         }),

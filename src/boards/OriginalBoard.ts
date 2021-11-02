@@ -6,11 +6,11 @@ import {ISpace} from './ISpace';
 import {BoardBuilder} from './BoardBuilder';
 import {SerializedBoard} from './SerializedBoard';
 import {Random} from '../Random';
-import {GameOptions} from '../Game';
+import {ShuffleTileOptionType} from './ShuffleTileOptionType';
 
 export class OriginalBoard extends Board {
-  public static newInstance(gameOptions: GameOptions, rng: Random): OriginalBoard {
-    const builder = new BoardBuilder(gameOptions.venusNextExtension, gameOptions.pathfindersExpansion);
+  public static newInstance(shuffleTileMode: ShuffleTileOptionType, rng: Random, includeVenus: boolean): OriginalBoard {
+    const builder = new BoardBuilder(shuffleTileMode, includeVenus, rng);
 
     const PLANT = SpaceBonus.PLANT;
     const STEEL = SpaceBonus.STEEL;
@@ -38,9 +38,8 @@ export class OriginalBoard extends Board {
     // y=8
     builder.land(STEEL).land(STEEL, STEEL).land().land().ocean(TITANIUM, TITANIUM);
 
-    if (gameOptions.shuffleMapOption) {
-      builder.shuffle(rng, SpaceName.NOCTIS_CITY, SpaceName.THARSIS_THOLUS, SpaceName.ASCRAEUS_MONS, SpaceName.ARSIA_MONS, SpaceName.PAVONIS_MONS);
-    }
+    builder.setMustBeLandSpaces(SpaceName.NOCTIS_CITY, SpaceName.THARSIS_THOLUS, SpaceName.ASCRAEUS_MONS, SpaceName.ARSIA_MONS, SpaceName.PAVONIS_MONS);
+
     const spaces = builder.build();
     return new OriginalBoard(spaces);
   }

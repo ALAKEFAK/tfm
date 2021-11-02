@@ -15,7 +15,6 @@ export class CallistoPenalMines extends Card implements IProjectCard {
       name: CardName.CALLISTO_PENAL_MINES,
       tags: [Tags.JOVIAN, Tags.SPACE],
       cost: 24,
-      victoryPoints: 2,
 
       metadata: {
         description: 'Increase your M€ production 3 steps.',
@@ -23,11 +22,15 @@ export class CallistoPenalMines extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => b.production((pb) => {
           pb.megacredits(3);
         })),
+        victoryPoints: 2,
       },
     });
   }
   public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS, 3);
     return undefined;
+  }
+  public getVictoryPoints() {
+    return 2;
   }
 }

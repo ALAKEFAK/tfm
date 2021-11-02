@@ -8,7 +8,7 @@ import {Tags} from '../../../src/cards/Tags';
 import {CardType} from '../../../src/cards/CardType';
 import {CardName} from '../../../src/CardName';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
-import {ICardMetadata} from '../../../src/cards/ICardMetadata';
+import {CardMetadata} from '../../../src/cards/CardMetadata';
 
 const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
@@ -29,11 +29,8 @@ describe('EarthEmbassy', () => {
       cardType: CardType.AUTOMATED,
       name: CardName.ZEPPELINS,
       tags: tags,
-      metadata: {} as ICardMetadata,
-      canPlay: () => true,
+      metadata: {} as CardMetadata,
       play: () => undefined,
-      getVictoryPoints: () => 0,
-      resourceCount: 0,
     };
 
     player.playedCards = [fakeCard];

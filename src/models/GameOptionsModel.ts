@@ -2,6 +2,7 @@ import {BoardName} from '../boards/BoardName';
 import {RandomMAOptionType} from '../RandomMAOptionType';
 import {AgendaStyle} from '../turmoil/PoliticalAgendas';
 import {CardName} from '../CardName';
+import {ShuffleTileOptionType} from '../boards/ShuffleTileOptionType';
 
 export interface GameOptionsModel {
   aresExtension: boolean,
@@ -21,14 +22,19 @@ export interface GameOptionsModel {
   removeNegativeGlobalEvents: boolean,
   showOtherPlayersVP: boolean,
   showTimers: boolean,
-  shuffleMapOption: boolean,
+  shuffleTileOption: ShuffleTileOptionType,
   solarPhaseOption: boolean,
   soloTR: boolean,
   randomMA: RandomMAOptionType,
   turmoilExtension: boolean,
   venusNextExtension: boolean,
-  requiresMoonTrackCompletion: boolean,
   requiresVenusTrackCompletion: boolean,
-  altVenusBoard: boolean,
-  undoOption: boolean,
+  requiresPassword: boolean,
+  trajectoryExtension: boolean,
+  escapeVelocityMode: boolean,
+  escapeVelocityThreshold?: number,
+  escapeVelocityPeriod?: number,
+  escapeVelocityPenalty?: number,
+  rebalancedExtension: boolean,
+  showAllGlobalEvents: boolean,
 }

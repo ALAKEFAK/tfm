@@ -1,3 +1,4 @@
+import {ColonyName} from '../colonies/ColonyName';
 import {Game, GameId, GameOptions, Score} from '../Game';
 import {SerializedGame} from '../SerializedGame';
 
@@ -43,26 +44,11 @@ export type DbLoadCallback<T> = (err: Error | undefined, game: T | undefined) =>
 export interface IDatabase {
 
     /**
-     * Creates any tables needed
-     */
-    initialize(): Promise<void>;
-
-    /**
      * Pulls most recent version of game
      * @param game_id the game id to load
-     * @param cb called with game if exists. If game is undefined err will be truthy.
+     * @param cb called with game if exists, if game is undefined err will be truthy
      */
     getGame(game_id: string, cb: (err: Error | undefined, game?: SerializedGame) => void): void;
-
-    /**
-     * Finds the game id associated with the given player.
-     *
-     * This is not yet written efficiently in Postgres, so use sparingly.
-     *
-     * @param playerId the playerID assocaited with a game
-     * @param cb called with the gameid if it exists. If it does not err will be truthy.
-     */
-    getGameId(playerId: string, cb: (err: Error | undefined, gameId?: GameId) => void): void;
 
     /**
      * Load a game at a specific save point.
@@ -108,7 +94,7 @@ export interface IDatabase {
      * @param gameOptions the options used for this game.
      * @param scores an array of scores correlated to the player's corporation.
      */
-    saveGameResults(game_id: GameId, players: number, generations: number, gameOptions: GameOptions, scores: Array<Score>): void;
+    saveGameResults(game_id: GameId, players: number, generations: number, gameOptions: GameOptions, scores: Array<Score>, colonies: Array<ColonyName>, milestones: Array<String>, awards: Array<String>): void;
 
     /**
      * The meat behind player undo. Loads the game at the given save point,

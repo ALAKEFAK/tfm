@@ -4,7 +4,8 @@ import {CardRenderer} from '../../render/CardRenderer';
 import {StandardProjectCard} from '../../StandardProjectCard';
 import {SelectCard} from '../../../inputs/SelectCard';
 import {IProjectCard} from '../../IProjectCard';
-import {multiplier} from '../../Options';
+import {LogHelper} from '../../../LogHelper';
+import {LogType} from '../../../deferredActions/DrawCards';
 
 export class SellPatentsStandardProject extends StandardProjectCard {
   constructor() {
@@ -15,7 +16,7 @@ export class SellPatentsStandardProject extends StandardProjectCard {
         cardNumber: 'SP8',
         renderData: CardRenderer.builder((b) =>
           b.standardProject('Discard any number of cards to gain that amount of M€.', (eb) => {
-            eb.text('X').cards(1).startAction.megacredits(0, {multiplier});
+            eb.text('X').cards(1).startAction.megacredits(0).multiplier;
           }),
         ),
       },
@@ -31,7 +32,7 @@ export class SellPatentsStandardProject extends StandardProjectCard {
   }
 
   public action(player: Player): SelectCard<IProjectCard> {
-    return new SelectCard(
+    const select = new SelectCard(
       'Sell patents',
       'Sell',
       player.cardsInHand,
@@ -48,8 +49,11 @@ export class SellPatentsStandardProject extends StandardProjectCard {
         });
         this.projectPlayed(player);
         player.game.log('${0} sold ${1} patents', (b) => b.player(player).number(foundCards.length));
+        LogHelper.logDrawnCards(player, foundCards.map((card)=>card.name), true, LogType.SOLD);
         return undefined;
       }, player.cardsInHand.length,
     );
+    select.buttonDanger = true;
+    return select;
   }
 }

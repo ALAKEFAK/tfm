@@ -19,6 +19,12 @@ import {Venus} from '../cards/community/Venus';
 import {Leavitt} from '../cards/community/Leavitt';
 import {Pallas} from '../cards/community/Pallas';
 import {SerializedColony} from '../SerializedColony';
+import {CeresRebalanced} from './CeresRebalanced';
+import {EuropaRebalanced} from './EuropaRebalanced';
+import {GanymedeRebalanced} from './GanymedeRebalanced';
+import {IoRebalanced} from './IoRebalanced';
+import {LunaRebalanced} from './LunaRebalanced';
+import {PlutoRebalanced} from './PlutoRebalanced';
 
 export interface IColonyFactory<T> {
     colonyName: ColonyName;
@@ -40,6 +46,24 @@ export const ALL_COLONIES_TILES: Array<IColonyFactory<Colony>> = [
   {colonyName: ColonyName.TRITON, Factory: Triton},
 ];
 
+// Rebalanced colonies
+export const REBALANCED_COLONIES_TILES: Array<IColonyFactory<Colony>> = [
+  {colonyName: ColonyName.CERES_REBALANCED, Factory: CeresRebalanced},
+  {colonyName: ColonyName.EUROPA_REBALANCED, Factory: EuropaRebalanced},
+  {colonyName: ColonyName.GANYMEDE_REBALANCED, Factory: GanymedeRebalanced},
+  {colonyName: ColonyName.IO_REBALANCED, Factory: IoRebalanced},
+  {colonyName: ColonyName.LUNA_REBALANCED, Factory: LunaRebalanced},
+];
+
+const REBALANCED_PLUTO_TILE: Array<IColonyFactory<Colony>> = [
+  {colonyName: ColonyName.PLUTO_REBALANCED, Factory: PlutoRebalanced},
+];
+
+// Colonies to be removed upon rebalanced
+const REBALANCED_REPLACEMENT_COLONIES_TILES: Array<ColonyName> = [
+  ColonyName.CERES, ColonyName.EUROPA, ColonyName.GANYMEDE, ColonyName.IO, ColonyName.LUNA,
+];
+
 export const COMMUNITY_COLONIES_TILES: Array<IColonyFactory<Colony>> = [
   {colonyName: ColonyName.IAPETUS, Factory: Iapetus},
   {colonyName: ColonyName.MERCURY, Factory: Mercury},
@@ -52,7 +76,7 @@ export const COMMUNITY_COLONIES_TILES: Array<IColonyFactory<Colony>> = [
 
 // Function to return a card object by its name
 export function getColonyByName(colonyName: string): Colony | undefined {
-  const colonyTiles = ALL_COLONIES_TILES.concat(COMMUNITY_COLONIES_TILES);
+  const colonyTiles = ALL_COLONIES_TILES.concat(COMMUNITY_COLONIES_TILES).concat(REBALANCED_COLONIES_TILES).concat(REBALANCED_PLUTO_TILE);
   const colonyFactory = colonyTiles.find((colonyFactory) => colonyFactory.colonyName === colonyName);
   if (colonyFactory !== undefined) {
     return new colonyFactory.Factory();
@@ -93,10 +117,21 @@ export class ColonyDealer {
     public discard(card: Colony): void {
       this.discardedColonies.push(card);
     }
-    public drawColonies(players: number, allowList: Array<ColonyName> = [], venusNextExtension: boolean, turmoilExtension: boolean, addCommunityColonies: boolean = false): Array<Colony> {
+    public drawColonies(players: number, allowList: Array<ColonyName> = [], venusNextExtension: boolean, turmoilExtension: boolean, addCommunityColonies: boolean = false, rebalancedExtension: boolean = false): Array<Colony> {
       let count: number = players + 2;
       let colonyTiles = ALL_COLONIES_TILES;
       if (addCommunityColonies) colonyTiles = colonyTiles.concat(COMMUNITY_COLONIES_TILES);
+      if (rebalancedExtension) {
+        // Remove original colonies
+        colonyTiles = colonyTiles.filter((c) => REBALANCED_REPLACEMENT_COLONIES_TILES.includes(c.colonyName) === false);
+        // Add new colonies
+        colonyTiles = colonyTiles.concat(REBALANCED_COLONIES_TILES);
+        // If rebalanced two players, replace pluto.
+        if (players === 2) {
+          colonyTiles = colonyTiles.filter((c) => c.colonyName !== ColonyName.PLUTO);
+          colonyTiles = colonyTiles.concat(REBALANCED_PLUTO_TILE);
+        }
+      }
       if (!venusNextExtension) colonyTiles = colonyTiles.filter((c) => c.colonyName !== ColonyName.VENUS);
       if (!turmoilExtension) colonyTiles = colonyTiles.filter((c) => c.colonyName !== ColonyName.PALLAS);
 
@@ -109,6 +144,9 @@ export class ColonyDealer {
         count = 5;
       }
 
+      // Allow rebalanced pluto if Pluto is in the custom list.
+      if (allowList.includes(ColonyName.PLUTO)) allowList.push(ColonyName.PLUTO_REBALANCED);
+
       const tempDeck = this.shuffle(
         colonyTiles.filter(
           (el) => allowList.includes(el.colonyName),
@@ -119,6 +157,7 @@ export class ColonyDealer {
       for (let i = 0; i < count; i++) {
         this.coloniesDeck.push(tempDeck.pop()!);
       }
+
       this.discardedColonies.push(...tempDeck);
       this.discardedColonies.sort((a, b) => (a.name > b.name) ? 1 : -1);
       this.coloniesDeck.sort((a, b) => (a.name > b.name) ? 1 : -1);

@@ -1,12 +1,12 @@
-import {DEFAULT_GAME_OPTIONS} from '../../src/Game';
 import {expect} from 'chai';
 import {OriginalBoard} from '../../src/boards/OriginalBoard';
+import {ShuffleTileOptionType} from '../../src/boards/ShuffleTileOptionType';
 import {Random} from '../../src/Random';
 import {SpaceType} from '../../src/SpaceType';
 
 describe('OriginalBoard', function() {
   it('has error with input while calling getAdjacentSpaces', function() {
-    const board = OriginalBoard.newInstance(DEFAULT_GAME_OPTIONS, new Random(0));
+    const board = OriginalBoard.newInstance(ShuffleTileOptionType.NONE, new Random(0), false);
     expect(function() {
       board.getAdjacentSpaces({
         x: 0,

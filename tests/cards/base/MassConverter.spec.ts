@@ -17,12 +17,12 @@ describe('MassConverter', function() {
   });
 
   it('Can\'t play', function() {
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
     player.playedCards.push(card, card, card, card, card);
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(card.canPlay(player)).is.true;
     card.play(player);
 
     expect(player.getProduction(Resources.ENERGY)).to.eq(6);

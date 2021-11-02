@@ -5,13 +5,6 @@ import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {Turmoil} from '../Turmoil';
 import {Tags} from '../../cards/Tags';
-import {CardRenderer} from '../../cards/render/CardRenderer';
-import {Size} from '../../cards/render/Size';
-import {played} from '../../cards/Options';
-
-const RENDER_DATA = CardRenderer.builder((b) => {
-  b.megacredits(2).slash().venus(1, {played}).influence({size: Size.SMALL});
-});
 
 export class VenusInfrastructure implements IGlobalEvent {
     public name = GlobalEventName.VENUS_INFRASTRUCTURE;
@@ -26,5 +19,4 @@ export class VenusInfrastructure implements IGlobalEvent {
         }
       });
     }
-    public renderData = RENDER_DATA;
 }

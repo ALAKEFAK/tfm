@@ -915,9 +915,6 @@
                 font-size: 24px;
                 line-height: 46px;
             }
-
-            // TODO(kberg): this is a duplicate of .card-resources-counter / .card-resource@{value})
-            // Not only can this be reduced using the same construct, but let's get rid of the CSS duplication.
             .card-resource-steel {
                 background-image: url(./assets/resources/steel.png);
             }
@@ -963,7 +960,7 @@
                 background-image: url(./assets/resources/disease.png);
             }
             .card-resource-preservation {
-                background-image: url(./assets/resources/preservation.png);
+                background-image: url(./assets/resources/pristar.png);
             }
             .card-resource-data {
                 color: #0000 !important;
@@ -1141,14 +1138,6 @@
                 height: 40px;
                 background-size: 40px 40px;
                 vertical-align: middle;
-            }
-            .card-influence--size-S {
-                height: 25px;
-                width: 25px;
-                background-size: 25px;
-                position: relative;
-                top: -10px;
-                left: -7px;
             }
             /*tags*/
             .card-resource-tag {
@@ -1744,7 +1733,7 @@
             }
         }
         .card-title {
-            font-family: "Ubuntu";
+            font-family: Ubuntu;
             color: #020202;
             text-transform: uppercase;
             width: 100%;
@@ -1829,37 +1818,8 @@
     }
 }
 
-.card-party {
-  display: inherit;
-}
-
-.card-party--revealed {
-  display: inherit;
-  position: absolute;
-  margin: -7px 0 0 -285px;
-}
-
-.card-party--current {
-  display: inherit;
-  position: absolute;
-  margin: 129px 0 0 280px;
-}
-
-@parties: greens, kelvinists, mars-first, reds, scientists, unity;
-each(@parties, {
-  .card-party--@{value} {
-    background-image: url("./assets/parties/@{value}.png");
-    background-size: 41px 30px;
-    width: 41px;
-    height: 30px;
-  }
-})
-
-.card-over {
-   margin: 0px 0 -59px -59px;
-}
-
 .card-resources-counter {
+
     .card-resource {
         position: relative;
         display: inline-block;
@@ -1869,11 +1829,45 @@ each(@parties, {
         background-size: 22px;
         vertical-align: middle;
     }
-
-    @resource_types: microbe, animal, science, floater, fighter, camp, asteroid, disease, preservation, data, syndicate-fleet, cube;
-    each(@resource_types, {
-      .card-resource-@{value} {
-        background-image: url("./assets/resources/@{value}.png");
-      }
-    })
+    .card-resource-microbe {
+        background-image: url(./assets/resources/microbe.png);
+    }
+    .card-resource-animal {
+        background-image: url(./assets/resources/animal.png);
+    }
+    .card-resource-science {
+        background-image: url(./assets/resources/science.png);
+    }
+    .card-resource-floater {
+        background-image: url(./assets/resources/floater.png);
+    }
+    .card-resource-fighter {
+        background-image: url(./assets/resources/fighter.png);
+    }
+    .card-resource-camp {
+        background-image: url(./assets/resources/camp.png);
+    }
+    .card-resource-asteroid {
+        color: #0000 !important;
+        background-image: url(./assets/resources/asteroid.png);
+    }
+    .card-resource-disease {
+        color: #0000 !important;
+        background-image: url(./assets/resources/disease.png);
+    }
+    .card-resource-preservation {
+        background-image: url(./assets/resources/pristar.png);
+    }
+    .card-resource-data {
+        color: #0000 !important;
+        background-image: url(./assets/resources/data.png);
+    }
+    .card-resource-syndicate-fleet {
+        color: #0000 !important;
+        background-image: url(./assets/resources/syndicate-fleet.png);
+    }
+    .card-resource-cube {
+        color: #0000 !important;
+        background-image: url(./assets/cube.png);
+    }
 }

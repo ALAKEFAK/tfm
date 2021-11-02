@@ -3,58 +3,55 @@ import {Color} from '../Color';
 import {VictoryPointsBreakdown} from '../VictoryPointsBreakdown';
 import {ITagCount} from '../ITagCount';
 import {PlayerInputModel} from './PlayerInputModel';
-import {TimerModel} from './TimerModel';
+import {SerializedTimer} from '../SerializedTimer';
 import {GameModel} from './GameModel';
-import {PlayerId} from '../Player';
-import {SpectatorId} from '../Game';
-import {CardName} from '@/CardName';
+import {Password} from '../Player';
 
-export interface ViewModel {
-  game: GameModel;
-  players: Array<PublicPlayerModel>;
-  id: PlayerId | SpectatorId;
-  thisPlayer: PublicPlayerModel | undefined;
-}
-
-/** The public information about a player */
 export interface PublicPlayerModel {
   actionsTakenThisRound: number;
+  actionsTakenThisGame: number;
   actionsThisGeneration: Array<string /* CardName */>;
   availableBlueCardActionCount: number;
   cardCost: number;
-  cardDiscount: number;
   cardsInHandNbr: number;
   citiesCount: number;
   coloniesCount: number;
   color: Color;
   corporationCard: CardModel | undefined;
+  dealtCorporationCards: Array<CardModel>;
+  dealtPreludeCards: Array<CardModel>;
+  dealtProjectCards: Array<CardModel>;
+  draftedCards: Array<CardModel>;
+  endGenerationScores: Array<number>;
   energy: number;
   energyProduction: number;
   fleetSize: number;
   heat: number;
   heatProduction: number;
-  // TODO(kberg): this is removeable now.
-  id: string; // Color
+  id: string; // PlayerId
   influence: number;
   isActive: boolean;
-  lastCardPlayed?: CardName;
   megaCredits: number;
   megaCreditProduction: number;
   name: string;
   needsToDraft: boolean | undefined;
   needsToResearch: boolean | undefined;
   noTagsCount: number;
+  password: Password | undefined;
+  pickedCorporationCard: Array<CardModel>; // Array?
   plants: number;
   plantProduction: number;
   plantsAreProtected: boolean;
   playedCards: Array<CardModel>;
+  preludeCardsInHand: Array<CardModel>;
   selfReplicatingRobotsCards: Array<CardModel>;
+  spectatorId?: string;
   steel: number;
   steelProduction: number;
   steelValue: number;
   tags: Array<ITagCount>;
   terraformRating: number;
-  timer: TimerModel;
+  timer: SerializedTimer;
   titanium: number;
   titaniumProduction: number;
   titaniumValue: number;
@@ -62,16 +59,20 @@ export interface PublicPlayerModel {
   victoryPointsBreakdown: VictoryPointsBreakdown;
 }
 
-/** A player's view of the game, including their secret information. */
-export interface PlayerViewModel extends ViewModel {
+export interface PlayerModel extends PublicPlayerModel {
+  availableBlueCardActionCount: number;
+  cardCost: number;
   cardsInHand: Array<CardModel>;
+  corporationCard: CardModel | undefined;
   dealtCorporationCards: Array<CardModel>;
   dealtPreludeCards: Array<CardModel>;
   dealtProjectCards: Array<CardModel>;
   draftedCards: Array<CardModel>;
-  id: PlayerId;
+  game: GameModel;
+  influence: number;
   pickedCorporationCard: Array<CardModel>; // Why Array?
+  players: Array<PublicPlayerModel>;
   preludeCardsInHand: Array<CardModel>;
-  thisPlayer: PublicPlayerModel;
+  timer: SerializedTimer;
   waitingFor: PlayerInputModel | undefined;
 }

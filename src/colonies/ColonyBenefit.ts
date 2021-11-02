@@ -20,4 +20,5 @@ export enum ColonyBenefit {
     GAIN_INFLUENCE,
     PLACE_DELEGATES,
     GIVE_MC_PER_DELEGATE,
+    RAISE_TEMPERATURE,
 }

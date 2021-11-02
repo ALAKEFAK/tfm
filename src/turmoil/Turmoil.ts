@@ -97,34 +97,6 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       return turmoil;
     }
 
-    public static getTurmoil(game: Game): Turmoil {
-      if (game.turmoil === undefined) {
-        throw new Error(`Assertion error: Turmoil not defined for ${game.id}`);
-      }
-      return game.turmoil;
-    }
-
-    public static ifTurmoil(game: Game, cb: (turmoil: Turmoil) => void) {
-      if (game.gameOptions.turmoilExtension !== false) {
-        if (game.turmoil === undefined) {
-          console.log(`Assertion failure: game.turmoil is undefined for ${game.id}`);
-        } else {
-          return cb(game.turmoil);
-        }
-      }
-    }
-
-    public static ifTurmoilElse<T>(game: Game, cb: (turmoil: Turmoil) => T, elseCb: () => T): T {
-      if (game.gameOptions.turmoilExtension !== false) {
-        if (game.turmoil === undefined) {
-          console.log(`Assertion failure: game.turmoil is undefined for ${game.id}`);
-        } else {
-          return cb(game.turmoil);
-        }
-      }
-      return elseCb();
-    }
-
     public initGlobalEvent(game: Game) {
       // Draw the first global event to setup the game
       this.comingGlobalEvent = this.globalEventDealer.draw();
@@ -152,27 +124,32 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       game: Game,
       source: 'lobby' | 'reserve' = 'lobby'): void {
       const party = this.getPartyByName(partyName);
-      if (playerId !== 'NEUTRAL' && this.lobby.has(playerId) && source === 'lobby') {
-        this.lobby.delete(playerId);
-      } else {
-        const index = this.delegateReserve.indexOf(playerId);
-        if (index > -1) {
-          this.delegateReserve.splice(index, 1);
+      if (party) {
+        if (playerId !== 'NEUTRAL' && this.lobby.has(playerId) && source === 'lobby') {
+          this.lobby.delete(playerId);
         } else {
-          console.log(`${playerId}/${game.id} tried to get a delegate from an empty reserve.`);
-          return;
+          const index = this.delegateReserve.indexOf(playerId);
+          if (index > -1) {
+            this.delegateReserve.splice(index, 1);
+          }
         }
+        party.sendDelegate(playerId, game);
+        this.checkDominantParty(party);
+      } else {
+        throw 'Party not found';
       }
-      party.sendDelegate(playerId, game);
-      this.checkDominantParty(party);
     }
 
     // Use to remove a delegate from a specific party
     public removeDelegateFromParty(playerId: PlayerId | NeutralPlayer, partyName: PartyName, game: Game): void {
       const party = this.getPartyByName(partyName);
-      this.delegateReserve.push(playerId);
-      party.removeDelegate(playerId, game);
-      this.checkDominantParty(party);
+      if (party) {
+        this.delegateReserve.push(playerId);
+        party.removeDelegate(playerId, game);
+        this.checkDominantParty(party);
+      } else {
+        throw 'Party not found';
+      }
     }
 
     // Use to replace a delegate from a specific party with another delegate with NO DOMINANCE CHANGE
@@ -183,9 +160,13 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       partyName: PartyName,
       game: Game): void {
       const party = this.getPartyByName(partyName);
-      this.delegateReserve.push(outgoingPlayerId);
-      party.removeDelegate(outgoingPlayerId, game);
-      this.sendDelegateToParty(incomingPlayerId, partyName, game, source);
+      if (party) {
+        this.delegateReserve.push(outgoingPlayerId);
+        party.removeDelegate(outgoingPlayerId, game);
+        this.sendDelegateToParty(incomingPlayerId, partyName, game, source);
+      } else {
+        throw 'Party not found';
+      }
     }
 
     // Check dominant party
@@ -270,7 +251,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       this.lobby = new Set<string>();
 
       game.getPlayers().forEach((player) => {
-        if (this.hasAvailableDelegates(player.id)) {
+        if (this.getDelegatesInReserve(player.id) > 0) {
           const index = this.delegateReserve.indexOf(player.id);
           if (index > -1) {
             this.delegateReserve.splice(index, 1);
@@ -409,7 +390,11 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       }
 
       const party = this.getPartyByName(partyName);
-      return party.getDelegates(player.id) >= 2;
+      if (party !== undefined && party.getDelegates(player.id) >= 2) {
+        return true;
+      }
+
+      return false;
     }
 
     // List players present in the reserve
@@ -484,6 +469,8 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
         tp.delegates = sp.delegates;
         tp.partyLeader = sp.partyLeader;
       });
+
+      turmoil.playersInfluenceBonus = new Map<string, number>(d.playersInfluenceBonus);
 
       turmoil.playersInfluenceBonus = new Map<string, number>(d.playersInfluenceBonus);
 

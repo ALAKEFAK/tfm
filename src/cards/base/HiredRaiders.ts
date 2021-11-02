@@ -8,7 +8,6 @@ import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
-import {all} from '../Options';
 
 export class HiredRaiders extends Card implements IProjectCard {
   constructor() {
@@ -20,9 +19,9 @@ export class HiredRaiders extends Card implements IProjectCard {
       metadata: {
         cardNumber: '124',
         renderData: CardRenderer.builder((b) => {
-          b.text('steal', Size.MEDIUM, true).steel(2, {all}).br;
+          b.text('steal', Size.MEDIUM, true).steel(2).any.br;
           b.or().br;
-          b.text('steal', Size.MEDIUM, true).megacredits(3, {all});
+          b.text('steal', Size.MEDIUM, true).megacredits(3).any;
         }),
         description: 'Steal up to 2 steel, or 3 M€ from any player.',
       },
@@ -58,7 +57,7 @@ export class HiredRaiders extends Card implements IProjectCard {
         }));
       }
 
-      if (target.megaCredits > 0 && !target.megaCreditsAreProtected()) {
+      if (target.megaCredits > 0) {
         const amountStolen = Math.min(3, target.megaCredits);
         const optionTitle = 'Steal ' + amountStolen + ' M€ from ' + target.name;
 

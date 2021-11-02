@@ -6,7 +6,6 @@ import {CardName} from '../../CardName';
 import {Resources} from '../../Resources';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
-import {digit} from '../Options';
 
 export class SolarReflectors extends Card implements IProjectCard {
   constructor() {
@@ -19,7 +18,7 @@ export class SolarReflectors extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'C38',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => pb.heat(5, {digit}));
+          b.production((pb) => pb.heat(5).digit);
         }),
         description: 'Increase your heat production 5 steps.',
       },

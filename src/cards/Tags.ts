@@ -13,6 +13,4 @@ export enum Tags {
     WILDCARD = 'wild',
     MOON = 'moon',
     EVENT = 'event',
-    MARS = 'mars',
-    CLONE = 'clone',
 }

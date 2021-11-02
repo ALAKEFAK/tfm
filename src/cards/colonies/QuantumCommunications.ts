@@ -8,7 +8,6 @@ import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
 import {Size} from '../render/Size';
-import {all} from '../Options';
 
 export class QuantumCommunications extends Card implements IProjectCard {
   constructor() {
@@ -16,17 +15,17 @@ export class QuantumCommunications extends Card implements IProjectCard {
       cost: 8,
       name: CardName.QUANTUM_COMMUNICATIONS,
       cardType: CardType.AUTOMATED,
-      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 4)),
-      victoryPoints: 1,
 
+      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 4)),
       metadata: {
         cardNumber: '079',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
-            pb.megacredits(1).slash().colonies(1, {size: Size.SMALL, all});
+            pb.megacredits(1).slash().colonies(1, Size.SMALL).any;
           });
         }),
         description: 'Requires 4 Science tags. Increase your M€ production 1 step for each colony in play.',
+        victoryPoints: 1,
       },
     });
   }
@@ -38,5 +37,9 @@ export class QuantumCommunications extends Card implements IProjectCard {
     });
     player.addProduction(Resources.MEGACREDITS, coloniesCount, {log: true});
     return undefined;
+  }
+
+  public getVictoryPoints() {
+    return 1;
   }
 }

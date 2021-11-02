@@ -11,10 +11,10 @@ describe('PublicCelebrations', function() {
 
     const gameOptions = TestingUtils.setCustomGameOptions();
     const game = Game.newInstance('foobar', [player], player, gameOptions);
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
 
         game.turmoil!.chairman = player.id;
-        expect(player.canPlayIgnoringCost(card)).is.true;
+        expect(card.canPlay(player)).is.true;
         card.play();
   });
 });

@@ -12,6 +12,7 @@ import {PartyName} from '../../turmoil/parties/PartyName';
 import {LogHelper} from '../../LogHelper';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
+import {AphroditeRebalanced} from '../rebalanced/rebalanced_corporation/AphroditeRebalanced';
 
 export class JetStreamMicroscrappers extends Card implements IActionCard, IResourceCard {
   constructor() {
@@ -46,8 +47,9 @@ export class JetStreamMicroscrappers extends Card implements IActionCard, IResou
     const venusMaxed = player.game.getVenusScaleLevel() === MAX_VENUS_SCALE;
     const canSpendResource = this.resourceCount > 1 && !venusMaxed;
 
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS) && !venusMaxed) {
-      return player.titanium > 0 || (canSpendResource && player.canAfford(REDS_RULING_POLICY_COST));
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !venusMaxed) {
+      const adjustedCost = REDS_RULING_POLICY_COST - AphroditeRebalanced.rebalancedAphroditeBonus(player, 1);
+      return player.titanium > 0 || (canSpendResource && player.canAfford(adjustedCost));
     }
 
     return player.titanium > 0 || canSpendResource;

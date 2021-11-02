@@ -124,14 +124,14 @@
     background: #000;
     text-transform: uppercase;
 
-    &.event-party--revealed {
+    &.event-party--top {
         clip-path: polygon(5% 0, 95% 0, 100% 30%, 100% 80%, 100% 100%, 6% 100%, 0% 70%, 0 0);
         margin: 0px 0 0 69px;
     }
 
-    &.event-party--current {
-        clip-path: polygon(5% 0%, 100% 0, 100% 40%, 89% 102%, 0% 100%, 0% 35%);
+    &.event-party--bottom {
         margin: 136px 0 0 127px;
+        clip-path: polygon(5% 0%, 100% 0, 100% 40%, 89% 102%, 0% 100%, 0% 35%);
     }
 
     &.event-party--greens {
@@ -534,6 +534,31 @@
     padding-left: 6px;
 }
 
+
+.showallevents-clickable {
+    font-family: Ubuntu, Sans;
+    letter-spacing: 1px;
+    font-size: 16px;
+    width: fit-content;
+    color: #D2AE94;
+    text-transform: uppercase;
+    padding: 3px 26px 3px 26px;
+    border-radius: 0 0 20px 20px;
+    text-decoration: none;
+    cursor: pointer;
+    position: absolute;
+    margin: 18px 0 0 -506px;
+    font-weight: bold;
+}
+
+.showallevents-clickable:link {
+    color: #D2AE94;
+}
+
+.showallevents-clickable:visited {
+    color: #D2AE94;
+}
+
 .policies-clickable {
     font-family: Ubuntu, Sans;
     letter-spacing: 1px;
@@ -557,6 +582,24 @@
     color: #303030;
 }
 
+.global-event-deck-index {
+    color: #303030;
+    margin: -36px 0 0 11px;
+    text-align: left;
+}
+
+
+.global-event-deck-close-button {
+    position: absolute;
+    padding-left: 90px;
+}
+
+.global-events-deck {
+    width: 1200px;
+    margin-top: -20px;
+    margin-left: -84px;
+    margin-bottom: 50px;
+}
 
 .policy-block {
     background-color: #313131;
@@ -631,9 +674,9 @@
 }
 
 .turmoil-party-transition-arrow-grid {
-    position: absolute;
-    left: 130px;
-    top: 400px;
+    position: relative;
+    left: 50px;
+    top: -224px;
 
     .turmoil-party-transition-arrow {
         display: inline-block;

@@ -18,11 +18,19 @@ import {Contractor} from './Contractor';
 import {Entrepreneur} from './Entrepreneur';
 import {FullMoon} from '../moon/FullMoon';
 import {LunarMagnate} from '../moon/LunarMagnate';
-import {CosmicSettler} from './CosmicSettler';
-import {Botanist} from './Botanist';
-import {Coordinator} from './Coordinator';
-import {Zoologist} from './Zoologist';
-import {Manufacturer} from './Manufacturer';
+import {EdgeDancer} from './trajectoryAwards/EdgeDancer';
+import {Adapter} from './trajectoryAwards/Adapter';
+import {Biologist} from './trajectoryAwards/Biologist';
+import {Coordinator} from './trajectoryAwards/Coordinator';
+import {Energetic} from './trajectoryAwards/Energetic';
+import {Equatorial} from './trajectoryAwards/Equatorial';
+import {Highlander} from './trajectoryAwards/Highlander';
+import {UrbanPlanner} from './trajectoryAwards/UrbanPlanner';
+import {Naturalist} from './trajectoryAwards/Naturalist';
+import {Microeconomist} from './trajectoryAwards/Microeconomist';
+import {Distributer} from './trajectoryAwards/Distributer';
+// import {Originalist} from './trajectoryAwards/Originalist';
+// import {Importer} from './trajectoryAwards/Importer';
 
 export const ORIGINAL_AWARDS: Array<IAward> = [
   new Landlord(),
@@ -61,12 +69,23 @@ export const MOON_AWARDS: Array<IAward> = [
   new LunarMagnate(),
 ];
 
-export const ARABIA_TERRA_AWARDS = [
-  new CosmicSettler(),
-  new Botanist(),
+export const TRAJECTORY_AWARDS: Array<IAward> = [
+  new EdgeDancer(),
+  new Adapter(),
+  new Biologist(),
   new Coordinator(),
-  new Zoologist(),
-  new Manufacturer(),
+  new Energetic(),
+  new Equatorial(),
+  new Highlander(),
+  new UrbanPlanner(),
+  new Naturalist(),
+  new Microeconomist(),
+  new Distributer(),
+  // new Originalist(),
+];
+
+export const TRAJECTORY_COLONIES_AWARDS: Array<IAward> = [
+  // new Importer(),
 ];
 
 export const ALL_AWARDS: Array<IAward> = [
@@ -76,7 +95,8 @@ export const ALL_AWARDS: Array<IAward> = [
   ...VENUS_AWARDS,
   ...ARES_AWARDS,
   ...MOON_AWARDS,
-  ...ARABIA_TERRA_AWARDS];
+  ...TRAJECTORY_AWARDS,
+  ...TRAJECTORY_COLONIES_AWARDS];
 
 export namespace Awards {
   export const ALL = ALL_AWARDS;

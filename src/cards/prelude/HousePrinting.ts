@@ -15,7 +15,6 @@ export class HousePrinting extends Card {
       tags: [Tags.BUILDING],
       cost: 10,
       productionBox: Units.of({steel: 1}),
-      victoryPoints: 1,
 
       metadata: {
         cardNumber: 'P36',
@@ -23,11 +22,15 @@ export class HousePrinting extends Card {
           b.production((pb) => pb.steel(1));
         }),
         description: 'Increase your steel production 1 step.',
+        victoryPoints: 1,
       },
     });
   }
   public play(player: Player) {
     player.addProduction(Resources.STEEL, 1);
     return undefined;
+  }
+  public getVictoryPoints() {
+    return 1;
   }
 }

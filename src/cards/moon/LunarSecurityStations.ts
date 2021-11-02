@@ -7,7 +7,6 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Size} from '../render/Size';
 import {IProjectCard} from '../IProjectCard';
 import {CardRequirements} from '../CardRequirements';
-import {all} from '../Options';
 
 export class LunarSecurityStations extends Card implements IProjectCard {
   constructor() {
@@ -15,8 +14,7 @@ export class LunarSecurityStations extends Card implements IProjectCard {
       name: CardName.LUNAR_SECURITY_STATIONS,
       cardType: CardType.ACTIVE,
       cost: 9,
-      requirements: CardRequirements.builder((b) => b.roadTiles(3, {all})),
-      tr: {moonLogistics: 1},
+      requirements: CardRequirements.builder((b) => b.roadTiles(3).any()),
 
       metadata: {
         description: 'Requires 3 road tiles on the Moon. Raise the Logistic Rate 1 step.',

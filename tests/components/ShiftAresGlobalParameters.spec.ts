@@ -1,10 +1,10 @@
-import {mount} from '@vue/test-utils';
-import {getLocalVue} from './getLocalVue';
+import {createLocalVue, mount} from '@vue/test-utils';
+
 import {expect} from 'chai';
-import ShiftAresGlobalParameters from '@/client/components/ShiftAresGlobalParameters.vue';
-import {PlayerInputModel} from '@/models/PlayerInputModel';
-import {PlayerInputTypes} from '@/PlayerInputTypes';
-import {PartyName} from '@/turmoil/parties/PartyName';
+import {ShiftAresGlobalParameters} from '../../src/components/ShiftAresGlobalParameters';
+import {PlayerInputModel} from '../../src/models/PlayerInputModel';
+import {PlayerInputTypes} from '../../src/PlayerInputTypes';
+import {PartyName} from '../../src/turmoil/parties/PartyName';
 
 describe('ShiftAresGlobalParameters', function() {
   const mockPlayerModel: PlayerInputModel = {
@@ -26,7 +26,6 @@ describe('ShiftAresGlobalParameters', function() {
     max: undefined,
     microbes: undefined,
     floaters: undefined,
-    science: undefined,
     coloniesModel: undefined,
     payProduction: undefined,
     aresData: {
@@ -54,7 +53,10 @@ describe('ShiftAresGlobalParameters', function() {
     },
     selectBlueCardAction: false,
   };
-
+  function getLocalVue() {
+    const localVue = createLocalVue();
+    return localVue;
+  }
   it('sets up data', function() {
     const playerinput = mockPlayerModel;
     const ares = mount(ShiftAresGlobalParameters, {

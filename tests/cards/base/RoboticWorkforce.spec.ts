@@ -25,8 +25,6 @@ import {Units} from '../../../src/Units';
 import {fail} from 'assert';
 import {SolarWindPower} from '../../../src/cards/base/SolarWindPower';
 import {MarsUniversity} from '../../../src/cards/base/MarsUniversity';
-import {Gyropolis} from '../../../src/cards/venusNext/Gyropolis';
-import {VenusGovernor} from '../../../src/cards/venusNext/VenusGovernor';
 
 describe('RoboticWorkforce', () => {
   let card : RoboticWorkforce; let player : TestPlayer; let game : Game;
@@ -69,22 +67,6 @@ describe('RoboticWorkforce', () => {
     expect(action).is.not.undefined;
     action!.cb([noctisFarming]);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
-  });
-
-  it('Should work with gyropolis', () => {
-    const gyropolis = new Gyropolis();
-    const venusgov = new VenusGovernor();
-    player.playedCards.push(gyropolis, venusgov);
-
-    const action = card.play(player);
-    expect(action).is.undefined; // Not enough energy production for gyropolis, no other building card to copy
-
-    player.addProduction(Resources.ENERGY, 2);
-    const selectCard = card.play(player);
-    expect(selectCard).is.not.undefined;
-    selectCard!.cb([gyropolis]);
-    expect(player.getProduction(Resources.ENERGY)).to.eq(0);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
   });
 
   it('Should work with capital', () => {
@@ -169,104 +151,92 @@ describe('RoboticWorkforce', () => {
     expect(action).is.undefined;
   });
 
-  describe('test all cards', () => {
-    ALL_CARD_MANIFESTS.forEach((manifest) => {
-      manifest.projectCards.factories.forEach((c) => {
-        it(c.cardName, () => {
-          testCard(new c.Factory());
-        });
-      });
-      manifest.preludeCards.factories.forEach((c) => {
-        it(c.cardName, () => {
-          testCard(new c.Factory());
-        });
-      });
-      manifest.corporationCards.factories.forEach((c) => {
-        it(c.cardName, () => {
-          testCard(new c.Factory());
-        });
+  ALL_CARD_MANIFESTS.forEach((manifest) => {
+    manifest.projectCards.factories.forEach((c) => {
+      it('test ' + c.cardName, () => {
+        testCard(new c.Factory());
       });
     });
-
-    const testCard = function(card: ICard) {
-      const researchCoordination = new ResearchCoordination();
-      const gameOptions = TestingUtils.setCustomGameOptions({aresExtension: true, aresHazards: false, moonExpansion: true});
-
-      let include = false;
-      if ((card.tags.includes(Tags.BUILDING) || card.tags.includes(Tags.WILDCARD)) && card.play !== undefined) {
-        // Solar Farm is a pain to test so let's just say it's fine
-        if (card.name === CardName.SOLAR_FARM) {
-          return;
-        }
-
-        // Create new players, set all productions to 2
-        player = TestPlayers.BLUE.newPlayer();
-        redPlayer = TestPlayers.RED.newPlayer();
-        game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
-        player.setProductionForTest({megacredits: 2, steel: 2, titanium: 2, plants: 2, energy: 2, heat: 2});
-        redPlayer.setProductionForTest({megacredits: 2, steel: 2, titanium: 2, plants: 2, energy: 2, heat: 2});
-
-        // Set Moon rates.
-        game.moonData!.miningRate = 3;
-        game.moonData!.colonyRate = 3;
-        game.moonData!.logisticRate = 3;
-
-        // place some tiles
-        TestingUtils.resetBoard(game);
-        game.addCityTile(player, '17');
-        game.addCityTile(player, '19');
-        game.addOceanTile(player, '32');
-        game.addOceanTile(player, '33');
-        game.addOceanTile(player, '34');
-
-        // Some moon cards need steel and titanium
-        player.steel = 2;
-        player.titanium = 2;
-
-        expect(game.deferredActions).has.lengthOf(0);
-
-        // Make sure to trigger any tag based production
-        player.playedCards.push(...Array(5).fill(researchCoordination));
-
-        if (card.name === CardName.LUNAR_MINE_URBANIZATION) {
-          game.moonData!.moon.spaces[4].tile = {tileType: TileType.MOON_MINE};
-          game.moonData!.moon.spaces[4].player = player;
-        }
-
-        const action = card.play(player);
-        if (action !== undefined) {
-          if (action instanceof SelectSpace) {
-            action.cb(action.availableSpaces[0]);
-          }
-        }
-
-        while (game.deferredActions.length) {
-          const defAction = game.deferredActions.pop()!.execute();
-          if (defAction !== undefined) {
-            if (defAction instanceof SelectSpace) {
-              defAction.cb(defAction.availableSpaces[0]);
-            }
-          }
-        }
-
-        // Now if any of the production changed, that means the card has a production change
-        const productions = [Resources.MEGACREDITS, Resources.STEEL, Resources.TITANIUM, Resources.PLANTS, Resources.ENERGY, Resources.HEAT];
-        include = productions.filter((prod) => player.getProduction(prod) !== 2).length > 0;
-      }
-
-      const isEmpty = function(u: Units): boolean {
-        return u.megacredits === 0 && u.steel === 0 && u.titanium === 0 && u.plants === 0 && u.energy === 0 && u.heat === 0;
-      };
-
-      console.log(`        ${card.name}: ${include}`);
-      // The card must have a productionBox or produce method.
-      if (include) {
-        if (card.produce === undefined) {
-          if (card.productionBox === undefined || isEmpty(card.productionBox)) {
-            fail(card.name + ' should be registered for Robotic Workforce');
-          }
-        };
-      }
-    };
+    manifest.preludeCards.factories.forEach((c) => {
+      it('test ' + c.cardName, () => {
+        testCard(new c.Factory());
+      });
+    });
+    manifest.corporationCards.factories.forEach((c) => {
+      it('test ' + c.cardName, () => {
+        testCard(new c.Factory());
+      });
+    });
   });
+
+  const testCard = function(card: ICard) {
+    const researchCoordination = new ResearchCoordination();
+    const gameOptions = TestingUtils.setCustomGameOptions({aresExtension: true, aresHazards: false, moonExpansion: true});
+    const productions = [Resources.MEGACREDITS, Resources.STEEL, Resources.TITANIUM, Resources.PLANTS, Resources.ENERGY, Resources.HEAT];
+
+    let include = false;
+    if ((card.tags.includes(Tags.BUILDING) || card.tags.includes(Tags.WILDCARD)) && card.play !== undefined) {
+      // Solar Farm is a pain to test so let's just say it's fine
+      if (card.name === CardName.SOLAR_FARM) {
+        return;
+      }
+
+      // Create new players, set all productions to 2
+      player = TestPlayers.BLUE.newPlayer();
+      redPlayer = TestPlayers.RED.newPlayer();
+      game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
+      player.setProductionForTest({megacredits: 2, steel: 2, titanium: 2, plants: 2, energy: 2, heat: 2});
+      redPlayer.setProductionForTest({megacredits: 2, steel: 2, titanium: 2, plants: 2, energy: 2, heat: 2});
+
+      // place some tiles
+      TestingUtils.resetBoard(game);
+      game.addCityTile(player, '17');
+      game.addCityTile(player, '19');
+      game.addOceanTile(player, '32');
+      game.addOceanTile(player, '33');
+      game.addOceanTile(player, '34');
+
+      expect(game.deferredActions).has.lengthOf(0);
+
+      // Let's make sure we trigger any tag based production
+      player.playedCards.push(...Array(5).fill(researchCoordination));
+
+      if (card.name === CardName.LUNAR_MINE_URBANIZATION) {
+        game.moonData!.moon.spaces[4].tile = {tileType: TileType.MOON_MINE};
+        game.moonData!.moon.spaces[4].player = player;
+      }
+
+      const action = card.play(player);
+      if (action !== undefined) {
+        if (action instanceof SelectSpace) {
+          action.cb(action.availableSpaces[0]);
+        }
+      }
+
+      while (game.deferredActions.length) {
+        const defAction = game.deferredActions.pop()!.execute();
+        if (defAction !== undefined) {
+          if (defAction instanceof SelectSpace) {
+            defAction.cb(defAction.availableSpaces[0]);
+          }
+        }
+      }
+
+      // Now if any of the production changed, that means the card has a production box
+      include = productions.filter((prod) => player.getProduction(prod) !== 2).length > 0;
+    }
+
+    const isEmpty = function(u: Units): boolean {
+      return u.megacredits === 0 && u.steel === 0 && u.titanium === 0 && u.plants === 0 && u.energy === 0 && u.heat === 0;
+    };
+
+    // The card must have a productionBox or produce method.
+    if (include) {
+      if (card.produce === undefined) {
+        if (card.productionBox === undefined || isEmpty(card.productionBox)) {
+          fail(card.name + ' should be registered for Robotic Workforce');
+        }
+      };
+    }
+  };
 });

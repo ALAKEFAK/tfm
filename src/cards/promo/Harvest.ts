@@ -1,11 +1,11 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../Tags';
 import {Card} from '../Card';
-import {CardType} from '../CardType';
-import {Player} from '../../Player';
 import {CardName} from '../../CardName';
-import {CardRenderer} from '../render/CardRenderer';
+import {CardType} from '../CardType';
+import {Tags} from '../Tags';
+import {Player} from '../../Player';
 import {Resources} from '../../Resources';
+import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
 
 export class Harvest extends Card implements IProjectCard {
@@ -16,12 +16,13 @@ export class Harvest extends Card implements IProjectCard {
       tags: [Tags.PLANT],
       cost: 4,
       requirements: CardRequirements.builder((b) => b.greeneries(3)),
+
       metadata: {
         cardNumber: 'X37',
+        description: 'Requires that you have 3 greenery tiles in play. Gain 12 M€.',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(12);
         }),
-        description: 'Requires that you have 3 greenery tiles in play. Gain 12 M€.',
       },
     });
   }

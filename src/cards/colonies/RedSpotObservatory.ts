@@ -19,7 +19,6 @@ export class RedSpotObservatory extends Card implements IProjectCard, IResourceC
       name: CardName.RED_SPOT_OBSERVATORY,
       cardType: CardType.ACTIVE,
       resourceType: ResourceType.FLOATER,
-      victoryPoints: 2,
 
       requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 3)),
       metadata: {
@@ -35,6 +34,7 @@ export class RedSpotObservatory extends Card implements IProjectCard, IResourceC
           text: 'Requires 3 Science tags. Draw 2 cards.',
           align: 'left',
         },
+        victoryPoints: 2,
       },
     });
   }
@@ -76,5 +76,9 @@ export class RedSpotObservatory extends Card implements IProjectCard, IResourceC
   public play(player: Player) {
     player.drawCard(2);
     return undefined;
+  }
+
+  public getVictoryPoints(): number {
+    return 2;
   }
 }

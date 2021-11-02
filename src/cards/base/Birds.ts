@@ -2,7 +2,6 @@ import {IActionCard, IResourceCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {Card} from '../Card';
-import {VictoryPoints} from '../ICard';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {ResourceType} from '../../ResourceType';
@@ -11,7 +10,7 @@ import {CardName} from '../../CardName';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {all} from '../Options';
+import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
 export class Birds extends Card implements IActionCard, IProjectCard, IResourceCard {
   constructor() {
@@ -20,11 +19,8 @@ export class Birds extends Card implements IActionCard, IProjectCard, IResourceC
       name: CardName.BIRDS,
       tags: [Tags.ANIMAL],
       cost: 10,
-
       resourceType: ResourceType.ANIMAL,
       requirements: CardRequirements.builder((b) => b.oxygen(13)),
-      victoryPoints: VictoryPoints.resource(1, 1),
-
       metadata: {
         cardNumber: '072',
         description: 'Requires 13% oxygen. Decrease any plant production 2 steps. 1 VP per Animal on this card.',
@@ -33,20 +29,31 @@ export class Birds extends Card implements IActionCard, IProjectCard, IResourceC
             eb.empty().startAction.animals(1);
           }).br;
           b.production((pb) => {
-            pb.minus().plants(-2, {all});
+            pb.minus().plants(-2).any;
           });
         }),
+        victoryPoints: CardRenderDynamicVictoryPoints.animals(1, 1),
       },
     });
   }
 
     public resourceCount = 0;
 
+    public warning?: string;
+
     public canPlay(player: Player): boolean {
-      return player.game.someoneHasResourceProduction(Resources.PLANTS, 2);
+      this.warning = undefined;
+      if (super.canPlay(player) && player.game.someoneElseHasResourceProduction(Resources.PLANTS, 2, player) === false) {
+        this.warning = 'You will have to decrease your own plant production because no other player has enough.';
+      }
+      return super.canPlay(player) && player.game.someoneHasResourceProduction(Resources.PLANTS, 2);
+    }
+    public getVictoryPoints(): number {
+      return this.resourceCount;
     }
     public play(player: Player) {
       player.game.defer(new DecreaseAnyProduction(player, Resources.PLANTS, 2));
+      this.warning = undefined;
       return undefined;
     }
     public canAct(): boolean {

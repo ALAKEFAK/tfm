@@ -13,6 +13,7 @@ import {PartyName} from '../../turmoil/parties/PartyName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
+import {AphroditeRebalanced} from '../rebalanced/rebalanced_corporation/AphroditeRebalanced';
 
 export class Thermophiles extends Card implements IActionCard, IResourceCard {
   constructor() {
@@ -28,7 +29,7 @@ export class Thermophiles extends Card implements IActionCard, IResourceCard {
         cardNumber: '253',
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 Microbe to ANY Venus CARD.', (eb) => {
-            eb.empty().startAction.microbes(1, {secondaryTag: Tags.VENUS});
+            eb.empty().startAction.microbes(1).secondaryTag(Tags.VENUS);
           }).br;
           b.or().br;
           b.action('Spend 2 Microbes here to raise Venus 1 step.', (eb) => {
@@ -80,10 +81,11 @@ export class Thermophiles extends Card implements IActionCard, IResourceCard {
       return undefined;
     });
 
-    const redsAreRuling = PartyHooks.shouldApplyPolicy(player, PartyName.REDS);
+    const redsAreRuling = PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS);
 
     if (canRaiseVenus) {
-      if (!redsAreRuling || (redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST))) {
+      const adjustedCost = REDS_RULING_POLICY_COST - AphroditeRebalanced.rebalancedAphroditeBonus(player, 1);
+      if (!redsAreRuling || (redsAreRuling && player.canAfford(adjustedCost))) {
         opts.push(spendResource);
       }
     } else {

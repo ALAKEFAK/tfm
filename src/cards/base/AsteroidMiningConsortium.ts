@@ -8,7 +8,6 @@ import {CardName} from '../../CardName';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {all} from '../Options';
 
 export class AsteroidMiningConsortium extends Card implements IProjectCard {
   constructor() {
@@ -17,7 +16,6 @@ export class AsteroidMiningConsortium extends Card implements IProjectCard {
       name: CardName.ASTEROID_MINING_CONSORTIUM,
       tags: [Tags.JOVIAN],
       cost: 13,
-      victoryPoints: 1,
 
       requirements: CardRequirements.builder((b) => b.production(Resources.TITANIUM)),
       metadata: {
@@ -25,17 +23,31 @@ export class AsteroidMiningConsortium extends Card implements IProjectCard {
         cardNumber: '002',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
-            pb.minus().titanium(-1, {all}).br;
+            pb.minus().titanium(-1).any.br;
             pb.plus().titanium(1);
           });
         }),
+        victoryPoints: 1,
       },
     });
+  }
+
+  public warning?: string;
+
+  public canPlay(player: Player): boolean {
+    this.warning = undefined;
+    if (super.canPlay(player) && player.game.someoneElseHasResourceProduction(Resources.TITANIUM, 1, player) === false) {
+      this.warning = 'You will have to decrease your own titanium production because no other player has enough.';
+    }
+    return player.getProduction(Resources.TITANIUM) >= 1;
   }
 
   public play(player: Player) {
     player.game.defer(new DecreaseAnyProduction(player, Resources.TITANIUM, 1));
     player.addProduction(Resources.TITANIUM, 1);
     return undefined;
+  }
+  public getVictoryPoints() {
+    return 1;
   }
 }

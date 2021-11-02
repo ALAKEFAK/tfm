@@ -23,7 +23,6 @@ import {StealResources} from '../deferredActions/StealResources';
 import {Tags} from '../cards/Tags';
 import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
 import {Game} from '../Game';
-import {Turmoil} from '../turmoil/Turmoil';
 
 export enum ShouldIncreaseTrack { YES, NO, ASK }
 
@@ -92,6 +91,12 @@ export abstract class Colony implements SerializedColony {
       if (poseidon !== undefined) {
         poseidon.addProduction(Resources.MEGACREDITS, 1);
       }
+
+      // Rebalanced Poseidon hook
+      const rebalancedPoseidonPlayer = player.game.getPlayers().find((player) => player.isCorporation(CardName.POSEIDON_REBALANCED));
+      if (rebalancedPoseidonPlayer !== undefined && rebalancedPoseidonPlayer === player) {
+        rebalancedPoseidonPlayer.addProduction(Resources.MEGACREDITS, 2);
+      }
     }
 
     public trade(player: Player, bonusTradeOffset: number = 0, usesTradeFleet: boolean = true, decreaseTrackAfterTrade: boolean = true): void {
@@ -134,6 +139,7 @@ export abstract class Colony implements SerializedColony {
       if (usesTradeFleet) {
         this.visitor = player.id;
         player.tradesThisGeneration++;
+        player.hasTradedThisTurn = true;
       }
 
       if (decreaseTrackAfterTrade) {
@@ -220,16 +226,16 @@ export abstract class Colony implements SerializedColony {
         break;
 
       case ColonyBenefit.GAIN_INFLUENCE:
-        Turmoil.ifTurmoil(game, (turmoil) => {
-          turmoil.addInfluenceBonus(player);
+        if (game.turmoil !== undefined) {
+          game.turmoil.addInfluenceBonus(player);
           game.log('${0} gained 1 influence', (b) => b.player(player));
-        });
+        }
         break;
 
       case ColonyBenefit.PLACE_DELEGATES:
-        Turmoil.ifTurmoil(game, (turmoil) => {
-          const playerHasLobbyDelegate = turmoil.lobby.has(player.id);
-          let availablePlayerDelegates = turmoil.getDelegatesInReserve(player.id);
+        if (game.turmoil !== undefined) {
+          const playerHasLobbyDelegate = game.turmoil.lobby.has(player.id);
+          let availablePlayerDelegates = game.turmoil.getDelegatesInReserve(player.id);
           if (playerHasLobbyDelegate) availablePlayerDelegates += 1;
 
           const qty = Math.min(quantity, availablePlayerDelegates);
@@ -238,22 +244,23 @@ export abstract class Colony implements SerializedColony {
             const fromLobby = (i === qty - 1 && qty === availablePlayerDelegates && playerHasLobbyDelegate);
             game.defer(new SendDelegateToArea(player, 'Select where to send delegate', {source: fromLobby ? 'lobby' : 'reserve'}));
           }
-        });
+        }
         break;
 
       case ColonyBenefit.GIVE_MC_PER_DELEGATE:
-        Turmoil.ifTurmoil(game, (turmoil) => {
-          let partyDelegateCount = PLAYER_DELEGATES_COUNT - turmoil.getDelegatesInReserve(player.id);
-          if (turmoil.lobby.has(player.id)) partyDelegateCount--;
-          if (turmoil.chairman === player.id) partyDelegateCount--;
+        if (game.turmoil !== undefined) {
+          let partyDelegateCount = PLAYER_DELEGATES_COUNT - game.turmoil.getDelegatesInReserve(player.id);
+          if (game.turmoil.lobby.has(player.id)) partyDelegateCount--;
+          if (game.turmoil.chairman === player.id) partyDelegateCount--;
 
           player.addResource(Resources.MEGACREDITS, partyDelegateCount, {log: true});
-        });
+        }
         break;
 
       case ColonyBenefit.GAIN_TR:
         if (quantity > 0) {
-          player.increaseTerraformRatingSteps(quantity, {log: true});
+          player.increaseTerraformRatingSteps(quantity);
+          LogHelper.logTRIncrease(player, quantity);
         };
         break;
 
@@ -296,6 +303,10 @@ export abstract class Colony implements SerializedColony {
 
       case ColonyBenefit.PLACE_OCEAN_TILE:
         action = new PlaceOceanTile(player, 'Select ocean space for ' + this.name + ' colony');
+        break;
+
+      case ColonyBenefit.RAISE_TEMPERATURE:
+        player.game.increaseTemperature(player, 1);
         break;
 
       case ColonyBenefit.STEAL_RESOURCES:

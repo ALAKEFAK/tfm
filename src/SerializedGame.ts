@@ -16,7 +16,7 @@ import {IAresData} from './ares/IAresData';
 import {LogMessage} from './LogMessage';
 import {SerializedBoard} from './boards/SerializedBoard';
 import {SerializedMoonData} from './moon/SerializedMoonData';
-import {SerializedPathfindersData} from './pathfinders/SerializedPathfindersData';
+import {PartyName} from './turmoil/parties/PartyName';
 
 export interface SerializedGame {
     activePlayer: PlayerId;
@@ -44,20 +44,24 @@ export interface SerializedGame {
     milestones: Array<IMilestone>;
     monsInsuranceOwner: PlayerId | undefined;
     moonData: SerializedMoonData | undefined;
-    pathfindersData: SerializedPathfindersData | undefined;
+    oceanRecord: Array<number>;
     oxygenLevel: number;
+    oxygenRecord: Array<number>;
     passedPlayers: Array<PlayerId>;
     phase: Phase;
     players: Array<SerializedPlayer>;
     researchedPlayers: Array<PlayerId>;
+    rulingPartiesRecord: Array<PartyName>
     seed: number;
     someoneHasRemovedOtherPlayersPlants: boolean;
     spectatorId: SpectatorId | undefined;
     syndicatePirateRaider: PlayerId | undefined;
     temperature: number;
+    tempRecord: Array<number>;
     turmoil?: SerializedTurmoil;
     undoCount: number;
     unDraftedCards: Array<[PlayerId, Array<CardName>]>;
+    venusRecord: Array<number>;
     venusScaleLevel: number;
 }
 

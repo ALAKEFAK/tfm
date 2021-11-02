@@ -14,7 +14,6 @@ export class EarthElevator extends Card implements IProjectCard {
       tags: [Tags.SPACE, Tags.EARTH],
       name: CardName.EARTH_ELEVATOR,
       cardType: CardType.AUTOMATED,
-      victoryPoints: 4,
 
       metadata: {
         description: 'Increase your titanium production 3 steps.',
@@ -22,6 +21,7 @@ export class EarthElevator extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.titanium(3));
         }),
+        victoryPoints: 4,
       },
     });
   }
@@ -29,5 +29,8 @@ export class EarthElevator extends Card implements IProjectCard {
   public play(player: Player) {
     player.addProduction(Resources.TITANIUM, 3);
     return undefined;
+  }
+  public getVictoryPoints() {
+    return 4;
   }
 }

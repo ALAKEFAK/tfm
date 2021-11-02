@@ -6,7 +6,7 @@ import {Player} from '../../Player';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {VictoryPoints} from '../ICard';
+import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
 export class IoMiningIndustries extends Card implements IProjectCard {
   constructor() {
@@ -15,7 +15,6 @@ export class IoMiningIndustries extends Card implements IProjectCard {
       name: CardName.IO_MINING_INDUSTRIES,
       tags: [Tags.JOVIAN, Tags.SPACE],
       cost: 41,
-      victoryPoints: VictoryPoints.tags(Tags.JOVIAN, 1, 1),
 
       metadata: {
         cardNumber: '092',
@@ -24,10 +23,14 @@ export class IoMiningIndustries extends Card implements IProjectCard {
           b.vpText('1 VP per Jovian tag you have.');
         }),
         description: 'Increase your titanium production 2 steps and your M€ production 2 steps.',
+        victoryPoints: CardRenderDynamicVictoryPoints.jovians(1, 1),
       },
     });
   }
 
+  public getVictoryPoints(player: Player) {
+    return player.getTagCount(Tags.JOVIAN, false, false);
+  }
   public play(player: Player) {
     player.addProduction(Resources.TITANIUM, 2);
     player.addProduction(Resources.MEGACREDITS, 2);

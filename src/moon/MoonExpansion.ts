@@ -161,7 +161,7 @@ export class MoonExpansion {
       const increment = Math.min(count, available);
       if (increment > 0) {
         if (player.game.phase === Phase.SOLAR) {
-          player.game.log('${0} acted as World Government and raised the mining rate ${1} step(s)', (b) => b.player(player).number(increment));
+          player.game.log('The World Government raised the mining rate ${1} step(s)', (b) => b.player(player).number(increment));
           this.activateLunaFirst(undefined, player.game, increment);
         } else {
           player.game.log('${0} raised the mining rate ${1} step(s)', (b) => b.player(player).number(increment));
@@ -185,7 +185,7 @@ export class MoonExpansion {
       const increment = Math.min(count, available);
       if (increment > 0) {
         if (player.game.phase === Phase.SOLAR) {
-          player.game.log('${0} acted as World Government and raised the colony rate ${1} step(s)', (b) => b.player(player).number(increment));
+          player.game.log('The World Government raised the colony rate ${1} step(s)', (b) => b.player(player).number(increment));
           this.activateLunaFirst(undefined, player.game, count);
         } else {
           player.game.log('${0} raised the moon colony rate ${1} step(s)', (b) => b.player(player).number(increment));
@@ -194,7 +194,7 @@ export class MoonExpansion {
             player.drawCard();
           });
           this.bonus(moonData.colonyRate, increment, 6, () => {
-            player.addProduction(Resources.ENERGY, 1, {log: true});
+            player.drawCard();
           });
           this.activateLunaFirst(player, player.game, count);
         }
@@ -209,7 +209,7 @@ export class MoonExpansion {
       const increment = Math.min(count, available);
       if (increment > 0) {
         if (player.game.phase === Phase.SOLAR) {
-          player.game.log('${0} acted as World Government and raised the logistic rate ${1} step(s)', (b) => b.player(player).number(increment));
+          player.game.log('The World Government raised the logistic rate ${1} step(s)', (b) => b.player(player).number(increment));
           this.activateLunaFirst(undefined, player.game, increment);
         } else {
           player.game.log('${0} raised the logistic rate ${1} step(s)', (b) => b.player(player).number(increment));
@@ -292,16 +292,12 @@ export class MoonExpansion {
    * Reservation units adjusted for cards in a player's hand that might reduce or eliminate these costs.
    */
   public static adjustedReserveCosts(player: Player, card: IProjectCard) : Units {
-    // This is a bit hacky and uncoordinated only because this returns early when there's a moon card with LTF Privileges
-    // even though the heat component below could be considered (and is, for LocalHeatTrapping.)
-
     if (player.cardIsInEffect(CardName.LTF_PRIVILEGES) && card.tags.includes(Tags.MOON)) {
       return Units.EMPTY;
     }
 
     const reserveUnits: Units = card.reserveUnits || Units.EMPTY;
 
-    const heat = reserveUnits.heat || 0;
     let steel = reserveUnits.steel || 0;
     let titanium = reserveUnits.titanium || 0;
 
@@ -321,7 +317,7 @@ export class MoonExpansion {
 
     steel = Math.max(steel, 0);
     titanium = Math.max(titanium, 0);
-    return Units.of({steel, titanium, heat});
+    return Units.of({steel, titanium});
   }
 
   public static calculateVictoryPoints(player: Player, vpb: VictoryPointsBreakdown): void {

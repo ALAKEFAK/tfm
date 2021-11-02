@@ -5,7 +5,6 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {played} from '../Options';
 
 export class EarthOffice extends Card implements IProjectCard {
   constructor() {
@@ -20,7 +19,7 @@ export class EarthOffice extends Card implements IProjectCard {
         cardNumber: '105',
         renderData: CardRenderer.builder((b) => {
           b.effect('When you play an Earth card, you pay 3 M€ less for it.', (eb) => {
-            eb.earth(1, {played}).startEffect.megacredits(-3);
+            eb.earth().played.startEffect.megacredits(-3);
           });
         }),
       },

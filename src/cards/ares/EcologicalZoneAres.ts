@@ -3,7 +3,7 @@ import {EcologicalZone} from '../base/EcologicalZone';
 import {SpaceBonus} from '../../SpaceBonus';
 import {TileType} from '../../TileType';
 import {CardRenderer} from '../render/CardRenderer';
-import {played} from '../Options';
+import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
 export class EcologicalZoneAres extends EcologicalZone {
   constructor() {
@@ -19,11 +19,12 @@ export class EcologicalZoneAres extends EcologicalZone {
         cardNumber: 'A08',
         renderData: CardRenderer.builder((b) => {
           b.effect('When you play an animal or plant tag /including these/, add an animal to this card.', (eb) => {
-            eb.animals(1, {played}).slash().plants(1, {played}).startEffect;
+            eb.animals(1).played.slash().plants(1).played.startEffect;
             eb.animals(1).tile(TileType.ECOLOGICAL_ZONE, false, true);
           }).br;
           b.vpText('The tile grants an ADJACENCY BONUS of 1 animal. 1 VP per 2 Animals on this card.');
         }),
+        victoryPoints: CardRenderDynamicVictoryPoints.animals(1, 2),
       },
     );
   }

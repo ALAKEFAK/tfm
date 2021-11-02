@@ -2,8 +2,12 @@ import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
+import {MAX_VENUS_SCALE, REDS_RULING_POLICY_COST} from '../../constants';
+import {PartyHooks} from '../../turmoil/parties/PartyHooks';
+import {PartyName} from '../../turmoil/parties/PartyName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
+import {AphroditeRebalanced} from '../rebalanced/rebalanced_corporation/AphroditeRebalanced';
 
 export class WaterToVenus extends Card {
   constructor() {
@@ -12,7 +16,6 @@ export class WaterToVenus extends Card {
       cardType: CardType.EVENT,
       tags: [Tags.SPACE],
       cost: 9,
-      tr: {venus: 1},
 
       metadata: {
         cardNumber: '254',
@@ -21,6 +24,16 @@ export class WaterToVenus extends Card {
       },
     });
   };
+
+  public canPlay(player: Player): boolean {
+    const venusMaxed = player.game.getVenusScaleLevel() === MAX_VENUS_SCALE;
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !venusMaxed) {
+      const adjustedCost = player.getCardCost(this) + REDS_RULING_POLICY_COST - AphroditeRebalanced.rebalancedAphroditeBonus(player, 1);
+      return player.canAfford(adjustedCost, {titanium: true});
+    }
+
+    return true;
+  }
 
   public play(player: Player) {
     player.game.increaseVenusScaleLevel(player, 1);

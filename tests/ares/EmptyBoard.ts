@@ -1,9 +1,11 @@
 import {Board} from '../../src/boards/Board';
 import {BoardBuilder} from '../../src/boards/BoardBuilder';
+import {ShuffleTileOptionType} from '../../src/boards/ShuffleTileOptionType';
+import {Random} from '../../src/Random';
 
 export class EmptyBoard extends Board {
   public static newInstance() {
-    const builder = new BoardBuilder(false, false);
+    const builder = new BoardBuilder(ShuffleTileOptionType.NONE, false, new Random(0));
 
     // y=0
     builder.land().land().land().land().land();

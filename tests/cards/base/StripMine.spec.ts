@@ -45,15 +45,16 @@ describe('StripMine', function() {
     player.megaCredits = card.cost;
     player.game.phase = Phase.ACTION;
 
-    turmoil.rulingParty = new Reds();
+    const reds = new Reds();
+    turmoil.rulingParty = reds;
     PoliticalAgendas.setNextAgenda(turmoil, game);
-    expect(player.canPlay(card)).is.false;
+    expect(card.canPlay(player)).is.false;
 
     player.megaCredits += REDS_RULING_POLICY_COST * 2; // Payment for Reds tax
-    expect(player.canPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     player.megaCredits = 5; // Cannot play as cannot afford Reds tax in MC
     player.steel = 30;
-    expect(player.canPlay(card)).is.false;
+    expect(card.canPlay(player)).is.false;
   });
 });

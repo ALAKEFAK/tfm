@@ -10,7 +10,6 @@ import {Resources} from '../../../src/Resources';
 import {SelectHowToPayDeferred} from '../../../src/deferredActions/SelectHowToPayDeferred';
 import {PlaceMoonMineTile} from '../../../src/moon/PlaceMoonMineTile';
 import {MooncrateBlockFactory} from '../../../src/cards/moon/MooncrateBlockFactory';
-import {Phase} from '../../../src/Phase';
 
 const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
@@ -28,18 +27,7 @@ describe('MoonMineStandardProject', () => {
   });
 
   it('can act', () => {
-    player.titanium = 1;
-    player.megaCredits = 19;
-    expect(player.canPlay(card)).is.false;
-
-    player.titanium = 0;
-    player.megaCredits = 20;
-    expect(player.canPlay(card)).is.false;
-
-    player.titanium = 1;
-    player.megaCredits = 20;
-    expect(player.canPlay(card)).is.true;
-
+    // 1. Have the money? And the titanium?
     // 2. Are there spaces on the moon for a Mine?
   });
 
@@ -72,20 +60,6 @@ describe('MoonMineStandardProject', () => {
 
     expect(moonData.miningRate).eq(1);
     expect(player.getTerraformRating()).eq(15);
-  });
-
-  it('can act when Reds are in power.', () => {
-    const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player, MOON_OPTIONS);
-    const moonData = MoonExpansion.moonData(game);
-    game.phase = Phase.ACTION;
-
-    // Card requirements
-    player.titanium = 1;
-
-    TestingUtils.testRedsCosts(() => card.canAct(player), player, card.cost, 3);
-    moonData.miningRate = 8;
-    TestingUtils.testRedsCosts(() => card.canAct(player), player, card.cost, 0);
   });
 });
 

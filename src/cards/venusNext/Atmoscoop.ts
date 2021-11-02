@@ -16,6 +16,7 @@ import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
 import {Card} from '../Card';
+import {AphroditeRebalanced} from '../rebalanced/rebalanced_corporation/AphroditeRebalanced';
 
 export class Atmoscoop extends Card implements IProjectCard {
   constructor() {
@@ -26,8 +27,6 @@ export class Atmoscoop extends Card implements IProjectCard {
       tags: [Tags.JOVIAN, Tags.SPACE],
 
       requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 3)),
-      victoryPoints: 1,
-
       metadata: {
         cardNumber: '217',
         description: 'Requires 3 Science tags. Either raise the temperature 2 steps, or raise Venus 2 steps. Add 2 Floaters to ANY card.',
@@ -35,17 +34,23 @@ export class Atmoscoop extends Card implements IProjectCard {
           b.temperature(2).or(Size.SMALL).venus(2).br;
           b.floaters(2).asterix();
         }),
+        victoryPoints: 1,
       },
     });
   }
 
   public canPlay(player: Player): boolean {
+    if (!super.canPlay(player)) {
+      return false;
+    }
     const remainingTemperatureSteps = (constants.MAX_TEMPERATURE - player.game.getTemperature()) / 2;
     const remainingVenusSteps = (constants.MAX_VENUS_SCALE - player.game.getVenusScaleLevel()) / 2;
     const stepsRaised = Math.min(remainingTemperatureSteps, remainingVenusSteps, 2);
 
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) {
-      return player.canAfford(this.cost + constants.REDS_RULING_POLICY_COST * stepsRaised, {titanium: true});
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
+      // This is true if raising venus, but it gets more complicated if they decide to raise temp instead
+      const adjustedCost = player.getCardCost(this) + constants.REDS_RULING_POLICY_COST * stepsRaised - AphroditeRebalanced.rebalancedAphroditeBonus(player, stepsRaised);
+      return player.canAfford(adjustedCost, {titanium: true});
     }
 
     return true;
@@ -104,6 +109,10 @@ export class Atmoscoop extends Card implements IProjectCard {
       }
       return addFloaters;
     }
+  }
+
+  public getVictoryPoints() {
+    return 1;
   }
 
   private temperatureIsMaxed(game: Game) {

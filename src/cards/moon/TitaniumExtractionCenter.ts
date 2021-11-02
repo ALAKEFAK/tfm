@@ -15,7 +15,7 @@ export class TitaniumExtractionCenter extends MoonCard {
       cardType: CardType.AUTOMATED,
       tags: [Tags.BUILDING],
       cost: 14,
-      reserveUnits: Units.of({titanium: 2}),
+      productionBox: Units.of({}),
 
       metadata: {
         description: 'Spend 2 titanium. Increase your titanium production 1 step for every 2 raised steps of Mining Rate.',
@@ -25,18 +25,16 @@ export class TitaniumExtractionCenter extends MoonCard {
           b.production((pb) => pb.titanium(1)).slash().moonMiningRate({amount: 2});
         }),
       },
+    }, {
+      reserveUnits: Units.of({titanium: 2}),
     });
-  }
-
-  public produce(player: Player) {
-    const miningRate = MoonExpansion.moonData(player.game).miningRate;
-    const productionIncrease = Math.floor(miningRate / 2);
-    player.addProduction(Resources.TITANIUM, productionIncrease, {log: true});
   }
 
   public play(player: Player) {
     super.play(player);
-    this.produce(player);
+    const miningRate = MoonExpansion.moonData(player.game).miningRate;
+    const productionIncrease = Math.floor(miningRate / 2);
+    player.addProduction(Resources.TITANIUM, productionIncrease);
     return undefined;
   }
 }

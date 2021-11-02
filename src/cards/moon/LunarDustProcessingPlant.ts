@@ -16,8 +16,7 @@ export class LunarDustProcessingPlant extends MoonCard implements IProjectCard {
       cardType: CardType.ACTIVE,
       tags: [Tags.BUILDING],
       cost: 6,
-      reserveUnits: Units.of({titanium: 1}),
-      tr: {moonLogistics: 1},
+      productionBox: Units.of({}),
 
       metadata: {
         description: 'Spend 1 titanium. Raise the Logistic Rate 1 step.',
@@ -29,6 +28,8 @@ export class LunarDustProcessingPlant extends MoonCard implements IProjectCard {
           b.minus().titanium(1).moonLogisticsRate();
         }),
       },
+    }, {
+      reserveUnits: Units.of({titanium: 1}),
     });
   };
 

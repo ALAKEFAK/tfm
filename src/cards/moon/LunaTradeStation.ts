@@ -11,7 +11,6 @@ import {Units} from '../../Units';
 import {MoonCard} from './MoonCard';
 import {Game} from '../../Game';
 import {Resources} from '../../Resources';
-import {all} from '../Options';
 
 export class LunaTradeStation extends MoonCard implements IActionCard {
   constructor() {
@@ -20,17 +19,19 @@ export class LunaTradeStation extends MoonCard implements IActionCard {
       cardType: CardType.ACTIVE,
       tags: [Tags.MOON, Tags.MOON, Tags.SPACE],
       cost: 10,
-      reserveUnits: Units.of({titanium: 2}),
+      productionBox: Units.of({}),
 
       metadata: {
         description: 'Spend 2 titanium. Place this tile ON THE RESERVED AREA.',
         cardNumber: 'M13',
         renderData: CardRenderer.builder((b) => {
           b.action('Gain 2 M€ for each colony tile on the Moon.', (eb) =>
-            eb.empty().startAction.megacredits(2).slash().moonColony({all}));
+            eb.empty().startAction.megacredits(2).slash().moonColony().any);
           b.br.minus().titanium(2).tile(TileType.LUNA_TRADE_STATION, true).asterix();
         }),
       },
+    }, {
+      reserveUnits: Units.of({titanium: 2}),
     });
   };
 

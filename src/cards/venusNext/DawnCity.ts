@@ -18,8 +18,6 @@ export class DawnCity extends Card {
       cost: 15,
 
       requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 4)),
-      victoryPoints: 3,
-
       metadata: {
         cardNumber: '220',
         description: 'Requires 4 Science tags. Decrease your energy production 1 step. Increase your titanium production 1 step. Place a City tile on the RESERVED AREA.',
@@ -29,16 +27,20 @@ export class DawnCity extends Card {
             pb.plus().titanium(1);
           }).nbsp.city().asterix();
         }),
+        victoryPoints: 3,
       },
     });
   };
   public canPlay(player: Player): boolean {
-    return player.getProduction(Resources.ENERGY) >= 1;
+    return super.canPlay(player) && player.getProduction(Resources.ENERGY) >= 1;
   }
   public play(player: Player) {
     player.addProduction(Resources.ENERGY, -1);
     player.addProduction(Resources.TITANIUM, 1);
     player.game.addCityTile(player, SpaceName.DAWN_CITY, SpaceType.COLONY);
     return undefined;
+  }
+  public getVictoryPoints() {
+    return 3;
   }
 }

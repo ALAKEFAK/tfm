@@ -11,7 +11,6 @@ import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
-import {max} from '../Options';
 
 export class ElectroCatapult extends Card implements IActionCard, IProjectCard {
   constructor() {
@@ -21,9 +20,8 @@ export class ElectroCatapult extends Card implements IActionCard, IProjectCard {
       tags: [Tags.BUILDING],
       cost: 17,
       productionBox: Units.of({energy: -1}),
-      victoryPoints: 1,
 
-      requirements: CardRequirements.builder((b) => b.oxygen(8, {max})),
+      requirements: CardRequirements.builder((b) => b.oxygen(8).max()),
       metadata: {
         cardNumber: '069',
         description: {
@@ -36,11 +34,12 @@ export class ElectroCatapult extends Card implements IActionCard, IProjectCard {
           }).br;
           b.production((pb) => pb.minus().energy(1));
         }),
+        victoryPoints: 1,
       },
     });
   }
   public canPlay(player: Player): boolean {
-    return player.getProduction(Resources.ENERGY) >= 1;
+    return player.getProduction(Resources.ENERGY) >= 1 && super.canPlay(player);
   }
   public canAct(player: Player): boolean {
     return player.plants > 0 || player.steel > 0;
@@ -75,6 +74,9 @@ export class ElectroCatapult extends Card implements IActionCard, IProjectCard {
   public play(player: Player) {
     player.addProduction(Resources.ENERGY, -1);
     return undefined;
+  }
+  public getVictoryPoints() {
+    return 1;
   }
 
   private log(player: Player, resource: Resources) {

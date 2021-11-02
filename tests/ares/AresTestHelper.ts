@@ -1,5 +1,6 @@
 import {expect} from 'chai';
 import {SpaceBonus} from '../../src/SpaceBonus';
+import {Game} from '../../src/Game';
 import {Player} from '../../src/Player';
 import {Resources} from '../../src/Resources';
 import {SpaceType} from '../../src/SpaceType';
@@ -44,8 +45,20 @@ export class AresTestHelper {
     expect(player.getResource(Resources.MEGACREDITS)).is.eq(expectedMc);
   }
 
-  public static getHazards(player: Player): Array<ISpace> {
-    return player.game.board.getSpaces(SpaceType.LAND, player).filter((space) => AresHandler.hasHazardTile(space));
+  public static addGreenery(player: Player): ISpace {
+    const space = player.game.board.getAvailableSpacesForGreenery(player)[0];
+    player.game.addGreenery(player, space.id);
+    return space;
+  }
+
+  public static addOcean(game: Game, player: Player): ISpace {
+    const space = game.board.getAvailableSpacesForOcean(player)[0];
+    game.addOceanTile(player, space.id);
+    return space;
+  }
+
+  public static getHazards(game: Game): Array<ISpace> {
+    return game.board.getSpaces(SpaceType.LAND).filter((space) => AresHandler.hasHazardTile(space));
   }
 
   public static byTileType(spaces: Array<ISpace>): Map<number, Array<ISpace>> {

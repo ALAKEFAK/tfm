@@ -15,12 +15,12 @@ describe('IceCapMelting', function() {
   });
 
   it('Can\'t play', function() {
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
     (game as any).temperature = 2;
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     card.play(player);
     expect(game.deferredActions).has.lengthOf(1);

@@ -5,6 +5,9 @@ import {Player} from '../../Player';
 import {CardType} from '../CardType';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
+import {PartyHooks} from '../../turmoil/parties/PartyHooks';
+import {PartyName} from '../../turmoil/parties/PartyName';
+import {REDS_RULING_POLICY_COST} from '../../constants';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
 
@@ -16,7 +19,6 @@ export class MagneticFieldDome extends Card implements IProjectCard {
       tags: [Tags.BUILDING],
       cost: 5,
       productionBox: Units.of({energy: -2, plants: 1}),
-      tr: {tr: 1},
 
       metadata: {
         cardNumber: '171',
@@ -33,7 +35,12 @@ export class MagneticFieldDome extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player): boolean {
-    return player.getProduction(Resources.ENERGY) >= 2;
+    const hasEnergyProduction = player.getProduction(Resources.ENERGY) >= 2;
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, {steel: true}) && hasEnergyProduction;
+    }
+
+    return hasEnergyProduction;
   }
 
   public play(player: Player) {

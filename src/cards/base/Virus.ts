@@ -11,7 +11,6 @@ import {ResourceType} from '../../ResourceType';
 import {RemoveAnyPlants} from '../../deferredActions/RemoveAnyPlants';
 import {RemoveResourcesFromCard} from '../../deferredActions/RemoveResourcesFromCard';
 import {CardRenderer} from '../render/CardRenderer';
-import {all, digit} from '../Options';
 
 export class Virus extends Card implements IProjectCard {
   constructor() {
@@ -24,8 +23,8 @@ export class Virus extends Card implements IProjectCard {
       metadata: {
         cardNumber: '050',
         renderData: CardRenderer.builder((b) => {
-          b.minus().animals(2, {all, digit}).nbsp;
-          b.or().nbsp.minus().plants(5, {all, digit});
+          b.minus().animals(2).any.digit.nbsp;
+          b.or().nbsp.minus().plants(5).any.digit;
         }),
         description: 'Remove up to 2 Animals or 5 Plants from any player.',
       },

@@ -4,6 +4,7 @@ import {IGameData} from './IDatabase';
 import {SerializedGame} from '../SerializedGame';
 
 import {Pool, ClientConfig, QueryResult} from 'pg';
+import {ColonyName} from '../colonies/ColonyName';
 
 export class PostgreSQL implements IDatabase {
   private client: Pool;
@@ -24,7 +25,7 @@ export class PostgreSQL implements IDatabase {
         throw err;
       }
     });
-    this.client.query('CREATE TABLE IF NOT EXISTS game_results(game_id varchar not null, seed_game_id varchar, players integer, generations integer, game_options text, scores text, PRIMARY KEY (game_id))', (err) => {
+    this.client.query('CREATE TABLE IF NOT EXISTS game_results(game_id varchar not null, seed_game_id varchar, players integer, generations integer, game_options text, scores text, log text, colonies text, milestones text, awards text, finished_time timestamp default now(), PRIMARY KEY (game_id))', (err) => {
       if (err) {
         throw err;
       }
@@ -40,10 +41,6 @@ export class PostgreSQL implements IDatabase {
         throw err;
       }
     });
-  }
-
-  async initialize(): Promise<void> {
-
   }
 
   getClonableGames(cb: (err: Error | undefined, allGames: Array<IGameData>) => void) {
@@ -120,26 +117,6 @@ export class PostgreSQL implements IDatabase {
     });
   }
 
-  // TODO(kberg): throw an error if two game ids exist.
-  getGameId(playerId: string, cb: (err: Error | undefined, gameId?: GameId) => void): void {
-    const sql =
-      `SELECT game_id
-      FROM games, json_array_elements(CAST(game AS JSON)->'players') AS e
-      WHERE save_id = 0 AND e->>'id' = $1`;
-
-    this.client.query(sql, [playerId], (err: Error | null, res: QueryResult<any>) => {
-      if (err) {
-        console.error('PostgreSQL:getGameId', err);
-        return cb(err ?? undefined);
-      }
-      if (res.rowCount === 0) {
-        return cb(new Error('Game not found'));
-      }
-      const gameId = res.rows[0].game_id;
-      cb(undefined, gameId);
-    });
-  }
-
   getGameVersion(game_id: GameId, save_id: number, cb: DbLoadCallback<SerializedGame>): void {
     this.client.query('SELECT game game FROM games WHERE game_id = $1 and save_id = $2', [game_id, save_id], (err: Error | null, res: QueryResult<any>) => {
       if (err) {
@@ -150,8 +127,8 @@ export class PostgreSQL implements IDatabase {
     });
   }
 
-  saveGameResults(game_id: GameId, players: number, generations: number, gameOptions: GameOptions, scores: Array<Score>): void {
-    this.client.query('INSERT INTO game_results (game_id, seed_game_id, players, generations, game_options, scores) VALUES($1, $2, $3, $4, $5, $6)', [game_id, gameOptions.clonedGamedId, players, generations, gameOptions, JSON.stringify(scores)], (err) => {
+  saveGameResults(game_id: GameId, players: number, generations: number, gameOptions: GameOptions, scores: Array<Score>, colonies: Array<ColonyName>, milestones: Array<String>, awards: Array<String>): void {
+    this.client.query('INSERT INTO game_results (game_id, seed_game_id, players, generations, game_options, scores, colonies, milestones, awards, finished_time) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, now())', [game_id, gameOptions.clonedGamedId, players, generations, gameOptions, JSON.stringify(scores), JSON.stringify(colonies), JSON.stringify(milestones), JSON.stringify(awards)], (err) => {
       if (err) {
         console.error('PostgreSQL:saveGameResults', err);
         throw err;
@@ -179,8 +156,22 @@ export class PostgreSQL implements IDatabase {
 
   // Purge unfinished games older than MAX_GAME_DAYS days. If this environment variable is absent, it uses the default of 10 days.
   purgeUnfinishedGames(): void {
-    const envDays = parseInt(process.env.MAX_GAME_DAYS || '');
-    const days = Number.isInteger(envDays) ? envDays : 10;
+    // const envDays = parseInt(process.env.MAX_GAME_DAYS || '');
+    // const days = Number.isInteger(envDays) ? envDays : 10;
+    // this.client.query('DELETE FROM games WHERE created_time < now() - interval \'1 day\' * $1', [days], function(err?: Error, res?: QueryResult<any>) {
+    const days = 7;
+
+    // Delete solo games after 1 day
+    this.client.query('DELETE FROM games WHERE players = 1 AND created_time < now() - interval \'1 day\'', [], function(err?: Error, res?: QueryResult<any>) {
+      if (res) {
+        console.log(`Purged ${res.rowCount} rows`);
+      }
+      if (err) {
+        return console.warn(err.message);
+      }
+    });
+
+    // Delete all games after 7 days
     this.client.query('DELETE FROM games WHERE created_time < now() - interval \'1 day\' * $1', [days], function(err?: Error, res?: QueryResult<any>) {
       if (res) {
         console.log(`Purged ${res.rowCount} rows`);

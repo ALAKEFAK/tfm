@@ -11,8 +11,6 @@ import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferr
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
-import {MoonExpansion} from '../../moon/MoonExpansion';
-import {all} from '../Options';
 
 export class Playwrights extends Card implements CorporationCard {
   constructor() {
@@ -34,7 +32,7 @@ export class Playwrights extends Card implements CorporationCard {
               // use 1000 as an id to tell Vue to render the '?'
               eb.megacredits(1000).startAction;
               eb.text('replay', Size.SMALL, true);
-              eb.nbsp.cards(1, {all, secondaryTag: Tags.EVENT});
+              eb.nbsp.cards(1).any.secondaryTag(Tags.EVENT);
             });
           });
         }),
@@ -54,7 +52,7 @@ export class Playwrights extends Card implements CorporationCard {
       return replayableEvents.length > 0;
     }
 
-    public action(player: Player): SelectCard<IProjectCard> | undefined {
+    public action(player: Player) {
       const players = player.game.getPlayers();
       const replayableEvents = this.getReplayableEvents(player);
 
@@ -115,10 +113,8 @@ export class Playwrights extends Card implements CorporationCard {
       player.game.getPlayers().forEach((p) => {
         playedEvents.push(...p.playedCards.filter((card) => {
           return card.cardType === CardType.EVENT &&
-            // Can player.canPlay(card) replace this?
-            player.canAfford(player.getCardCost(card), {
-              reserveUnits: MoonExpansion.adjustedReserveCosts(player, card),
-            }) && player.canPlayIgnoringCost(card);
+            player.canAfford(player.getCardCost(card)) &&
+            (card.canPlay === undefined || card.canPlay(player));
         }));
       });
       this.checkLoops--;

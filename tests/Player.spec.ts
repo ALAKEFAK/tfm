@@ -204,12 +204,13 @@ describe('Player', function() {
   });
   it('serialization test', () => {
     const json = {
-      id: 'p-blue-id',
+      id: 'blue-id',
       pickedCorporationCard: 'Tharsis Republic',
       terraformRating: 20,
       corporationCard: undefined,
       hasIncreasedTerraformRatingThisGeneration: false,
       terraformRatingAtGenerationStart: 20,
+      endGenerationScores: [],
       megaCredits: 1,
       megaCreditProduction: 2,
       steel: 3,
@@ -226,6 +227,7 @@ describe('Player', function() {
       steelValue: 14,
       canUseHeatAsMegaCredits: false,
       actionsTakenThisRound: 15,
+      actionsTakenThisGame: 30,
       actionsThisGeneration: [CardName.FACTORUM, CardName.GHG_PRODUCING_BACTERIA],
       corporationInitialActionDone: false,
       dealtCorporationCards: [CardName.THARSIS_REPUBLIC],
@@ -239,7 +241,9 @@ describe('Player', function() {
       cardCost: 3,
       cardDiscount: 7,
       fleetSize: 99,
-      tradesThisTurn: 100,
+      tradesThisGeneration: 100,
+      hasTradedThisTurn: false,
+      hasWarnedOfUnusedDelegate: false,
       colonyTradeOffset: 101,
       colonyTradeDiscount: 102,
       colonyVictoryPoints: 104,
@@ -261,6 +265,7 @@ describe('Player', function() {
       oceanBonus: 86,
       scienceTagCount: 97,
       plantsNeededForGreenery: 5,
+      heatNeededForTemperature: 8,
       removingPlayers: [],
       removedFromPlayCards: [],
       name: 'player-blue',
@@ -327,97 +332,6 @@ describe('Player', function() {
     expect(player.hasUnits(units)).is.true;
   });
 
-
-  it('add units', () => {
-    function asUnits(player: Player): Units {
-      return {
-        megacredits: player.megaCredits,
-        steel: player.steel,
-        titanium: player.titanium,
-        plants: player.plants,
-        energy: player.energy,
-        heat: player.heat,
-      };
-    };
-
-    const player = TestPlayers.BLUE.newPlayer();
-
-    expect(asUnits(player)).deep.eq({
-      megacredits: 0,
-      steel: 0,
-      titanium: 0,
-      plants: 0,
-      energy: 0,
-      heat: 0,
-    });
-
-    player.megaCredits = 20;
-    player.steel = 19;
-    player.titanium = 18;
-    player.plants = 17;
-    player.energy = 16;
-    player.heat = 15;
-
-    player.addUnits(Units.of({megacredits: 10}));
-    expect(asUnits(player)).deep.eq({
-      megacredits: 30,
-      steel: 19,
-      titanium: 18,
-      plants: 17,
-      energy: 16,
-      heat: 15,
-    });
-
-    player.addUnits(Units.of({steel: 10}));
-    expect(asUnits(player)).deep.eq({
-      megacredits: 30,
-      steel: 29,
-      titanium: 18,
-      plants: 17,
-      energy: 16,
-      heat: 15,
-    });
-
-    player.addUnits(Units.of({titanium: 10}));
-    expect(asUnits(player)).deep.eq({
-      megacredits: 30,
-      steel: 29,
-      titanium: 28,
-      plants: 17,
-      energy: 16,
-      heat: 15,
-    });
-
-    player.addUnits(Units.of({plants: 10}));
-    expect(asUnits(player)).deep.eq({
-      megacredits: 30,
-      steel: 29,
-      titanium: 28,
-      plants: 27,
-      energy: 16,
-      heat: 15,
-    });
-
-    player.addUnits(Units.of({energy: 10}));
-    expect(asUnits(player)).deep.eq({
-      megacredits: 30,
-      steel: 29,
-      titanium: 28,
-      plants: 27,
-      energy: 26,
-      heat: 15,
-    });
-
-    player.addUnits(Units.of({heat: 10}));
-    expect(asUnits(player)).deep.eq({
-      megacredits: 30,
-      steel: 29,
-      titanium: 28,
-      plants: 27,
-      energy: 26,
-      heat: 25,
-    });
-  });
 
   it('deduct units', () => {
     function asUnits(player: Player): Units {
@@ -695,7 +609,7 @@ describe('Player', function() {
 
     const log = game.gameLog;
     const logEntry = log[log.length - 1];
-    expect(TestingUtils.formatLogMessage(logEntry)).eq('blue\'s megacredits amount decreased by 5 by red');
+    expect(TestingUtils.formatLogMessage(logEntry)).eq('red decreased blue \'s megacredits amount by 5');
   });
 
   it('addResource logging from global event', () => {
@@ -728,12 +642,12 @@ describe('Player', function() {
       {
         'gameId': 'foobar',
         'lastSaveId': 0,
-        'logAge': 7,
-        'currentPlayer': 'p-blue-id',
+        'logAge': 9,
+        'currentPlayer': 'blue-id',
         'metadata': {
           'player': {
             'color': 'blue',
-            'id': 'p-blue-id',
+            'id': 'blue-id',
             'name': 'player-blue',
           },
           'resource': 'megacredits',
@@ -763,10 +677,10 @@ function titlesToGlobalParameter(title: string): GlobalParameter {
   if (title.includes('colony')) {
     return GlobalParameter.MOON_COLONY_RATE;
   }
-  if (title.includes('mining')) {
+  if (title.includes('mine')) {
     return GlobalParameter.MOON_MINING_RATE;
   }
-  if (title.includes('logistics')) {
+  if (title.includes('road')) {
     return GlobalParameter.MOON_LOGISTICS_RATE;
   }
   throw new Error('title does not match any description: ' + title);

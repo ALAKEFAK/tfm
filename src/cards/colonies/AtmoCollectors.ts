@@ -11,7 +11,6 @@ import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {Card} from '../Card';
 import {Size} from '../render/Size';
 import {CardRenderer} from '../render/CardRenderer';
-import {digit} from '../Options';
 
 export class AtmoCollectors extends Card implements IProjectCard, IResourceCard {
   constructor() {
@@ -29,7 +28,7 @@ export class AtmoCollectors extends Card implements IProjectCard, IResourceCard 
             eb.empty().startAction.floaters(1).or(Size.SMALL);
           }).br;
           b.action('Spend 1 floater here to gain 2 titanium, or 3 energy, or 4 heat.', (eb) => {
-            eb.floaters(1).startAction.titanium(2, {digit}).slash(Size.SMALL).energy(3, {digit}).slash(Size.SMALL).heat(4, {digit});
+            eb.floaters(1).startAction.titanium(2).digit.slash(Size.SMALL).energy(3).digit.slash(Size.SMALL).heat(4).digit;
           }).br;
           b.floaters(2).asterix();
         }),

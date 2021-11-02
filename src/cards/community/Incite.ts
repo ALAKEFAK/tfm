@@ -7,7 +7,6 @@ import {CardType} from '../CardType';
 import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
-import {Turmoil} from '../../turmoil/Turmoil';
 
 export class Incite extends Card implements CorporationCard {
   constructor() {
@@ -27,7 +26,7 @@ export class Incite extends Card implements CorporationCard {
           b.corpBox('effect', (ce) => {
             ce.vSpace(Size.LARGE);
             ce.effect(undefined, (eb) => {
-              eb.startEffect.influence();
+              eb.startEffect.influence(1);
             });
             ce.vSpace(Size.SMALL);
             ce.effect('You have +1 influence. When you send a delegate using the lobbying action, you pay 2 M€ less for it.', (eb) => {
@@ -39,13 +38,17 @@ export class Incite extends Card implements CorporationCard {
     });
   }
   public play(player: Player) {
-    Turmoil.getTurmoil(player.game).addInfluenceBonus(player);
+    if (player.game.turmoil) {
+      player.game.turmoil.addInfluenceBonus(player);
+    }
     return undefined;
   }
 
   public initialAction(player: Player) {
-    const title = 'Incite first action - Select where to send two delegates';
-    player.game.defer(new SendDelegateToArea(player, title, {count: 2, source: 'reserve'}));
+    if (player.game.turmoil) {
+      const title = 'Incite first action - Select where to send two delegates';
+      player.game.defer(new SendDelegateToArea(player, title, {count: 2, source: 'reserve'}));
+    }
 
     return undefined;
   }

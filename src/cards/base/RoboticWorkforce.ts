@@ -10,7 +10,6 @@ import {ICard} from '../ICard';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
 import {Units} from '../../Units';
-import {played} from '../Options';
 
 export class RoboticWorkforce extends Card implements IProjectCard {
   constructor() {
@@ -23,7 +22,7 @@ export class RoboticWorkforce extends Card implements IProjectCard {
         cardNumber: '086',
         renderData: CardRenderer.builder((b) => {
           b.text('Copy A', Size.SMALL, true).nbsp;
-          b.production((pb) => pb.building(1, {played}));
+          b.production((pb) => pb.building().played);
         }),
         description: 'Duplicate only the production box of one of your building cards.',
       },
@@ -34,7 +33,7 @@ export class RoboticWorkforce extends Card implements IProjectCard {
   }
 
   private isCardApplicable(card: ICard, player: Player): boolean {
-    if (!card.tags.includes(Tags.BUILDING)) {
+    if (!card.tags.includes(Tags.BUILDING) && !card.tags.includes(Tags.WILDCARD)) {
       return false;
     }
     if (card.name === CardName.BIOMASS_COMBUSTORS) {

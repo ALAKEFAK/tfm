@@ -40,6 +40,10 @@ import {MicrogravityHealthProblems} from './MicrogravityHealthProblems';
 import {SerializedGlobalEventDealer} from './SerializedGlobalEventDealer';
 import {ISerializable} from '../../ISerializable';
 import {LeadershipSummit} from './LeadershipSummit';
+import {GlobalDustStormRebalanced} from './GlobalDustStormRebalanced';
+import {CorrosiveRainRebalanced} from './CorrosiveRainRebalanced';
+import {EcoSabotageRebalanced} from './EcoSabotageRebalanced';
+import {ScientificCommunityRebalanced} from './ScientificCommunityRebalanced';
 
 const COLONY_ONLY_POSITIVE_GLOBAL_EVENTS = new Map<GlobalEventName, new() => IGlobalEvent>([
   [GlobalEventName.JOVIAN_TAX_RIGHTS, JovianTaxRights],
@@ -107,10 +111,26 @@ const COMMUNITY_GLOBAL_EVENTS = new Map<GlobalEventName, new() => IGlobalEvent>(
 // When renaming, add the rename here and add a TODO (like the example below)
 // And remember to add a test in GlobalEventDealer.spec.ts
 const RENAMED_GLOBAL_EVENTS = new Map<GlobalEventName, new() => IGlobalEvent>([
-  // ['Miners Of Strike' as GlobalEventName, MinersOnStrike],
+  // TODO(bafolts): remove after 2021-05-08
+  ['Miners Of Strike' as GlobalEventName, MinersOnStrike],
 ]);
 
-export const ALL_EVENTS = new Map<GlobalEventName, new() => IGlobalEvent>([
+const EVENTS_REPLACED_BY_REBALANCED = [
+  GlobalEventName.GLOBAL_DUST_STORM,
+  GlobalEventName.ECO_SABOTAGE,
+  GlobalEventName.SCIENTIFIC_COMMUNITY,
+  GlobalEventName.CORROSIVE_RAIN,
+];
+
+// ALL NEGATIVE GLOBAL EVENTS
+const REBALANCED_GLOBAL_EVENTS = new Map<GlobalEventName, new() => IGlobalEvent>([
+  [GlobalEventName.GLOBAL_DUST_STORM_REBALANCED, GlobalDustStormRebalanced],
+  [GlobalEventName.ECO_SABOTAGE_REBALANCED, EcoSabotageRebalanced],
+  [GlobalEventName.SCIENTIFIC_COMMUNITY_REBALANCED, ScientificCommunityRebalanced],
+  [GlobalEventName.CORROSIVE_RAIN_REBALANCED, CorrosiveRainRebalanced],
+]);
+
+const ALL_EVENTS = new Map<GlobalEventName, new() => IGlobalEvent>([
   ...Array.from(POSITIVE_GLOBAL_EVENTS),
   ...Array.from(NEGATIVE_GLOBAL_EVENTS),
   ...Array.from(COLONY_ONLY_POSITIVE_GLOBAL_EVENTS),
@@ -120,7 +140,9 @@ export const ALL_EVENTS = new Map<GlobalEventName, new() => IGlobalEvent>([
   ...Array.from(VENUS_POSITIVE_GLOBAL_EVENTS),
   ...Array.from(COMMUNITY_GLOBAL_EVENTS),
   ...Array.from(RENAMED_GLOBAL_EVENTS),
+  ...Array.from(REBALANCED_GLOBAL_EVENTS),
 ]);
+
 
 // Function to return a global event object by its name
 export function getGlobalEventByName(globalEventName: GlobalEventName): IGlobalEvent | undefined {
@@ -136,7 +158,7 @@ export class GlobalEventDealer implements ISerializable<SerializedGlobalEventDea
     public readonly discardedGlobalEvents: Array<IGlobalEvent>) {}
 
   public static newInstance(game: Game): GlobalEventDealer {
-    const events = Array.from(POSITIVE_GLOBAL_EVENTS);
+    let events = Array.from(POSITIVE_GLOBAL_EVENTS);
 
     if (!game.gameOptions.removeNegativeGlobalEventsOption) {
       events.push(...Array.from(NEGATIVE_GLOBAL_EVENTS));
@@ -156,6 +178,19 @@ export class GlobalEventDealer implements ISerializable<SerializedGlobalEventDea
     }
 
     if (game.gameOptions.communityCardsOption) events.push(...Array.from(COMMUNITY_GLOBAL_EVENTS));
+
+    // Add rebalanced events and remove the corresponding ones
+    if (game.gameOptions.rebalancedExtension) {
+      events = events.filter((event) => EVENTS_REPLACED_BY_REBALANCED.includes(event[0]) === false);
+      events.push([GlobalEventName.SCIENTIFIC_COMMUNITY_REBALANCED, ScientificCommunityRebalanced]);
+      if (!game.gameOptions.removeNegativeGlobalEventsOption) {
+        events.push([GlobalEventName.GLOBAL_DUST_STORM_REBALANCED, GlobalDustStormRebalanced]);
+        events.push([GlobalEventName.ECO_SABOTAGE_REBALANCED, EcoSabotageRebalanced]);
+        if (game.gameOptions.venusNextExtension && game.gameOptions.coloniesExtension) {
+          events.push([GlobalEventName.CORROSIVE_RAIN_REBALANCED, CorrosiveRainRebalanced]);
+        };
+      }
+    }
 
     const globalEventsDeck = this.shuffle(events.map((cf) => new cf[1]));
     return new GlobalEventDealer(globalEventsDeck, []);

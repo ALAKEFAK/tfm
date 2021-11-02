@@ -6,7 +6,6 @@ import {Player} from '../../Player';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {played} from '../Options';
 
 export class PowerGrid extends Card implements IProjectCard {
   constructor() {
@@ -19,7 +18,7 @@ export class PowerGrid extends Card implements IProjectCard {
       metadata: {
         cardNumber: '102',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => pb.energy(1).slash().energy(1, {played}));
+          b.production((pb) => pb.energy(1).slash().energy(1).played);
         }),
         description: 'Increase your Energy production step for each Power tag you have, including this.',
       },

@@ -16,5 +16,5 @@ export interface CardModel {
     isDisabled: boolean;
     warning?: string | Message;
     reserveUnits: Readonly<Units>;
-    bonusResource?: Array<Resources>;
+    bonusResource?: Resources | undefined;
 }

@@ -4,12 +4,6 @@ import {PartyName} from '../parties/PartyName';
 import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {Turmoil} from '../Turmoil';
-import {CardRenderer} from '../../cards/render/CardRenderer';
-import {Size} from '../../cards/render/Size';
-
-const RENDER_DATA = CardRenderer.builder((b) => {
-  b.megacredits(2).slash().city().influence({size: Size.SMALL});
-});
 
 export class StrongSociety implements IGlobalEvent {
     public name = GlobalEventName.STRONG_SOCIETY;
@@ -24,5 +18,4 @@ export class StrongSociety implements IGlobalEvent {
         }
       });
     }
-    public renderData = RENDER_DATA;
 }

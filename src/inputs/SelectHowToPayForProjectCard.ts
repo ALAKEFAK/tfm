@@ -14,7 +14,6 @@ export class SelectHowToPayForProjectCard implements PlayerInput {
   public microbes: number;
   public floaters: number;
   public canUseHeat: boolean;
-  public scienceResources: number;
   public reserveUnits: Array<Units>;
 
   constructor(
@@ -24,7 +23,6 @@ export class SelectHowToPayForProjectCard implements PlayerInput {
     this.microbes = player.getMicrobesCanSpend();
     this.floaters = player.getFloatersCanSpend();
     this.canUseHeat = player.canUseHeatAsMegaCredits;
-    this.scienceResources = player.getSpendableScienceResources();
     this.reserveUnits = this.cards.map((card) => {
       return card.reserveUnits ? MoonExpansion.adjustedReserveCosts(player, card) : Units.EMPTY;
     });

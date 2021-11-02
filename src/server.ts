@@ -65,10 +65,6 @@ const handlers: Map<string, IHandler> = new Map(
 );
 
 function processRequest(req: http.IncomingMessage, res: http.ServerResponse): void {
-  if (req.method === 'HEAD') {
-    res.end();
-    return;
-  }
   if (req.url === undefined) {
     route.notFound(req, res);
     return;
@@ -124,27 +120,28 @@ if (process.env.KEY_PATH && process.env.CERT_PATH) {
   server = http.createServer(requestHandler);
 }
 
-Database.getInstance().initialize()
-  .then(() => {
-    Database.getInstance().purgeUnfinishedGames();
+console.log('Starting server on port ' + (process.env.PORT || 8080));
 
-    console.log('Starting server on port ' + (process.env.PORT || 8080));
-    console.log('version 0.X');
+try {
+  // The first call to Database.getInstance also intiailizes a connection to the database. Better to
+  // fail here than after the server opens to process requests.
+  Database.getInstance().purgeUnfinishedGames();
+} catch (err) {
+  console.error('Cannot connect to database:', err);
+  throw err;
+}
 
-    server.listen(process.env.PORT || 8080);
+console.log('version 0.X');
 
-    console.log();
-    console.log(
-      'The secret serverId for this server is \x1b[1m' +
-      serverId +
-      '\x1b[0m. Use it to access the following administrative routes:',
-    );
-    console.log(
-      '* Overview of existing games: /games-overview?serverId=' + serverId,
-    );
-    console.log('* API for game IDs: /api/games?serverId=' + serverId + '\n');
-  })
-  .catch((err) => {
-    console.error('Cannot connect to database:', err);
-    throw err;
-  });
+server.listen(process.env.PORT || 8080);
+
+console.log(
+  '\nThe secret serverId for this server is \x1b[1m' +
+  serverId +
+  '\x1b[0m. Use it to access the following administrative routes:\n',
+);
+console.log(
+  '* Overview of existing games: /games-overview?serverId=' + serverId,
+);
+console.log('* API for game IDs: /api/games?serverId=' + serverId + '\n');
+

@@ -13,6 +13,7 @@ import {LogHelper} from '../../LogHelper';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
 import {Card} from '../Card';
+import {AphroditeRebalanced} from '../rebalanced/rebalanced_corporation/AphroditeRebalanced';
 
 export class ExtractorBalloons extends Card implements IActionCard, IResourceCard {
   constructor() {
@@ -49,7 +50,8 @@ export class ExtractorBalloons extends Card implements IActionCard, IResourceCar
   }
   public action(player: Player) {
     const venusMaxed = player.game.getVenusScaleLevel() === MAX_VENUS_SCALE;
-    const cannotAffordRed = PartyHooks.shouldApplyPolicy(player, PartyName.REDS) && !player.canAfford(REDS_RULING_POLICY_COST);
+    const adjustedCost = REDS_RULING_POLICY_COST - AphroditeRebalanced.rebalancedAphroditeBonus(player, 1);
+    const cannotAffordRed = PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !player.canAfford(adjustedCost);
     if (this.resourceCount < 2 || venusMaxed || cannotAffordRed) {
       player.addResourceTo(this, {log: true});
       return undefined;

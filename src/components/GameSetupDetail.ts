@@ -1,0 +1,217 @@
+import Vue from 'vue';
+import {GameOptionsModel} from '../models/GameOptionsModel';
+import {BoardName} from '../boards/BoardName';
+import {RandomMAOptionType} from '../RandomMAOptionType';
+import {AgendaStyle} from '../turmoil/PoliticalAgendas';
+import {ShuffleTileOptionType} from '../boards/ShuffleTileOptionType';
+
+export const GameSetupDetail = Vue.component('game-setup-detail', {
+  props: {
+    playerNumber: {
+      type: Number,
+    },
+    gameOptions: {
+      type: Object as () => GameOptionsModel,
+    },
+    lastSoloGeneration: {
+      type: Number,
+    },
+    inlineDisplay: {
+      type: Boolean,
+    },
+  },
+  methods: {
+    isPoliticalAgendasOn: function(): boolean {
+      return (this.gameOptions.politicalAgendasExtension !== AgendaStyle.STANDARD);
+    },
+    getBoardColorClass: function(boardName: string): string {
+      switch (boardName) {
+      case BoardName.ORIGINAL:
+        return 'game-config board-tharsis map';
+      case BoardName.HELLAS:
+        return 'game-config board-hellas map';
+      case BoardName.ELYSIUM:
+        return 'game-config board-elysium map';
+      case BoardName.AMAZONIS:
+        return 'game-config board-amazonis map';
+      case BoardName.ARABIA_TERRA:
+        return 'game-config board-arabia_terra map';
+      case BoardName.VASTITAS_BOREALIS:
+        return 'game-config board-vastitas_borealis map';
+      case BoardName.TERRA_CIMMERIA:
+        return 'game-config board-terra_cimmeria map';
+      default:
+        return 'game-config board-other map';
+      }
+    },
+    isRandomMANone: function(): boolean {
+      return this.gameOptions.randomMA === RandomMAOptionType.NONE;
+    },
+    isRandomMALimited: function(): boolean {
+      return this.gameOptions.randomMA === RandomMAOptionType.LIMITED;
+    },
+    isRandomMAUnlimited: function(): boolean {
+      return this.gameOptions.randomMA === RandomMAOptionType.UNLIMITED;
+    },
+    isRandomizedTiles: function(): boolean {
+      return this.gameOptions.shuffleTileOption !== ShuffleTileOptionType.NONE;
+    },
+    getRandomizedTileText: function(): string {
+      if (this.gameOptions.shuffleTileOption === ShuffleTileOptionType.LIMITED_RANDOM) {
+        return 'Procedurally randomized tiles';
+      } else {
+        return 'Fully randomized tiles';
+      }
+    },
+  },
+  template: `
+      <div id="game-setup-detail" class="game-setup-detail-container">
+        <template v-if="inlineDisplay === false">
+          <ul>
+            <li><div class="setup-item" v-i18n>Expansion:</div>
+              <div v-if="gameOptions.venusNextExtension" class="create-game-expansion-icon expansion-icon-venus"></div>
+              <div v-if="gameOptions.preludeExtension" class="create-game-expansion-icon expansion-icon-prelude"></div>
+              <div v-if="gameOptions.coloniesExtension" class="create-game-expansion-icon expansion-icon-colony"></div>
+              <div v-if="gameOptions.turmoilExtension" class="create-game-expansion-icon expansion-icon-turmoil"></div>
+              <div v-if="gameOptions.promoCardsOption" class="create-game-expansion-icon expansion-icon-promo"></div>
+              <div v-if="gameOptions.aresExtension" class="create-game-expansion-icon expansion-icon-ares"></div>
+              <div v-if="gameOptions.moonExpansion" class="create-game-expansion-icon expansion-icon-themoon"></div>
+              <div v-if="gameOptions.communityCardsOption" class="create-game-expansion-icon expansion-icon-community"></div>
+              <div v-if="isPoliticalAgendasOn()" class="create-game-expansion-icon expansion-icon-agendas"></div>
+              <div v-if="gameOptions.rebalancedExtension" class="create-game-expansion-icon expansion-icon-rebalanced"></div>
+            </li>
+
+            <li><div class="setup-item" v-i18n>Board:</div>
+              <span :class="getBoardColorClass(gameOptions.boardName)" v-i18n>{{ gameOptions.boardName }}</span>
+              &nbsp;
+              <span v-if="isRandomizedTiles()" class="game-config generic" v-i18n>{{ getRandomizedTileText() }}</span>
+            </li>
+
+            <li><div class="setup-item" v-i18n>WGT:</div>
+              <div v-if="gameOptions.solarPhaseOption" class="game-config generic" v-i18n>On</div>
+              <div v-else class="game-config generic" v-i18n>Off</div>
+            </li>
+            
+            <li v-if="gameOptions.requiresVenusTrackCompletion">Require Terraforming Venus to end the game</li>
+            <li v-if="gameOptions.requiresMoonTrackCompletion">Require Terraforming The Moon to end the game</li>
+
+            <li><div class="setup-item" v-i18n>Password:</div>
+              <div v-if="gameOptions.requiresPassword" class="game-config generic" v-i18n>Required</div>
+              <div v-else class="game-config generic" v-i18n>Not required</div>
+            </li>
+
+            <li v-if="playerNumber > 1">
+              <div class="setup-item" v-i18n>Milestones and Awards:</div>
+              <div v-if="isRandomMANone()" class="game-config generic" v-i18n>Board-defined</div>
+              <div v-if="isRandomMALimited()" class="game-config generic" v-i18n>Randomized with limited synergy</div>
+              <div v-if="isRandomMAUnlimited()" class="game-config generic" v-i18n>Full randomized</div>
+              <div v-if="isRandomMANone() && gameOptions.venusNextExtension" class="game-config generic" v-i18n>HoverLord & Venuphile</div>
+              <div v-if="!isRandomMANone() && !gameOptions.includeVenusMA" class="game-config generic" v-i18n>(5 each)</div>
+              <div v-if="!isRandomMANone() && gameOptions.includeVenusMA" class="game-config generic" v-i18n>(6 each)</div>
+              <span v-if="gameOptions.trajectoryExtension" class="game-config generic" v-i18n>
+                <div class="create-game-expansion-icon expansion-icon-trajectory"></div>
+              </span>
+            </li>
+
+            <li v-if="playerNumber > 1">
+              <div class="setup-item" v-i18n>Draft:</div>
+              <div v-if="gameOptions.initialDraftVariant" class="game-config generic" v-i18n>Initial</div>
+              <div v-if="gameOptions.draftVariant" class="game-config generic" v-i18n>Research phase</div>
+              <div v-if="!gameOptions.initialDraftVariant && !gameOptions.draftVariant" class="game-config generic" v-i18n>Off</div>
+            </li>
+
+
+            <li v-if="gameOptions.turmoilExtension && (gameOptions.removeNegativeGlobalEvents || gameOptions.showAllGlobalEvents)">
+              <div class="setup-item" v-i18n>Turmoil:</div>
+              <div class="game-config generic" v-i18n v-if="gameOptions.removeNegativeGlobalEvents">No negative Turmoil event</div>
+              <div class="game-config generic" v-i18n v-if="gameOptions.showAllGlobalEvents">Show future global events</div>
+            </li>
+
+            <li v-if="gameOptions.escapeVelocityMode">
+              <div class="create-game-expansion-icon expansion-icon-escape-velocity"></div>
+              <span>After {{gameOptions.escapeVelocityThreshold}} min, reduce {{gameOptions.escapeVelocityPenalty}} VP every {{gameOptions.escapeVelocityPeriod}} min.</span>
+            </li>
+
+            <li v-if="playerNumber === 1">
+              <div class="setup-item" v-i18n>Solo:</div>
+              <div class="game-config generic" v-i18n>{{ this.lastSoloGeneration }} Gens</div>
+              <div v-if="gameOptions.soloTR" class="game-config generic" v-i18n>63 TR</div>
+              <div v-else class="game-config generic" v-i18n>TR all</div>
+            </li>
+
+            <li><div class="setup-item" v-i18n>Game configs:</div>
+              <div v-if="gameOptions.fastModeOption" class="game-config fastmode" v-i18n>fast mode</div>
+              <div v-if="gameOptions.showTimers" class="game-config timer" v-i18n>timer</div>
+              <div v-if="gameOptions.showOtherPlayersVP" class="game-config realtime-vp" v-i18n>real-time vp</div>
+              <div v-if="gameOptions.undoOption" class="game-config undo" v-i18n>undo</div>
+            </li>
+
+            <li v-if="gameOptions.cardsBlackList.length > 0"><div class="setup-item" v-i18n>Banned cards:</div>{{ gameOptions.cardsBlackList.join(', ') }}</li>
+          </ul>
+        </template>
+
+        <template v-else>
+          <div>
+            <span class="setup-item" v-i18n>Expansion:</span>
+            <span v-if="gameOptions.venusNextExtension" class="create-game-expansion-icon expansion-icon-venus"></span>
+            <span v-if="gameOptions.preludeExtension" class="create-game-expansion-icon expansion-icon-prelude"></span>
+            <span v-if="gameOptions.coloniesExtension" class="create-game-expansion-icon expansion-icon-colony"></span>
+            <span v-if="gameOptions.turmoilExtension" class="create-game-expansion-icon expansion-icon-turmoil"></span>
+            <span v-if="gameOptions.promoCardsOption" class="create-game-expansion-icon expansion-icon-promo"></span>
+            <span v-if="gameOptions.aresExtension" class="create-game-expansion-icon expansion-icon-ares"></span>
+            <span v-if="gameOptions.moonExpansion" class="create-game-expansion-icon expansion-icon-themoon"></span>
+            <span v-if="gameOptions.communityCardsOption" class="create-game-expansion-icon expansion-icon-community"></span>
+            <span v-if="isPoliticalAgendasOn()" class="create-game-expansion-icon expansion-icon-agendas"></span>
+            <span v-if="gameOptions.rebalancedExtension" class="create-game-expansion-icon expansion-icon-rebalanced"></span>
+
+            <span class="setup-item" v-i18n>Board:</span>
+            <span :class="getBoardColorClass(gameOptions.boardName)" v-i18n>{{ gameOptions.boardName }}</span>
+            &nbsp;
+            <span v-if="isRandomizedTiles()" class="game-config generic" v-i18n>{{ getRandomizedTileText() }}</span>
+
+          </div>
+          <div>
+
+            <span class="setup-item" v-i18n>Setup:</span>
+
+            <span v-if="gameOptions.solarPhaseOption" class="game-config generic" v-i18n>WGT</span>
+            <span v-if="gameOptions.solarPhaseOption === false && gameOptions.venusNextExtension" class="game-config generic" v-i18n>No WGT</span>
+
+            <span v-if="gameOptions.requiresVenusTrackCompletion" class="game-config generic">Require Terraforming Venus to end the game</span>
+            <span v-if="gameOptions.requiresMoonTrackCompletion" class="game-config generic">Require Terraforming The Moon to end the game</span>
+  
+            <template v-if="playerNumber > 1">
+              <span v-if="isRandomMANone()" class="game-config generic" v-i18n>Board-defined Ms & As</span>
+              <span v-if="isRandomMALimited()" class="game-config generic" v-i18n>Limited synergy randomized Ms & As</span>
+              <span v-if="isRandomMAUnlimited()" class="game-config generic" v-i18n>Fully randomized Ms & As</span>
+              <span v-if="gameOptions.trajectoryExtension" class="game-config generic" v-i18n>
+                <div class="create-game-expansion-icon expansion-icon-trajectory"></div>
+              </span>
+            </template>
+
+            <template v-if="playerNumber > 1">
+              <span v-if="gameOptions.initialDraftVariant" class="game-config generic" v-i18n>Initial draft</span>
+              <span v-if="gameOptions.draftVariant" class="game-config generic" v-i18n>Research phase draft</span>
+            </template>
+
+            <span v-if="gameOptions.turmoilExtension && gameOptions.showAllGlobalEvents" class="game-config generic" v-i18n>Show future global events</span>
+
+            <span v-if="gameOptions.turmoilExtension && gameOptions.removeNegativeGlobalEvents" class="game-config generic" v-i18n>No negative Turmoil event</span>
+
+            <span v-if="gameOptions.fastModeOption" class="game-config fastmode" v-i18n>fast mode</span>
+
+            <template v-if="playerNumber === 1">
+              <span v-if="gameOptions.soloTR" class="game-config generic" v-i18n>63 TR</span>
+              <span v-else class="game-config generic" v-i18n>TR all</span>
+            </template>
+
+          </div>
+          <div v-if="gameOptions.escapeVelocityMode">
+            <div class="create-game-expansion-icon expansion-icon-escape-velocity"></div>
+            <span>after {{gameOptions.escapeVelocityThreshold}} min, reduce {{gameOptions.escapeVelocityPenalty}} VP every {{gameOptions.escapeVelocityPeriod}} min.</span>
+          </div>
+          <br>
+        </template>
+      </div>
+    `,
+});

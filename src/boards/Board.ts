@@ -4,6 +4,7 @@ import {SpaceType} from '../SpaceType';
 import {TileType} from '../TileType';
 import {AresHandler} from '../ares/AresHandler';
 import {SerializedBoard, SerializedSpace} from './SerializedBoard';
+import {SpaceBonus} from '../SpaceBonus';
 
 /**
  * A representation of any hex board. This is normally Mars (Tharsis, Hellas, Elysium) but can also be The Moon.
@@ -120,7 +121,7 @@ export abstract class Board {
     }
   }
 
-  public getSpaces(spaceType: SpaceType, _player : Player): Array<ISpace> {
+  public getSpaces(spaceType: SpaceType, _player?: Player): Array<ISpace> {
     return this.spaces.filter((space) => space.spaceType === spaceType);
   }
 
@@ -163,10 +164,12 @@ export abstract class Board {
       .filter(
         (space) => space.tile === undefined &&
                       (space.player === undefined || space.player === player),
+      ).concat(
+        this.getSpaces(SpaceType.LAND, player).filter((space) => space.tile === undefined && space.bonus.includes(SpaceBonus.COVE)),
       );
   }
 
-  public getAvailableSpacesOnLand(player: Player): Array<ISpace> {
+  public getAvailableSpacesOnLand(player?: Player): Array<ISpace> {
     const landSpaces = this.getSpaces(SpaceType.LAND, player).filter((space) => {
       const hasPlayerMarker = space.player !== undefined;
       // A space is available if it doesn't have a player marker on it or it belongs to |player|
@@ -175,7 +178,10 @@ export abstract class Board {
       const playableSpace = space.tile === undefined || AresHandler.hasHazardTile(space);
       // If it does have a hazard tile, make sure it's not a protected one.
       const blockedByDesperateMeasures = space.tile?.protectedHazard === true;
-      return safeForPlayer && playableSpace && !blockedByDesperateMeasures;
+      // tiles are not placeable on restricted spaces at all
+      const isPlaceableSpace = !space.bonus.includes(SpaceBonus.RESTRICTED);
+
+      return isPlaceableSpace && safeForPlayer && playableSpace && !blockedByDesperateMeasures;
     });
 
     return landSpaces;
@@ -209,14 +215,14 @@ export abstract class Board {
 
   public getNonReservedLandSpaces(): Array<ISpace> {
     return this.spaces.filter((space) => {
-      return (space.spaceType === SpaceType.LAND || space.spaceType === SpaceType.COVE) &&
+      return space.spaceType === SpaceType.LAND &&
         (space.tile === undefined || AresHandler.hasHazardTile(space)) &&
         space.player === undefined;
     });
   }
 
   public canPlaceTile(space: ISpace): boolean {
-    return space.tile === undefined && space.spaceType === SpaceType.LAND;
+    return space.tile === undefined && space.spaceType === SpaceType.LAND && space.bonus.includes(SpaceBonus.RESTRICTED) === false;
   }
 
   public static isCitySpace(space: ISpace): boolean {
@@ -274,26 +280,3 @@ export abstract class Board {
     return spaces.map((space) => Board.deserializeSpace(space, players));
   }
 }
-
-export function nextToNoOtherTileFn(board: Board): (space: ISpace) => boolean {
-  return (space: ISpace) => board.getAdjacentSpaces(space).every((space) => space.tile === undefined);
-};
-
-export function playerTileFn(player: Player) {
-  return (space: ISpace) => space.player?.id === player.id;
-}
-
-export function isSpecialTile(space: ISpace): boolean {
-  switch (space.tile?.tileType) {
-  case TileType.GREENERY:
-  case TileType.OCEAN:
-  case TileType.CITY:
-  case TileType.MOON_COLONY:
-  case TileType.MOON_MINE:
-  case TileType.MOON_ROAD:
-  case undefined:
-    return false;
-  default:
-    return true;
-  }
-};

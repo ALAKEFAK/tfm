@@ -18,12 +18,12 @@ describe('WavePower', function() {
 
   it('Can\'t play', function() {
     TestingUtils.maxOutOceans(player, 2);
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
     TestingUtils.maxOutOceans(player, 3);
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     card.play(player);
     expect(player.getProduction(Resources.ENERGY)).to.eq(1);

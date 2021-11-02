@@ -16,7 +16,6 @@ export class Farming extends Card implements IProjectCard {
       name: CardName.FARMING,
       tags: [Tags.PLANT],
       cost: 16,
-      victoryPoints: 2,
 
       requirements: CardRequirements.builder((b) => b.temperature(4)),
       metadata: {
@@ -28,6 +27,7 @@ export class Farming extends Card implements IProjectCard {
             pb.plants(2);
           }).nbsp.plants(2);
         }),
+        victoryPoints: 2,
       },
     });
   }
@@ -36,5 +36,8 @@ export class Farming extends Card implements IProjectCard {
     player.addProduction(Resources.PLANTS, 2);
     player.plants += 2;
     return undefined;
+  }
+  public getVictoryPoints() {
+    return 2;
   }
 }

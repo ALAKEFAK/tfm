@@ -15,8 +15,6 @@ export class DeepLunarMining extends MoonCard {
       tags: [Tags.MOON],
       cost: 18,
       productionBox: Units.of({titanium: 2}),
-      reserveUnits: Units.of({titanium: 1}),
-      tr: {moonMining: 1},
 
       metadata: {
         description: 'Spend 1 titanium. Increase your titanium production 2 steps. Raise the Mining Rate 1 step.',
@@ -28,6 +26,8 @@ export class DeepLunarMining extends MoonCard {
           b.moonMiningRate();
         }),
       },
+    }, {
+      reserveUnits: Units.of({titanium: 1}),
     });
   };
 

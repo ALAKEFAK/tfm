@@ -4,11 +4,14 @@ import {Player} from '../../Player';
 import {SelectPlayer} from '../../inputs/SelectPlayer';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
+import {MAX_VENUS_SCALE, REDS_RULING_POLICY_COST} from '../../constants';
+import {PartyHooks} from '../../turmoil/parties/PartyHooks';
+import {PartyName} from '../../turmoil/parties/PartyName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
-import {all} from '../Options';
+import {AphroditeRebalanced} from '../rebalanced/rebalanced_corporation/AphroditeRebalanced';
 
 export class CometForVenus extends Card {
   constructor() {
@@ -17,17 +20,26 @@ export class CometForVenus extends Card {
       cardType: CardType.EVENT,
       tags: [Tags.SPACE],
       cost: 11,
-      tr: {venus: 1},
 
       metadata: {
         description: 'Raise Venus 1 step. Remove up to 4M€ from any player WITH A VENUS TAG IN PLAY.',
         cardNumber: '218',
         renderData: CardRenderer.builder((b) => {
-          b.venus(1).nbsp.nbsp.minus().megacredits(4, {all, secondaryTag: Tags.VENUS});
+          b.venus(1).nbsp.nbsp.minus().megacredits(4).secondaryTag(Tags.VENUS).any;
         }),
       },
     });
   };
+
+  public canPlay(player: Player): boolean {
+    const venusMaxed = player.game.getVenusScaleLevel() === MAX_VENUS_SCALE;
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !venusMaxed) {
+      const adjustedCost = player.getCardCost(this) + REDS_RULING_POLICY_COST - AphroditeRebalanced.rebalancedAphroditeBonus(player, 1);
+      return player.canAfford(adjustedCost, {titanium: true});
+    }
+
+    return true;
+  }
 
   public play(player: Player) {
     const venusTagPlayers = player.game.getPlayers().filter((otherPlayer) => otherPlayer.id !== player.id && otherPlayer.getTagCount(Tags.VENUS, false, false) > 0);

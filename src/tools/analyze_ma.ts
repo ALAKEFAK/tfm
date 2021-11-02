@@ -8,6 +8,7 @@ import {BoardName} from '../boards/BoardName';
 import {AgendaStyle} from '../turmoil/PoliticalAgendas';
 import {RandomMAOptionType} from '../RandomMAOptionType';
 import {Multiset} from '../utils/Multiset';
+import {ShuffleTileOptionType} from '../boards/ShuffleTileOptionType';
 
 function processRequest(req: http.IncomingMessage, res: http.ServerResponse): void {
   if (req.url === undefined) {
@@ -57,6 +58,10 @@ function calc(params: URLSearchParams): string {
     options.moonExpansion = true;
   }
 
+  if (params.get('trajectory') === 'true') {
+    options.trajectoryExtension = true;
+  }
+
   const type = params.get('type');
   switch (type) {
   case 'NONE':
@@ -71,7 +76,7 @@ function calc(params: URLSearchParams): string {
   }
   const results: Multiset<string> = new Multiset();
   for (let nth = 1; nth <= runs; nth++) {
-    if (nth % 100 === 0) {
+    if (nth % (runs/100) === 0) {
       console.log(`#${nth}`);
     }
     try {
@@ -109,15 +114,21 @@ function simpleGameOptions(): GameOptions {
     draftVariant: false,
     initialDraftVariant: false,
     startingCorporations: 0,
-    shuffleMapOption: false,
+    shuffleTileOption: ShuffleTileOptionType.NONE,
     soloTR: false,
     customCorporationsList: [],
     cardsBlackList: [],
     customColoniesList: [],
     requiresVenusTrackCompletion: false, // Venus must be completed to end the game
     requiresMoonTrackCompletion: false, // Moon must be completed to end the game
-    moonStandardProjectVariant: false,
-    altVenusBoard: false,
+    requiresPassword: false,
+    trajectoryExtension: false,
+    escapeVelocityMode: false,
+    escapeVelocityThreshold: undefined,
+    escapeVelocityPeriod: undefined,
+    escapeVelocityPenalty: undefined,
+    rebalancedExtension: false,
+    showAllGlobalEvents: false,
 
     // The options that can change, should be parameters.
     boardName: BoardName.ORIGINAL,
@@ -125,7 +136,6 @@ function simpleGameOptions(): GameOptions {
     aresExtension: false,
     includeVenusMA: false,
     moonExpansion: false,
-    pathfindersExpansion: false,
     randomMA: RandomMAOptionType.NONE,
   };
 }

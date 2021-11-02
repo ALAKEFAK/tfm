@@ -11,7 +11,7 @@ import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
 import {Board} from '../../boards/Board';
-import {ICardMetadata} from '../ICardMetadata';
+import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
@@ -21,7 +21,7 @@ export class Capital extends Card implements IProjectCard {
   constructor(
     name: CardName = CardName.CAPITAL,
     adjacencyBonus: IAdjacencyBonus | undefined = undefined,
-    metadata: ICardMetadata = {
+    metadata: CardMetadata = {
       cardNumber: '008',
       description: {
         text: 'Requires 4 ocean tiles. Place this tile. Decrease your Energy production 2 steps and increase your M€ production 5 steps.',
@@ -46,12 +46,12 @@ export class Capital extends Card implements IProjectCard {
       productionBox: Units.of({energy: -2, megacredits: 5}),
 
       requirements: CardRequirements.builder((b) => b.oceans(4)),
-      victoryPoints: 'special',
       metadata,
     });
   }
   public canPlay(player: Player): boolean {
     return player.getProduction(Resources.ENERGY) >= 2 &&
+        super.canPlay(player) &&
         player.game.board.getAvailableSpacesForCity(player).length > 0;
   }
   public getVictoryPoints(player: Player) {

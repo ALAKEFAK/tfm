@@ -20,8 +20,6 @@ export class MareNectarisMine extends MoonCard implements IProjectCard, IMoonCar
       tags: [Tags.MOON, Tags.BUILDING],
       cost: 14,
       productionBox: Units.of({steel: 1}),
-      reserveUnits: Units.of({titanium: 1}),
-      tr: {moonMining: 1},
 
       metadata: {
         description: 'Spend 1 titanium. Increase your steel production 1 step. Place a mine ON THE RESERVED AREA and raise the Mining Rate 1 step.',
@@ -29,10 +27,11 @@ export class MareNectarisMine extends MoonCard implements IProjectCard, IMoonCar
         renderData: CardRenderer.builder((b) => {
           b.minus().titanium(1).nbsp;
           b.production((pb) => pb.steel(1));
-          b.moonMine({secondaryTag: AltSecondaryTag.MOON_MINING_RATE}).asterix();
+          b.moonMine().secondaryTag(AltSecondaryTag.MOON_MINING_RATE).asterix();
         }),
       },
     }, {
+      reserveUnits: Units.of({titanium: 1}),
       tilesBuilt: [TileType.MOON_MINE],
     });
   }

@@ -1,10 +1,14 @@
 
-import {mount} from '@vue/test-utils';
-import {getLocalVue} from './getLocalVue';
+import {createLocalVue, mount} from '@vue/test-utils';
+
 import {expect} from 'chai';
-import TagCount from '@/client/components/TagCount.vue';
+import {TagCount} from '../../src/components/TagCount';
 
 describe('TagCount', function() {
+  function getLocalVue() {
+    const localVue = createLocalVue();
+    return localVue;
+  }
   it('renders with no count', function() {
     const tagCount = mount(TagCount, {
       localVue: getLocalVue(),

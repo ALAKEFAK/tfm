@@ -18,14 +18,14 @@ describe('GreatDam', () => {
 
   it('Can play', () => {
     TestingUtils.maxOutOceans(player, 3);
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
     TestingUtils.maxOutOceans(player, 4);
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(card.canPlay(player)).is.true;
   });
 
   it('Should play', () => {
     TestingUtils.maxOutOceans(player, 4);
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(card.canPlay(player)).is.true;
     card.play(player);
 
     expect(player.getProduction(Resources.ENERGY)).to.eq(2);

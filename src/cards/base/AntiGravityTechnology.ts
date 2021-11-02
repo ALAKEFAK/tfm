@@ -13,7 +13,6 @@ export class AntiGravityTechnology extends Card implements IProjectCard {
       name: CardName.ANTI_GRAVITY_TECHNOLOGY,
       tags: [Tags.SCIENCE],
       cost: 14,
-      victoryPoints: 3,
 
       requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 7)),
       cardDiscount: {amount: 2},
@@ -23,6 +22,7 @@ export class AntiGravityTechnology extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.effect('When you play a card, you pay 2 M€ less for it.', (be) => be.empty().startEffect.megacredits(-2));
         }),
+        victoryPoints: 3,
       },
     });
   }
@@ -32,5 +32,8 @@ export class AntiGravityTechnology extends Card implements IProjectCard {
   }
   public play() {
     return undefined;
+  }
+  public getVictoryPoints() {
+    return 3;
   }
 }

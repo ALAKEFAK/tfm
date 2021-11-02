@@ -26,19 +26,20 @@ export class ConvertHeat extends StandardActionCard {
     if (player.game.getTemperature() === MAX_TEMPERATURE) {
       return false;
     }
-    if (player.availableHeat < HEAT_FOR_TEMPERATURE) {
+    if (player.availableHeat < player.heatNeededForTemperature) {
       return false;
     }
 
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) {
-      return (!player.isCorporation(CardName.HELION) && player.canAfford(REDS_RULING_POLICY_COST)) ||
-        player.canAfford(REDS_RULING_POLICY_COST + 8);
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
+      if (player.isCorporation(CardName.HELION)) return player.canAfford(REDS_RULING_POLICY_COST + HEAT_FOR_TEMPERATURE);
+      else if (player.isCorporation(CardName.HELION_REBALANCED)) return player.canAfford(REDS_RULING_POLICY_COST + 7);
+      else return player.canAfford(REDS_RULING_POLICY_COST);
     }
     return true;
   }
 
   public action(player: Player) {
-    return player.spendHeat(HEAT_FOR_TEMPERATURE, () => {
+    return player.spendHeat(player.heatNeededForTemperature, () => {
       this.actionUsed(player);
       player.game.increaseTemperature(player, 1);
       return undefined;

@@ -11,7 +11,6 @@ import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
-import {digit, max} from '../Options';
 
 export class DomedCrater extends Card implements IProjectCard {
   constructor() {
@@ -21,9 +20,8 @@ export class DomedCrater extends Card implements IProjectCard {
       tags: [Tags.CITY, Tags.BUILDING],
       cost: 24,
       productionBox: Units.of({energy: -1, megacredits: 3}),
-      victoryPoints: 1,
 
-      requirements: CardRequirements.builder((b) => b.oxygen(7, {max})),
+      requirements: CardRequirements.builder((b) => b.oxygen(7).max()),
       metadata: {
         cardNumber: 'T03',
         description: {
@@ -34,14 +32,16 @@ export class DomedCrater extends Card implements IProjectCard {
           b.production((pb) => {
             pb.minus().energy(1).br;
             pb.plus().megacredits(3);
-          }).nbsp.city().plants(3, {digit}).br;
+          }).nbsp.city().plants(3).digit.br;
         }),
+        victoryPoints: 1,
       },
     });
   }
 
   public canPlay(player: Player): boolean {
-    return player.getProduction(Resources.ENERGY) >= 1 &&
+    return super.canPlay(player) &&
+      player.getProduction(Resources.ENERGY) >= 1 &&
       player.game.board.getAvailableSpacesForCity(player).length > 0;
   }
   public play(player: Player) {
@@ -56,5 +56,8 @@ export class DomedCrater extends Card implements IProjectCard {
         return undefined;
       },
     );
+  }
+  public getVictoryPoints() {
+    return 1;
   }
 }

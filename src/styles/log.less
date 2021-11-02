@@ -53,8 +53,13 @@
         list-style-type: none;
 
         span {
-            margin-right: 5px;
             font-size: 15px;
+            line-height: 15px;
+            vertical-align: middle;
+            margin-right: 2px;
+        }
+        .log-icon {
+            margin-right: 5px;
         }
 
     }
@@ -70,11 +75,30 @@
     }
 }
 
-.log-player {
-    text-shadow:1px 1px 1px #222, -1px -1px 1px #666;
-    padding: 1px 5px;
+.end-game-player {
+    text-shadow: 1px 1px 1px #222, -1px -1px 1px #666;
+    padding: 2px 10px;
     border-radius: 4px;
     font-weight: bold;
+    display: inline-block;
+}
+
+.log-icon-private-message {
+    margin-left: 10px;
+}
+
+.log-player {
+    text-shadow: 1px 1px 1px #222, -1px -1px 1px #666;
+    padding: 2px 10px;
+    border-radius: 4px;
+    font-weight: bold;
+    display: inline-block;
+    width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: center;
+    margin-left: 5px;
 }
 
 .log-card {

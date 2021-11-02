@@ -7,6 +7,7 @@ import {FakeGameLoader} from './FakeGameLoader';
 import {MockResponse} from './HttpMocks';
 import {IContext} from '../../src/routes/IHandler';
 import {TestPlayers} from '../TestPlayers';
+import {ShuffleTileOptionType} from '../../src/boards/ShuffleTileOptionType';
 
 describe('ApiGame', () => {
   let req: http.IncomingMessage;
@@ -61,12 +62,11 @@ describe('ApiGame', () => {
         'players': [
           {
             'color': 'black',
-            'id': 'p-black-id',
+            'id': 'black-id',
             'name': 'player-black',
           },
         ],
         'gameOptions': {
-          'altVenusBoard': false,
           'aresExtension': false,
           'boardName': 'tharsis',
           'cardsBlackList': [],
@@ -82,17 +82,20 @@ describe('ApiGame', () => {
           'promoCardsOption': false,
           'politicalAgendasExtension': 'Standard',
           'removeNegativeGlobalEvents': false,
-          'requiresMoonTrackCompletion': false,
           'showOtherPlayersVP': false,
           'showTimers': true,
-          'shuffleMapOption': false,
+          'shuffleTileOption': ShuffleTileOptionType.NONE,
           'solarPhaseOption': false,
           'soloTR': false,
           'randomMA': 'No randomization',
           'turmoilExtension': false,
-          'undoOption': false,
           'venusNextExtension': false,
           'requiresVenusTrackCompletion': false,
+          'requiresPassword': true,
+          'trajectoryExtension': false,
+          'escapeVelocityMode': false,
+          'rebalancedExtension': false,
+          'showAllGlobalEvents': false,
         },
       },
     );

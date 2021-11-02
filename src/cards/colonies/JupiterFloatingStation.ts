@@ -22,14 +22,13 @@ export class JupiterFloatingStation extends Card implements IProjectCard, IResou
       name: CardName.JUPITER_FLOATING_STATION,
       cardType: CardType.ACTIVE,
       resourceType: ResourceType.FLOATER,
-      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 3)),
-      victoryPoints: 1,
 
+      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 3)),
       metadata: {
         cardNumber: 'C19',
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 floater to a JOVIAN CARD.', (eb) => {
-            eb.empty().startAction.floaters(1, {secondaryTag: Tags.JOVIAN});
+            eb.empty().startAction.floaters(1).secondaryTag(Tags.JOVIAN);
           }).br;
           b.or().br;
           b.action('Gain 1 M€ for every floater here [MAX 4].', (eb) => {
@@ -41,6 +40,7 @@ export class JupiterFloatingStation extends Card implements IProjectCard, IResou
           text: 'Requires 3 Science tags.',
           align: 'left',
         },
+        victoryPoints: 1,
       },
     });
   }
@@ -68,5 +68,9 @@ export class JupiterFloatingStation extends Card implements IProjectCard, IResou
 
   public play() {
     return undefined;
+  }
+
+  public getVictoryPoints(): number {
+    return 1;
   }
 }

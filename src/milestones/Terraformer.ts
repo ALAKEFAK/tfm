@@ -1,6 +1,5 @@
 import {IMilestone} from './IMilestone';
 import {Player} from '../Player';
-import {Turmoil} from '../turmoil/Turmoil';
 
 export class Terraformer implements IMilestone {
     public name: string = 'Terraformer';
@@ -16,8 +15,9 @@ export class Terraformer implements IMilestone {
       return player.getTerraformRating();
     }
     public canClaim(player: Player): boolean {
-      const target = Turmoil.ifTurmoilElse(player.game, () => this.terraformRatingTurmoil, () => this.terraformRating);
-      const score = this.getScore(player);
-      return score >= target;
+      if (player.game.gameOptions.turmoilExtension) {
+        return this.getScore(player) >= this.terraformRatingTurmoil;
+      }
+      return this.getScore(player) >= this.terraformRating;
     }
 }

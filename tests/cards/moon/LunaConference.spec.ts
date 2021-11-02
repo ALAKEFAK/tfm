@@ -37,7 +37,7 @@ describe('LunaConference', () => {
   });
 
   it('play', () => {
-    const spaces = moonData.moon.getAvailableSpacesOnLand(player);
+    const spaces = moonData.moon.getAvailableSpacesOnLand();
     spaces[0].tile = {tileType: TileType.MOON_ROAD};
     spaces[1].tile = {tileType: TileType.MOON_ROAD};
 

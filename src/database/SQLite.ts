@@ -6,8 +6,8 @@ import {SerializedGame} from '../SerializedGame';
 import sqlite3 = require('sqlite3');
 const path = require('path');
 const fs = require('fs');
-const dbFolder = path.resolve(process.cwd(), './db');
-const dbPath = path.resolve(dbFolder, 'game.db');
+const dbFolder = path.resolve(__dirname, '../../../db');
+const dbPath = path.resolve(__dirname, '../../../db/game.db');
 
 export class SQLite implements IDatabase {
   private db: sqlite3.Database;
@@ -18,24 +18,8 @@ export class SQLite implements IDatabase {
       fs.mkdirSync(dbFolder);
     }
     this.db = new sqlite3.Database(dbPath);
-  }
-
-  initialize(): Promise<void> {
-    return new Promise((resolve, reject) => {
-      this.db.run('CREATE TABLE IF NOT EXISTS games(game_id varchar, players integer, save_id integer, game text, status text default \'running\', created_time timestamp default (strftime(\'%s\', \'now\')), PRIMARY KEY (game_id, save_id))', (err) => {
-        if (err) {
-          reject(err);
-          return;
-        }
-        this.db.run('CREATE TABLE IF NOT EXISTS game_results(game_id varchar not null, seed_game_id varchar, players integer, generations integer, game_options text, scores text, PRIMARY KEY (game_id))', (err2) => {
-          if (err2) {
-            reject(err2);
-            return;
-          }
-          resolve();
-        });
-      });
-    });
+    this.db.run('CREATE TABLE IF NOT EXISTS games(game_id varchar, players integer, save_id integer, game text, status text default \'running\', created_time timestamp default (strftime(\'%s\', \'now\')), PRIMARY KEY (game_id, save_id))');
+    this.db.run('CREATE TABLE IF NOT EXISTS game_results(game_id varchar not null, seed_game_id varchar, players integer, generations integer, game_options text, scores text, PRIMARY KEY (game_id))');
   }
 
   getClonableGames(cb: (err: Error | undefined, allGames: Array<IGameData>) => void) {
@@ -66,8 +50,8 @@ export class SQLite implements IDatabase {
         rows.forEach((row) => {
           allGames.push(row.game_id);
         });
+        return cb(err ?? undefined, allGames);
       }
-      return cb(err ?? undefined, allGames);
     });
   }
 
@@ -111,17 +95,6 @@ export class SQLite implements IDatabase {
     });
   }
 
-  // TODO(kberg): throw an error if two game ids exist.
-  getGameId(playerId: string, cb: (err: Error | undefined, gameId?: GameId) => void): void {
-    const sql = 'SELECT game_id from games, json_each(games.game, \'$.players\') e where json_extract(e.value, \'$.id\') = ?';
-    this.db.get(sql, [playerId], (err: Error | null, row: { gameId: any; }) => {
-      if (err) {
-        return cb(err ?? undefined);
-      }
-      cb(undefined, row.gameId);
-    });
-  }
-
   getGameVersion(game_id: GameId, save_id: number, cb: DbLoadCallback<SerializedGame>): void {
     this.db.get('SELECT game game FROM games WHERE game_id = ? and save_id = ?', [game_id, save_id], (err: Error | null, row: { game: any; }) => {
       if (err) {
@@ -150,7 +123,7 @@ export class SQLite implements IDatabase {
   purgeUnfinishedGames(): void {
     // Purge unfinished games older than MAX_GAME_DAYS days. If this .env variable is not present, unfinished games will not be purged.
     if (process.env.MAX_GAME_DAYS) {
-      this.db.run(`DELETE FROM games WHERE created_time < strftime('%s',date('now', '-' || ? || ' day')) and status = 'running'`, [process.env.MAX_GAME_DAYS], function(err: Error | null) {
+      this.db.run('DELETE FROM games WHERE created_time < strftime(\'%s\',date(\'now\', \'-? day\')) and status = \'running\'', [process.env.MAX_GAME_DAYS], function(err: Error | null) {
         if (err) {
           return console.warn(err.message);
         }

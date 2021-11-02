@@ -8,7 +8,6 @@ import {Policy} from '../Policy';
 import {Player} from '../../Player';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {TurmoilPolicy} from '../TurmoilPolicy';
-import {MAX_TEMPERATURE} from '../../constants';
 
 export class Kelvinists extends Party implements IParty {
   name = PartyName.KELVINISTS;
@@ -22,13 +21,10 @@ class KelvinistsBonus01 implements Bonus {
   isDefault = true;
   description = 'Gain 1 M€ for each Heat production you have';
 
-  getScore(player: Player) {
-    return player.getProduction(Resources.HEAT);
-  }
-
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
-      player.addResource(Resources.MEGACREDITS, this.getScore(player));
+      const heatProduction = player.getProduction(Resources.HEAT);
+      player.addResource(Resources.MEGACREDITS, heatProduction);
     });
   }
 }
@@ -38,13 +34,10 @@ class KelvinistsBonus02 implements Bonus {
   description = 'Gain 1 heat for each Heat production you have';
   isDefault = false;
 
-  getScore(player: Player) {
-    return player.getProduction(Resources.HEAT);
-  }
-
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
-      player.addResource(Resources.HEAT, this.getScore(player));
+      const heatProduction = player.getProduction(Resources.HEAT);
+      player.addResource(Resources.HEAT, heatProduction);
     });
   }
 }
@@ -90,7 +83,7 @@ class KelvinistsPolicy03 implements Policy {
   isDefault = false;
 
   canAct(player: Player) {
-    return player.availableHeat >= 6 && player.game.getTemperature() < MAX_TEMPERATURE;
+    return player.heat >= 6;
   }
 
   action(player: Player) {
@@ -98,10 +91,9 @@ class KelvinistsPolicy03 implements Policy {
     game.log('${0} used Turmoil Kelvinists action', (b) => b.player(player));
     game.log('${0} spent 6 heat to raise temperature 1 step', (b) => b.player(player));
 
-    return player.spendHeat(6, () => {
-      game.increaseTemperature(player, 1);
-      return undefined;
-    });
+    player.deductResource(Resources.HEAT, 6);
+    game.increaseTemperature(player, 1);
+    return undefined;
   }
 }
 

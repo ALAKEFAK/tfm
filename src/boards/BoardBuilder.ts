@@ -3,6 +3,9 @@ import {SpaceBonus} from '../SpaceBonus';
 import {SpaceName} from '../SpaceName';
 import {SpaceType} from '../SpaceType';
 import {Random} from '../Random';
+import {TileRandomizer} from './TileRandomizer';
+import {ShuffleTileOptionType} from './ShuffleTileOptionType';
+import {TILES_PER_ROW} from '../constants';
 
 export class BoardBuilder {
   // This builder assumes the map has nine rows, of tile counts [5,6,7,8,9,8,7,6,5].
@@ -11,53 +14,51 @@ export class BoardBuilder {
   // "Watch, " said I
   // "Beloved, " I said "watch me scare you though." said she,
   // "Able am I, Son."
-
-    private spaceTypes: Array<SpaceType> = [];
+    private randomizer: TileRandomizer;
+    private oceans: Array<boolean> = [];
     private bonuses: Array<Array<SpaceBonus>> = [];
     private spaces: Array<ISpace> = [];
     private unshufflableSpaces: Array<number> = [];
 
-    constructor(private includeVenus: boolean, private includePathfinders: boolean) {
+    constructor(shuffleTileOption: ShuffleTileOptionType, private includeVenus: boolean, rng: Random) {
       this.spaces.push(Space.colony(SpaceName.GANYMEDE_COLONY));
       this.spaces.push(Space.colony(SpaceName.PHOBOS_SPACE_HAVEN));
+      this.randomizer = new TileRandomizer(shuffleTileOption, rng);
     }
 
     ocean(...bonus: Array<SpaceBonus>) {
-      this.spaceTypes.push(SpaceType.OCEAN);
-      this.bonuses.push(bonus);
-      return this;
-    }
-
-    cove(...bonus: Array<SpaceBonus>) {
-      this.spaceTypes.push(SpaceType.COVE);
+      this.oceans.push(true);
       this.bonuses.push(bonus);
       return this;
     }
 
     land(...bonus: Array<SpaceBonus>) {
-      this.spaceTypes.push(SpaceType.LAND);
+      this.oceans.push(false);
       this.bonuses.push(bonus);
       return this;
     }
 
     doNotShuffleLastSpace() {
-      this.unshufflableSpaces.push(this.spaceTypes.length - 1);
+      this.randomizer.addUnshufflableSpace(this.oceans.length - 1);
       return this;
     }
 
+    setMustBeLandSpaces(...lands: Array<SpaceName>) {
+      this.randomizer.setMustBeLandSpaces(...lands);
+    }
 
     build(): Array<ISpace> {
-      const tilesPerRow = [5, 6, 7, 8, 9, 8, 7, 6, 5];
+      this.oceans = this.randomizer.randomizeOceans(this.oceans);
+      this.bonuses = this.randomizer.randomizeBonuses(this.bonuses);
+
       const idOffset = this.spaces.length + 1;
       let idx = 0;
 
       for (let row = 0; row < 9; row++) {
-        const tilesInThisRow = tilesPerRow[row];
+        const tilesInThisRow = TILES_PER_ROW[row];
         const xOffset = 9 - tilesInThisRow;
         for (let i = 0; i < tilesInThisRow; i++) {
-          const spaceId = idx + idOffset;
-          const xCoordinate = xOffset + i;
-          const space = new Space(BoardBuilder.spaceId(spaceId), this.spaceTypes[idx], this.bonuses[idx], xCoordinate, row);
+          const space = this.newTile(idx + idOffset, xOffset + i, row, this.oceans[idx], this.bonuses[idx]);
           this.spaces.push(space);
           idx++;
         }
@@ -70,15 +71,6 @@ export class BoardBuilder {
           Space.colony(SpaceName.LUNA_METROPOLIS),
           Space.colony(SpaceName.MAXWELL_BASE),
           Space.colony(SpaceName.STRATOPOLIS),
-        );
-      }
-      if (this.includePathfinders) {
-        this.spaces.push(
-          // Space.colony(SpaceName.MARTIAN_TRANSHIPMENT_STATION),
-          Space.colony(SpaceName.CERES_SPACEPORT),
-          Space.colony(SpaceName.DYSON_SCREENS),
-          Space.colony(SpaceName.LUNAR_EMBASSY),
-          Space.colony(SpaceName.VENERA_BASE),
         );
       }
 
@@ -102,7 +94,7 @@ export class BoardBuilder {
     // Shuffle the ocean spaces and bonus spaces. But protect the land spaces supplied by
     // |lands| so that those IDs most definitely have land spaces.
     public shuffle(rng: Random, ...lands: Array<SpaceName>) {
-      this.shuffleArray(rng, this.spaceTypes);
+      this.shuffleArray(rng, this.oceans);
       this.shuffleArray(rng, this.bonuses);
       let safety = 0;
       while (safety < 1000) {
@@ -110,10 +102,10 @@ export class BoardBuilder {
         for (const land of lands) {
           // Why -3?
           const land_id = Number(land) - 3;
-          while (this.spaceTypes[land_id] === SpaceType.OCEAN) {
+          while (this.oceans[land_id]) {
             satisfy = false;
-            const idx = rng.nextInt(this.spaceTypes.length + 1);
-            [this.spaceTypes[land_id], this.spaceTypes[idx]] = [this.spaceTypes[idx], this.spaceTypes[land_id]];
+            const idx = rng.nextInt(this.oceans.length + 1);
+            [this.oceans[land_id], this.oceans[idx]] = [this.oceans[idx], this.oceans[land_id]];
           }
         }
         if (satisfy) return;
@@ -122,17 +114,18 @@ export class BoardBuilder {
       throw new Error('infinite loop detected');
     }
 
-    private static spaceId(id: number): SpaceId {
-      let strId = id.toString();
-      if (id < 10) {
-        strId = '0'+strId;
+    private newTile(idx: number, pos_x: number, pos_y: number, is_ocean: boolean, bonus: Array<SpaceBonus>) {
+      const id = idx.toString().padStart(2, '0');
+      if (is_ocean) {
+        return Space.ocean(id, pos_x, pos_y, bonus);
+      } else {
+        return Space.land(id, pos_x, pos_y, bonus);
       }
-      return strId;
     }
 }
 
 class Space implements ISpace {
-  constructor(public id: SpaceId, public spaceType: SpaceType, public bonus: Array<SpaceBonus>, public x: number, public y: number ) {
+  private constructor(public id: SpaceId, public spaceType: SpaceType, public bonus: Array<SpaceBonus>, public x: number, public y: number ) {
   }
 
   static colony(id: SpaceId) {

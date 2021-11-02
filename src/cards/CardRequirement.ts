@@ -7,18 +7,11 @@ import {ResourceType} from '../ResourceType';
 import {TileType} from '../TileType';
 import {GlobalParameter} from '../GlobalParameter';
 import {MoonExpansion} from '../moon/MoonExpansion';
-import {Turmoil} from '../turmoil/Turmoil';
-import {Options} from './CardRequirements';
 
 const firstLetterUpperCase = (s: string): string => s.charAt(0).toUpperCase() + s.slice(1);
 
 export class CardRequirement {
-  private _isMax: boolean = false;
-  protected _isAny: boolean = false;
-  constructor(private _type: RequirementType, protected _amount: number = 1, options?: Options) {
-    this._isMax = options?.max ?? false;
-    this._isAny = options?.all ?? false;
-  }
+  constructor(private _type: RequirementType, protected _amount: number = 1, private _isMax: boolean = false, private _isAny: boolean = false) {}
 
   private amountToString(): string {
     if (this._type === RequirementType.OXYGEN || this._type === RequirementType.VENUS) {
@@ -65,6 +58,16 @@ export class CardRequirement {
     return result;
   }
 
+  public max(): CardRequirement {
+    this._isMax = true;
+    return this;
+  }
+
+  public any(): CardRequirement {
+    this._isAny = true;
+    return this;
+  }
+
   public get isMax(): boolean {
     return this._isMax;
   }
@@ -88,7 +91,7 @@ export class CardRequirement {
   public satisfies(player: Player): boolean {
     switch (this.type) {
     case RequirementType.CHAIRMAN:
-      return Turmoil.getTurmoil(player.game).chairman === player.id;
+      return player.game.turmoil?.chairman === player.id;
 
     case RequirementType.CITIES:
       if (this._isAny) {
@@ -114,9 +117,11 @@ export class CardRequirement {
       return this.satisfiesInequality(greeneries);
 
     case RequirementType.PARTY_LEADERS:
-      const turmoil = Turmoil.getTurmoil(player.game);
-      const parties = turmoil.parties.filter((party) => party.partyLeader === player.id).length;
-      return this.satisfiesInequality(parties);
+      if (player.game.turmoil !== undefined) {
+        const parties = player.game.turmoil.parties.filter((party) => party.partyLeader === player.id).length;
+        return this.satisfiesInequality(parties);
+      }
+      return false;
 
     case RequirementType.OCEANS:
       return this.checkGlobalRequirement(player, GlobalParameter.OCEANS, this.amount, this.isMax);
@@ -215,25 +220,15 @@ export class CardRequirement {
 }
 
 export class TagCardRequirement extends CardRequirement {
-  constructor(public tag: Tags, amount: number, options?: Options) {
-    super(RequirementType.TAG, amount, options);
+  constructor(public tag: Tags, amount: number = 1) {
+    super(RequirementType.TAG, amount);
   }
 
   protected parseType(): string {
     return firstLetterUpperCase(this.tag);
   }
   public satisfies(player: Player): boolean {
-    const includeWildTags = this.isMax !== true;
-    let tagCount = player.getTagCount(this.tag, false, includeWildTags);
-
-    if (this._isAny) {
-      player.game.getPlayers().forEach((p) => {
-        if (p.id !== player.id) {
-          // Don't include opponents' wild tags because they are not performing the action.
-          tagCount += p.getTagCount(this.tag, false, false);
-        }
-      });
-    }
+    let tagCount = player.getTagCount(this.tag);
     // PoliticalAgendas Scientists P4 hook
     if (this.tag === Tags.SCIENCE && player.hasTurmoilScienceTagBonus) tagCount += 1;
 
@@ -242,8 +237,8 @@ export class TagCardRequirement extends CardRequirement {
 }
 
 export class ProductionCardRequirement extends CardRequirement {
-  constructor(private resource: Resources, amount: number, options?: Options) {
-    super(RequirementType.RESOURCE_TYPES, amount, options);
+  constructor(private resource: Resources, amount: number = 1) {
+    super(RequirementType.RESOURCE_TYPES, amount);
   }
 
   protected parseType(): string {
@@ -262,6 +257,9 @@ export class PartyCardRequirement extends CardRequirement {
     return this.party.toLowerCase();
   }
   public satisfies(player: Player): boolean {
-    return Turmoil.getTurmoil(player.game).canPlay(player, this.party);
+    if (player.game.turmoil !== undefined) {
+      return player.game.turmoil.canPlay(player, this.party);
+    }
+    return false;
   }
 }

@@ -7,7 +7,6 @@ import {Player} from '../../Player';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {played} from '../Options';
 
 export class Cartel extends Card implements IProjectCard {
   constructor() {
@@ -21,7 +20,7 @@ export class Cartel extends Card implements IProjectCard {
         cardNumber: '137',
         description: 'Increase your M€ production 1 step for each Earth tag you have, including this.',
         renderData: CardRenderer.builder((b) => b.production((pb) => {
-          pb.megacredits(1).slash().earth(1, {played});
+          pb.megacredits(1).slash().earth().played;
         })),
       },
     });

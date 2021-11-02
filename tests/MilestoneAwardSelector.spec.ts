@@ -1,12 +1,11 @@
 import {expect} from 'chai';
-import {ARABIA_TERRA_AWARDS, ARES_AWARDS, ELYSIUM_AWARDS, HELLAS_AWARDS, MOON_AWARDS, ORIGINAL_AWARDS, VENUS_AWARDS} from '../src/awards/Awards';
+import {ARES_AWARDS, ELYSIUM_AWARDS, HELLAS_AWARDS, MOON_AWARDS, ORIGINAL_AWARDS, VENUS_AWARDS} from '../src/awards/Awards';
 import {IAward} from '../src/awards/IAward';
 import {MilestoneAwardSelector} from '../src/MilestoneAwardSelector';
 import {IMilestone} from '../src/milestones/IMilestone';
-import {ARABIA_TERRA_MILESTONES, ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, MOON_MILESTONES, ORIGINAL_MILESTONES, VENUS_MILESTONES} from '../src/milestones/Milestones';
+import {ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, MOON_MILESTONES, ORIGINAL_MILESTONES, VENUS_MILESTONES} from '../src/milestones/Milestones';
 import {RandomMAOptionType} from '../src/RandomMAOptionType';
 import {TestingUtils} from './TestingUtils';
-import {intersection} from '../src/utils/utils';
 
 function toNames(list: Array<IMilestone | IAward>): Array<string> {
   return list.map((e) => e.name);
@@ -104,8 +103,12 @@ describe('MilestoneAwardSelector', () => {
   });
 
   it('Do not select expansion milestones or awards when they are not selected', () => {
-    const avoidedAwards = [...VENUS_AWARDS, ...ARES_AWARDS, ...MOON_AWARDS, ...ARABIA_TERRA_AWARDS].map((a) => a.name);
-    const avoidedMilestones = [...VENUS_MILESTONES, ...ARES_MILESTONES, ...MOON_MILESTONES, ...ARABIA_TERRA_MILESTONES].map((m) => m.name);
+    const intersection = function<T>(a: Array<T>, b: Array<T>) {
+      return a.filter((e) => b.includes(e));
+    };
+
+    const avoidedAwards = [...VENUS_AWARDS, ...ARES_AWARDS, ...MOON_AWARDS].map((a) => a.name);
+    const avoidedMilestones = [...VENUS_MILESTONES, ...ARES_MILESTONES, ...MOON_MILESTONES].map((m) => m.name);
     for (let idx = 0; idx < 10000; idx++) {
       const mas = MilestoneAwardSelector.chooseMilestonesAndAwards(
         TestingUtils.setCustomGameOptions({

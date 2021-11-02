@@ -6,7 +6,7 @@ import {Dirent} from 'fs';
 
 const path = require('path');
 const fs = require('fs');
-const dbFolder = path.resolve(process.cwd(), './db/files');
+const dbFolder = path.resolve(__dirname, '../../../db/files');
 const historyFolder = path.resolve(dbFolder, 'history');
 
 export class Localfilesystem implements IDatabase {
@@ -20,17 +20,13 @@ export class Localfilesystem implements IDatabase {
     }
   }
 
-  async initialize(): Promise<void> {
-
-  }
-
   _filename(gameId: string): string {
-    return path.resolve(dbFolder, `${gameId}.json`);
+    return path.resolve(dbFolder, `game-${gameId}.json`);
   }
 
   _historyFilename(gameId: string, saveId: number) {
     const saveIdString = saveId.toString().padStart(5, '0');
-    return path.resolve(historyFolder, `${gameId}-${saveIdString}.json`);
+    return path.resolve(historyFolder, `game-${gameId}-${saveIdString}.json`);
   }
 
   saveGame(game: Game): void {
@@ -54,10 +50,6 @@ export class Localfilesystem implements IDatabase {
     } catch (err) {
       cb(err, undefined);
     }
-  }
-
-  getGameId(_playerId: string, _cb: (err: Error | undefined, gameId?: GameId) => void): void {
-    throw new Error('Not implemented');
   }
 
   getGameVersion(_game_id: GameId, _save_id: number, _cb: DbLoadCallback<SerializedGame>): void {
@@ -95,7 +87,7 @@ export class Localfilesystem implements IDatabase {
       if (!dirent.isFile()) {
         return;
       }
-      const re = /(.*).json/;
+      const re = /game-(.*).json/;
       const result = dirent.name.match(re);
       if (result === null) {
         return;
@@ -109,11 +101,11 @@ export class Localfilesystem implements IDatabase {
     cb(new Error('Does not work'), undefined);
   }
 
-  saveGameResults(_gameId: GameId, _players: number, _generations: number, _gameOptions: GameOptions, _scores: Array<Score>): void {
+  saveGameResults(_game_id: GameId, _players: number, _generations: number, _gameOptions: GameOptions, _scores: Array<Score>): void {
     // Not implemented
   }
 
-  cleanSaves(_gameId: GameId, _save_id: number): void {
+  cleanSaves(_game_id: GameId, _save_id: number): void {
     // Not implemented here.
   }
 
@@ -121,11 +113,11 @@ export class Localfilesystem implements IDatabase {
     // Not implemented.
   }
 
-  restoreGame(_gameId: GameId, _save_id: number, _cb: DbLoadCallback<Game>): void {
+  restoreGame(_game_id: GameId, _save_id: number, _cb: DbLoadCallback<Game>): void {
     throw new Error('Undo not yet implemented');
   }
 
-  deleteGameNbrSaves(_gameId: GameId, _rollbackCount: number): void {
+  deleteGameNbrSaves(_game_id: GameId, _rollbackCount: number): void {
     throw new Error('Rollback not yet implemented');
   }
 }

@@ -8,7 +8,6 @@ import {CardName} from '../../CardName';
 import {Resources} from '../../Resources';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
-import {all} from '../Options';
 
 export class MartianRails extends Card implements IActionCard, IProjectCard {
   constructor() {
@@ -23,7 +22,7 @@ export class MartianRails extends Card implements IActionCard, IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.action('Spend 1 Energy to gain 1 M€ for each City tile ON MARS.', (eb) => {
             eb.energy(1).startAction.megacredits(1).slash();
-            eb.city({all, size: Size.SMALL}).asterix();
+            eb.city(Size.SMALL).any.asterix();
           }).br;
         }),
       },

@@ -2,14 +2,14 @@ import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {PlayerInput} from '../../PlayerInput';
-import {ICardMetadata} from '../ICardMetadata';
+import {CardMetadata} from '../CardMetadata';
 import {CardName} from '../../CardName';
 import {Tags} from '../Tags';
 import {IProjectCard} from '../IProjectCard';
 import {Units} from '../../Units';
 
 interface StaticPreludeProperties {
-    metadata: ICardMetadata;
+    metadata: CardMetadata;
     name: CardName;
     tags?: Array<Tags>;
     productionBox?: Units;

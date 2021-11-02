@@ -4,13 +4,8 @@ import {PartyName} from '../parties/PartyName';
 import {Game} from '../../Game';
 import {Turmoil} from '../Turmoil';
 import {RemoveOceanTile} from '../../deferredActions/RemoveOceanTile';
-import {SelectResourcesDeferred} from '../../deferredActions/SelectResourcesDeferred';
+import {DryDesertsDeferredAction} from '../../deferredActions/DryDesertsDeferredAction';
 import {MAX_OCEAN_TILES} from '../../constants';
-import {CardRenderer} from '../../cards/render/CardRenderer';
-
-const RENDER_DATA = CardRenderer.builder((b) => {
-  b.minus().oceans(1).br.wild(1).slash().influence();
-});
 
 export class DryDeserts implements IGlobalEvent {
     public name = GlobalEventName.DRY_DESERTS;
@@ -26,15 +21,12 @@ export class DryDeserts implements IGlobalEvent {
       }
 
       game.getPlayers().forEach((player) => {
-        const count = turmoil.getPlayerInfluence(player);
-        if (count > 0) {
-          game.defer(new SelectResourcesDeferred(
+        if (turmoil.getPlayerInfluence(player) > 0) {
+          game.defer(new DryDesertsDeferredAction(
             player,
-            count,
-            'Dry Deserts Global Event - Gain ' + count + ' resource(s) for influence',
+            turmoil.getPlayerInfluence(player),
           ));
         }
       });
     }
-    public renderData = RENDER_DATA;
 }

@@ -7,7 +7,6 @@ import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
-import {played} from '../Options';
 
 export class Dirigibles extends Card implements IActionCard, IResourceCard {
   constructor() {
@@ -25,7 +24,7 @@ export class Dirigibles extends Card implements IActionCard, IResourceCard {
             eb.empty().startAction.floaters(1).asterix();
           }).br;
           b.effect('When playing a Venus tag, Floaters here may be used as payment, and are worth 3M€ each.', (eb) => {
-            eb.venus(1, {played}).startEffect.floaters(1).equals().megacredits(3);
+            eb.venus(1).played.startEffect.floaters(1).equals().megacredits(3);
           });
         }),
       },

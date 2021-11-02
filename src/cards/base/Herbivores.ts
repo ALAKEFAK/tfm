@@ -1,7 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {Card} from '../Card';
-import {VictoryPoints} from '../ICard';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {ISpace} from '../../boards/ISpace';
@@ -14,8 +13,8 @@ import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
+import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {Size} from '../render/Size';
-import {all} from '../Options';
 
 export class Herbivores extends Card implements IProjectCard, IResourceCard {
   constructor() {
@@ -24,11 +23,9 @@ export class Herbivores extends Card implements IProjectCard, IResourceCard {
       name: CardName.HERBIVORES,
       tags: [Tags.ANIMAL],
       cost: 12,
-
       resourceType: ResourceType.ANIMAL,
-      victoryPoints: VictoryPoints.resource(1, 2),
-      requirements: CardRequirements.builder((b) => b.oxygen(8)),
 
+      requirements: CardRequirements.builder((b) => b.oxygen(8)),
       metadata: {
         cardNumber: '147',
         renderData: CardRenderer.builder((b) => {
@@ -36,20 +33,31 @@ export class Herbivores extends Card implements IProjectCard, IResourceCard {
             eb.greenery(Size.MEDIUM, false).startEffect.animals(1);
           }).br;
           b.vpText('1 VP per 2 Animals on this card.');
-          b.animals(1).production((pb) => pb.minus().plants(1, {all}));
+          b.animals(1).production((pb) => pb.minus().plants(1).any);
         }),
         description: {
         // TODO (chosta): revert the original description once a solution for description space is found
           text: 'Requires 8% oxygen. +1 animal to this card. -1 any plant production',
           align: 'left',
         },
+        victoryPoints: CardRenderDynamicVictoryPoints.animals(1, 2),
       },
     });
   }
     public resourceCount: number = 0;
 
+    public warning?: string;
+
     public canPlay(player: Player): boolean {
-      return player.game.someoneHasResourceProduction(Resources.PLANTS, 1);
+      this.warning = undefined;
+      if (super.canPlay(player) && player.game.someoneElseHasResourceProduction(Resources.PLANTS, 1, player) === false) {
+        this.warning = 'You will have to decrease your own plant production because no other player has enough.';
+      }
+      return super.canPlay(player) && player.game.someoneHasResourceProduction(Resources.PLANTS, 1);
+    }
+
+    public getVictoryPoints(): number {
+      return Math.floor(this.resourceCount / 2);
     }
 
     public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
@@ -61,6 +69,7 @@ export class Herbivores extends Card implements IProjectCard, IResourceCard {
     public play(player: Player) {
       player.addResourceTo(this);
       player.game.defer(new DecreaseAnyProduction(player, Resources.PLANTS, 1));
+      this.warning = undefined;
       return undefined;
     }
 }

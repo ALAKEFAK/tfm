@@ -20,19 +20,19 @@ export class TitanShuttles extends Card implements IProjectCard, IResourceCard {
       name: CardName.TITAN_SHUTTLES,
       cardType: CardType.ACTIVE,
       resourceType: ResourceType.FLOATER,
-      victoryPoints: 1,
 
       metadata: {
         cardNumber: 'C45',
         renderData: CardRenderer.builder((b) => {
           b.action('Add 2 floaters to ANY JOVIAN CARD.', (eb) => {
-            eb.empty().startAction.floaters(2, {secondaryTag: Tags.JOVIAN});
+            eb.empty().startAction.floaters(2).secondaryTag(Tags.JOVIAN);
           }).br;
           b.or().br;
           b.action('Spend any number of floaters here to gain the same number of titanium.', (eb) => {
             eb.text('x').floaters(1).startAction.text('x').titanium(1);
           }).br;
         }),
+        victoryPoints: 1,
       },
     });
   }
@@ -72,5 +72,9 @@ export class TitanShuttles extends Card implements IProjectCard, IResourceCard {
 
   public play() {
     return undefined;
+  }
+
+  public getVictoryPoints(): number {
+    return 1;
   }
 }

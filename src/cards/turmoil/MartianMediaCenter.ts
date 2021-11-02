@@ -11,7 +11,6 @@ import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
-import {Turmoil} from '../../turmoil/Turmoil';
 
 export class MartianMediaCenter extends Card implements IProjectCard {
   constructor() {
@@ -44,7 +43,7 @@ export class MartianMediaCenter extends Card implements IProjectCard {
   }
 
   public canAct(player: Player): boolean {
-    return player.canAfford(3) && Turmoil.getTurmoil(player.game).hasAvailableDelegates(player.id);
+    return player.canAfford(3) && player.game.turmoil!.hasAvailableDelegates(player.id);
   }
 
   public action(player: Player) {

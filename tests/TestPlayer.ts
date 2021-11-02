@@ -8,7 +8,7 @@ import {VictoryPointsBreakdown} from '../src/VictoryPointsBreakdown';
 export class TestPlayer extends Player {
   public victoryPointsBreakdown = new VictoryPointsBreakdown();
   constructor(color: Color) {
-    super('player-' + color, color, false, 0, 'p-' + color + '-id');
+    super('player-' + color, color, false, 0, color + '-id');
   }
 
   public setProductionForTest(units: Partial<Units>) {
@@ -32,63 +32,26 @@ export class TestPlayer extends Player {
     }
   }
 
-  public getProductionForTest(): Units {
-    return {
-      megacredits: this.megaCreditProduction,
-      steel: this.steelProduction,
-      titanium: this.titaniumProduction,
-      plants: this.plantProduction,
-      energy: this.energyProduction,
-      heat: this.heatProduction,
-    };
-  }
-
-  public getResourcesForTest(): Units {
-    return {
-      megacredits: this.megaCredits,
-      steel: this.steel,
-      titanium: this.titanium,
-      plants: this.plants,
-      energy: this.energy,
-      heat: this.heat,
-    };
-  }
-
   public getVictoryPoints(): VictoryPointsBreakdown {
     this.victoryPointsBreakdown = super.getVictoryPoints();
     return this.victoryPointsBreakdown;
   }
 
+  public tagsForTest: Partial<TagsForTest> | undefined = undefined;
+
   public getStandardProjectOption() {
     return super.getStandardProjectOption();
   }
 
-  public tagsForTest: Partial<TagsForTest> | undefined = undefined;
-
   public getTagCount(tag: Tags, includeEventsTags:boolean = false, includeWildcardTags:boolean = true): number {
     if (this.tagsForTest !== undefined) {
-      let count = this.tagsForTest[tag] ?? 0;
-      if (tag !== Tags.WILDCARD && includeWildcardTags === true) {
-        count += this.tagsForTest[Tags.WILDCARD] ?? 0;
-      }
-      return count;
+      return this.tagsForTest[tag] || 0;
     }
     return super.getTagCount(tag, includeEventsTags, includeWildcardTags);
   }
 
   public runInput(input: ReadonlyArray<ReadonlyArray<string>>, pi: PlayerInput): void {
     super.runInput(input, pi);
-  }
-
-  public purse(): Units {
-    return Units.of({
-      megacredits: this.megaCredits,
-      steel: this.steel,
-      titanium: this.titanium,
-      plants: this.plants,
-      energy: this.energy,
-      heat: this.heat,
-    });
   }
 }
 
@@ -107,6 +70,4 @@ export interface TagsForTest {
   wild: number;
   moon: number;
   event: number;
-  mars: number;
-  clone: number;
 }

@@ -5,11 +5,11 @@ import {BoardBuilder} from './BoardBuilder';
 import {SerializedBoard} from './SerializedBoard';
 import {Player} from '../Player';
 import {Random} from '../Random';
-import {GameOptions} from '../Game';
+import {ShuffleTileOptionType} from './ShuffleTileOptionType';
 
 export class ElysiumBoard extends Board {
-  public static newInstance(gameOptions: GameOptions, rng: Random): ElysiumBoard {
-    const builder = new BoardBuilder(gameOptions.venusNextExtension, gameOptions.pathfindersExpansion);
+  public static newInstance(shuffleTileMode: ShuffleTileOptionType, rng: Random, includeVenus: boolean): ElysiumBoard {
+    const builder = new BoardBuilder(shuffleTileMode, includeVenus, rng);
 
     const PLANT = SpaceBonus.PLANT;
     const STEEL = SpaceBonus.STEEL;
@@ -35,9 +35,8 @@ export class ElysiumBoard extends Board {
     // y=8
     builder.land(STEEL).land().land(DRAW_CARD).land(DRAW_CARD).land(STEEL, STEEL);
 
-    if (gameOptions.shuffleMapOption) {
-      builder.shuffle(rng, SpaceName.HECATES_THOLUS, SpaceName.ELYSIUM_MONS, SpaceName.ARSIA_MONS_ELYSIUM, SpaceName.OLYMPUS_MONS);
-    }
+    builder.setMustBeLandSpaces(SpaceName.HECATES_THOLUS, SpaceName.ELYSIUM_MONS, SpaceName.ARSIA_MONS_ELYSIUM, SpaceName.OLYMPUS_MONS);
+
     const spaces = builder.build();
     return new ElysiumBoard(spaces);
   }

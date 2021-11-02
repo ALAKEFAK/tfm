@@ -75,7 +75,7 @@ describe('CardRenderer', function() {
       expect(item.amount).to.equal(3);
     });
     it('shows digit for amount > 5', () => {
-      const renderer = CardRenderer.builder((b) => b.titanium(6, {digit: 'large'}));
+      const renderer = CardRenderer.builder((b) => b.titanium(6, true));
       const item = renderer.rows[0][0] as CardRenderItem;
       expect(item.type).to.equal(CardRenderItemType.TITANIUM);
       expect(item.showDigit).to.be.true;
@@ -96,14 +96,13 @@ describe('CardRenderer', function() {
       expect(item.amount).to.equal(10);
     });
     it('size - S', () => {
-      const renderer = CardRenderer.builder((b) => b.tr(6, {size: Size.SMALL}));
+      const renderer = CardRenderer.builder((b) => b.tr(6, Size.SMALL));
       const item = renderer.rows[0][0] as CardRenderItem;
       expect(item.amount).to.equal(6);
       expect(item.size).to.equal(Size.SMALL);
-      expect(item.cancelled).to.be.false;
     });
     it('cancelled', () => {
-      const renderer = CardRenderer.builder((b) => b.tr(6, {size: Size.SMALL, cancelled: true}));
+      const renderer = CardRenderer.builder((b) => b.tr(6, Size.SMALL, true));
       const item = renderer.rows[0][0] as CardRenderItem;
       expect(item.amount).to.equal(6);
       expect(item.size).to.equal(Size.SMALL);
@@ -120,7 +119,7 @@ describe('CardRenderer', function() {
       expect(item.amountInside).to.be.true;
     });
     it('size - s', () => {
-      const renderer = CardRenderer.builder((b) => b.megacredits(16, {size: Size.SMALL}));
+      const renderer = CardRenderer.builder((b) => b.megacredits(16, Size.SMALL));
       const item = renderer.rows[0][0] as CardRenderItem;
       expect(item.type).to.equal(CardRenderItemType.MEGACREDITS);
       expect(item.amount).to.equal(16);
@@ -203,7 +202,7 @@ describe('CardRenderer', function() {
       expect(item.amount).to.equal(2);
     });
     it('size - s', () => {
-      const renderer = CardRenderer.builder((b) => b.colonies(1, {size: Size.SMALL}));
+      const renderer = CardRenderer.builder((b) => b.colonies(1, Size.SMALL));
       const item = renderer.rows[0][0] as CardRenderItem;
       expect(item.type).to.equal(CardRenderItemType.COLONIES);
       expect(item.size).to.equal(Size.SMALL);
@@ -223,7 +222,7 @@ describe('CardRenderer', function() {
     expect(item.amount).to.equal(-1);
   });
   it('influence: success', () => {
-    const renderer = CardRenderer.builder((b) => b.influence());
+    const renderer = CardRenderer.builder((b) => b.influence(1));
     const item = renderer.rows[0][0] as CardRenderItem;
     expect(item.type).to.equal(CardRenderItemType.INFLUENCE);
     expect(item.amount).to.equal(1);

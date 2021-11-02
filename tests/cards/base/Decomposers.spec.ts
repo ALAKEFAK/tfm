@@ -2,9 +2,7 @@ import {expect} from 'chai';
 import {Algae} from '../../../src/cards/base/Algae';
 import {Birds} from '../../../src/cards/base/Birds';
 import {Decomposers} from '../../../src/cards/base/Decomposers';
-import {EcologyExperts} from '../../../src/cards/prelude/EcologyExperts';
 import {Game} from '../../../src/Game';
-import {Phase} from '../../../src/Phase';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 
@@ -19,13 +17,13 @@ describe('Decomposers', function() {
   });
 
   it('Can\'t play', function() {
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
     (game as any).oxygenLevel = 3;
-    expect(player.canPlayIgnoringCost(card)).is.true;
-    card.play(player);
+    expect(card.canPlay(player)).is.true;
+    card.play();
 
     card.onCardPlayed(player, new Birds());
     expect(card.resourceCount).to.eq(1);
@@ -35,14 +33,5 @@ describe('Decomposers', function() {
 
     expect(card.resourceCount).to.eq(3);
     expect(card.getVictoryPoints()).to.eq(1);
-  });
-
-  it('Should get triggered by EcoExperts if played together', function() {
-    const ecoExpertCard = new EcologyExperts();
-    game.phase = Phase.PRELUDES;
-    player.playCard(ecoExpertCard);
-    expect(player.canPlayIgnoringCost(card)).is.true;
-    player.playCard(card);
-    expect(card.resourceCount).to.eq(3);
   });
 });

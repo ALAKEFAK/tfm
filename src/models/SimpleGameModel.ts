@@ -10,9 +10,9 @@ export interface SimpleGameModel {
     id: GameId;
     phase: Phase;
     players: Array<SimplePlayerModel>;
-    spectatorId: SpectatorId | undefined;
     gameOptions: GameOptionsModel;
     lastSoloGeneration: number;
+    spectatorId: SpectatorId | undefined;
 }
 
 interface SimplePlayerModel {

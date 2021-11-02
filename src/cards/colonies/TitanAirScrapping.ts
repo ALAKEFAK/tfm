@@ -21,7 +21,6 @@ export class TitanAirScrapping extends Card implements IProjectCard, IResourceCa
       name: CardName.TITAN_AIRSCRAPPING,
       cardType: CardType.ACTIVE,
       resourceType: ResourceType.FLOATER,
-      victoryPoints: 2,
 
       metadata: {
         cardNumber: 'C43',
@@ -34,6 +33,7 @@ export class TitanAirScrapping extends Card implements IProjectCard, IResourceCa
             eb.floaters(2).startAction.tr(1);
           });
         }),
+        victoryPoints: 2,
       },
     });
   }
@@ -44,7 +44,7 @@ export class TitanAirScrapping extends Card implements IProjectCard, IResourceCa
     const hasTitanium = player.titanium > 0;
     const hasResources = this.resourceCount >= 2;
 
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) {
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
       return hasTitanium || (player.canAfford(REDS_RULING_POLICY_COST) && hasResources);
     }
 
@@ -58,7 +58,7 @@ export class TitanAirScrapping extends Card implements IProjectCard, IResourceCa
     const spendResource = new SelectOption('Remove 2 floaters on this card to increase your TR 1 step', 'Remove floaters', () => this.spendResource(player));
 
     if (this.resourceCount >= 2 && player.titanium > 0) {
-      const redsAreRuling = PartyHooks.shouldApplyPolicy(player, PartyName.REDS);
+      const redsAreRuling = PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS);
       if (!redsAreRuling || (redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST))) {
         opts.push(spendResource);
       }
@@ -86,5 +86,9 @@ export class TitanAirScrapping extends Card implements IProjectCard, IResourceCa
 
   public play() {
     return undefined;
+  }
+
+  public getVictoryPoints(): number {
+    return 2;
   }
 }

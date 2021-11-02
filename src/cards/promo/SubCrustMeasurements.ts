@@ -15,9 +15,8 @@ export class SubCrustMeasurements extends Card implements IActionCard, IProjectC
       name: CardName.SUB_CRUST_MEASUREMENTS,
       tags: [Tags.SCIENCE, Tags.BUILDING, Tags.EARTH],
       cost: 20,
-      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 2)),
-      victoryPoints: 2,
 
+      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 2)),
       metadata: {
         cardNumber: 'X29',
         renderData: CardRenderer.builder((b) => {
@@ -26,6 +25,7 @@ export class SubCrustMeasurements extends Card implements IActionCard, IProjectC
           });
         }),
         description: 'Requires 2 science tags.',
+        victoryPoints: 2,
       },
     });
   }
@@ -36,6 +36,10 @@ export class SubCrustMeasurements extends Card implements IActionCard, IProjectC
 
   public canAct(): boolean {
     return true;
+  }
+
+  public getVictoryPoints() {
+    return 2;
   }
 
   public action(player: Player) {

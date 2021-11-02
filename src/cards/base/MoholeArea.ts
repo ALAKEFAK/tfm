@@ -10,18 +10,18 @@ import {ISpace} from '../../boards/ISpace';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
+import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
-import {digit} from '../Options';
 
 export class MoholeArea extends Card implements IProjectCard {
   constructor(
     name: CardName = CardName.MOHOLE_AREA,
     adjacencyBonus: IAdjacencyBonus | undefined = undefined,
-    metadata = {
+    metadata: CardMetadata = {
       cardNumber: '142',
       renderData: CardRenderer.builder((b) => {
-        b.production((pb) => pb.heat(4, {digit})).br;
+        b.production((pb) => pb.heat(4).digit).br;
         b.tile(TileType.MOHOLE_AREA, true);
       }),
       description: 'Increase your heat production 4 steps. Place this tile ON AN AREA RESERVED FOR OCEAN.',

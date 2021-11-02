@@ -10,20 +10,29 @@ import {ColonyName} from './colonies/ColonyName';
 import {Color} from './Color';
 import {TileType} from './TileType';
 import {Random} from './Random';
+import {AmazonisBoard} from './boards/AmazonisBoard';
 import {ArabiaTerraBoard} from './boards/ArabiaTerraBoard';
+import {VastitasBorealisBoard} from './boards/VastitasBorealisBoard';
+import {TerraCimmeriaBoard} from './boards/TerraCimmeriaBoard';
+import {ShuffleTileOptionType} from './boards/ShuffleTileOptionType';
 
 export class GameSetup {
   // Function to construct the board and milestones/awards list
-  public static newBoard(gameOptions: GameOptions, rng: Random): Board {
-    switch (gameOptions.boardName) {
-    case BoardName.ELYSIUM:
-      return ElysiumBoard.newInstance(gameOptions, rng);
-    case BoardName.HELLAS:
-      return HellasBoard.newInstance(gameOptions, rng);
-    case BoardName.ARABIA_TERRA:
-      return ArabiaTerraBoard.newInstance(gameOptions, rng);
-    default:
-      return OriginalBoard.newInstance(gameOptions, rng);
+  public static newBoard(boardName: BoardName, shuffleTileMode: ShuffleTileOptionType, rng: Random, includeVenus: boolean): Board {
+    if (boardName === BoardName.ELYSIUM) {
+      return ElysiumBoard.newInstance(shuffleTileMode, rng, includeVenus);
+    } else if (boardName === BoardName.HELLAS) {
+      return HellasBoard.newInstance(shuffleTileMode, rng, includeVenus);
+    } else if (boardName === BoardName.AMAZONIS) {
+      return AmazonisBoard.newInstance(shuffleTileMode, rng, includeVenus);
+    } else if (boardName === BoardName.ARABIA_TERRA) {
+      return ArabiaTerraBoard.newInstance(shuffleTileMode, rng, includeVenus);
+    } else if (boardName === BoardName.VASTITAS_BOREALIS) {
+      return VastitasBorealisBoard.newInstance(shuffleTileMode, rng, includeVenus);
+    } else if (boardName === BoardName.TERRA_CIMMERIA) {
+      return TerraCimmeriaBoard.newInstance(shuffleTileMode, rng, includeVenus);
+    } else {
+      return OriginalBoard.newInstance(shuffleTileMode, rng, includeVenus);
     }
   }
 

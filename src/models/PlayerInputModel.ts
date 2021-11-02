@@ -24,11 +24,11 @@ export interface PlayerInputModel {
     maxCardsToSelect: number | undefined;
     microbes: number | undefined;
     floaters: number | undefined;
-    science: number | undefined;
     minCardsToSelect: number | undefined;
     players: Array<ColorWithNeutral> | undefined;
     title: string | Message;
     buttonLabel: string;
+    buttonDanger?: boolean;
     coloniesModel : Array<ColonyModel> | undefined;
     payProduction?: IPayProductionModel;
     aresData?: IAresData;
@@ -37,4 +37,5 @@ export interface PlayerInputModel {
     showOwner?: boolean;
     availableParties: Array<PartyName> | undefined;
     turmoil?: TurmoilModel;
+    redsWarning?: boolean;
 }

@@ -3,6 +3,7 @@ import * as http from 'http';
 import {IContext} from './IHandler';
 import {LogMessage} from '../LogMessage';
 import {LogMessageType} from '../LogMessageType';
+import {Phase} from '../Phase';
 
 export class GameLogs {
   private getLogsForGeneration(messages: Array<LogMessage>, generation: number): Array<LogMessage> {
@@ -42,9 +43,26 @@ export class GameLogs {
 
       const messagesForPlayer = ((message: LogMessage) => message.playerId === undefined || message.playerId === playerId);
 
-      // for most recent generation pull last 50 log messages
-      if (generation === null || Number(generation) === game.generation) {
-        logs = game.gameLog.filter(messagesForPlayer).slice(-50);
+      // for most recent generation pull last 50 log messages unless the game has ended
+      if (generation === null || (Number(generation) === game.generation && game.phase !== Phase.END)) {
+        // If it is during research phase and player has not researched yet
+        // filter out the last few messages
+        if (game.phase === Phase.RESEARCH && game.researchedPlayers.has(playerId) === false) {
+          const numPlayersDoneWithResearch = game.researchedPlayers.size ?? 0;
+          if (numPlayersDoneWithResearch === 0 || game.generation === 1) {
+            logs = game.gameLog.filter(messagesForPlayer).slice(-50);
+          } else {
+            logs = game.gameLog.filter(messagesForPlayer).slice(-50, -numPlayersDoneWithResearch);
+          }
+        } else {
+          logs = game.gameLog.filter(messagesForPlayer).slice(-50);
+        }
+      // if generation = 0 and id = spectator and the game is ended, pull all log, no filter
+      } else if (playerId === game.spectatorId && game.phase === Phase.END && Number(generation) === 0) {
+        logs = game.gameLog;
+      // if specified generation, then pull just for that generation
+      } else if (playerId === game.spectatorId && game.phase === Phase.END) {
+        logs = this.getLogsForGeneration(game.gameLog, Number(generation));
       } else { // pull all logs for generation
         logs = this.getLogsForGeneration(game.gameLog, Number(generation)).filter(messagesForPlayer);
       }

@@ -8,7 +8,6 @@ import {ResourceType} from '../../ResourceType';
 import {CardName} from '../../CardName';
 import {Resources} from '../../Resources';
 import {CardRenderer} from '../render/CardRenderer';
-import {played} from '../Options';
 
 export class SaturnSurfing extends Card implements IActionCard, IProjectCard, IResourceCard {
   constructor() {
@@ -18,7 +17,6 @@ export class SaturnSurfing extends Card implements IActionCard, IProjectCard, IR
       cost: 13,
       tags: [Tags.JOVIAN, Tags.EARTH],
       resourceType: ResourceType.FLOATER,
-      victoryPoints: 1,
 
       metadata: {
         cardNumber: 'X11',
@@ -27,9 +25,10 @@ export class SaturnSurfing extends Card implements IActionCard, IProjectCard, IR
             eb.floaters(1).startAction.megacredits(1).slash().floaters(1);
             eb.asterix().text('max 5');
           }).br;
-          b.floaters(1).slash().earth(1, {played});
+          b.floaters(1).slash().earth().played;
         }),
         description: 'Add 1 floater here for every Earth tag you have, including this.',
+        victoryPoints: 1,
       },
     });
   }
@@ -48,5 +47,9 @@ export class SaturnSurfing extends Card implements IActionCard, IProjectCard, IR
     public action(player: Player) {
       player.addResource(Resources.MEGACREDITS, Math.min(5, this.resourceCount--));
       return undefined;
+    }
+
+    public getVictoryPoints() {
+      return 1;
     }
 }

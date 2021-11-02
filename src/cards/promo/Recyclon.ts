@@ -12,7 +12,6 @@ import {IResourceCard} from '../ICard';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
-import {digit, played} from '../Options';
 
 export class Recyclon extends Card implements CorporationCard, IResourceCard {
   constructor() {
@@ -32,8 +31,8 @@ export class Recyclon extends Card implements CorporationCard, IResourceCard {
           b.megacredits(38).nbsp.production((pb) => pb.steel(1));
           b.corpBox('effect', (ce) => {
             ce.effect('When you play a building tag, including this, gain 1 microbe to this card, or remove 2 microbes here and raise your plant production 1 step.', (eb) => {
-              eb.building(1, {played}).colon().microbes(1).or();
-              eb.microbes(2, {digit}).startEffect.production((pb) => pb.plants(1));
+              eb.building().played.colon().microbes(1).or();
+              eb.microbes(2).digit.startEffect.production((pb) => pb.plants(1));
             });
           });
         }),

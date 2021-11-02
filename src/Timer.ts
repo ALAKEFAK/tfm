@@ -2,7 +2,7 @@ import {ISerializable} from './ISerializable';
 import {SerializedTimer} from './SerializedTimer';
 
 export class Timer implements ISerializable<SerializedTimer> {
-  private sumElapsed: number = 0; // Sum of elapsed closed time intervals
+  private sumElapsed: number = 0; // Sum of elapsed closed time intervals in milliseconds
   private startedAt: number = 0; // When was current time interval started
   private running: boolean = false; // Is the timer currently running
   private afterFirstAction: boolean = false; // Are we already after first action (First action time measure is currently skipped.)
@@ -53,6 +53,15 @@ export class Timer implements ISerializable<SerializedTimer> {
       return;
     }
     this.sumElapsed += Timer.lastStoppedAt - this.startedAt;
+  }
+
+  public rebateTime(amountInSeconds: number): void {
+    this.sumElapsed -= amountInSeconds * 1000;
+  }
+
+  public getElapsedTimeInMinute(): number {
+    const elapsedTimeInMin = (this.sumElapsed + (this.running ? Date.now() - this.startedAt : 0))/(60*1000);
+    return elapsedTimeInMin;
   }
 
   // Converts Timer to [hhh:]mm:ss format based on current time. Used to display the timer.

@@ -46,7 +46,7 @@ describe('Cloner', function() {
     expect(player.draftedCards, 'draftedCards').deep.eq(newPlayerZero.draftedCards);
 
     expect(game.seed).eq(newGame!.seed);
-    expect(game.gameAge).eq(newGame!.gameAge);
+    expect(game.gameAge).eq(newGame!.gameAge-2);
     expect(game.undoCount).eq(newGame!.undoCount);
     expect(game.dealer, 'dealer').to.deep.eq(newGame!.dealer);
     expect(game.milestones, 'milestones').to.deep.eq(newGame!.milestones);

@@ -8,9 +8,13 @@ import {CardType} from '../cards/CardType';
 import {SelectHowToPayDeferred} from './SelectHowToPayDeferred';
 import {LogHelper} from '../LogHelper';
 
-enum LogType {
+export enum LogType {
   DREW='drew',
+  KEPT='kept',
+  DRAFTED='drafted',
   BOUGHT='bought',
+  PASSED='passed',
+  SOLD='sold',
   DREW_VERBOSE='drew_verbose',
 }
 
@@ -50,7 +54,10 @@ export class DrawCards<T extends undefined | SelectCard<IProjectCard>> implement
   }
 
   public static keepSome(player: Player, count: number = 1, options: DrawCards.AllOptions): DrawCards<SelectCard<IProjectCard>> {
-    return new DrawCards(player, count, options, (cards) => DrawCards.choose(player, cards, options));
+    return new DrawCards(player, count, options, (cards) => {
+      LogHelper.logDrawnCards(player, cards, true);
+      return DrawCards.choose(player, cards, options);
+    });
   }
 
   public static keep(player: Player, cards: Array<IProjectCard>, logType: LogType = LogType.DREW): undefined {
@@ -59,7 +66,7 @@ export class DrawCards<T extends undefined | SelectCard<IProjectCard>> implement
       LogHelper.logDrawnCards(player, cards);
     } else {
       player.game.log('${0} ${1} ${2} card(s)', (b) => b.player(player).string(logType).number(cards.length));
-      LogHelper.logDrawnCards(player, cards, /* privateMessage */ true);
+      if (cards.length > 0) LogHelper.logDrawnCards(player, cards, /* privateMessage */ true, logType);
     }
     return undefined;
   }

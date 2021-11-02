@@ -17,7 +17,6 @@ export class SpaceElevator extends Card implements IActionCard, IProjectCard {
       tags: [Tags.SPACE, Tags.BUILDING],
       cost: 27,
       productionBox: Units.of({titanium: 1}),
-      victoryPoints: 2,
 
       metadata: {
         cardNumber: '203',
@@ -28,6 +27,7 @@ export class SpaceElevator extends Card implements IActionCard, IProjectCard {
           b.production((pb) => pb.titanium(1));
         }),
         description: 'Increase your titanium production 1 step.',
+        victoryPoints: 2,
       },
     });
   }
@@ -42,6 +42,9 @@ export class SpaceElevator extends Card implements IActionCard, IProjectCard {
     player.steel--;
     player.megaCredits += 5;
     return undefined;
+  }
+  public getVictoryPoints() {
+    return 2;
   }
 }
 

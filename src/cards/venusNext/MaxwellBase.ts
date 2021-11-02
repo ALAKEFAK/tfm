@@ -5,6 +5,7 @@ import {SpaceName} from '../../SpaceName';
 import {SpaceType} from '../../SpaceType';
 import {Resources} from '../../Resources';
 import {IActionCard, ICard} from '../ICard';
+import {ResourceType} from '../../ResourceType';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
@@ -20,13 +21,11 @@ export class MaxwellBase extends Card implements IActionCard {
       cost: 18,
 
       requirements: CardRequirements.builder((b) => b.venus(12)),
-      victoryPoints: 3,
-
       metadata: {
         cardNumber: '238',
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 resource to ANOTHER VENUS CARD.', (eb) => {
-            eb.empty().startAction.wild(1, {secondaryTag: Tags.VENUS});
+            eb.empty().startAction.wild(1).secondaryTag(Tags.VENUS);
           }).br;
           b.production((pb) => pb.minus().energy(1)).nbsp.city().asterix();
         }),
@@ -34,20 +33,27 @@ export class MaxwellBase extends Card implements IActionCard {
           text: 'Requires Venus 12%. Decrease your energy production 1 step. Place a City tile ON THE RESERVED AREA.',
           align: 'left',
         },
+        victoryPoints: 3,
       },
     });
   };
   public canPlay(player: Player): boolean {
-    return player.getProduction(Resources.ENERGY) >= 1;
+    return player.getProduction(Resources.ENERGY) >= 1 && super.canPlay(player);
   }
   public play(player: Player) {
     player.addProduction(Resources.ENERGY, -1);
     player.game.addCityTile(player, SpaceName.MAXWELL_BASE, SpaceType.COLONY);
     return undefined;
   }
+  public getVictoryPoints() {
+    return 3;
+  }
 
   public getResCards(player: Player): ICard[] {
-    return player.getResourceCards().filter((card) => card.tags.includes(Tags.VENUS));
+    let resourceCards = player.getResourceCards(ResourceType.FLOATER);
+    resourceCards = resourceCards.concat(player.getResourceCards(ResourceType.MICROBE));
+    resourceCards = resourceCards.concat(player.getResourceCards(ResourceType.ANIMAL));
+    return resourceCards.filter((card) => card.tags.includes(Tags.VENUS));
   }
 
   public canAct(player: Player): boolean {

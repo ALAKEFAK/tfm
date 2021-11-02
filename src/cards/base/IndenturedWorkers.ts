@@ -12,7 +12,6 @@ export class IndenturedWorkers extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       name: CardName.INDENTURED_WORKERS,
       cost: 0,
-      victoryPoints: -1,
 
       metadata: {
         cardNumber: '195',
@@ -20,17 +19,21 @@ export class IndenturedWorkers extends Card implements IProjectCard {
           b.text('next card', Size.SMALL, true).colon().megacredits(-8);
         }),
         description: 'The next card you play this generation costs 8 M€ less.',
+        victoryPoints: -1,
       },
     });
   }
 
   public getCardDiscount(player: Player) {
-    if (player.lastCardPlayed === this.name) {
+    if (player.lastCardPlayed !== undefined && player.lastCardPlayed.name === this.name) {
       return 8;
     }
     return 0;
   }
   public play() {
     return undefined;
+  }
+  public getVictoryPoints() {
+    return -1;
   }
 }

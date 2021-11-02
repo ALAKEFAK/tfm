@@ -7,7 +7,6 @@ import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {played} from '../Options';
 
 export class ValleyTrust extends Card implements CorporationCard {
   constructor() {
@@ -27,7 +26,7 @@ export class ValleyTrust extends Card implements CorporationCard {
           b.megacredits(37).nbsp.prelude().asterix();
           b.corpBox('effect', (ce) => {
             ce.effect('When you play a Science tag, you pay 2M€ less for it.', (eb) => {
-              eb.science(1, {played}).startEffect.megacredits(-2);
+              eb.science(1).played.startEffect.megacredits(-2);
             });
           });
         }),

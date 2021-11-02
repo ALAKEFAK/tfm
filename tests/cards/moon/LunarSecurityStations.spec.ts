@@ -18,7 +18,7 @@ describe('LunarSecurityStations', () => {
   let opponent1: Player;
   let opponent2: Player;
   let moonData: IMoonData;
-  let card: LunarSecurityStations;
+  let lunaSecurityStations: LunarSecurityStations;
 
   beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
@@ -26,22 +26,23 @@ describe('LunarSecurityStations', () => {
     opponent2 = TestPlayers.GREEN.newPlayer();
     game = Game.newInstance('id', [player, opponent1, opponent2], player, MOON_OPTIONS);
     moonData = MoonExpansion.moonData(game);
-    card = new LunarSecurityStations();
+    lunaSecurityStations = new LunarSecurityStations();
   });
 
-  it('can play', () => {
-    player.cardsInHand = [card];
-    player.megaCredits = card.cost;
 
-    const spaces = moonData.moon.getAvailableSpacesOnLand(player);
+  it('can play', () => {
+    player.cardsInHand = [lunaSecurityStations];
+    player.megaCredits = lunaSecurityStations.cost;
+
+    const spaces = moonData.moon.getAvailableSpacesOnLand();
     spaces[0].tile = {tileType: TileType.MOON_ROAD};
     spaces[1].tile = {tileType: TileType.MOON_ROAD};
     spaces[2].tile = {tileType: TileType.MOON_ROAD};
 
-    expect(player.getPlayableCards()).includes(card);
+    expect(player.getPlayableCards()).includes(lunaSecurityStations);
 
     spaces[1].tile = {tileType: TileType.MOON_COLONY};
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(lunaSecurityStations);
   });
 
   it('protects against Hired Raiders', () => {
@@ -55,12 +56,12 @@ describe('LunarSecurityStations', () => {
     // Options for both opponents.
     expect(action.options).has.lengthOf(3);
 
-    opponent2.playedCards = [card];
+    opponent2.playedCards = [lunaSecurityStations];
     action = hiredRaiders.play(player) as OrOptions;
     // Options for only one opponent.
     expect(action.options).has.lengthOf(2);
     action.options[0].cb();
-    // And it's the one without Luna Security Stations.
+    // And it's the one weithout Luna Security Stations.
     expect(opponent1.steel).to.eq(3);
   });
 
@@ -68,9 +69,10 @@ describe('LunarSecurityStations', () => {
     expect(player.getTerraformRating()).eq(20);
     expect(moonData.logisticRate).eq(0);
 
-    card.play(player);
+    lunaSecurityStations.play(player);
 
     expect(moonData.logisticRate).eq(1);
     expect(player.getTerraformRating()).eq(21);
   });
 });
+

@@ -6,7 +6,6 @@ import {CardName} from '../../CardName';
 import {Resources} from '../../Resources';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
-import {all, played} from '../Options';
 
 export class GalileanWaystation extends Card implements IProjectCard {
   constructor() {
@@ -15,14 +14,14 @@ export class GalileanWaystation extends Card implements IProjectCard {
       tags: [Tags.SPACE],
       name: CardName.GALILEAN_WAYSTATION,
       cardType: CardType.AUTOMATED,
-      victoryPoints: 1,
 
       metadata: {
         description: 'Increase your M€ production 1 step for every Jovian tag in play.',
         cardNumber: 'C13',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => pb.megacredits(1).slash().jovian({played, all}));
+          b.production((pb) => pb.megacredits(1).slash().jovian().played.any);
         }),
+        victoryPoints: 1,
       },
     });
   }
@@ -33,5 +32,9 @@ export class GalileanWaystation extends Card implements IProjectCard {
       .reduce((a, c) => a + c, 0);
     player.addProduction(Resources.MEGACREDITS, amount, {log: true});
     return undefined;
+  }
+
+  public getVictoryPoints() {
+    return 1;
   }
 }
