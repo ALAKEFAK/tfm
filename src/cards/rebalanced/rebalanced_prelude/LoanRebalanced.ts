@@ -1,9 +1,9 @@
-import {Player} from '../../Player';
-import {PreludeCard} from './PreludeCard';
-import {IProjectCard} from '../IProjectCard';
-import {Resources} from '../../Resources';
-import {CardName} from '../../CardName';
-import {CardRenderer} from '../render/CardRenderer';
+import {Player} from '../../../Player';
+import {PreludeCard} from '../../prelude/PreludeCard';
+import {IProjectCard} from '../../IProjectCard';
+import {Resources} from '../../../Resources';
+import {CardName} from '../../../CardName';
+import {CardRenderer} from '../../render/CardRenderer';
 
 export class LoanRebalanced extends PreludeCard implements IProjectCard {
   constructor() {

@@ -1,18 +1,20 @@
-import {IActionCard, IResourceCard} from '../ICard';
-import {Tags} from '../Tags';
-import {CardType} from '../CardType';
-import {Player} from '../../Player';
-import {ResourceType} from '../../ResourceType';
-import {OrOptions} from '../../inputs/OrOptions';
-import {SelectOption} from '../../inputs/SelectOption';
-import {MAX_VENUS_SCALE, REDS_RULING_POLICY_COST} from '../../constants';
-import {CardName} from '../../CardName';
-import {PartyHooks} from '../../turmoil/parties/PartyHooks';
-import {PartyName} from '../../turmoil/parties/PartyName';
-import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
-import {LogHelper} from '../../LogHelper';
-import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
+import {IActionCard, IResourceCard} from '../../ICard';
+import {Tags} from '../../Tags';
+import {CardType} from '../../CardType';
+import {Player} from '../../../Player';
+import {ResourceType} from '../../../ResourceType';
+import {OrOptions} from '../../../inputs/OrOptions';
+import {SelectOption} from '../../../inputs/SelectOption';
+import {CardName} from '../../../CardName';
+import {MAX_VENUS_SCALE, REDS_RULING_POLICY_COST} from '../../../constants';
+import {PartyHooks} from '../../../turmoil/parties/PartyHooks';
+import {PartyName} from '../../../turmoil/parties/PartyName';
+import {SelectHowToPayDeferred} from '../../../deferredActions/SelectHowToPayDeferred';
+import {LogHelper} from '../../../LogHelper';
+import {CardRenderer} from '../../render/CardRenderer';
+import {Size} from '../../render/Size';
+import {Card} from '../../Card';
+import {AphroditeRebalanced} from '../../rebalanced/rebalanced_corporation/AphroditeRebalanced';
 
 export class ForcedPrecipitationRebalanced extends Card implements IActionCard, IResourceCard {
   constructor() {

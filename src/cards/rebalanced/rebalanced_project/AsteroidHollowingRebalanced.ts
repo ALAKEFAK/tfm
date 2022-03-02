@@ -1,14 +1,14 @@
-import {IProjectCard} from '../IProjectCard';
-import {IActionCard, IResourceCard} from '../ICard';
-import {Card} from '../Card';
-import {CardName} from '../../CardName';
-import {CardType} from '../CardType';
-import {ResourceType} from '../../ResourceType';
-import {Tags} from '../Tags';
-import {Player} from '../../Player';
-import {Resources} from '../../Resources';
-import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {IProjectCard} from '../../IProjectCard';
+import {IActionCard, IResourceCard} from '../../ICard';
+import {Card} from '../../Card';
+import {CardName} from '../../../CardName';
+import {CardType} from '../../CardType';
+import {ResourceType} from '../../../ResourceType';
+import {Tags} from '../../Tags';
+import {Player} from '../../../Player';
+import {Resources} from '../../../Resources';
+import {CardRenderer} from '../../render/CardRenderer';
+import {CardRenderDynamicVictoryPoints} from '../../render/CardRenderDynamicVictoryPoints';
 
 export class AsteroidHollowingRebalanced extends Card implements IActionCard, IProjectCard, IResourceCard {
   constructor() {

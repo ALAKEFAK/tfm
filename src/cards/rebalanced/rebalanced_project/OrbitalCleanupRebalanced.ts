@@ -1,11 +1,12 @@
-import {IProjectCard} from '../IProjectCard';
-import {Card} from '../Card';
-import {CardName} from '../../CardName';
-import {CardType} from '../CardType';
-import {Tags} from '../Tags';
-import {Player} from '../../Player';
-import {Resources} from '../../Resources';
-import {CardRenderer} from '../render/CardRenderer';
+import {IProjectCard} from '../../IProjectCard';
+import {Tags} from '../../Tags';
+import {Card} from '../../Card';
+import {CardType} from '../../CardType';
+import {Player} from '../../../Player';
+import {Resources} from '../../../Resources';
+import {CardName} from '../../../CardName';
+import {CardRenderer} from '../../render/CardRenderer';
+
 
 export class OrbitalCleanupRebalanced extends Card implements IProjectCard {
   constructor() {

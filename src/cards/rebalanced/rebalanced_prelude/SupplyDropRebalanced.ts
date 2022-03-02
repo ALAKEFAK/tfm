@@ -1,7 +1,7 @@
-import {Player} from '../../Player';
-import {PreludeCard} from './PreludeCard';
-import {CardName} from '../../CardName';
-import {CardRenderer} from '../render/CardRenderer';
+import {Player} from '../../../Player';
+import {PreludeCard} from '../../prelude/PreludeCard';
+import {CardName} from '../../../CardName';
+import {CardRenderer} from '../../render/CardRenderer';
 
 export class SupplyDropRebalanced extends PreludeCard {
   constructor() {

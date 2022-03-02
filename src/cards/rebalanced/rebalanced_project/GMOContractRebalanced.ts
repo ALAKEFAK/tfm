@@ -1,14 +1,14 @@
-import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../Tags';
-import {Card} from '../Card';
-import {CardName} from '../../CardName';
-import {CardType} from '../CardType';
-import {Player} from '../../Player';
-import {PartyName} from '../../turmoil/parties/PartyName';
-import {Resources} from '../../Resources';
-import {DeferredAction} from '../../deferredActions/DeferredAction';
-import {CardRenderer} from '../render/CardRenderer';
-import {CardRequirements} from '../CardRequirements';
+import {IProjectCard} from '../../IProjectCard';
+import {Tags} from '../../Tags';
+import {Card} from '../../Card';
+import {CardType} from '../../CardType';
+import {Player} from '../../../Player';
+import {PartyName} from '../../../turmoil/parties/PartyName';
+import {Resources} from '../../../Resources';
+import {CardName} from '../../../CardName';
+import {DeferredAction} from '../../../deferredActions/DeferredAction';
+import {CardRenderer} from '../../render/CardRenderer';
+import {CardRequirements} from '../../CardRequirements';
 
 export class GMOContractRebalanced extends Card implements IProjectCard {
   constructor() {

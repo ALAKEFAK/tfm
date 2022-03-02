@@ -2,6 +2,8 @@ import {Player} from '../../../Player';
 import {PreludeCard} from '../../prelude/PreludeCard';
 import {CardName} from '../../../CardName';
 import {CardRenderer} from '../../render/CardRenderer';
+import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
+
 
 export class HugeAsteroidRebalanced extends PreludeCard {
   constructor() {

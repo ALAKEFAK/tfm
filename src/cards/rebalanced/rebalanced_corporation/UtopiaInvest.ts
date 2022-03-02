@@ -1,15 +1,15 @@
-import {IActionCard} from '../ICard';
-import {Tags} from '../Tags';
-import {Player} from '../../Player';
-import {CorporationCard} from './../corporation/CorporationCard';
-import {OrOptions} from '../../inputs/OrOptions';
-import {SelectOption} from '../../inputs/SelectOption';
-import {Resources} from '../../Resources';
-import {Card} from '../Card';
-import {CardName} from '../../CardName';
-import {CardType} from '../CardType';
-import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../Units';
+import {CorporationCard} from '../../corporation/CorporationCard';
+import {IActionCard} from '../../ICard';
+import {Player} from '../../../Player';
+import {Tags} from '../../Tags';
+import {OrOptions} from '../../../inputs/OrOptions';
+import {SelectOption} from '../../../inputs/SelectOption';
+import {Resources} from '../../../Resources';
+import {CardType} from '../../CardType';
+import {CardName} from '../../../CardName';
+import {Card} from '../../Card';
+import {CardRenderer} from '../../render/CardRenderer';
+import {Units} from '../../../Units';
 
 export class UtopiaInvestRebalanced extends Card implements IActionCard, CorporationCard {
   constructor() {

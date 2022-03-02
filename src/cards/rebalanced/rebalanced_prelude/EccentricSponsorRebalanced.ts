@@ -1,9 +1,9 @@
-import {Player} from '../../Player';
-import {CardName} from '../../CardName';
-import {PreludeCard} from './PreludeCard';
-import {PlayProjectCard} from '../../deferredActions/PlayProjectCard';
-import {CardRenderer} from '../render/CardRenderer';
-import {Size} from '../render/Size';
+import {Player} from '../../../Player';
+import {CardName} from '../../../CardName';
+import {PreludeCard} from '../../prelude/PreludeCard';
+import {PlayProjectCard} from '../../../deferredActions/PlayProjectCard';
+import {CardRenderer} from '../../render/CardRenderer';
+import {Size} from '../../render/Size';
 
 export class EccentricSponsorRebalanced extends PreludeCard {
   constructor() {

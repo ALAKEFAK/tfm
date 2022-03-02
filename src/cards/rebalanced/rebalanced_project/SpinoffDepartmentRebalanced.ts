@@ -1,11 +1,12 @@
-import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../Tags';
-import {CardType} from '../CardType';
-import {Player} from '../../Player';
-import {CardName} from '../../CardName';
-import {Resources} from '../../Resources';
-import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
+import {IProjectCard} from '../../IProjectCard';
+import {Tags} from '../../Tags';
+import {Card} from '../../Card';
+import {CardType} from '../../CardType';
+import {Player} from '../../../Player';
+import {CardName} from '../../../CardName';
+import {Resources} from '../../../Resources';
+import {DeferredAction} from '../../../deferredActions/DeferredAction';
+import {CardRenderer} from '../../render/CardRenderer';
 import {Units} from '../../Units';
 
 export class SpinoffDepartmentRebalanced extends Card implements IProjectCard {

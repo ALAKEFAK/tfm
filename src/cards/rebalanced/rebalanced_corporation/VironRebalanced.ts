@@ -1,12 +1,12 @@
-import {CorporationCard} from '../corporation/CorporationCard';
-import {Player} from '../../Player';
-import {Tags} from '../Tags';
-import {ICard} from '../ICard';
-import {SelectCard} from '../../inputs/SelectCard';
-import {Card} from '../Card';
-import {CardName} from '../../CardName';
-import {CardType} from '../CardType';
-import {CardRenderer} from '../render/CardRenderer';
+import {CorporationCard} from '../../corporation/CorporationCard';
+import {Player} from '../../../Player';
+import {Tags} from '../../Tags';
+import {ICard} from '../../ICard';
+import {SelectCard} from '../../../inputs/SelectCard';
+import {Card} from '../../Card';
+import {CardName} from '../../../CardName';
+import {CardType} from '../../CardType';
+import {CardRenderer} from '../../render/CardRenderer';
 
 export class VironRebalanced extends Card implements ICard, CorporationCard {
   constructor() {

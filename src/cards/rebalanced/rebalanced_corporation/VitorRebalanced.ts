@@ -1,14 +1,14 @@
-import {Tags} from '../Tags';
-import {Player} from '../../Player';
-import {Card} from '../Card';
-import {CorporationCard} from './../corporation/CorporationCard';
-import {IProjectCard} from '../IProjectCard';
-import {OrOptions} from '../../inputs/OrOptions';
-import {SelectOption} from '../../inputs/SelectOption';
-import {IAward} from '../../awards/IAward';
-import {CardName} from '../../CardName';
-import {CardType} from '../CardType';
-import {CardRenderer} from '../render/CardRenderer';
+import {CorporationCard} from '../../corporation/CorporationCard';
+import {Player} from '../../../Player';
+import {Tags} from '../../Tags';
+import {Card} from '../../Card';
+import {IProjectCard} from '../../IProjectCard';
+import {OrOptions} from '../../../inputs/OrOptions';
+import {SelectOption} from '../../../inputs/SelectOption';
+import {IAward} from '../../../awards/IAward';
+import {CardName} from '../../../CardName';
+import {CardType} from '../../CardType';
+import {CardRenderer} from '../../render/CardRenderer';
 
 export class VitorRebalanced extends Card implements CorporationCard {
   constructor() {
