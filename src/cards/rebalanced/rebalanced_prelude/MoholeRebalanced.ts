@@ -12,22 +12,24 @@ export class MoholeRebalanced extends PreludeCard implements IProjectCard {
     super({
       name: CardName.MOHOLE_REBALANCED,
       tags: [Tags.BUILDING],
-      productionBox: Units.of({heat: 3, energy: 1}),
+      productionBox: Units.of({heat: 2, energy: 1}),
 
       metadata: {
         cardNumber: 'P22',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => pb.heat(3).energy(1)).br;
+          b.production((pb) => pb.heat(2).energy(1)).br;
           b.energy(3);
+          b.heat(5);
         }),
-        description: 'Increase your heat production 3 steps and energy production 1 step. Gain 3 energy.',
+        description: 'Increase your heat production 2 steps and energy production 1 step. Gain 3 energy and 5 heat.',
       },
     });
   }
   public play(player: Player) {
-    player.addProduction(Resources.HEAT, 3);
+    player.addProduction(Resources.HEAT, 2);
     player.addProduction(Resources.ENERGY, 1);
     player.energy += 3;
+    player.heat +=5;
     return undefined;
   }
 }

@@ -18,17 +18,17 @@ export class PolarIndustriesRebalanced extends PreludeCard implements IProjectCa
       metadata: {
         cardNumber: 'P26',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => pb.heat(2)).nbsp.megacredits(7).br;
+          b.production((pb) => pb.heat(2)).nbsp.megacredits(5).br;
           b.oceans(1);
         }),
-        description: 'Increase your heat production 2 steps. Gain 7 mc. Place an Ocean tile.',
+        description: 'Increase your heat production 2 steps. Gain 5 mc. Place an Ocean tile.',
       },
     });
   }
   public play(player: Player) {
     player.game.defer(new PlaceOceanTile(player));
     player.addProduction(Resources.HEAT, 2);
-    player.megaCredits += 7;
+    player.megaCredits += 5;
     return undefined;
   }
 }

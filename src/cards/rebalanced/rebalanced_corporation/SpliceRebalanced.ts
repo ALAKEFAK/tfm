@@ -17,14 +17,14 @@ export class SpliceRebalanced extends Card implements CorporationCard {
       cardType: CardType.CORPORATION,
       name: CardName.SPLICE_REBALANCED,
       tags: [Tags.MICROBE],
-      startingMegaCredits: 48, // 44 + 4 as card resolution when played
+      startingMegaCredits: 52, // 48 + 4 as card resolution when played
       initialActionText: 'Draw a card with a microbe tag',
 
       metadata: {
         cardNumber: 'R28',
-        description: 'You start with 44 M€. As your first action, reveal cards until you have revealed 2 cards with a microbe tag. Take them into hand and discard the rest.',
+        description: 'You start with 44 M€. As your first action, reveal cards until you have revealed 1 card with a microbe tag. Take it into hand and discard the rest.',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(44).nbsp.cards(2).secondaryTag(Tags.MICROBE);
+          b.megacredits(48).nbsp.cards(1).secondaryTag(Tags.MICROBE);
           b.corpBox('effect', (ce) => {
             ce.vSpace(Size.LARGE);
             ce.effect(undefined, (eb) => {
@@ -43,7 +43,7 @@ export class SpliceRebalanced extends Card implements CorporationCard {
   }
 
   public initialAction(player: Player) {
-    player.drawCard(2, {tag: Tags.MICROBE});
+    player.drawCard(1, {tag: Tags.MICROBE});
     return undefined;
   }
 
