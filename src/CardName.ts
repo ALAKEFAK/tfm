@@ -651,6 +651,9 @@ export enum CardName {
     MONS_INSURANCE_REBALANCED = 'Mons Insurance(⚖)',
     ARIDOR_REBALANCED = 'Aridor(⚖)',
     THARSIS_REPUBLIC_REBALANCED = 'Tharsis Republic(⚖)',
+    UTOPIA_INVEST_REBALANCED = 'Utopia Invest(⚖)',
+    VIRON_REBALANCED = 'Viron(⚖)',
+    VITOR_REBALANCED = 'Vitor(⚖)',
     // Rebalanced preludes
     SOCIETY_SUPPORT_REBALANCED = 'Society Support(⚖)',
     BIOFUELS_REBALANCED = 'Biofuels(⚖)',
@@ -664,6 +667,13 @@ export enum CardName {
     POLAR_INDUSTRIES_REBALANCED = 'Polar Industries(⚖)',
     SELF_SUFFICIENT_SETTLEMENT_REBALANCED = 'Self-Sufficient Settlement(⚖)',
     SMELTING_PLANT_REBALANCED = 'Smelting Plant(⚖)',
+    DONATION_REBALANCED = 'Donation(⚖)',
+    ECCENTRIC_SPONSOR_REBALANCED = 'Eccentric Sponsor(⚖)',
+    GALILEAN_MINING_REBALANCED = 'Galilean Mining(⚖)',
+    IO_RESEARCH_OUTPOST_REBALANCED = 'Io Research Outpost(⚖)',
+    LOAN_REBALANCED = 'Loan(⚖)',
+    METALS_COMPANY_REBALANCED = 'Metals Company(⚖)',
+    SUPPLY_DROP_REBALANCED = 'Supply Drop(⚖)',
     // Rebalanced projects
     TOLL_STATION_REBALANCED = 'Toll Station(⚖)',
     UNDERGROUND_DETONATIONS_REBALANCED = 'Underground Detonations(⚖)',
@@ -671,6 +681,14 @@ export enum CardName {
     BACTOVIRAL_RESEARCH_REBALANCED = 'Bactoviral Research(⚖)',
     AEROBRAKED_AMMONIA_ASTEROID_REBALANCED = 'Aerobraked Ammonia Asteroid(⚖)',
     MARS_UNIVERSITY_REBALANCED = 'Mars University(⚖)',
+    ASTEROID_HOLLOWING_REBALANCED = 'Asteroid Hollowing(⚖)',
+    EXTRACTOR_BALLOONS_REBALANCED = 'Extractor Balloons(⚖)',
+    FORCED_PRECIPITATION_REBALANCED = 'Forced Precipitation(⚖)',
+    GHG_IMPORT_FROM_VENUS_REBALANCED = 'GHG Import From Venus(⚖)',
+    GMO_CONTRACT_REBALANCED = 'GMO Contract(⚖)',
+    ORBITAL_CLEANUP_REBALANCED = 'Orbital Cleanup(⚖)',
+    SPINOFF_DEPARTMENT_REBALANCED = 'Spin-off Department(⚖)',
+    STRATOPOLIS_REBALANCED = 'Stratopolis(⚖)',
     // Rebalanced standard proect
     BUILD_COLONY_STANDARD_PROJECT_REBALANCED = 'Colony(⚖)',
 }

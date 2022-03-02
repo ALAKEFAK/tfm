@@ -3,7 +3,7 @@ import {Player} from '../../../Player';
 import {PreludeCard} from '../../prelude/PreludeCard';
 import {Resources} from '../../../Resources';
 import {CardName} from '../../../CardName';
-import {SelectHowToPayDeferred} from '../../../deferredActions/SelectHowToPayDeferred';
+import {SelectHowToPayDeferred} from '../../../../deferredActions/SelectHowToPayDeferred';
 import {CardRenderer} from '../../render/CardRenderer';
 
 export class GalileanMiningRebalanced extends PreludeCard {

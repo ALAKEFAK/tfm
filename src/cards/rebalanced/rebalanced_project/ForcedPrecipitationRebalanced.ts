@@ -12,9 +12,7 @@ import {PartyName} from '../../../turmoil/parties/PartyName';
 import {SelectHowToPayDeferred} from '../../../deferredActions/SelectHowToPayDeferred';
 import {LogHelper} from '../../../LogHelper';
 import {CardRenderer} from '../../render/CardRenderer';
-import {Size} from '../../render/Size';
 import {Card} from '../../Card';
-import {AphroditeRebalanced} from '../../rebalanced/rebalanced_corporation/AphroditeRebalanced';
 
 export class ForcedPrecipitationRebalanced extends Card implements IActionCard, IResourceCard {
   constructor() {
