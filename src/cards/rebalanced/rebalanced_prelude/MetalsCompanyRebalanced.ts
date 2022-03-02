@@ -14,7 +14,7 @@ export class MetalsCompanyRebalanced extends PreludeCard implements IProjectCard
         cardNumber: 'P20',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(1).steel(1).titanium(1));
-          b.megacredits(2)
+          b.megacredits(2);
         }),
         description: 'Increase your MC, steel and titanium production 1 step. Gain 2 MC.',
       },
