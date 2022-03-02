@@ -62,6 +62,7 @@ import {OrbitalCleanupRebalanced} from './rebalanced_project/OrbitalCleanupRebal
 import {StratopolisRebalanced} from './rebalanced_project/StratopolisRebalanced';
 import {GMOContractRebalanced} from './rebalanced_project/GMOContractRebalanced';
 import {SpinoffDepartmentRebalanced} from './rebalanced_project/SpinoffDepartmentRebalanced';
+import {AstrodrillRebalanced} from './rebalanced_project/AstrodrillRebalanced';
 
 export const REBALANCED_CARD_MANIFEST = new CardManifest({
   module: GameModule.Rebalanced,
@@ -79,6 +80,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.STRATOPOLIS_REBALANCED, Factory: StratopolisRebalanced},
     {cardName: CardName.GMO_CONTRACT_REBALANCED, Factory: GMOContractRebalanced},
     {cardName: CardName.SPINOFF_DEPARTMENT_REBALANCED, Factory: SpinoffDepartmentRebalanced},
+    {cardName: CardName.ASTEROID_HOLLOWING_REBALANCED, Factory: AstrodrillRebalanced},
   ],
   corporationCards: [
     {cardName: CardName.APHRODITE_REBALANCED, Factory: AphroditeRebalanced, compatibility: GameModule.Venus},
@@ -149,6 +151,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     CardName.STRATOPOLIS,
     CardName.GMO_CONTRACT,
     CardName.SPINOFF_DEPARTMENT,
+    CardName.ASTEROID_HOLLOWING_REBALANCED,
     // corporations
     CardName.ECOLINE,
     CardName.UNITED_NATIONS_MARS_INITIATIVE,
