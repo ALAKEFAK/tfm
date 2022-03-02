@@ -145,7 +145,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
   cardsToRemove: [
     // projects
     CardName.AEROBRAKED_AMMONIA_ASTEROID,
-    CardName.ASTEROID_HOLLOWING_REBALANCED,
+    CardName.ASTEROID_HOLLOWING,
     CardName.BACTOVIRAL_RESEARCH,
     CardName.EARTH_CATAPULT,
     CardName.EXTRACTOR_BALLOONS,
