@@ -65,12 +65,13 @@ import {SpinoffDepartmentRebalanced} from './rebalanced_project/SpinoffDepartmen
 import {EccentricSponsorRebalanced} from './rebalanced_prelude/EccentricSponsorRebalanced';
 import {GalileanMiningRebalanced} from './rebalanced_prelude/GalileanMiningRebalanced';
 import {IoResearchOutpostRebalanced} from './rebalanced_prelude/IoResearchOutpostRebalanced';
+import {AsteroidHollowingRebalanced} from './rebalanced_project/AsteroidHollowingRebalanced';
 
 export const REBALANCED_CARD_MANIFEST = new CardManifest({
   module: GameModule.Rebalanced,
   projectCards: [
     {cardName: CardName.AEROBRAKED_AMMONIA_ASTEROID_REBALANCED, Factory: AerobrakedAmmoniaAsteroidRebalanced},
-    {cardName: CardName.ASTEROID_HOLLOWING_REBALANCED, Factory: AstrodrillRebalanced},
+    {cardName: CardName.ASTEROID_HOLLOWING_REBALANCED, Factory: AsteroidHollowingRebalanced},
     {cardName: CardName.BACTOVIRAL_RESEARCH_REBALANCED, Factory: BactoviralResearchRebalanced},
     {cardName: CardName.EARTH_CATAPULT_REBALANCED, Factory: EarthCatapultRebalanced},
     {cardName: CardName.EXTRACTOR_BALLOONS_REBALANCED, Factory: ExtractorBalloonsRebalanced},
