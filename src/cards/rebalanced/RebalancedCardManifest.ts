@@ -48,6 +48,20 @@ import {MarsUniversityRebalanced} from './rebalanced_project/MarsUniversityRebal
 import {TollStationRebalanced} from './rebalanced_project/TollStationRebalanced';
 import {UndergroundDetonationsRebalanced} from './rebalanced_project/UndergroundDetonationsRebalanced';
 import {BuildColonyStandardProjectRebalanced} from './rebalanced_standardproject/BuildColonyStandardProjectRebalanced';
+import {VironRebalanced} from './rebalanced_corporation/VironRebalanced';
+import {VitorRebalanced} from './rebalanced_corporation/VitorRebalanced';
+import {UtopiaInvestRebalanced} from './rebalanced_corporation/UtopiaInvestRebalanced';
+import {MetalsCompanyRebalanced} from './rebalanced_prelude/MetalsCompanyRebalanced';
+import {SupplyDropRebalanced} from './rebalanced_prelude/SupplyDropRebalanced';
+import {LoanRebalanced} from './rebalanced_prelude/LoanRebalanced';
+import {DonationRebalanced} from './rebalanced_prelude/DonationRebalanced';
+import {ExtractorBalloonsRebalanced} from './rebalanced_project/ExtractorBalloonsRebalanced';
+import {ForcedPrecipitationRebalanced} from './rebalanced_project/ForcedPrecipitationRebalanced';
+import {GHGImportFromVenusRebalanced} from './rebalanced_project/GHGImportFromVenusRebalanced';
+import {OrbitalCleanupRebalanced} from './rebalanced_project/OrbitalCleanupRebalanced';
+import {StratopolisRebalanced} from './rebalanced_project/StratopolisRebalanced';
+import {GMOContractRebalanced} from './rebalanced_project/GMOContractRebalanced';
+import {SpinoffDepartmentRebalanced} from './rebalanced_project/SpinoffDepartmentRebalanced';
 
 export const REBALANCED_CARD_MANIFEST = new CardManifest({
   module: GameModule.Rebalanced,
@@ -58,6 +72,13 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.MARS_UNIVERSITY_REBALANCED, Factory: MarsUniversityRebalanced},
     {cardName: CardName.BACTOVIRAL_RESEARCH_REBALANCED, Factory: BactoviralResearchRebalanced},
     {cardName: CardName.AEROBRAKED_AMMONIA_ASTEROID_REBALANCED, Factory: AerobrakedAmmoniaAsteroidRebalanced},
+    {cardName: CardName.EXTRACTOR_BALLOONS_REBALANCED, Factory: ExtractorBalloonsRebalanced},
+    {cardName: CardName.FORCED_PRECIPITATION_REBALANCED, Factory: ForcedPrecipitationRebalanced},
+    {cardName: CardName.GHG_IMPORT_FROM_VENUS_REBALANCED, Factory: GHGImportFromVenusRebalanced},
+    {cardName: CardName.ORBITAL_CLEANUP_REBALANCED, Factory: OrbitalCleanupRebalanced},
+    {cardName: CardName.STRATOPOLIS_REBALANCED, Factory: StratopolisRebalanced},
+    {cardName: CardName.GMO_CONTRACT_REBALANCED, Factory: GMOContractRebalanced},
+    {cardName: CardName.SPINOFF_DEPARTMENT_REBALANCED, Factory: SpinoffDepartmentRebalanced},
   ],
   corporationCards: [
     {cardName: CardName.APHRODITE_REBALANCED, Factory: AphroditeRebalanced, compatibility: GameModule.Venus},
@@ -88,6 +109,9 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.THARSIS_REPUBLIC_REBALANCED, Factory: TharsisRepublicRebalanced},
     {cardName: CardName.THORGATE_REBALANCED, Factory: ThorgateRebalanced},
     {cardName: CardName.UNITED_NATIONS_MARS_INITIATIVE_REBALANCED, Factory: UnitedNationsMarsInitiativeRebalanced},
+    {cardName: CardName.VIRON_REBALANCED, Factory: VironRebalanced},
+    {cardName: CardName.VITOR_REBALANCED, Factory: VitorRebalanced},
+    {cardName: CardName.UTOPIA_INVEST_REBALANCED, Factory: UtopiaInvestRebalanced},
   ],
   preludeCards: [
     {cardName: CardName.SOCIETY_SUPPORT_REBALANCED, Factory: SocietySupportRebalanced},
@@ -102,6 +126,10 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.SELF_SUFFICIENT_SETTLEMENT_REBALANCED, Factory: SelfSufficientSettlementRebalanced},
     {cardName: CardName.SMELTING_PLANT_REBALANCED, Factory: SmeltingPlantRebalanced},
     {cardName: CardName.POLAR_INDUSTRIES_REBALANCED, Factory: PolarIndustriesRebalanced},
+    {cardName: CardName.METALS_COMPANY_REBALANCED, Factory: MetalsCompanyRebalanced},
+    {cardName: CardName.SUPPLY_DROP_REBALANCED, Factory: SupplyDropRebalanced},
+    {cardName: CardName.LOAN_REBALANCED, Factory: LoanRebalanced},
+    {cardName: CardName.DONATION_REBALANCED, Factory: DonationRebalanced},
   ],
   standardProjects: [
     {cardName: CardName.BUILD_COLONY_STANDARD_PROJECT_REBALANCED, Factory: BuildColonyStandardProjectRebalanced, compatibility: GameModule.Colonies},
@@ -114,6 +142,13 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     CardName.MARS_UNIVERSITY,
     CardName.BACTOVIRAL_RESEARCH,
     CardName.AEROBRAKED_AMMONIA_ASTEROID,
+    CardName.EXTRACTOR_BALLOONS,
+    CardName.FORCED_PRECIPITATION,
+    CardName.GHG_IMPORT_FROM_VENUS,
+    CardName.ORBITAL_CLEANUP,
+    CardName.STRATOPOLIS,
+    CardName.GMO_CONTRACT,
+    CardName.SPINOFF_DEPARTMENT,
     // corporations
     CardName.ECOLINE,
     CardName.UNITED_NATIONS_MARS_INITIATIVE,
@@ -143,6 +178,9 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     CardName.ARIDOR,
     CardName.THARSIS_REPUBLIC,
     CardName.CHEUNG_SHING_MARS,
+    CardName.VIRON,
+    CardName.VITOR,
+    CardName.UTOPIA_INVEST,
     // preludes
     CardName.SOCIETY_SUPPORT,
     CardName.BIOFUELS,
@@ -156,6 +194,10 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     CardName.SELF_SUFFICIENT_SETTLEMENT,
     CardName.SMELTING_PLANT,
     CardName.POLAR_INDUSTRIES,
+    CardName.METALS_COMPANY,
+    CardName.SUPPLY_DROP,
+    CardName.LOAN,
+    CardName.DONATION,
     // standard project
     CardName.BUILD_COLONY_STANDARD_PROJECT,
   ],
