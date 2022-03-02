@@ -99,11 +99,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.INVENTRIX_REBALANCED, Factory: InventrixRebalanced},
     {cardName: CardName.MINING_GUILD_REBALANCED, Factory: MiningGuildRebalanced},
     {cardName: CardName.MONS_INSURANCE_REBALANCED, Factory: MonsInsuranceRebalanced},
-    {
-      cardName: CardName.MORNING_STAR_INC_REBALANCED,
-      Factory: MorningStarIncRebalanced,
-      compatibility: GameModule.Venus,
-    },
+    {cardName: CardName.MORNING_STAR_INC_REBALANCED, Factory: MorningStarIncRebalanced, compatibility: GameModule.Venus},
     {cardName: CardName.PHOBOLOG_REBALANCED, Factory: PhoboLogRebalanced},
     {cardName: CardName.POINT_LUNA_REBALANCED, Factory: PointLunaRebalanced},
     {cardName: CardName.POLYPHEMOS_REBALANCED, Factory: PolyphemosRebalanced},
@@ -143,11 +139,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.SUPPLY_DROP_REBALANCED, Factory: SupplyDropRebalanced},
   ],
   standardProjects: [
-    {
-      cardName: CardName.BUILD_COLONY_STANDARD_PROJECT_REBALANCED,
-      Factory: BuildColonyStandardProjectRebalanced,
-      compatibility: GameModule.Colonies,
-    },
+    {cardName: CardName.BUILD_COLONY_STANDARD_PROJECT_REBALANCED, Factory: BuildColonyStandardProjectRebalanced, compatibility: GameModule.Colonies},
   ],
   cardsToRemove: [
     // projects
