@@ -386,7 +386,7 @@ export const Colony = Vue.component('colony', {
       <div>1</div>
       <div>2</div>
       <div>4</div>
-      <div>6</div>
+      <div>7</div>
       <div>10</div>
       <div>13</div>
       <div>17</div>
