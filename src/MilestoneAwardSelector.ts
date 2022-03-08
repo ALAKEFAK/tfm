@@ -143,7 +143,7 @@ export namespace MilestoneAwardSelector {
       bind(Mayor, Landlord, 6);
       bind(Mayor, Cultivator, 6);
       bind(Gardener, EstateDealer, 5);
-      bind(Builder, Magnate, 5);
+      bind(Planner, Magnate, 5);
       bind(Tycoon, Magnate, 5);
       bind(PolarExplorer, DesertSettler, 8);
       bind(Hoverlord, Excentric, 5);
@@ -211,12 +211,13 @@ export namespace MilestoneAwardSelector {
       bind(Irrigator, Mayor, 4);
       bind(Irrigator, Gardener, 4);
       bind(Irrigator, PolarExplorer, 4);
-      bind(Irrigator, Landlord, 4);
+      bind(Irrigator, Landlord, 5);
       bind(Irrigator, DesertSettler, 5);
       bind(Irrigator, EstateDealer, 9);
       bind(Irrigator, Cultivator, 4);
       bind(Irrigator, Equatorial, 4);
       bind(Irrigator, Naturalist, 3);
+      bind(Irrigator, Terraformer, 2)
 
       bind(Astronomer, Generalist, 1);
       bind(Astronomer, Specialist, 1);
@@ -234,6 +235,7 @@ export namespace MilestoneAwardSelector {
       bind(Spacefarer, Magnate, 1);
       bind(Spacefarer, SpaceBaron, 9);
       bind(Spacefarer, Astronomer, 3);
+      bind(Spacefarer, Miner, 4);
 
       bind(FrontRunner, Ecologist, 1);
       bind(FrontRunner, Tycoon, 1);
@@ -251,8 +253,8 @@ export namespace MilestoneAwardSelector {
       bind(Pioneer, Highlander, 4);
 
       bind(Terran, Specialist, 3);
-      bind(Terran, Tycoon, 2);
-      bind(Terran, Magnate, 1);
+      bind(Terran, Tycoon, 4);
+      bind(Terran, Magnate, 4);
       bind(Terran, Astronomer, 7);
 
       bind(MorningStar, Tycoon, 1);
@@ -260,24 +262,24 @@ export namespace MilestoneAwardSelector {
       bind(MorningStar, Venuphile, 9);
       bind(MorningStar, Astronomer, 7);
 
-      bind(Farmer, Gardener, 3);
+      bind(Farmer, Gardener, 9);
       bind(Farmer, Generalist, 1);
-      bind(Farmer, Ecologist, 4);
-      bind(Farmer, Landlord, 2);
-      bind(Farmer, DesertSettler, 2);
-      bind(Farmer, EstateDealer, 2);
-      bind(Farmer, Cultivator, 4);
-      bind(Farmer, Irrigator, 1);
-      bind(Farmer, Pioneer, 1);
+      bind(Farmer, Ecologist, 9);
+      bind(Farmer, Landlord, 9);
+      bind(Farmer, DesertSettler, 9);
+      bind(Farmer, EstateDealer, 9);
+      bind(Farmer, Cultivator, 9);
+      bind(Farmer, Irrigator, 9);
+      bind(Farmer, Pioneer, 9);
 
       bind(EdgeDancer, Mayor, 2);
       bind(EdgeDancer, Gardener, 4);
       bind(EdgeDancer, PolarExplorer, 5);
       bind(EdgeDancer, DesertSettler, 5);
-      bind(EdgeDancer, EstateDealer, 1);
+      bind(EdgeDancer, EstateDealer, 4);
       bind(EdgeDancer, Cultivator, 4);
-      bind(EdgeDancer, Irrigator, 1);
-      bind(EdgeDancer, Farmer, 3);
+      bind(EdgeDancer, Irrigator, 4);
+      bind(EdgeDancer, Farmer, 4);
       bind(EdgeDancer, Equatorial, 4);
       bind(EdgeDancer, Highlander, 4);
       bind(EdgeDancer, Naturalist, 4);
@@ -295,7 +297,7 @@ export namespace MilestoneAwardSelector {
       bind(UrbanPlanner, Mayor, 6);
       bind(UrbanPlanner, Gardener, 6);
       bind(UrbanPlanner, Landlord, 7);
-      bind(UrbanPlanner, DesertSettler, 1);
+      bind(UrbanPlanner, DesertSettler, 4);
       bind(UrbanPlanner, EstateDealer, 1);
       bind(UrbanPlanner, Cultivator, 7);
       bind(UrbanPlanner, Irrigator, 1);
@@ -333,13 +335,15 @@ export namespace MilestoneAwardSelector {
       bind(Smith, Colonizer, 1);
       bind(Smith, Importer, 1);
       bind(Smith, Distributer, 2);
+      bind(Smith, SpaceBaron, 4);
+      bind(Smith, Contractor, 4);
 
       bind(Collector, Ecologist, 6);
       bind(Collector, Diversifier, 3);
       bind(Collector, Hoverlord, 6);
       bind(Collector, Excentric, 8);
       bind(Collector, Venuphile, 4);
-      bind(Collector, Biologist, 3);
+      bind(Collector, Biologist, 4);
 
       bind(Colonizer, Generalist, 1);
       bind(Colonizer, Minimalist, 6);
@@ -353,8 +357,8 @@ export namespace MilestoneAwardSelector {
 
       bind(Sapling, Gardener, 8);
       bind(Sapling, PolarExplorer, 4);
-      bind(Sapling, Irrigator, 3);
-      bind(Sapling, Pioneer, 3);
+      bind(Sapling, Irrigator, 4);
+      bind(Sapling, Pioneer, 4);
       bind(Sapling, Farmer, 8);
       bind(Sapling, EdgeDancer, 4);
       bind(Sapling, Equatorial, 4);
@@ -543,8 +547,18 @@ export namespace MilestoneAwardSelector {
     }
     if (gameOptions.trajectoryExtension) {
       // Remove Specialist if Trajectory is in use
-      const index = candidateMilestones.indexOf(Specialist.name);
-      if (index > -1) {
+      // Remove Tropicalist and Farmer as well.
+      const index_spec = candidateMilestones.indexOf(Specialist.name);
+      if (index_spec > -1) {
+        candidateMilestones.splice(index, 1);
+      }
+      const index_t = candidateMilestones.indexOf(Tropicalist.name);
+      if (index_t > -1) {
+        candidateMilestones.splice(index, 1);
+      }
+
+      const index_f = candidateMilestones.indexOf(Farmer.name);
+      if (index_f > -1) {
         candidateMilestones.splice(index, 1);
       }
 
