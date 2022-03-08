@@ -553,12 +553,12 @@ export namespace MilestoneAwardSelector {
         candidateMilestones.splice(index_spec, 1);
       }
       const index_trop = candidateMilestones.indexOf(Tropicalist.name);
-      if (index_t > -1) {
+      if (index_trop > -1) {
         candidateMilestones.splice(index_trop, 1);
       }
 
       const index_farmer = candidateMilestones.indexOf(Farmer.name);
-      if (index_f > -1) {
+      if (index_farmer > -1) {
         candidateMilestones.splice(index_farmer, 1);
       }
 
