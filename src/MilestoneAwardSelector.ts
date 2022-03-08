@@ -550,16 +550,16 @@ export namespace MilestoneAwardSelector {
       // Remove Tropicalist and Farmer as well.
       const index_spec = candidateMilestones.indexOf(Specialist.name);
       if (index_spec > -1) {
-        candidateMilestones.splice(index, 1);
+        candidateMilestones.splice(index_spec, 1);
       }
-      const index_t = candidateMilestones.indexOf(Tropicalist.name);
+      const index_trop = candidateMilestones.indexOf(Tropicalist.name);
       if (index_t > -1) {
-        candidateMilestones.splice(index, 1);
+        candidateMilestones.splice(index_trop, 1);
       }
 
-      const index_f = candidateMilestones.indexOf(Farmer.name);
+      const index_farmer = candidateMilestones.indexOf(Farmer.name);
       if (index_f > -1) {
-        candidateMilestones.splice(index, 1);
+        candidateMilestones.splice(index_farmer, 1);
       }
 
       candidateMilestones.push(...TRAJECTORY_MILESTONES.map(toName));
