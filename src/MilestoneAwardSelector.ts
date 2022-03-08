@@ -217,7 +217,7 @@ export namespace MilestoneAwardSelector {
       bind(Irrigator, Cultivator, 4);
       bind(Irrigator, Equatorial, 4);
       bind(Irrigator, Naturalist, 3);
-      bind(Irrigator, Terraformer, 2)
+      bind(Irrigator, Terraformer, 2);
 
       bind(Astronomer, Generalist, 1);
       bind(Astronomer, Specialist, 1);
