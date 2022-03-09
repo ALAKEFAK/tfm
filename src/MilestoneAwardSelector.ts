@@ -84,6 +84,7 @@ export namespace MilestoneAwardSelector {
   //
   class SynergyMap {
     private readonly map: Map<string, number> = new Map();
+
     public set(a: string, b: string, weight: number): void {
       this.map.set(a + '|' + b, weight);
       this.map.set(b + '|' + a, weight);
@@ -92,7 +93,7 @@ export namespace MilestoneAwardSelector {
     public get(a: string, b: string) {
       return this.map.get(a + '|' + b) || 0;
     }
-  };
+  }
 
   class Synergies {
     public static map: SynergyMap = Synergies.makeMap();
@@ -105,9 +106,9 @@ export namespace MilestoneAwardSelector {
 
       // Higher synergies represent similar milestones or awards. For instance, Terraformer rewards for high TR
       // and the Benefactor award is given to the player with the highets TR. Their synergy weight is 9, very high.
-      function bind(A: { new(): IMilestone | IAward }, B: { new(): IMilestone | IAward }, weight: number):void;
-      function bind(a: string, b: string, weight: number):void;
-      function bind(A: any, B: any, weight: number):void {
+      function bind(A: { new(): IMilestone | IAward }, B: { new(): IMilestone | IAward }, weight: number): void;
+      function bind(a: string, b: string, weight: number): void;
+      function bind(A: any, B: any, weight: number): void {
         if (typeof A === 'string') {
           synergies.set(A, B, weight);
         } else {
@@ -416,7 +417,7 @@ export namespace MilestoneAwardSelector {
 
   // Function to compute max synergy of a given set of milestones and awards.
   // Exported for testing
-  export function maximumSynergy(names: Array<string>) : number {
+  export function maximumSynergy(names: Array<string>): number {
     let max = 0;
     for (let i = 0; i < names.length - 1; i++) {
       for (let j = i + 1; j < names.length; j++) {
@@ -487,7 +488,8 @@ export namespace MilestoneAwardSelector {
       if (gameOptions.aresExtension) {
         drawnMilestonesAndAwards.milestones.push(...ARES_MILESTONES);
         drawnMilestonesAndAwards.awards.push(...ARES_AWARDS);
-      };
+      }
+
       if (gameOptions.moonExpansion) {
         // One MA will reward moon tags, the other will reward moon tiles.
         if (Math.random() > 0.5) {
@@ -497,7 +499,8 @@ export namespace MilestoneAwardSelector {
           drawnMilestonesAndAwards.milestones.push(new Lunarchitect());
           drawnMilestonesAndAwards.awards.push(new FullMoon());
         }
-      };
+      }
+
       break;
 
     case RandomMAOptionType.LIMITED:
@@ -509,7 +512,7 @@ export namespace MilestoneAwardSelector {
     }
 
     return drawnMilestonesAndAwards;
-  };
+  }
 
   // Selects |numberMARequested| milestones and |numberMARequested| awards from all available awards and milestones (optionally including
   // Venusian.) It does this by following these rules:
@@ -528,7 +531,7 @@ export namespace MilestoneAwardSelector {
       throw new Error('No limited synergy milestones and awards set was generated after ' + maxAttempts + ' attempts. Please try again.');
     }
 
-    const toName = (e: {name: string}) => e.name;
+    const toName = (e: { name: string }) => e.name;
 
     const candidateMilestones = [...ORIGINAL_MILESTONES, ...ELYSIUM_MILESTONES, ...HELLAS_MILESTONES].map(toName);
     const candidateAwards = [...ORIGINAL_AWARDS, ...ELYSIUM_AWARDS, ...HELLAS_AWARDS].map(toName);
@@ -581,14 +584,14 @@ export namespace MilestoneAwardSelector {
         const newMilestone = shuffledMilestones.splice(0, 1)[0];
         // If not enough milestone are left to satisfy the constraints, restart the function with a recursive call.
         if (newMilestone === undefined) {
-          return getRandomMilestonesAndAwards(gameOptions, numberMARequested, constraints, attempt+1);
+          return getRandomMilestonesAndAwards(gameOptions, numberMARequested, constraints, attempt + 1);
         }
         accum.add(newMilestone, true);
       } else {
         const newAward = shuffledAwards.splice(0, 1)[0];
         // If not enough awards are left to satisfy the constraints, restart the function with a recursive call.
         if (newAward === undefined) {
-          return getRandomMilestonesAndAwards(gameOptions, numberMARequested, constraints, attempt+1);
+          return getRandomMilestonesAndAwards(gameOptions, numberMARequested, constraints, attempt + 1);
         }
         accum.add(newAward, false);
       }
