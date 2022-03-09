@@ -30,6 +30,7 @@ import {Meltworks} from './Meltworks';
 import {MercurianAlloys} from './MercurianAlloys';
 import {MoholeLake} from './MoholeLake';
 import {MonsInsurance} from './MonsInsurance';
+import {NewPartner} from './NewPartner';
 import {OrbitalCleanup} from './OrbitalCleanup';
 import {Penguins} from './Penguins';
 import {PharmacyUnion} from './PharmacyUnion';
@@ -94,6 +95,9 @@ export const PROMO_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.BACTOVIRAL_RESEARCH, Factory: BactoviralResearch},
     {cardName: CardName.HARVEST, Factory: Harvest},
   ],
+  preludeCards: [
+    {cardName: CardName.NEW_PARTNER, Factory: NewPartner},
+  ],
 
   cardsToRemove: [
     CardName.DEIMOS_DOWN,
@@ -109,4 +113,5 @@ export const PROMO_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.MONS_INSURANCE, Factory: MonsInsurance},
     {cardName: CardName.RECYCLON, Factory: Recyclon},
     {cardName: CardName.SPLICE, Factory: Splice},
-  ]});
+  ],
+});
