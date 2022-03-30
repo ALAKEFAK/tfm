@@ -66,6 +66,7 @@ import {EccentricSponsorRebalanced} from './rebalanced_prelude/EccentricSponsorR
 import {GalileanMiningRebalanced} from './rebalanced_prelude/GalileanMiningRebalanced';
 import {IoResearchOutpostRebalanced} from './rebalanced_prelude/IoResearchOutpostRebalanced';
 import {AsteroidHollowingRebalanced} from './rebalanced_project/AsteroidHollowingRebalanced';
+import {JetStreamMicroscrappersRebalanced} from './rebalanced_project/JetStreamMicroscrappersRebalanced';
 
 export const REBALANCED_CARD_MANIFEST = new CardManifest({
   module: GameModule.Rebalanced,
@@ -78,6 +79,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.FORCED_PRECIPITATION_REBALANCED, Factory: ForcedPrecipitationRebalanced},
     {cardName: CardName.GHG_IMPORT_FROM_VENUS_REBALANCED, Factory: GHGImportFromVenusRebalanced},
     {cardName: CardName.GMO_CONTRACT_REBALANCED, Factory: GMOContractRebalanced},
+    {cardName: CardName.JET_STREAM_MICROSCRAPPERS_REBALANCED, Factory: JetStreamMicroscrappersRebalanced},
     {cardName: CardName.MARS_UNIVERSITY_REBALANCED, Factory: MarsUniversityRebalanced},
     {cardName: CardName.ORBITAL_CLEANUP_REBALANCED, Factory: OrbitalCleanupRebalanced},
     {cardName: CardName.SPINOFF_DEPARTMENT_REBALANCED, Factory: SpinoffDepartmentRebalanced},
