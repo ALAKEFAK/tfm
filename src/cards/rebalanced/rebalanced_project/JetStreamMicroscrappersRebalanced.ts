@@ -19,7 +19,7 @@ export class JetStreamMicroscrappersRebalanced extends Card implements IActionCa
 
   constructor() {
     super({
-      name: CardName.JET_STREAM_MICROSCRAPPERS,
+      name: CardName.JET_STREAM_MICROSCRAPPERS_REBALANCED,
       cardType: CardType.ACTIVE,
       tags: [Tags.VENUS],
       cost: 7,
