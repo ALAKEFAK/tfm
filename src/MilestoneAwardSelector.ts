@@ -84,6 +84,7 @@ export namespace MilestoneAwardSelector {
   //
   class SynergyMap {
     private readonly map: Map<string, number> = new Map();
+
     public set(a: string, b: string, weight: number): void {
       this.map.set(a + '|' + b, weight);
       this.map.set(b + '|' + a, weight);
@@ -92,7 +93,7 @@ export namespace MilestoneAwardSelector {
     public get(a: string, b: string) {
       return this.map.get(a + '|' + b) || 0;
     }
-  };
+  }
 
   class Synergies {
     public static map: SynergyMap = Synergies.makeMap();
@@ -105,9 +106,9 @@ export namespace MilestoneAwardSelector {
 
       // Higher synergies represent similar milestones or awards. For instance, Terraformer rewards for high TR
       // and the Benefactor award is given to the player with the highets TR. Their synergy weight is 9, very high.
-      function bind(A: { new(): IMilestone | IAward }, B: { new(): IMilestone | IAward }, weight: number):void;
-      function bind(a: string, b: string, weight: number):void;
-      function bind(A: any, B: any, weight: number):void {
+      function bind(A: { new(): IMilestone | IAward }, B: { new(): IMilestone | IAward }, weight: number): void;
+      function bind(a: string, b: string, weight: number): void;
+      function bind(A: any, B: any, weight: number): void {
         if (typeof A === 'string') {
           synergies.set(A, B, weight);
         } else {
@@ -143,7 +144,7 @@ export namespace MilestoneAwardSelector {
       bind(Mayor, Landlord, 6);
       bind(Mayor, Cultivator, 6);
       bind(Gardener, EstateDealer, 5);
-      bind(Builder, Magnate, 5);
+      bind(Planner, Magnate, 5);
       bind(Tycoon, Magnate, 5);
       bind(PolarExplorer, DesertSettler, 8);
       bind(Hoverlord, Excentric, 5);
@@ -211,12 +212,13 @@ export namespace MilestoneAwardSelector {
       bind(Irrigator, Mayor, 4);
       bind(Irrigator, Gardener, 4);
       bind(Irrigator, PolarExplorer, 4);
-      bind(Irrigator, Landlord, 4);
+      bind(Irrigator, Landlord, 5);
       bind(Irrigator, DesertSettler, 5);
       bind(Irrigator, EstateDealer, 9);
       bind(Irrigator, Cultivator, 4);
       bind(Irrigator, Equatorial, 4);
       bind(Irrigator, Naturalist, 3);
+      bind(Irrigator, Terraformer, 2);
 
       bind(Astronomer, Generalist, 1);
       bind(Astronomer, Specialist, 1);
@@ -234,6 +236,7 @@ export namespace MilestoneAwardSelector {
       bind(Spacefarer, Magnate, 1);
       bind(Spacefarer, SpaceBaron, 9);
       bind(Spacefarer, Astronomer, 3);
+      bind(Spacefarer, Miner, 4);
 
       bind(FrontRunner, Ecologist, 1);
       bind(FrontRunner, Tycoon, 1);
@@ -251,8 +254,8 @@ export namespace MilestoneAwardSelector {
       bind(Pioneer, Highlander, 4);
 
       bind(Terran, Specialist, 3);
-      bind(Terran, Tycoon, 2);
-      bind(Terran, Magnate, 1);
+      bind(Terran, Tycoon, 4);
+      bind(Terran, Magnate, 4);
       bind(Terran, Astronomer, 7);
 
       bind(MorningStar, Tycoon, 1);
@@ -260,24 +263,24 @@ export namespace MilestoneAwardSelector {
       bind(MorningStar, Venuphile, 9);
       bind(MorningStar, Astronomer, 7);
 
-      bind(Farmer, Gardener, 3);
+      bind(Farmer, Gardener, 9);
       bind(Farmer, Generalist, 1);
-      bind(Farmer, Ecologist, 4);
-      bind(Farmer, Landlord, 2);
-      bind(Farmer, DesertSettler, 2);
-      bind(Farmer, EstateDealer, 2);
-      bind(Farmer, Cultivator, 4);
-      bind(Farmer, Irrigator, 1);
-      bind(Farmer, Pioneer, 1);
+      bind(Farmer, Ecologist, 9);
+      bind(Farmer, Landlord, 9);
+      bind(Farmer, DesertSettler, 9);
+      bind(Farmer, EstateDealer, 9);
+      bind(Farmer, Cultivator, 9);
+      bind(Farmer, Irrigator, 9);
+      bind(Farmer, Pioneer, 9);
 
       bind(EdgeDancer, Mayor, 2);
       bind(EdgeDancer, Gardener, 4);
       bind(EdgeDancer, PolarExplorer, 5);
       bind(EdgeDancer, DesertSettler, 5);
-      bind(EdgeDancer, EstateDealer, 1);
+      bind(EdgeDancer, EstateDealer, 4);
       bind(EdgeDancer, Cultivator, 4);
-      bind(EdgeDancer, Irrigator, 1);
-      bind(EdgeDancer, Farmer, 3);
+      bind(EdgeDancer, Irrigator, 4);
+      bind(EdgeDancer, Farmer, 4);
       bind(EdgeDancer, Equatorial, 4);
       bind(EdgeDancer, Highlander, 4);
       bind(EdgeDancer, Naturalist, 4);
@@ -295,7 +298,7 @@ export namespace MilestoneAwardSelector {
       bind(UrbanPlanner, Mayor, 6);
       bind(UrbanPlanner, Gardener, 6);
       bind(UrbanPlanner, Landlord, 7);
-      bind(UrbanPlanner, DesertSettler, 1);
+      bind(UrbanPlanner, DesertSettler, 4);
       bind(UrbanPlanner, EstateDealer, 1);
       bind(UrbanPlanner, Cultivator, 7);
       bind(UrbanPlanner, Irrigator, 1);
@@ -333,13 +336,15 @@ export namespace MilestoneAwardSelector {
       bind(Smith, Colonizer, 1);
       bind(Smith, Importer, 1);
       bind(Smith, Distributer, 2);
+      bind(Smith, SpaceBaron, 4);
+      bind(Smith, Contractor, 4);
 
       bind(Collector, Ecologist, 6);
       bind(Collector, Diversifier, 3);
       bind(Collector, Hoverlord, 6);
       bind(Collector, Excentric, 8);
       bind(Collector, Venuphile, 4);
-      bind(Collector, Biologist, 3);
+      bind(Collector, Biologist, 4);
 
       bind(Colonizer, Generalist, 1);
       bind(Colonizer, Minimalist, 6);
@@ -353,8 +358,8 @@ export namespace MilestoneAwardSelector {
 
       bind(Sapling, Gardener, 8);
       bind(Sapling, PolarExplorer, 4);
-      bind(Sapling, Irrigator, 3);
-      bind(Sapling, Pioneer, 3);
+      bind(Sapling, Irrigator, 4);
+      bind(Sapling, Pioneer, 4);
       bind(Sapling, Farmer, 8);
       bind(Sapling, EdgeDancer, 4);
       bind(Sapling, Equatorial, 4);
@@ -412,7 +417,7 @@ export namespace MilestoneAwardSelector {
 
   // Function to compute max synergy of a given set of milestones and awards.
   // Exported for testing
-  export function maximumSynergy(names: Array<string>) : number {
+  export function maximumSynergy(names: Array<string>): number {
     let max = 0;
     for (let i = 0; i < names.length - 1; i++) {
       for (let j = i + 1; j < names.length; j++) {
@@ -483,7 +488,8 @@ export namespace MilestoneAwardSelector {
       if (gameOptions.aresExtension) {
         drawnMilestonesAndAwards.milestones.push(...ARES_MILESTONES);
         drawnMilestonesAndAwards.awards.push(...ARES_AWARDS);
-      };
+      }
+
       if (gameOptions.moonExpansion) {
         // One MA will reward moon tags, the other will reward moon tiles.
         if (Math.random() > 0.5) {
@@ -493,7 +499,8 @@ export namespace MilestoneAwardSelector {
           drawnMilestonesAndAwards.milestones.push(new Lunarchitect());
           drawnMilestonesAndAwards.awards.push(new FullMoon());
         }
-      };
+      }
+
       break;
 
     case RandomMAOptionType.LIMITED:
@@ -505,7 +512,7 @@ export namespace MilestoneAwardSelector {
     }
 
     return drawnMilestonesAndAwards;
-  };
+  }
 
   // Selects |numberMARequested| milestones and |numberMARequested| awards from all available awards and milestones (optionally including
   // Venusian.) It does this by following these rules:
@@ -524,7 +531,7 @@ export namespace MilestoneAwardSelector {
       throw new Error('No limited synergy milestones and awards set was generated after ' + maxAttempts + ' attempts. Please try again.');
     }
 
-    const toName = (e: {name: string}) => e.name;
+    const toName = (e: { name: string }) => e.name;
 
     const candidateMilestones = [...ORIGINAL_MILESTONES, ...ELYSIUM_MILESTONES, ...HELLAS_MILESTONES].map(toName);
     const candidateAwards = [...ORIGINAL_AWARDS, ...ELYSIUM_AWARDS, ...HELLAS_AWARDS].map(toName);
@@ -543,9 +550,19 @@ export namespace MilestoneAwardSelector {
     }
     if (gameOptions.trajectoryExtension) {
       // Remove Specialist if Trajectory is in use
-      const index = candidateMilestones.indexOf(Specialist.name);
-      if (index > -1) {
-        candidateMilestones.splice(index, 1);
+      // Remove Tropicalist and Farmer as well.
+      const index_spec = candidateMilestones.indexOf(Specialist.name);
+      if (index_spec > -1) {
+        candidateMilestones.splice(index_spec, 1);
+      }
+      const index_trop = candidateMilestones.indexOf(Tropicalist.name);
+      if (index_trop > -1) {
+        candidateMilestones.splice(index_trop, 1);
+      }
+
+      const index_farmer = candidateMilestones.indexOf(Farmer.name);
+      if (index_farmer > -1) {
+        candidateMilestones.splice(index_farmer, 1);
       }
 
       candidateMilestones.push(...TRAJECTORY_MILESTONES.map(toName));
@@ -567,14 +584,14 @@ export namespace MilestoneAwardSelector {
         const newMilestone = shuffledMilestones.splice(0, 1)[0];
         // If not enough milestone are left to satisfy the constraints, restart the function with a recursive call.
         if (newMilestone === undefined) {
-          return getRandomMilestonesAndAwards(gameOptions, numberMARequested, constraints, attempt+1);
+          return getRandomMilestonesAndAwards(gameOptions, numberMARequested, constraints, attempt + 1);
         }
         accum.add(newMilestone, true);
       } else {
         const newAward = shuffledAwards.splice(0, 1)[0];
         // If not enough awards are left to satisfy the constraints, restart the function with a recursive call.
         if (newAward === undefined) {
-          return getRandomMilestonesAndAwards(gameOptions, numberMARequested, constraints, attempt+1);
+          return getRandomMilestonesAndAwards(gameOptions, numberMARequested, constraints, attempt + 1);
         }
         accum.add(newAward, false);
       }

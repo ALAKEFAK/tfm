@@ -1,20 +1,17 @@
 import {IActionCard, ICard, IResourceCard} from '../../ICard';
-import {IProjectCard} from '../../IProjectCard';
 import {Tags} from '../../Tags';
 import {Card} from '../../Card';
 import {CardType} from '../../CardType';
 import {Player} from '../../../Player';
-import {SpaceName} from '../../SpaceName';
-import {SpaceType} from '../../SpaceType';
+import {SpaceName} from '../../../SpaceName';
+import {SpaceType} from '../../../SpaceType';
 import {Resources} from '../../../Resources';
 import {ResourceType} from '../../../ResourceType';
 import {SelectCard} from '../../../inputs/SelectCard';
-import {SelectOption} from '../../../inputs/SelectOption';
-import {CardRequirements} from '../CardRequirements';
+import {CardRequirements} from '../../CardRequirements';
 import {CardName} from '../../../CardName';
-import {DeferredAction} from '../../../deferredActions/DeferredAction';
 import {CardRenderer} from '../../render/CardRenderer';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {CardRenderDynamicVictoryPoints} from '../../render/CardRenderDynamicVictoryPoints';
 
 export class StratopolisRebalanced extends Card implements IActionCard, IResourceCard {
   constructor() {

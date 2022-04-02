@@ -83,6 +83,7 @@ export const CardCorporationLogo = Vue.component('CardCorporationLogo', {
       case CardName.THORGATE_REBALANCED:
         return '<span class="card-thorgate-logo">THORGATE</span>';
       case CardName.VIRON:
+      case CardName.VIRON_REBALANCED:
         return '<span class="card-viron-logo">VIRON</span>';
       case CardName.ARIDOR:
       case CardName.ARIDOR_REBALANCED:
@@ -141,6 +142,7 @@ export const CardCorporationLogo = Vue.component('CardCorporationLogo', {
       case CardName.UNITED_NATIONS_MARS_INITIATIVE_REBALANCED:
         return '<span class="card-unmi-logo">UNITED<br/>NATIONS<br/>MARS<br/>INITIATIVE</span>';
       case CardName.UTOPIA_INVEST:
+      case CardName.UTOPIA_INVEST_REBALANCED:
         return `<div class="card-utopia-logo">
         <div class="utopia-corp-name-1">UTOPIA</div>
         <div class="utopia-corp-name-2">INVEST</div>
@@ -150,6 +152,7 @@ export const CardCorporationLogo = Vue.component('CardCorporationLogo', {
         <div style="display:inline-block;margin-left:25px;padding-top: 2px;margin-bottom:0px;font-size:26px;text-shadow: 2px 2px #ccc;text-align:center">VALLEY<br/> TRUST</div>
         </div>`;
       case CardName.VITOR:
+      case CardName.VITOR_REBALANCED:
         return `<div class="card-vitor-logo">
         <span style="color:white;background:orangered;padding-left:3px;">VIT</span>
         <span style="background:linear-gradient(to right, orangered,white);">O</span>

@@ -59,8 +59,14 @@ export const SelectInitialCards = Vue.component('select-initial-cards', {
         case CardName.HUGE_ASTEROID:
           result -= 5;
           break;
+        case CardName.HUGE_ASTEROID_REBALANCED:
+          result -= 2;
+          break;
         case CardName.DONATION:
           result += 21;
+          break;
+        case CardName.DONATION_REBALANCED:
+          result += 23;
           break;
         case CardName.GALILEAN_MINING:
           result -= 5;
@@ -68,8 +74,14 @@ export const SelectInitialCards = Vue.component('select-initial-cards', {
         case CardName.LOAN:
           result += 30;
           break;
+        case CardName.LOAN_REBALANCED:
+          result += 32;
+          break;
+        case CardName.METALS_COMPANY_REBALANCED:
+          result += 2;
+          break;
         case CardName.POLAR_INDUSTRIES_REBALANCED:
-          result += 7;
+          result += 5;
           break;
         case CardName.SOCIETY_SUPPORT_REBALANCED:
           result -= 3;

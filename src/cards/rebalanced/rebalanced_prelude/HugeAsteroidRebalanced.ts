@@ -2,7 +2,7 @@ import {Player} from '../../../Player';
 import {PreludeCard} from '../../prelude/PreludeCard';
 import {CardName} from '../../../CardName';
 import {CardRenderer} from '../../render/CardRenderer';
-import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
+import {SelectHowToPayDeferred} from '../../../deferredActions/SelectHowToPayDeferred';
 
 
 export class HugeAsteroidRebalanced extends PreludeCard {
@@ -13,7 +13,7 @@ export class HugeAsteroidRebalanced extends PreludeCard {
       metadata: {
         cardNumber: 'P15',
         renderData: CardRenderer.builder((b) => {
-          b.temperature(3);
+          b.temperature(3).br;
           b.megacredits(-2);
         }),
         description: 'Increase Temperature 3 steps. Pay 2 MC.',
