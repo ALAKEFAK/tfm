@@ -65,7 +65,7 @@ import {Setter} from './milestones/trajectoryMilestones/Setter';
 import {Smith} from './milestones/trajectoryMilestones/Smith';
 import {Spacefarer} from './milestones/trajectoryMilestones/Spacefarer';
 import {Terran} from './milestones/trajectoryMilestones/Terran';
-import {Tropicalist} from './milestones/trajectoryMilestones/tropicalist';
+import {Tropicalist} from './milestones/trajectoryMilestones/Tropicalist';
 import {Tycoon} from './milestones/Tycoon';
 import {FullMoon} from './moon/FullMoon';
 import {Lunarchitect} from './moon/Lunarchitect';
@@ -549,22 +549,6 @@ export namespace MilestoneAwardSelector {
       candidateAwards.push(...MOON_AWARDS.map(toName));
     }
     if (gameOptions.trajectoryExtension) {
-      // Remove Specialist if Trajectory is in use
-      // Remove Tropicalist and Farmer as well.
-      const index_spec = candidateMilestones.indexOf(Specialist.name);
-      if (index_spec > -1) {
-        candidateMilestones.splice(index_spec, 1);
-      }
-      const index_trop = candidateMilestones.indexOf(Tropicalist.name);
-      if (index_trop > -1) {
-        candidateMilestones.splice(index_trop, 1);
-      }
-
-      const index_farmer = candidateMilestones.indexOf(Farmer.name);
-      if (index_farmer > -1) {
-        candidateMilestones.splice(index_farmer, 1);
-      }
-
       candidateMilestones.push(...TRAJECTORY_MILESTONES.map(toName));
       candidateAwards.push(...TRAJECTORY_AWARDS.map(toName));
 

@@ -9,6 +9,7 @@ import {CardType} from '../../CardType';
 import {CardRenderer} from '../../render/CardRenderer';
 import {Size} from '../../render/Size';
 import {Resources} from '../../../Resources';
+import {Tags} from '../../Tags';
 
 export class ArcadianCommunitiesRebalanced extends Card implements IActionCard, CorporationCard {
   constructor() {
@@ -16,6 +17,7 @@ export class ArcadianCommunitiesRebalanced extends Card implements IActionCard, 
       cardType: CardType.CORPORATION,
       name: CardName.ARCADIAN_COMMUNITIES_REBALANCED,
       startingMegaCredits: 42,
+      tags: [Tags.BUILDING],
       initialActionText: 'Place a community (player marker) on a non-reserved area',
 
       metadata: {

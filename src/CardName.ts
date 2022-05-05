@@ -694,6 +694,24 @@ export enum CardName {
     STRATOPOLIS_REBALANCED = 'Stratopolis(⚖)',
     TOLL_STATION_REBALANCED = 'Toll Station(⚖)',
     UNDERGROUND_DETONATIONS_REBALANCED = 'Underground Detonations(⚖)',
-    // Rebalanced standard proect
+
+    ADAPTED_LICHEN_REBALANCED = 'Adapted Lichen(⚖)',
+    BLACK_POLAR_DUST_REBALANCED = 'Black Polar Dust(⚖)',
+    CLOUD_SEEDING_REBALANCED = 'Cloud Seeding(⚖)',
+    COMMUNITY_SERVICES_REBALANCED = 'Community Services(⚖)',
+    CORPORATE_STRONGHOLD_REBALANCED = 'Corporate Stronghold(⚖)',
+    DESIGNED_MICRO_ORGANISMS_REBALANCED = 'Designed Micro-organisms(⚖)',
+    ENERGY_SAVING_REBALANCED = 'Energy Saving(⚖)',
+    INDUSTRIAL_CENTER_REBALANCED = 'Industrial Center(⚖)',
+    MARTIAN_RAILS_REBALANCED = 'Martian Rails(⚖)',
+    MICRO_MILLS_REBALANCED = 'Micro-Mills(⚖)',
+    RELEASE_OF_INERT_GASES_REBALANCED = 'Release of Inert Gases(⚖)',
+    SNOW_ALGAE_REBALANCED = 'Snow Algae(⚖)',
+    TITAN_AIRSCRAPPING_REBALANCED = 'Titan Air-scrapping(⚖)',
+    TROPICAL_RESORT_REBALANCED = 'Tropical Resort(⚖)',
+    UNDERGROUND_CITY_REBALANCED = 'Underground City(⚖)',
+    ZEPPELINS_REBALANCED = 'Zeppelins(⚖)',
+
+    // Rebalanced standard project
     BUILD_COLONY_STANDARD_PROJECT_REBALANCED = 'Colony(⚖)',
 }

@@ -30,7 +30,7 @@ import {Smith} from './trajectoryMilestones/Smith';
 import {Collector} from './trajectoryMilestones/Collector';
 import {Setter} from './trajectoryMilestones/Setter';
 import {Sapling} from './trajectoryMilestones/Sapling';
-import {Tropicalist} from './trajectoryMilestones/tropicalist';
+// import {Tropicalist} from './trajectoryMilestones/Tropicalist';
 // import {Terran} from './trajectoryMilestones/Terran';
 // import {Colonizer} from './trajectoryMilestones/Colonizer';
 
@@ -83,7 +83,7 @@ export const TRAJECTORY_MILESTONES: Array<IMilestone> = [
   new Collector(),
   new Setter(),
   new Sapling(),
-  new Tropicalist(),
+  // new Tropicalist(),
   // new Terran(),
 ];
 

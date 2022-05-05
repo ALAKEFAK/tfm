@@ -22,18 +22,18 @@ export class StratopolisRebalanced extends Card implements IActionCard, IResourc
       cost: 20,
       resourceType: ResourceType.FLOATER,
 
-      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 1)),
+      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 2)),
       metadata: {
         cardNumber: '248',
         renderData: CardRenderer.builder((b) => {
           b.action('Add 2 floaters to ANY VENUS CARD.', (eb) => {
             eb.empty().startAction.floaters(2).secondaryTag(Tags.VENUS);
           }).br;
-          b.production((pb) => pb.megacredits(3)).city().asterix();
+          b.production((pb) => pb.megacredits(2)).city().asterix();
           b.vpText('1 VP for every 2nd Floater on this card.');
         }),
         description: {
-          text: 'Requires 1 science tag. Increase your M€ production 3 steps. Place a City tile ON THE RESERVED AREA',
+          text: 'Requires 2 science tag. Increase your M€ production 2 steps. Place a City tile ON THE RESERVED AREA',
           align: 'left',
         },
         victoryPoints: CardRenderDynamicVictoryPoints.floaters(1, 2),
@@ -43,7 +43,7 @@ export class StratopolisRebalanced extends Card implements IActionCard, IResourc
   public resourceCount: number = 0;
 
   public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, 3);
+    player.addProduction(Resources.MEGACREDITS, 2);
     player.game.addCityTile(player, SpaceName.STRATOPOLIS, SpaceType.COLONY);
     return undefined;
   }
