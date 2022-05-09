@@ -406,6 +406,8 @@ export class Game implements ISerializable<SerializedGame> {
       game.log('The id of this game is ${0}', (b) => b.rawString(id));
     }
 
+    LogHelper.logPlayerOrder(game, players);
+
     players.forEach((player) => {
       game.log('Good luck', () => {}, {reservedFor: player});
     });

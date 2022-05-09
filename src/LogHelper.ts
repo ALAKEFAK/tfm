@@ -173,4 +173,16 @@ export class LogHelper {
       b.string(target);
     }, {reservedFor: player});
   }
+
+  static logPlayerOrder(game: Game, players: Player[]) {
+    let message = 'Player order: ';
+    console.log(players[0].name, players[1].name);
+    for (let i = 0; i < players.length; i++) {
+      if (i > 0) {
+        message += ', ';
+      }
+      message += players[i].name;
+    }
+    game.log(message);
+  }
 }
