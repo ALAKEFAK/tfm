@@ -80,7 +80,8 @@ export type GameId = string;
 export type SpectatorId = string;
 
 export interface Score {
-  color: String
+  name?: String;
+  color: String;
   corporation: String;
   dealtCorporationCards: Array<String>;
   preludes: Array<String>;
@@ -407,6 +408,8 @@ export class Game implements ISerializable<SerializedGame> {
     }
 
     LogHelper.logPlayerOrder(game, players);
+    LogHelper.logMsAs(game);
+    LogHelper.logColonies(game);
 
     players.forEach((player) => {
       game.log('Good luck', () => {}, {reservedFor: player});
@@ -1113,6 +1116,7 @@ export class Game implements ISerializable<SerializedGame> {
         corponame = player.corporationCard.name;
       }
       scores.push({
+        name: player.name,
         color: player.color,
         corporation: corponame,
         dealtCorporationCards: player.dealtCorporationCards.map((corp) => corp.name),

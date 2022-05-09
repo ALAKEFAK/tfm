@@ -176,12 +176,41 @@ export class LogHelper {
 
   static logPlayerOrder(game: Game, players: Player[]) {
     let message = 'Player order: ';
-    console.log(players[0].name, players[1].name);
     for (let i = 0; i < players.length; i++) {
       if (i > 0) {
         message += ', ';
       }
       message += players[i].name;
+    }
+    game.log(message);
+  }
+
+  static logMsAs(game: Game) {
+    let messageMs = 'Milestones: ';
+    for (let i = 0; i < game.milestones.length; i++) {
+      if (i > 0) {
+        messageMs += ', ';
+      }
+      messageMs += game.milestones[i].name;
+    }
+    let messageAs = 'Awards: ';
+    for (let i = 0; i < game.awards.length; i++) {
+      if (i > 0) {
+        messageAs += ', ';
+      }
+      messageAs += game.awards[i].name;
+    }
+    game.log(messageMs);
+    game.log(messageAs);
+  }
+
+  static logColonies(game: Game) {
+    let message = 'Colonies: ';
+    for (let i = 0; i < game.colonies.length; i++) {
+      if (i > 0) {
+        message += ', ';
+      }
+      message += game.colonies[i].name;
     }
     game.log(message);
   }
