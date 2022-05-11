@@ -6,6 +6,7 @@ import {ISpace} from './boards/ISpace';
 import {TileType} from './TileType';
 import {Colony} from './colonies/Colony';
 import {LogType} from './deferredActions/DrawCards';
+import {SpaceBonus} from './SpaceBonus';
 
 export class LogHelper {
   static logAddResource(player: Player, card: ICard, qty: number = 1): void {
@@ -213,5 +214,17 @@ export class LogHelper {
       message += game.colonies[i].name;
     }
     game.log(message);
+  }
+
+  static logBoard(game: Game) {
+    game.log('Board');
+    for (let i = 0; i < game.board.spaces.length; i++) {
+      if (game.board.spaces[i].spaceType === 'colony') continue;
+      if (game.board.spaces[i].bonus.length > 0) {
+        game.log(`Id: ${game.board.spaces[i].id}, Type: ${game.board.spaces[i].spaceType}, Bonus: ${game.board.spaces[i].bonus.map((key) => SpaceBonus[key]).toString()}`);
+      } else {
+        game.log(`Id: ${game.board.spaces[i].id}, Type: ${game.board.spaces[i].spaceType}`);
+      }
+    }
   }
 }

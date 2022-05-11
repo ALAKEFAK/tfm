@@ -410,6 +410,7 @@ export class Game implements ISerializable<SerializedGame> {
     LogHelper.logPlayerOrder(game, players);
     LogHelper.logMsAs(game);
     LogHelper.logColonies(game);
+    LogHelper.logBoard(game);
 
     players.forEach((player) => {
       game.log('Good luck', () => {}, {reservedFor: player});
@@ -1125,6 +1126,9 @@ export class Game implements ISerializable<SerializedGame> {
         playerScore: vpb.total,
       });
     });
+
+    // this.log('Final scores:');
+    // TODO
 
     const usedColonies = this.colonies.map((colony) => colony.name);
     const claimedMilestones = this.claimedMilestones.map((milestone) => milestone.milestone.name);
