@@ -409,7 +409,15 @@ export class Game implements ISerializable<SerializedGame> {
 
     LogHelper.logPlayerOrder(game, players);
     LogHelper.logMsAs(game);
-    LogHelper.logColonies(game);
+
+    if (game.gameOptions.coloniesExtension) {
+      LogHelper.logColonies(game);
+    }
+
+    if (game.gameOptions.turmoilExtension) {
+      LogHelper.logKnownEvents(game, 3);
+    }
+
     LogHelper.logBoard(game);
 
     players.forEach((player) => {
@@ -884,6 +892,7 @@ export class Game implements ISerializable<SerializedGame> {
   private goToDraftOrResearch() {
     this.generation++;
     this.log('Generation ${0}', (b) => b.forNewGeneration().number(this.generation));
+    LogHelper.logKnownEvents(this, 3);
     this.incrementFirstPlayer();
 
     this.players.forEach((player) => {

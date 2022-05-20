@@ -7,6 +7,7 @@ import {TileType} from './TileType';
 import {Colony} from './colonies/Colony';
 import {LogType} from './deferredActions/DrawCards';
 import {SpaceBonus} from './SpaceBonus';
+import {IGlobalEvent} from './turmoil/globalEvents/IGlobalEvent';
 
 export class LogHelper {
   static logAddResource(player: Player, card: ICard, qty: number = 1): void {
@@ -214,6 +215,30 @@ export class LogHelper {
       message += game.colonies[i].name;
     }
     game.log(message);
+  }
+
+  private static createEventMessage(event: IGlobalEvent | undefined): string {
+    if (typeof(event) !== 'undefined' && event !== null) {
+      let message = 'Name: ' + event.name;
+      message += ', Description: ' + event.description;
+      message += ', Top: ' + event.revealedDelegate;
+      message += ', Bottom: ' + event.currentDelegate;
+      return message;
+    } else {
+      return 'None';
+    }
+  }
+
+  static logKnownEvents(game: Game, FutureEventsShown: number) {
+    game.log('EventQueue: ');
+    game.log('Current: ' + LogHelper.createEventMessage(game.turmoil?.currentGlobalEvent));
+    game.log('Coming: ' + LogHelper.createEventMessage(game.turmoil?.comingGlobalEvent));
+    game.log('Distant: ' + LogHelper.createEventMessage(game.turmoil?.distantGlobalEvent));
+
+    for (let j = 1; j <= FutureEventsShown; j++) {
+      const event = game.turmoil?.globalEventDealer.globalEventsDeck[game.turmoil?.globalEventDealer.globalEventsDeck.length - j];
+      game.log('Distant (+' + j + '): ' + LogHelper.createEventMessage(event));
+    }
   }
 
   static logBoard(game: Game) {
