@@ -1139,20 +1139,10 @@ export class Game implements ISerializable<SerializedGame> {
     });
 
     this.log('Final scores:');
+    // TODO: Order players by score
+
     this.players.forEach((player) => {
-      const vpb = player.getVictoryPoints();
-      this.log(`Player: ${player.name}, \
-                        TR: ${vpb.terraformRating}, \
-                        MS: ${vpb.milestones}, \
-                        AW: ${vpb.awards}, \
-                        Greenery: ${vpb.greenery}, \
-                        City: ${vpb.city}, \
-                        VP: ${vpb.victoryPoints}, \
-                        EV: ${vpb.escapeVelocity}, \
-                        Total: ${vpb.total}, \
-                        MC: ${player.megaCredits}, \
-                        Time: ${player.timer.getElapsedTimeInMinute()}, \
-                        Actions: ${player.actionsTakenThisGame}`);
+      LogHelper.logFinalScore(this, player);
     });
 
     const usedColonies = this.colonies.map((colony) => colony.name);

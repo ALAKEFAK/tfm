@@ -219,10 +219,9 @@ export class LogHelper {
 
   private static createEventMessage(event: IGlobalEvent | undefined): string {
     if (typeof(event) !== 'undefined' && event !== null) {
-      let message = 'Name: ' + event.name;
-      message += ', Description: ' + event.description;
-      message += ', Top: ' + event.revealedDelegate;
-      message += ', Bottom: ' + event.currentDelegate;
+      let message = event.name + ', Desc: ' + event.description;
+      message += ', ' + event.revealedDelegate;
+      message += ' / ' + event.currentDelegate;
       return message;
     } else {
       return 'None';
@@ -231,13 +230,13 @@ export class LogHelper {
 
   static logKnownEvents(game: Game, FutureEventsShown: number) {
     game.log('EventQueue: ');
-    game.log('Current: ' + LogHelper.createEventMessage(game.turmoil?.currentGlobalEvent));
-    game.log('Coming: ' + LogHelper.createEventMessage(game.turmoil?.comingGlobalEvent));
-    game.log('Distant: ' + LogHelper.createEventMessage(game.turmoil?.distantGlobalEvent));
+    game.log('Cu: ' + LogHelper.createEventMessage(game.turmoil?.currentGlobalEvent));
+    game.log('Co: ' + LogHelper.createEventMessage(game.turmoil?.comingGlobalEvent));
+    game.log('D: ' + LogHelper.createEventMessage(game.turmoil?.distantGlobalEvent));
 
     for (let j = 1; j <= FutureEventsShown; j++) {
       const event = game.turmoil?.globalEventDealer.globalEventsDeck[game.turmoil?.globalEventDealer.globalEventsDeck.length - j];
-      game.log('Distant (+' + j + '): ' + LogHelper.createEventMessage(event));
+      game.log('D+' + j + ': ' + LogHelper.createEventMessage(event));
     }
   }
 
@@ -251,5 +250,21 @@ export class LogHelper {
         game.log(`Id: ${game.board.spaces[i].id}, Type: ${game.board.spaces[i].spaceType}`);
       }
     }
+  }
+
+  static logFinalScore(game: Game, player: Player) {
+    const vpb = player.getVictoryPoints();
+    game.log(`Player: ${player.name}, \
+                        TR: ${vpb.terraformRating}, \
+                        MS: ${vpb.milestones}, \
+                        AW: ${vpb.awards}, \
+                        Greenery: ${vpb.greenery}, \
+                        City: ${vpb.city}, \
+                        VP: ${vpb.victoryPoints}, \
+                        EV: ${vpb.escapeVelocity}, \
+                        Total: ${vpb.total}, \
+                        MC: ${player.megaCredits}, \
+                        Time: ${player.timer.getElapsedTimeInMinute()}, \
+                        Actions: ${player.actionsTakenThisGame}`);
   }
 }
