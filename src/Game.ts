@@ -407,6 +407,7 @@ export class Game implements ISerializable<SerializedGame> {
       game.log('The id of this game is ${0}', (b) => b.rawString(id));
     }
 
+    game.log('Board: ' + gameOptions.boardName);
     LogHelper.logPlayerOrder(game, players);
     LogHelper.logMsAs(game);
 
