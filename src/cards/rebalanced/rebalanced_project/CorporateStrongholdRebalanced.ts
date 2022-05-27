@@ -49,6 +49,6 @@ export class CorporateStrongholdRebalanced extends Card implements IProjectCard 
     );
   }
   public getVictoryPoints() {
-    return -2;
+    return -1;
   }
 }
