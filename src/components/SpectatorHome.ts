@@ -72,7 +72,7 @@ export const SpectatorHome = Vue.component('spectator-home', {
     },
   },
   mounted() {
-    ui_update_timeout_id = window.setInterval(this.forceRerender, 5000);
+    ui_update_timeout_id = window.setInterval(this.forceRerender, 2000);
   },
   beforeDestroy() {
     window.clearInterval(ui_update_timeout_id);
