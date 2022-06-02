@@ -6,6 +6,8 @@ import {ISpace} from './boards/ISpace';
 import {TileType} from './TileType';
 import {Colony} from './colonies/Colony';
 import {LogType} from './deferredActions/DrawCards';
+import {SpaceBonus} from './SpaceBonus';
+import {IGlobalEvent} from './turmoil/globalEvents/IGlobalEvent';
 
 export class LogHelper {
   static logAddResource(player: Player, card: ICard, qty: number = 1): void {
@@ -172,5 +174,97 @@ export class LogHelper {
       // Target
       b.string(target);
     }, {reservedFor: player});
+  }
+
+  static logPlayerOrder(game: Game, players: Player[]) {
+    let message = 'Player order: ';
+    for (let i = 0; i < players.length; i++) {
+      if (i > 0) {
+        message += ', ';
+      }
+      message += players[i].name;
+    }
+    game.log(message);
+  }
+
+  static logMsAs(game: Game) {
+    let messageMs = 'Milestones: ';
+    for (let i = 0; i < game.milestones.length; i++) {
+      if (i > 0) {
+        messageMs += ', ';
+      }
+      messageMs += game.milestones[i].name;
+    }
+    let messageAs = 'Awards: ';
+    for (let i = 0; i < game.awards.length; i++) {
+      if (i > 0) {
+        messageAs += ', ';
+      }
+      messageAs += game.awards[i].name;
+    }
+    game.log(messageMs);
+    game.log(messageAs);
+  }
+
+  static logColonies(game: Game) {
+    let message = 'Colonies: ';
+    for (let i = 0; i < game.colonies.length; i++) {
+      if (i > 0) {
+        message += ', ';
+      }
+      message += game.colonies[i].name;
+    }
+    game.log(message);
+  }
+
+  private static createEventMessage(event: IGlobalEvent | undefined): string {
+    if (typeof(event) !== 'undefined' && event !== null) {
+      let message = event.name + ', Desc: ' + event.description;
+      message += ', ' + event.revealedDelegate;
+      message += ' / ' + event.currentDelegate;
+      return message;
+    } else {
+      return 'None';
+    }
+  }
+
+  static logKnownEvents(game: Game, FutureEventsShown: number) {
+    game.log('EventQueue: ');
+    game.log('Cu: ' + LogHelper.createEventMessage(game.turmoil?.currentGlobalEvent));
+    game.log('Co: ' + LogHelper.createEventMessage(game.turmoil?.comingGlobalEvent));
+    game.log('D: ' + LogHelper.createEventMessage(game.turmoil?.distantGlobalEvent));
+
+    for (let j = 1; j <= FutureEventsShown; j++) {
+      const event = game.turmoil?.globalEventDealer.globalEventsDeck[game.turmoil?.globalEventDealer.globalEventsDeck.length - j];
+      game.log('D+' + j + ': ' + LogHelper.createEventMessage(event));
+    }
+  }
+
+  static logBoard(game: Game) {
+    game.log('Board');
+    for (let i = 0; i < game.board.spaces.length; i++) {
+      if (game.board.spaces[i].spaceType === 'colony') continue;
+      if (game.board.spaces[i].bonus.length > 0) {
+        game.log(`Id: ${game.board.spaces[i].id}, Type: ${game.board.spaces[i].spaceType}, Bonus: ${game.board.spaces[i].bonus.map((key) => SpaceBonus[key]).toString()}`);
+      } else {
+        game.log(`Id: ${game.board.spaces[i].id}, Type: ${game.board.spaces[i].spaceType}`);
+      }
+    }
+  }
+
+  static logFinalScore(game: Game, player: Player) {
+    const vpb = player.getVictoryPoints();
+    game.log(`Player: ${player.name}, \
+                        TR: ${vpb.terraformRating}, \
+                        MS: ${vpb.milestones}, \
+                        AW: ${vpb.awards}, \
+                        Greenery: ${vpb.greenery}, \
+                        City: ${vpb.city}, \
+                        VP: ${vpb.victoryPoints}, \
+                        EV: ${vpb.escapeVelocity}, \
+                        Total: ${vpb.total}, \
+                        MC: ${player.megaCredits}, \
+                        Time: ${player.timer.getElapsedTimeInMinute()}, \
+                        Actions: ${player.actionsTakenThisGame}`);
   }
 }

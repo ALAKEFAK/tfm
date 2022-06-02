@@ -68,49 +68,82 @@ import {IoResearchOutpostRebalanced} from './rebalanced_prelude/IoResearchOutpos
 import {AsteroidHollowingRebalanced} from './rebalanced_project/AsteroidHollowingRebalanced';
 import {JetStreamMicroscrappersRebalanced} from './rebalanced_project/JetStreamMicroscrappersRebalanced';
 
+import {AdaptedLichenRebalanced} from './rebalanced_project/AdaptedLichenRebalanced';
+import {BlackPolarDustRebalanced} from './rebalanced_project/BlackPolarDustRebalanced';
+import {CloudSeedingRebalanced} from './rebalanced_project/CloudSeedingRebalanced';
+import {CommunityServicesRebalanced} from './rebalanced_project/CommunityServicesRebalanced';
+import {CorporateStrongholdRebalanced} from './rebalanced_project/CorporateStrongholdRebalanced';
+import {DesignedMicroOrganismsRebalanced} from './rebalanced_project/DesignedMicroOrganismsRebalanced';
+import {EnergySavingRebalanced} from './rebalanced_project/EnergySavingRebalanced';
+import {IndustrialCenterRebalanced} from './rebalanced_project/IndustrialCenterRebalanced';
+import {MartianRailsRebalanced} from './rebalanced_project/MartianRailsRebalanced';
+import {MicroMillsRebalanced} from './rebalanced_project/MicroMillsRebalanced';
+import {ReleaseOfInertGasesRebalanced} from './rebalanced_project/ReleaseOfInertGasesRebalanced';
+import {SnowAlgaeRebalanced} from './rebalanced_project/SnowAlgaeRebalanced';
+import {TitanAirScrappingRebalanced} from './rebalanced_project/TitanAirScrappingRebalanced';
+import {TropicalResortRebalanced} from './rebalanced_project/TropicalResortRebalanced';
+import {UndergroundCityRebalanced} from './rebalanced_project/UndergroundCityRebalanced';
+import {ZeppelinsRebalanced} from './rebalanced_project/ZeppelinsRebalanced';
+
 export const REBALANCED_CARD_MANIFEST = new CardManifest({
   module: GameModule.Rebalanced,
   projectCards: [
+    {cardName: CardName.ADAPTED_LICHEN_REBALANCED, Factory: AdaptedLichenRebalanced},
     {cardName: CardName.AEROBRAKED_AMMONIA_ASTEROID_REBALANCED, Factory: AerobrakedAmmoniaAsteroidRebalanced},
-    {cardName: CardName.ASTEROID_HOLLOWING_REBALANCED, Factory: AsteroidHollowingRebalanced},
-    {cardName: CardName.BACTOVIRAL_RESEARCH_REBALANCED, Factory: BactoviralResearchRebalanced},
+    {cardName: CardName.ASTEROID_HOLLOWING_REBALANCED, Factory: AsteroidHollowingRebalanced, compatibility: GameModule.Promo},
+    {cardName: CardName.BACTOVIRAL_RESEARCH_REBALANCED, Factory: BactoviralResearchRebalanced, compatibility: GameModule.Promo},
+    {cardName: CardName.BLACK_POLAR_DUST_REBALANCED, Factory: BlackPolarDustRebalanced},
+    {cardName: CardName.CLOUD_SEEDING_REBALANCED, Factory: CloudSeedingRebalanced},
+    {cardName: CardName.COMMUNITY_SERVICES_REBALANCED, Factory: CommunityServicesRebalanced, compatibility: GameModule.Colonies},
+    {cardName: CardName.CORPORATE_STRONGHOLD_REBALANCED, Factory: CorporateStrongholdRebalanced},
+    {cardName: CardName.DESIGNED_MICRO_ORGANISMS_REBALANCED, Factory: DesignedMicroOrganismsRebalanced},
     {cardName: CardName.EARTH_CATAPULT_REBALANCED, Factory: EarthCatapultRebalanced},
+    {cardName: CardName.ENERGY_SAVING_REBALANCED, Factory: EnergySavingRebalanced},
     {cardName: CardName.EXTRACTOR_BALLOONS_REBALANCED, Factory: ExtractorBalloonsRebalanced, compatibility: GameModule.Venus},
     {cardName: CardName.FORCED_PRECIPITATION_REBALANCED, Factory: ForcedPrecipitationRebalanced, compatibility: GameModule.Venus},
     {cardName: CardName.GHG_IMPORT_FROM_VENUS_REBALANCED, Factory: GHGImportFromVenusRebalanced, compatibility: GameModule.Venus},
     {cardName: CardName.GMO_CONTRACT_REBALANCED, Factory: GMOContractRebalanced, compatibility: GameModule.Turmoil},
+    {cardName: CardName.INDUSTRIAL_CENTER_REBALANCED, Factory: IndustrialCenterRebalanced},
     {cardName: CardName.JET_STREAM_MICROSCRAPPERS_REBALANCED, Factory: JetStreamMicroscrappersRebalanced, compatibility: GameModule.Venus},
     {cardName: CardName.MARS_UNIVERSITY_REBALANCED, Factory: MarsUniversityRebalanced},
-    {cardName: CardName.ORBITAL_CLEANUP_REBALANCED, Factory: OrbitalCleanupRebalanced},
+    {cardName: CardName.MARTIAN_RAILS_REBALANCED, Factory: MartianRailsRebalanced},
+    {cardName: CardName.MICRO_MILLS_REBALANCED, Factory: MicroMillsRebalanced},
+    {cardName: CardName.ORBITAL_CLEANUP_REBALANCED, Factory: OrbitalCleanupRebalanced, compatibility: GameModule.Promo},
+    {cardName: CardName.RELEASE_OF_INERT_GASES_REBALANCED, Factory: ReleaseOfInertGasesRebalanced},
+    {cardName: CardName.SNOW_ALGAE_REBALANCED, Factory: SnowAlgaeRebalanced, compatibility: GameModule.Promo},
     {cardName: CardName.SPINOFF_DEPARTMENT_REBALANCED, Factory: SpinoffDepartmentRebalanced},
     {cardName: CardName.STRATOPOLIS_REBALANCED, Factory: StratopolisRebalanced, compatibility: GameModule.Venus},
+    {cardName: CardName.TITAN_AIRSCRAPPING_REBALANCED, Factory: TitanAirScrappingRebalanced, compatibility: GameModule.Colonies},
     {cardName: CardName.TOLL_STATION_REBALANCED, Factory: TollStationRebalanced},
+    {cardName: CardName.TROPICAL_RESORT_REBALANCED, Factory: TropicalResortRebalanced},
+    {cardName: CardName.UNDERGROUND_CITY_REBALANCED, Factory: UndergroundCityRebalanced},
     {cardName: CardName.UNDERGROUND_DETONATIONS_REBALANCED, Factory: UndergroundDetonationsRebalanced},
+    {cardName: CardName.ZEPPELINS_REBALANCED, Factory: ZeppelinsRebalanced},
   ],
   corporationCards: [
     {cardName: CardName.APHRODITE_REBALANCED, Factory: AphroditeRebalanced, compatibility: GameModule.Venus},
-    {cardName: CardName.ARCADIAN_COMMUNITIES_REBALANCED, Factory: ArcadianCommunitiesRebalanced},
+    {cardName: CardName.ARCADIAN_COMMUNITIES_REBALANCED, Factory: ArcadianCommunitiesRebalanced, compatibility: GameModule.Promo},
     {cardName: CardName.ARIDOR_REBALANCED, Factory: AridorRebalanced, compatibility: GameModule.Colonies},
     {cardName: CardName.ARKLIGHT_REBALANCED, Factory: ArklightRebalanced},
-    {cardName: CardName.ASTRODRILL_REBALANCED, Factory: AstrodrillRebalanced},
+    {cardName: CardName.ASTRODRILL_REBALANCED, Factory: AstrodrillRebalanced, compatibility: GameModule.Promo},
     {cardName: CardName.CELESTIC_REBALANCED, Factory: CelesticRebalanced, compatibility: GameModule.Venus},
     {cardName: CardName.CHEUNG_SHING_MARS_REBALANCED, Factory: CheungShingMARSRebalanced},
     {cardName: CardName.ECOLINE_REBALANCED, Factory: EcoLineRebalanced},
-    {cardName: CardName.FACTORUM_REBALANCED, Factory: FactorumRebalanced},
+    {cardName: CardName.FACTORUM_REBALANCED, Factory: FactorumRebalanced, compatibility: GameModule.Promo},
     {cardName: CardName.HELION_REBALANCED, Factory: HelionRebalanced},
     {cardName: CardName.INTERPLANETARY_CINEMATICS_REBALANCED, Factory: InterplanetaryCinematicsRebalanced},
     {cardName: CardName.INVENTRIX_REBALANCED, Factory: InventrixRebalanced},
     {cardName: CardName.MINING_GUILD_REBALANCED, Factory: MiningGuildRebalanced},
-    {cardName: CardName.MONS_INSURANCE_REBALANCED, Factory: MonsInsuranceRebalanced},
+    {cardName: CardName.MONS_INSURANCE_REBALANCED, Factory: MonsInsuranceRebalanced, compatibility: GameModule.Promo},
     {cardName: CardName.MORNING_STAR_INC_REBALANCED, Factory: MorningStarIncRebalanced, compatibility: GameModule.Venus},
     {cardName: CardName.PHOBOLOG_REBALANCED, Factory: PhoboLogRebalanced},
     {cardName: CardName.POINT_LUNA_REBALANCED, Factory: PointLunaRebalanced},
     {cardName: CardName.POLYPHEMOS_REBALANCED, Factory: PolyphemosRebalanced},
     {cardName: CardName.POSEIDON_REBALANCED, Factory: PoseidonRebalanced, compatibility: GameModule.Colonies},
     {cardName: CardName.PRISTAR_REBALANCED, Factory: PristarRebalanced},
-    {cardName: CardName.RECYCLON_REBALANCED, Factory: RecyclonRebalanced},
+    {cardName: CardName.RECYCLON_REBALANCED, Factory: RecyclonRebalanced, compatibility: GameModule.Promo},
     {cardName: CardName.ROBINSON_INDUSTRIES_REBALANCED, Factory: RobinsonIndustriesRebalanced},
-    {cardName: CardName.SPLICE_REBALANCED, Factory: SpliceRebalanced},
+    {cardName: CardName.SPLICE_REBALANCED, Factory: SpliceRebalanced, compatibility: GameModule.Promo},
     {cardName: CardName.STORMCRAFT_INCORPORATED_REBALANCED, Factory: StormCraftIncorporatedRebalanced},
     {cardName: CardName.TERRALABS_RESEARCH_REBALANCED, Factory: TerralabsResearchRebalanced},
     {cardName: CardName.THARSIS_REPUBLIC_REBALANCED, Factory: TharsisRepublicRebalanced},
@@ -146,21 +179,37 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
   ],
   cardsToRemove: [
     // projects
+    CardName.ADAPTED_LICHEN,
     CardName.AEROBRAKED_AMMONIA_ASTEROID,
     CardName.ASTEROID_HOLLOWING,
     CardName.BACTOVIRAL_RESEARCH,
+    CardName.BLACK_POLAR_DUST,
+    CardName.CLOUD_SEEDING,
+    CardName.COMMUNITY_SERVICES,
+    CardName.CORPORATE_STRONGHOLD,
+    CardName.DESIGNED_MICRO_ORGANISMS,
     CardName.EARTH_CATAPULT,
+    CardName.ENERGY_SAVING,
     CardName.EXTRACTOR_BALLOONS,
     CardName.FORCED_PRECIPITATION,
     CardName.GHG_IMPORT_FROM_VENUS,
     CardName.GMO_CONTRACT,
+    CardName.INDUSTRIAL_CENTER,
     CardName.JET_STREAM_MICROSCRAPPERS,
     CardName.MARS_UNIVERSITY,
+    CardName.MARTIAN_RAILS,
+    CardName.MICRO_MILLS,
     CardName.ORBITAL_CLEANUP,
+    CardName.RELEASE_OF_INERT_GASES,
+    CardName.SNOW_ALGAE,
     CardName.SPINOFF_DEPARTMENT,
     CardName.STRATOPOLIS,
+    CardName.TITAN_AIRSCRAPPING,
     CardName.TOLL_STATION,
+    CardName.TROPICAL_RESORT,
+    CardName.UNDERGROUND_CITY,
     CardName.UNDERGROUND_DETONATIONS,
+    CardName.ZEPPELINS,
     // corporations
     CardName.APHRODITE,
     CardName.ARCADIAN_COMMUNITIES,

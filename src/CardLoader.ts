@@ -47,12 +47,14 @@ export class CardLoader {
     const expansions: Array<GameModule> = Array.isArray(cf.compatibility) ? cf.compatibility : [cf.compatibility];
     return expansions.every((expansion) => {
       switch (expansion) {
-      case GameModule.Venus:
-        return gameOptions.venusNextExtension;
       case GameModule.Colonies:
         return gameOptions.coloniesExtension;
+      case GameModule.Promo:
+        return gameOptions.promoCardsOption;
       case GameModule.Turmoil:
         return gameOptions.turmoilExtension;
+      case GameModule.Venus:
+        return gameOptions.venusNextExtension;
       default:
         throw new Error(`Unhandled expansion type ${expansion} for card ${cf.cardName}`);
       }

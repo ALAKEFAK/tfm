@@ -13,7 +13,7 @@ export class ThorgateRebalanced extends Card implements CorporationCard {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.THORGATE_REBALANCED,
-      tags: [Tags.ENERGY],
+      tags: [Tags.SCIENCE, Tags.ENERGY],
       startingMegaCredits: 48,
 
       cardDiscount: {tag: Tags.ENERGY, amount: 3},
