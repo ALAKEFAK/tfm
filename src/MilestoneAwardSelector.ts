@@ -353,7 +353,6 @@ export namespace MilestoneAwardSelector {
       bind(Colonizer, Collector, 1);
 
       bind(Setter, Tycoon, 6);
-      bind(Setter, Legend, 6);
       bind(Setter, Tactician, 2);
       bind(Setter, Magnate, 2);
 
