@@ -63,5 +63,7 @@ export interface SerializedGame {
     unDraftedCards: Array<[PlayerId, Array<CardName>]>;
     venusRecord: Array<number>;
     venusScaleLevel: number;
+    corporationDraftToNext: boolean;
+    corporationsToDraft: Array<CardName>;
 }
 

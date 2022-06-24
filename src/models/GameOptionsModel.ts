@@ -12,6 +12,7 @@ export interface GameOptionsModel {
   communityCardsOption: boolean,
   corporateEra: boolean,
   draftVariant: boolean,
+  corporationsDraft: boolean,
   fastModeOption: boolean,
   includeVenusMA: boolean,
   initialDraftVariant: boolean,

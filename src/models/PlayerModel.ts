@@ -21,6 +21,7 @@ export interface PublicPlayerModel {
   dealtCorporationCards: Array<CardModel>;
   dealtPreludeCards: Array<CardModel>;
   dealtProjectCards: Array<CardModel>;
+  draftedCorporations: Array<CardModel>;
   draftedCards: Array<CardModel>;
   endGenerationScores: Array<number>;
   energy: number;

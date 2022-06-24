@@ -9,6 +9,7 @@ import {SpaceModel} from './SpaceModel';
 import {IAresData} from '../ares/IAresData';
 import {MoonModel} from './MoonModel';
 import {PartyName} from '../turmoil/parties/PartyName';
+import {CardModel} from './CardModel';
 
 // Common data about a game not assocaited with a player (eg the temperature.)
 export interface GameModel {
@@ -39,4 +40,5 @@ export interface GameModel {
   undoCount: number;
   venusRecord: Array<number>;
   venusScaleLevel: number;
+  corporationsToDraft: Array<CardModel>;
 }

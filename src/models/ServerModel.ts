@@ -92,6 +92,7 @@ export class Server {
       undoCount: game.undoCount,
       venusRecord: game.venusRecord,
       venusScaleLevel: game.getVenusScaleLevel(),
+      corporationsToDraft: this.getCards(game.getPlayers()[0], game.corporationsToDraft),
     };
   }
 
@@ -115,6 +116,7 @@ export class Server {
       dealtCorporationCards: this.getCards(player, player.dealtCorporationCards),
       dealtPreludeCards: this.getCards(player, player.dealtPreludeCards),
       dealtProjectCards: this.getCards(player, player.dealtProjectCards),
+      draftedCorporations: this.getCards(player, player.draftedCorporations),
       draftedCards: this.getCards(player, player.draftedCards, {showNewCost: true}),
       // TODO: remove ?? [] later
       endGenerationScores: player.endGenerationScores ?? [],
@@ -469,6 +471,7 @@ export class Server {
         dealtCorporationCards: [],
         dealtPreludeCards: [],
         dealtProjectCards: [],
+        draftedCorporations: [],
         draftedCards: [],
         pickedCorporationCard: [],
         players: [],
@@ -567,6 +570,7 @@ export class Server {
       communityCardsOption: options.communityCardsOption,
       corporateEra: options.corporateEra,
       draftVariant: options.draftVariant,
+      corporationsDraft: options.corporationsDraft,
       fastModeOption: options.fastModeOption,
       includeVenusMA: options.includeVenusMA,
       initialDraftVariant: options.initialDraftVariant,

@@ -112,6 +112,7 @@ function simpleGameOptions(): GameOptions {
     solarPhaseOption: false,
     removeNegativeGlobalEventsOption: false,
     draftVariant: false,
+    corporationsDraft: false,
     initialDraftVariant: false,
     startingCorporations: 0,
     shuffleTileOption: ShuffleTileOptionType.NONE,

@@ -29,6 +29,7 @@ export interface CreateGameModel {
     prelude: boolean;
     draftVariant: boolean;
     initialDraft: boolean;
+    corporationsDraft: boolean;
     randomMA: RandomMAOptionType;
     randomFirstPlayer: boolean;
     showOtherPlayersVP: boolean;
@@ -102,6 +103,7 @@ const defaultGameSetting: CreateGameModel = {
   prelude: false,
   draftVariant: true,
   initialDraft: false,
+  corporationsDraft: false,
   randomMA: RandomMAOptionType.NONE,
   randomFirstPlayer: true,
   showOtherPlayersVP: false,
@@ -483,6 +485,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       const prelude = component.prelude;
       const draftVariant = component.draftVariant;
       const initialDraft = component.initialDraft;
+      const corporationsDraft = component.corporationsDraft;
       const randomMA = component.randomMA;
       const showOtherPlayersVP = component.showOtherPlayersVP;
       const venusNext = component.venusNext;
@@ -588,6 +591,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
         soloTR,
         clonedGamedId,
         initialDraft,
+        corporationsDraft,
         randomMA,
         shuffleTileOption,
         beginnerOption,
@@ -987,6 +991,10 @@ export const CreateGameForm = Vue.component('create-game-form', {
                             <div class="create-game-subsection-label" v-i18n>
                             </div>
 
+                            <input type="checkbox" v-model="corporationsDraft" id="corporationsDraft-checkbox">
+                            <label for="corporationsDraft-checkbox">
+                                <span v-i18n>Corporations Draft</span>
+                            </label>
                             <input type="checkbox" v-model="randomFirstPlayer" id="randomFirstPlayer-checkbox">
                             <label for="randomFirstPlayer-checkbox">
                                 <span v-i18n>Random first player</span>
