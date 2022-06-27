@@ -130,6 +130,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   public preludeCardsInHand: Array<IProjectCard> = [];
   public playedCards: Array<IProjectCard> = [];
   public draftedCards: Array<IProjectCard> = [];
+  public draftedCorporations: Array<CorporationCard> = [];
   public cardCost: number = constants.CARD_COST;
   public needsToDraft: boolean | undefined = undefined;
   public cardDiscount: number = 0;
@@ -1247,6 +1248,38 @@ export class Player implements ISerializable<SerializedPlayer> {
         this.game.playerIsFinishedWithDraftingPhase(initialDraft, this, cards);
         return undefined;
       }, cardsToKeep, cardsToKeep,
+      false, undefined, false,
+      ),
+    );
+  }
+
+  /*
+   * @param playerName  The player _this_ player passes remaining cards to.
+   * @param passedCards The cards received from the draw, or from the prior player.
+   */
+  public runDraftCorporationPhase(playerName: string, passedCards: Array<CorporationCard>): void {
+    let cards: Array<CorporationCard> = passedCards;
+
+    const message = 'Select a corporation to keep and pass the rest to ${0}';
+
+    this.setWaitingFor(
+      new SelectCard({
+        message: message,
+        data: [{
+          type: LogMessageDataType.RAW_STRING,
+          value: playerName,
+        }],
+      },
+      'Keep',
+      cards,
+      (foundCards: Array<CorporationCard>) => {
+        foundCards.forEach((card) => {
+          this.draftedCorporations.push(card);
+          cards = cards.filter((c) => c !== card);
+        });
+        this.game.playerIsFinishedWithDraftingCorporationPhase(this, cards);
+        return undefined;
+      }, 1, 1,
       false, undefined, false,
       ),
     );

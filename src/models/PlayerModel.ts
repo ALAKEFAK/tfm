@@ -68,6 +68,7 @@ export interface PlayerModel extends PublicPlayerModel {
   dealtPreludeCards: Array<CardModel>;
   dealtProjectCards: Array<CardModel>;
   draftedCards: Array<CardModel>;
+  draftedCorporations: Array<CardModel>;
   game: GameModel;
   influence: number;
   pickedCorporationCard: Array<CardModel>; // Why Array?

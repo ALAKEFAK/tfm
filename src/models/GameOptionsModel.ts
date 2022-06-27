@@ -11,6 +11,7 @@ export interface GameOptionsModel {
   coloniesExtension: boolean,
   communityCardsOption: boolean,
   corporateEra: boolean,
+  corporationsDraft: boolean,
   draftVariant: boolean,
   fastModeOption: boolean,
   includeVenusMA: boolean,

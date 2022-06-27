@@ -9,12 +9,14 @@ import {SpaceModel} from './SpaceModel';
 import {IAresData} from '../ares/IAresData';
 import {MoonModel} from './MoonModel';
 import {PartyName} from '../turmoil/parties/PartyName';
+import {CardModel} from './CardModel';
 
 // Common data about a game not assocaited with a player (eg the temperature.)
 export interface GameModel {
   aresData: IAresData | undefined;
   awards: Array<FundedAwardModel>;
   colonies: Array<ColonyModel>;
+  corporationsToDraft: Array<CardModel>;
   deckSize: number;
   gameAge: number;
   gameOptions: GameOptionsModel;

@@ -27,6 +27,8 @@ export interface SerializedGame {
     clonedGamedId?: string;
     colonies: Array<SerializedColony>;
     colonyDealer: ColonyDealer | undefined;
+    corporationsDraftToNextPlayer: boolean;
+    corporationsToDraft: Array<CardName>;
     dealer: SerializedDealer;
     deferredActions: Array<DeferredAction>;
     donePlayers: Array<PlayerId>;

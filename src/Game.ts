@@ -118,6 +118,7 @@ export interface GameOptions {
   // Variants
   draftVariant: boolean;
   initialDraftVariant: boolean;
+  corporationsDraft: boolean;
   startingCorporations: number;
   shuffleTileOption: ShuffleTileOptionType;
   randomMA: RandomMAOptionType;
@@ -146,6 +147,7 @@ const DEFAULT_GAME_OPTIONS: GameOptions = {
   coloniesExtension: false,
   communityCardsOption: false,
   corporateEra: true,
+  corporationsDraft: false,
   customColoniesList: [],
   customCorporationsList: [],
   draftVariant: false,
@@ -219,6 +221,9 @@ export class Game implements ISerializable<SerializedGame> {
   // Used when drafting the first 10 project cards.
   private initialDraftIteration: number = 1;
   private unDraftedCards: Map<PlayerId, Array<IProjectCard>> = new Map();
+  // Used for corporation global draft: do we draft to next player or to player before
+  private corporationsDraftToNextPlayer: boolean = false;
+  public corporationsToDraft: Array<CorporationCard> = [];
 
   // Milestones and awards
   public claimedMilestones: Array<ClaimedMilestone> = [];
@@ -297,6 +302,7 @@ export class Game implements ISerializable<SerializedGame> {
     if (players.length === 1) {
       gameOptions.draftVariant = false;
       gameOptions.initialDraftVariant = false;
+      gameOptions.corporationsDraft = false;
       gameOptions.randomMA = RandomMAOptionType.NONE;
 
       players[0].setTerraformRating(14);
@@ -427,16 +433,35 @@ export class Game implements ISerializable<SerializedGame> {
     });
 
     game.log('Generation ${0}', (b) => b.forNewGeneration().number(game.generation));
-
-    // Initial Draft
-    if (gameOptions.initialDraftVariant) {
-      game.phase = Phase.INITIALDRAFTING;
-      game.runDraftRound(true);
+    // Do we draft corporations or do we start the game?
+    if (gameOptions.corporationsDraft) {
+      game.phase = Phase.CORPORATIONDRAFTING;
+      for (let i = 0; i < gameOptions.startingCorporations * players.length; i++) {
+        game.corporationsToDraft.push(corporationCards.pop()!);
+      }
+      // First player should be the last player
+      const playerStartingCorporationsDraft = game.getPlayerBefore(firstPlayer);
+      if (playerStartingCorporationsDraft !== undefined) {
+        playerStartingCorporationsDraft.runDraftCorporationPhase(playerStartingCorporationsDraft.name, game.corporationsToDraft);
+      } else {
+        // If for any reason, we don't have player before the first one.
+        firstPlayer.runDraftCorporationPhase(firstPlayer.name, game.corporationsToDraft);
+      }
     } else {
-      game.gotoInitialResearchPhase();
+      game.gotoInitialPhase();
     }
-
     return game;
+  }
+
+  // Function use to properly start the game: with project draft or with research phase
+  public gotoInitialPhase(): void {
+    // Initial Draft
+    if (this.gameOptions.initialDraftVariant) {
+      this.phase = Phase.INITIALDRAFTING;
+      this.runDraftRound(true, false);
+    } else {
+      this.gotoInitialResearchPhase();
+    }
   }
 
   public save(): void {
@@ -455,6 +480,8 @@ export class Game implements ISerializable<SerializedGame> {
       claimedMilestones: serializeClaimedMilestones(this.claimedMilestones),
       colonies: this.colonies,
       colonyDealer: this.colonyDealer,
+      corporationsDraftToNextPlayer: this.corporationsDraftToNextPlayer,
+      corporationsToDraft: this.corporationsToDraft.map((c) => c.name),
       dealer: this.dealer.serialize(),
       deferredActions: [],
       donePlayers: Array.from(this.donePlayers),
@@ -1022,6 +1049,37 @@ export class Game implements ISerializable<SerializedGame> {
     } else {
       this.gotoInitialResearchPhase();
     }
+  }
+
+  // Function use to manage corporation draft way
+  public playerIsFinishedWithDraftingCorporationPhase(player: Player, cards : Array<CorporationCard>): void {
+    // If more than 1 card are to be passed to the next player, that means we're still drafting
+    if (cards.length > 1) {
+      if (this.draftRound % this.players.length === 0) {
+        player.runDraftCorporationPhase(player.name, cards);
+        this.corporationsDraftToNextPlayer = !this.corporationsDraftToNextPlayer;
+      } else if (this.corporationsDraftToNextPlayer) {
+        this.getPlayerAfter(player)!.runDraftCorporationPhase(this.getPlayerAfter(player)!.name, cards);
+      } else {
+        this.getPlayerBefore(player)!.runDraftCorporationPhase(this.getPlayerBefore(player)!.name, cards);
+      }
+      this.draftRound++;
+      return;
+    }
+
+    // Push last card to last player depending of the way we are drafting
+    if (this.corporationsDraftToNextPlayer) {
+      this.getPlayerAfter(player)!.draftedCorporations.push(...cards);
+    } else {
+      this.getPlayerBefore(player)!.draftedCorporations.push(...cards);
+    }
+    this.players.forEach((player) => {
+      player.dealtCorporationCards = player.draftedCorporations;
+    });
+    // Reset value to guarantee no impact on eventual futur drafts (projects or preludes)
+    this.initialDraftIteration = 1;
+    this.draftRound = 1;
+    this.gotoInitialPhase();
   }
 
   private getDraftCardsFrom(player: Player): PlayerId {
@@ -1762,6 +1820,10 @@ export class Game implements ISerializable<SerializedGame> {
     d.unDraftedCards.forEach((unDraftedCard) => {
       game.unDraftedCards.set(unDraftedCard[0], cardFinder.cardsFromJSON(unDraftedCard[1]));
     });
+
+    // TODO(kberg): remove by 2022-09-01
+    game.corporationsToDraft = cardFinder.corporationCardsFromJSON(d.corporationsToDraft ?? []);
+    game.corporationsDraftToNextPlayer = d.corporationsDraftToNextPlayer ?? false;
 
     game.lastSaveId = d.lastSaveId;
     game.clonedGamedId = d.clonedGamedId;

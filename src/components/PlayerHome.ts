@@ -158,6 +158,9 @@ export const PlayerHome = Vue.component('player-home', {
     isInitialDraftingPhase(): boolean {
       return (this.player.game.phase === Phase.INITIALDRAFTING) && this.player.game.gameOptions.initialDraftVariant;
     },
+    isCorporationDraftingPhase(): boolean {
+      return (this.player.game.phase === Phase.CORPORATIONDRAFTING) && this.player.game.gameOptions.corporationsDraft;
+    },
     getToggleLabel: function(hideType: string): string {
       if (hideType === 'ACTIVE') {
         return (this.showActiveCards? '✔' : '');
@@ -358,6 +361,22 @@ export const PlayerHome = Vue.component('player-home', {
             </div>
 
             <div class="player_home_block player_home_block--setup nofloat"  v-if="!player.corporationCard">
+                <div v-if="isCorporationDraftingPhase()">
+                  <div>
+                    <dynamic-title title="Corporations To Draft" :color="player.color"/>
+                    <div v-for="card in player.game.corporationsToDraft" :key="card.name" class="cardbox">
+                      <Card :card="card"/>
+                    </div>
+                  </div>
+                  <br/>
+                  <br/>
+                  <div>
+                    <dynamic-title title="Your Picked Corporations" :color="player.color"/>
+                    <div v-for="card in player.draftedCorporations" :key="card.name" class="cardbox">
+                      <Card :card="card"/>
+                    </div>
+                  </div>
+                </div>
 
                 <div v-for="card in player.dealtCorporationCards" :key="card.name" class="cardbox" v-if="isInitialDraftingPhase()">
                     <Card :card="card"/>

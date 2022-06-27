@@ -113,6 +113,7 @@ function simpleGameOptions(): GameOptions {
     removeNegativeGlobalEventsOption: false,
     draftVariant: false,
     initialDraftVariant: false,
+    corporationsDraft: false,
     startingCorporations: 0,
     shuffleTileOption: ShuffleTileOptionType.NONE,
     soloTR: false,

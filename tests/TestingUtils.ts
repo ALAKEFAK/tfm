@@ -42,6 +42,7 @@ export class TestingUtils {
       draftVariant: false,
       initialDraftVariant: false,
       corporateEra: true,
+      corporationsDraft: false,
       randomMA: RandomMAOptionType.NONE,
       preludeExtension: false,
       venusNextExtension: true,
