@@ -1056,12 +1056,14 @@ export class Game implements ISerializable<SerializedGame> {
     // If more than 1 card are to be passed to the next player, that means we're still drafting
     if (cards.length > 1) {
       if (this.draftRound % this.players.length === 0) {
-        player.runDraftCorporationPhase(player.name, cards);
+        player.runDraftCorporationPhase(this.getPlayerAfter(player)!.name, cards);
         this.corporationsDraftToNextPlayer = !this.corporationsDraftToNextPlayer;
       } else if (this.corporationsDraftToNextPlayer) {
-        this.getPlayerAfter(player)!.runDraftCorporationPhase(this.getPlayerAfter(player)!.name, cards);
+        const nextPlayerToDraft = this.getPlayerAfter(player);
+        nextPlayerToDraft!.runDraftCorporationPhase(this.getPlayerAfter(nextPlayerToDraft!)!.name, cards);
       } else {
-        this.getPlayerBefore(player)!.runDraftCorporationPhase(this.getPlayerBefore(player)!.name, cards);
+        const nextPlayerToDraft = this.getPlayerBefore(player);
+        nextPlayerToDraft!.runDraftCorporationPhase(this.getPlayerBefore(nextPlayerToDraft!)!.name, cards);
       }
       this.draftRound++;
       return;
