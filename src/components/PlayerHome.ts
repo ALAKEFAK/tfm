@@ -382,11 +382,12 @@ export const PlayerHome = Vue.component('player-home', {
                     <Card :card="card"/>
                 </div>
 
-                <div v-for="card in player.dealtPreludeCards" :key="card.name" class="cardbox" v-if="isInitialDraftingPhase()">
+                <dynamic-title title="Your cards" :color="player.color" v-if="isCorporationDraftingPhase()"/>
+                <div v-for="card in player.dealtPreludeCards" :key="card.name" class="cardbox" v-if="isInitialDraftingPhase() || isCorporationDraftingPhase()">
                     <Card :card="card"/>
                 </div>
 
-                <div v-for="card in player.dealtProjectCards" :key="card.name" class="cardbox" v-if="isInitialDraftingPhase()">
+                <div v-for="card in player.dealtProjectCards" :key="card.name" class="cardbox" v-if="isInitialDraftingPhase() || isCorporationDraftingPhase()">
                     <Card :card="card"/>
                 </div>
 
