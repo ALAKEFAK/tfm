@@ -442,7 +442,7 @@ export class Game implements ISerializable<SerializedGame> {
       // First player should be the last player
       const playerStartingCorporationsDraft = game.getPlayerBefore(firstPlayer);
       if (playerStartingCorporationsDraft !== undefined) {
-        playerStartingCorporationsDraft.runDraftCorporationPhase(playerStartingCorporationsDraft.name, game.corporationsToDraft);
+        playerStartingCorporationsDraft.runDraftCorporationPhase(game.getPlayerBefore(playerStartingCorporationsDraft)!.name, game.corporationsToDraft);
       } else {
         // If for any reason, we don't have player before the first one.
         firstPlayer.runDraftCorporationPhase(firstPlayer.name, game.corporationsToDraft);
@@ -1055,9 +1055,13 @@ export class Game implements ISerializable<SerializedGame> {
   public playerIsFinishedWithDraftingCorporationPhase(player: Player, cards : Array<CorporationCard>): void {
     // If more than 1 card are to be passed to the next player, that means we're still drafting
     if (cards.length > 1) {
-      if (this.draftRound % this.players.length === 0) {
-        player.runDraftCorporationPhase(this.getPlayerAfter(player)!.name, cards);
+      if ((this.draftRound + 1) % this.players.length === 0) {
+        const nextPlayerToDraft = this.corporationsDraftToNextPlayer? this.getPlayerAfter(player) : this.getPlayerBefore(player);
+        nextPlayerToDraft!.runDraftCorporationPhase(nextPlayerToDraft!.name, cards);
+      } else if (this.draftRound % this.players.length === 0) {
         this.corporationsDraftToNextPlayer = !this.corporationsDraftToNextPlayer;
+        const nextPlayerToDraft = this.corporationsDraftToNextPlayer? this.getPlayerAfter(player) : this.getPlayerBefore(player);
+        player.runDraftCorporationPhase(nextPlayerToDraft!.name, cards);
       } else if (this.corporationsDraftToNextPlayer) {
         const nextPlayerToDraft = this.getPlayerAfter(player);
         nextPlayerToDraft!.runDraftCorporationPhase(this.getPlayerAfter(nextPlayerToDraft!)!.name, cards);
