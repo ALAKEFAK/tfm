@@ -123,14 +123,16 @@ export namespace MilestoneAwardSelector {
         bind(ma.name, ma.name, 1000);
       });
 
-      bind(Terraformer, Benefactor, 9);
-      bind(Gardener, Cultivator, 9);
       bind(Builder, Contractor, 9);
+      bind(FullMoon, LunarMagnate, 9);
+      bind(Gardener, Cultivator, 9);
+      bind(Legend, Coordinator, 9);
+      bind(Legend, Setter, 9);
+      bind(Lunarchitect, LunarMagnate, 9);
       bind(Networker, Entrepreneur, 9);
       bind(OneGiantStep, FullMoon, 9);
-      bind(Lunarchitect, LunarMagnate, 9);
       bind(OneGiantStep, Lunarchitect, 9);
-      bind(FullMoon, LunarMagnate, 9);
+      bind(Terraformer, Benefactor, 9);
       bind(EstateDealer, Cultivator, 8);
       bind(Landlord, Cultivator, 8);
       bind(Landlord, DesertSettler, 7);
@@ -305,7 +307,6 @@ export namespace MilestoneAwardSelector {
       bind(UrbanPlanner, Pioneer, 2);
 
       bind(Coordinator, Terraformer, 3);
-      bind(Coordinator, Legend, 5);
       bind(Coordinator, Benefactor, 4);
 
       bind(Importer, Energizer, 1);
@@ -352,7 +353,6 @@ export namespace MilestoneAwardSelector {
       bind(Colonizer, Collector, 1);
 
       bind(Setter, Tycoon, 6);
-      bind(Setter, Legend, 6);
       bind(Setter, Tactician, 2);
       bind(Setter, Magnate, 2);
 
