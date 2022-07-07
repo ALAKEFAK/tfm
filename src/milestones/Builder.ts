@@ -9,6 +9,6 @@ export class Builder implements IMilestone {
       return player.getTagCount(Tags.BUILDING);
     }
     public canClaim(player: Player): boolean {
-      return this.getScore(player) >= 8;
+      return this.getScore(player) >= 7;
     }
 }
