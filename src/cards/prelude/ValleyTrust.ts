@@ -45,7 +45,6 @@ export class ValleyTrust extends Card implements CorporationCard {
       const cardsDrawn: Array<IProjectCard> = [
         player.game.dealer.dealPreludeCard(),
         player.game.dealer.dealPreludeCard(),
-        player.game.dealer.dealPreludeCard(),
       ];
 
       return new SelectCard('Choose prelude card to play', 'Play', cardsDrawn, (foundCards: Array<IProjectCard>) => {
