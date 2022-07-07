@@ -13,7 +13,6 @@ export class MorningStarIncRebalanced extends Card implements CorporationCard {
   constructor() {
     super({
       name: CardName.MORNING_STAR_INC_REBALANCED,
-      tags: [Tags.VENUS],
       startingMegaCredits: 47,
       cardType: CardType.CORPORATION,
       initialActionText: 'Draw 3 Venus-tag cards',
