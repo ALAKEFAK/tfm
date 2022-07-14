@@ -79,6 +79,7 @@ import {IndustrialCenterRebalanced} from './rebalanced_project/IndustrialCenterR
 import {MartianRailsRebalanced} from './rebalanced_project/MartianRailsRebalanced';
 import {MicroMillsRebalanced} from './rebalanced_project/MicroMillsRebalanced';
 import {ReleaseOfInertGasesRebalanced} from './rebalanced_project/ReleaseOfInertGasesRebalanced';
+import {SolarPowerRebalanced} from './rebalanced_project/SolarPowerRebalanced';
 import {SnowAlgaeRebalanced} from './rebalanced_project/SnowAlgaeRebalanced';
 import {TitanAirScrappingRebalanced} from './rebalanced_project/TitanAirScrappingRebalanced';
 import {TropicalResortRebalanced} from './rebalanced_project/TropicalResortRebalanced';
@@ -110,6 +111,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.MICRO_MILLS_REBALANCED, Factory: MicroMillsRebalanced},
     {cardName: CardName.ORBITAL_CLEANUP_REBALANCED, Factory: OrbitalCleanupRebalanced, compatibility: GameModule.Promo},
     {cardName: CardName.RELEASE_OF_INERT_GASES_REBALANCED, Factory: ReleaseOfInertGasesRebalanced},
+    {cardName: CardName.SOLAR_POWER_REBALANCED, Factory: SolarPowerRebalanced},
     {cardName: CardName.SNOW_ALGAE_REBALANCED, Factory: SnowAlgaeRebalanced, compatibility: GameModule.Promo},
     {cardName: CardName.SPINOFF_DEPARTMENT_REBALANCED, Factory: SpinoffDepartmentRebalanced},
     {cardName: CardName.STRATOPOLIS_REBALANCED, Factory: StratopolisRebalanced, compatibility: GameModule.Venus},
@@ -201,6 +203,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     CardName.MICRO_MILLS,
     CardName.ORBITAL_CLEANUP,
     CardName.RELEASE_OF_INERT_GASES,
+    CardName.SOLAR_POWER,
     CardName.SNOW_ALGAE,
     CardName.SPINOFF_DEPARTMENT,
     CardName.STRATOPOLIS,
