@@ -707,6 +707,7 @@ export enum CardName {
     MARTIAN_RAILS_REBALANCED = 'Martian Rails(⚖)',
     MICRO_MILLS_REBALANCED = 'Micro-Mills(⚖)',
     RELEASE_OF_INERT_GASES_REBALANCED = 'Release of Inert Gases(⚖)',
+    ROTATOR_IMPACTS_REBALANCED = 'Rotator Impacts(⚖)',
     SOLAR_POWER_REBALANCED = 'Solar Power(⚖)',
     SNOW_ALGAE_REBALANCED = 'Snow Algae(⚖)',
     TITAN_AIRSCRAPPING_REBALANCED = 'Titan Air-scrapping(⚖)',

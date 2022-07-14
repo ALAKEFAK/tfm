@@ -86,6 +86,7 @@ import {TitanAirScrappingRebalanced} from './rebalanced_project/TitanAirScrappin
 import {TropicalResortRebalanced} from './rebalanced_project/TropicalResortRebalanced';
 import {UndergroundCityRebalanced} from './rebalanced_project/UndergroundCityRebalanced';
 import {ZeppelinsRebalanced} from './rebalanced_project/ZeppelinsRebalanced';
+import {RotatorImpactsRebalanced} from './rebalanced_project/RotatorImpactsRebalanced';
 
 export const REBALANCED_CARD_MANIFEST = new CardManifest({
   module: GameModule.Rebalanced,
@@ -113,6 +114,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.MICRO_MILLS_REBALANCED, Factory: MicroMillsRebalanced},
     {cardName: CardName.ORBITAL_CLEANUP_REBALANCED, Factory: OrbitalCleanupRebalanced, compatibility: GameModule.Promo},
     {cardName: CardName.RELEASE_OF_INERT_GASES_REBALANCED, Factory: ReleaseOfInertGasesRebalanced},
+    {cardName: CardName.ROTATOR_IMPACTS_REBALANCED, Factory: RotatorImpactsRebalanced, compatibility: GameModule.Venus},
     {cardName: CardName.SOLAR_POWER_REBALANCED, Factory: SolarPowerRebalanced},
     {cardName: CardName.SNOW_ALGAE_REBALANCED, Factory: SnowAlgaeRebalanced, compatibility: GameModule.Promo},
     {cardName: CardName.SPINOFF_DEPARTMENT_REBALANCED, Factory: SpinoffDepartmentRebalanced},
@@ -206,6 +208,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     CardName.MICRO_MILLS,
     CardName.ORBITAL_CLEANUP,
     CardName.RELEASE_OF_INERT_GASES,
+    CardName.ROTATOR_IMPACTS,
     CardName.SOLAR_POWER,
     CardName.SNOW_ALGAE,
     CardName.SPINOFF_DEPARTMENT,
