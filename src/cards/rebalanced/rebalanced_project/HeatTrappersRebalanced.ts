@@ -7,7 +7,7 @@ import {Resources} from '../../../Resources';
 import {CardName} from '../../../CardName';
 import {DecreaseAnyProduction} from '../../../deferredActions/DecreaseAnyProduction';
 import {CardRenderer} from '../../render/CardRenderer';
-import { CardRequirements } from '../../CardRequirements';
+import {CardRequirements} from '../../CardRequirements';
 
 export class HeatTrappersRebalanced extends Card implements IProjectCard {
   constructor() {
