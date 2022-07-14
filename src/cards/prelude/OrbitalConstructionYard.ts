@@ -16,15 +16,15 @@ export class OrbitalConstructionYard extends PreludeCard implements IProjectCard
         cardNumber: 'P25',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.titanium(1)).br;
-          b.titanium(4);
+          b.titanium(5);
         }),
-        description: 'Increase your titanium production 1 step. Gain 4 titanium.',
+        description: 'Increase your titanium production 1 step. Gain 5 titanium.',
       },
     });
   }
   public play(player: Player) {
     player.addProduction(Resources.TITANIUM, 1);
-    player.titanium += 4;
+    player.titanium += 5;
     return undefined;
   }
 }
