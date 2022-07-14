@@ -799,7 +799,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     ].filter((tag) => tag.count > 0);
   }
 
-  public getTagCount(tag: Tags, includeEventsTags:boolean = false, includeTagSubstitutions:boolean = true): number {
+  public getTagCount(tag: Tags, includeEventsTags:boolean = false, includeTagSubstitutions:boolean = true, wildCardLimit:boolean = false): number {
     let tagCount = 0;
 
     this.playedCards.forEach((card: IProjectCard) => {
@@ -824,7 +824,11 @@ export class Player implements ISerializable<SerializedPlayer> {
         tagCount += this.getTagCount(Tags.MOON, includeEventsTags, false);
       }
       if (tag !== Tags.WILDCARD) {
-        tagCount += this.getTagCount(Tags.WILDCARD, includeEventsTags, false);
+        if (wildCardLimit) {
+          tagCount += Math.min(this.getTagCount(Tags.WILDCARD, includeEventsTags, false), 1);
+        } else {
+          tagCount += this.getTagCount(Tags.WILDCARD, includeEventsTags, false);
+        }
       }
     } else {
     }
