@@ -385,7 +385,7 @@ export namespace MilestoneAwardSelector {
       bind(Microeconomist, Excentric, 2);
       bind(Microeconomist, Biologist, 2);
 
-      bind(Distributer, Generalist, 3);
+      bind(Distributer, Generalist, 9);
 
       bind(Originalist, Benefactor, 2);
 
