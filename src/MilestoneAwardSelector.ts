@@ -43,10 +43,11 @@ import {Hoverlord} from './milestones/Hoverlord';
 import {IMilestone} from './milestones/IMilestone';
 import {Legend} from './milestones/Legend';
 import {Mayor} from './milestones/Mayor';
-import {ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, Milestones, MOON_MILESTONES, ORIGINAL_MILESTONES, TRAJECTORY_MILESTONES, TRAJECTORY_VENUS_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
+import {ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, Milestones, MOON_MILESTONES, ORIGINAL_MILESTONES, REBALANCED_MILESTONES, TRAJECTORY_MILESTONES, TRAJECTORY_VENUS_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
 import {Networker} from './milestones/Networker';
 import {Planner} from './milestones/Planner';
 import {PolarExplorer} from './milestones/PolarExplorer';
+import {Firestarter} from './milestones/rebalancedMilestones/Firestarter';
 import {RimSettler} from './milestones/RimSettler';
 import {Specialist} from './milestones/Specialist';
 import {Tactician} from './milestones/Tactician';
@@ -399,6 +400,7 @@ export namespace MilestoneAwardSelector {
       bind(Tropicalist, EstateDealer, 6);
       bind(Tropicalist, Pioneer, 9);
       bind(Tropicalist, Equatorial, 9);
+      bind(Firestarter, Thermalist, 9);
 
       return synergies;
     }
@@ -555,6 +557,9 @@ export namespace MilestoneAwardSelector {
       if (gameOptions.venusNextExtension) {
         candidateMilestones.push(...TRAJECTORY_VENUS_MILESTONES.map(toName));
       }
+    }
+    if (gameOptions.rebalancedExtension) {
+      candidateMilestones.push(...REBALANCED_MILESTONES.map(toName));
     }
     const shuffledMilestones = shuffle(candidateMilestones);
     const shuffledAwards = shuffle(candidateAwards);
