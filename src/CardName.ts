@@ -702,6 +702,7 @@ export enum CardName {
     CORPORATE_STRONGHOLD_REBALANCED = 'Corporate Stronghold(⚖)',
     DESIGNED_MICRO_ORGANISMS_REBALANCED = 'Designed Micro-organisms(⚖)',
     ENERGY_SAVING_REBALANCED = 'Energy Saving(⚖)',
+    HEAT_TRAPPERS_REBALANCED = 'Heat Trappers(⚖)',
     INDUSTRIAL_CENTER_REBALANCED = 'Industrial Center(⚖)',
     MARTIAN_RAILS_REBALANCED = 'Martian Rails(⚖)',
     MICRO_MILLS_REBALANCED = 'Micro-Mills(⚖)',

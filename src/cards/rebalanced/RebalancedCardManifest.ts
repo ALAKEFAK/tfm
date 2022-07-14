@@ -75,6 +75,7 @@ import {CommunityServicesRebalanced} from './rebalanced_project/CommunityService
 import {CorporateStrongholdRebalanced} from './rebalanced_project/CorporateStrongholdRebalanced';
 import {DesignedMicroOrganismsRebalanced} from './rebalanced_project/DesignedMicroOrganismsRebalanced';
 import {EnergySavingRebalanced} from './rebalanced_project/EnergySavingRebalanced';
+import {HeatTrappersRebalanced} from './rebalanced_project/HeatTrappersRebalanced';
 import {IndustrialCenterRebalanced} from './rebalanced_project/IndustrialCenterRebalanced';
 import {MartianRailsRebalanced} from './rebalanced_project/MartianRailsRebalanced';
 import {MicroMillsRebalanced} from './rebalanced_project/MicroMillsRebalanced';
@@ -104,6 +105,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.FORCED_PRECIPITATION_REBALANCED, Factory: ForcedPrecipitationRebalanced, compatibility: GameModule.Venus},
     {cardName: CardName.GHG_IMPORT_FROM_VENUS_REBALANCED, Factory: GHGImportFromVenusRebalanced, compatibility: GameModule.Venus},
     {cardName: CardName.GMO_CONTRACT_REBALANCED, Factory: GMOContractRebalanced, compatibility: GameModule.Turmoil},
+    {cardName: CardName.HEAT_TRAPPERS_REBALANCED, Factory: HeatTrappersRebalanced},
     {cardName: CardName.INDUSTRIAL_CENTER_REBALANCED, Factory: IndustrialCenterRebalanced},
     {cardName: CardName.JET_STREAM_MICROSCRAPPERS_REBALANCED, Factory: JetStreamMicroscrappersRebalanced, compatibility: GameModule.Venus},
     {cardName: CardName.MARS_UNIVERSITY_REBALANCED, Factory: MarsUniversityRebalanced},
@@ -196,6 +198,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     CardName.FORCED_PRECIPITATION,
     CardName.GHG_IMPORT_FROM_VENUS,
     CardName.GMO_CONTRACT,
+    CardName.HEAT_TRAPPERS,
     CardName.INDUSTRIAL_CENTER,
     CardName.JET_STREAM_MICROSCRAPPERS,
     CardName.MARS_UNIVERSITY,
