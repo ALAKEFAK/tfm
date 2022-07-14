@@ -13,7 +13,7 @@ export class OrbitalCleanupRebalanced extends Card implements IProjectCard {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.ORBITAL_CLEANUP_REBALANCED,
-      tags: [Tags.EARTH, Tags.SPACE],
+      tags: [Tags.EARTH],
       cost: 14,
 
       metadata: {
