@@ -15,7 +15,7 @@ export class CheungShingMARSRebalanced extends Card implements CorporationCard {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.CHEUNG_SHING_MARS_REBALANCED,
-      tags: [Tags.BUILDING],
+      tags: [Tags.BUILDING, Tags.SPACE],
       startingMegaCredits: 42,
       productionBox: Units.of({megacredits: 3}),
 
@@ -31,8 +31,8 @@ export class CheungShingMARSRebalanced extends Card implements CorporationCard {
             ce.effect('When you play a building tag, you pay 2 M€ less for it.', (eb) => {
               eb.building().played.startEffect.megacredits(-2);
             });
-            ce.effect('When you play a space tag, you pay 2 M€ less for it.', (eb) => {
-              eb.space().played.startEffect.megacredits(-2);
+            ce.effect('When you play a space tag, you pay 1 M€ less for it.', (eb) => {
+              eb.space().played.startEffect.megacredits(-1);
             });
           });
         }),
