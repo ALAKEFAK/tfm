@@ -3,7 +3,6 @@ import {CorporationCard} from '../../corporation/CorporationCard';
 import {Tags} from '../../Tags';
 import {Player} from '../../../Player';
 import {SelectSpace} from '../../../inputs/SelectSpace';
-import {SpaceType} from '../../../SpaceType';
 import {ISpace} from '../../../boards/ISpace';
 import {Resources} from '../../../Resources';
 import {CardName} from '../../../CardName';
@@ -31,7 +30,7 @@ export class TharsisRepublicRebalanced extends Card implements CorporationCard {
           b.br.br;
           b.megacredits(40).nbsp.city();
           b.corpBox('effect', (ce) => {
-            ce.effect('When any city tile is placed ON MARS, increase your M€ production 1 step. When you place a city tile, gain 3 M€.', (eb) => {
+            ce.effect('When any city tile is placed, increase your M€ production 1 step. When you place a city tile, gain 3 M€.', (eb) => {
               eb.city(Size.SMALL).any.asterix().colon();
               eb.production((pb) => pb.megacredits(1)).nbsp;
               eb.city(Size.SMALL).startEffect.megacredits(3);
@@ -55,12 +54,10 @@ export class TharsisRepublicRebalanced extends Card implements CorporationCard {
       if (cardOwner.id === activePlayer.id) {
         cardOwner.game.defer(new GainResources(cardOwner, Resources.MEGACREDITS, {count: 3}));
       }
-      if (space.spaceType !== SpaceType.COLONY) {
-        cardOwner.game.defer(
-          new GainProduction(cardOwner, Resources.MEGACREDITS),
-          cardOwner.id !== activePlayer.id ? Priority.OPPONENT_TRIGGER : undefined,
-        );
-      }
+      cardOwner.game.defer(
+        new GainProduction(cardOwner, Resources.MEGACREDITS),
+        cardOwner.id !== activePlayer.id ? Priority.OPPONENT_TRIGGER : undefined,
+      );
     }
     return;
   }
