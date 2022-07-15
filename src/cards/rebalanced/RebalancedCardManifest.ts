@@ -29,6 +29,7 @@ import {TerralabsResearchRebalanced} from './rebalanced_corporation/TerralabsRes
 import {TharsisRepublicRebalanced} from './rebalanced_corporation/TharsisRepublicRebalanced';
 import {ThorgateRebalanced} from './rebalanced_corporation/ThorgateRebalanced';
 import {UnitedNationsMarsInitiativeRebalanced} from './rebalanced_corporation/UnitedNationsMarsInitiativeRebalanced';
+import {ValleyTrustRebalanced} from './rebalanced_corporation/ValleyTrustRebalanced';
 import {BiofuelsRebalanced} from './rebalanced_prelude/BiofuelsRebalanced';
 import {BiosphereSupportRebalanced} from './rebalanced_prelude/BiosphereSupportRebalanced';
 import {DomeFarmingRebalanced} from './rebalanced_prelude/DomeFarmingRebalanced';
@@ -160,6 +161,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.UTOPIA_INVEST_REBALANCED, Factory: UtopiaInvestRebalanced},
     {cardName: CardName.VIRON_REBALANCED, Factory: VironRebalanced},
     {cardName: CardName.VITOR_REBALANCED, Factory: VitorRebalanced},
+    {cardName: CardName.VALLEY_TRUST_REBALANCED, Factory: ValleyTrustRebalanced},
   ],
   preludeCards: [
     {cardName: CardName.BIOFUELS_REBALANCED, Factory: BiofuelsRebalanced},

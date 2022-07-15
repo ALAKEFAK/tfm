@@ -656,6 +656,7 @@ export enum CardName {
     UTOPIA_INVEST_REBALANCED = 'Utopia Invest(⚖)',
     VIRON_REBALANCED = 'Viron(⚖)',
     VITOR_REBALANCED = 'Vitor(⚖)',
+    VALLEY_TRUST_REBALANCED = 'Valley Trust(⚖)',
 
     // Rebalanced preludes
     BIOFUELS_REBALANCED = 'Biofuels(⚖)',
