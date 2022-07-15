@@ -43,7 +43,7 @@ export class MorningStarIncRebalanced extends Card implements CorporationCard {
   }
 
   public getCardDiscount(_player: Player, card: IProjectCard) {
-    return card.tags.filter((tag) => tag === Tags.VENUS).length * 2;
+    return card.tags.filter((tag) => tag === Tags.VENUS).length * 1;
   }
 
   public getRequirementBonus(_player: Player, parameter: GlobalParameter): number {
