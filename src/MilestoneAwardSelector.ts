@@ -132,6 +132,7 @@ export namespace MilestoneAwardSelector {
       bind(Lunarchitect, LunarMagnate, 9);
       bind(OneGiantStep, Lunarchitect, 9);
       bind(FullMoon, LunarMagnate, 9);
+      bind(Pioneer, Irrigator, 9);
       bind(EstateDealer, Cultivator, 8);
       bind(Landlord, Cultivator, 8);
       bind(Landlord, DesertSettler, 7);
