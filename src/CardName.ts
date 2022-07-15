@@ -672,6 +672,7 @@ export enum CardName {
     MOHOLE_EXCAVATION_REBALANCED = 'Mohole Excavation(⚖)',
     MOHOLE_REBALANCED = 'Mohole(⚖)',
     NITROGEN_SHIPMENT_REBALANCED = 'Nitrogen Shipment(⚖)',
+    ORBITAL_CONSTRUCTION_YARD_REBALANCED = 'Orbital Construction Yard(⚖)',
     POLAR_INDUSTRIES_REBALANCED = 'Polar Industries(⚖)',
     SELF_SUFFICIENT_SETTLEMENT_REBALANCED = 'Self-Sufficient Settlement(⚖)',
     SMELTING_PLANT_REBALANCED = 'Smelting Plant(⚖)',

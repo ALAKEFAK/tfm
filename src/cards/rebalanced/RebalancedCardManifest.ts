@@ -87,6 +87,7 @@ import {TropicalResortRebalanced} from './rebalanced_project/TropicalResortRebal
 import {UndergroundCityRebalanced} from './rebalanced_project/UndergroundCityRebalanced';
 import {ZeppelinsRebalanced} from './rebalanced_project/ZeppelinsRebalanced';
 import {RotatorImpactsRebalanced} from './rebalanced_project/RotatorImpactsRebalanced';
+import {OrbitalConstructionYardRebalanced} from './rebalanced_prelude/OrbitalConstructionYardRebalanced';
 
 export const REBALANCED_CARD_MANIFEST = new CardManifest({
   module: GameModule.Rebalanced,
@@ -174,6 +175,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.MOHOLE_EXCAVATION_REBALANCED, Factory: MoholeExcavationRebalanced},
     {cardName: CardName.MOHOLE_REBALANCED, Factory: MoholeRebalanced},
     {cardName: CardName.NITROGEN_SHIPMENT_REBALANCED, Factory: NitrogenDeliveryRebalanced},
+    {cardName: CardName.ORBITAL_CONSTRUCTION_YARD_REBALANCED, Factory: OrbitalConstructionYardRebalanced},
     {cardName: CardName.POLAR_INDUSTRIES_REBALANCED, Factory: PolarIndustriesRebalanced},
     {cardName: CardName.SELF_SUFFICIENT_SETTLEMENT_REBALANCED, Factory: SelfSufficientSettlementRebalanced},
     {cardName: CardName.SMELTING_PLANT_REBALANCED, Factory: SmeltingPlantRebalanced},
@@ -266,6 +268,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     CardName.MOHOLE,
     CardName.MOHOLE_EXCAVATION,
     CardName.NITROGEN_SHIPMENT,
+    CardName.ORBITAL_CONSTRUCTION_YARD,
     CardName.POLAR_INDUSTRIES,
     CardName.SELF_SUFFICIENT_SETTLEMENT,
     CardName.SMELTING_PLANT,
