@@ -13,14 +13,15 @@ export class SmeltingPlant extends PreludeCard {
       metadata: {
         cardNumber: 'P30',
         renderData: CardRenderer.builder((b) => {
-          b.oxygen(3);
+          b.oxygen(2).br;
+          b.steel(6);
         }),
-        description: 'Raise oxygen 3 steps.',
+        description: 'Raise oxygen 2 steps. Gain 6 steel.',
       },
     });
   }
   public play(player: Player) {
-    player.game.increaseOxygenLevel(player, 1);
+    player.steel += 6;
     return player.game.increaseOxygenLevel(player, 2);
   }
 }
