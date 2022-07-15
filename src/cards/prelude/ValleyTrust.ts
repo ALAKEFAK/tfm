@@ -15,12 +15,12 @@ export class ValleyTrust extends Card implements CorporationCard {
       name: CardName.VALLEY_TRUST,
       tags: [Tags.EARTH],
       startingMegaCredits: 37,
-      initialActionText: 'Draw 2 Prelude cards, and play one of them',
+      initialActionText: 'Draw 3 Prelude cards, and play one of them',
 
       cardDiscount: {tag: Tags.SCIENCE, amount: 2},
       metadata: {
         cardNumber: 'R34',
-        description: 'You start with 37 M€. As your first action, draw 2 Prelude cards, and play one of them. Discard the other.',
+        description: 'You start with 37 M€. As your first action, draw 3 Prelude cards, and play one of them. Discard the other two.',
         renderData: CardRenderer.builder((b) => {
           b.br.br;
           b.megacredits(37).nbsp.prelude().asterix();
@@ -43,6 +43,7 @@ export class ValleyTrust extends Card implements CorporationCard {
   public initialAction(player: Player) {
     if (player.game.gameOptions.preludeExtension) {
       const cardsDrawn: Array<IProjectCard> = [
+        player.game.dealer.dealPreludeCard(),
         player.game.dealer.dealPreludeCard(),
         player.game.dealer.dealPreludeCard(),
       ];
