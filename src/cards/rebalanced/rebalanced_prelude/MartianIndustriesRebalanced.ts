@@ -1,17 +1,17 @@
-import {Tags} from '../Tags';
-import {Player} from '../../Player';
-import {PreludeCard} from './PreludeCard';
-import {IProjectCard} from '../IProjectCard';
-import {Resources} from '../../Resources';
-import {CardName} from '../../CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../Units';
+import {Tags} from '../../Tags';
+import {Player} from '../../../Player';
+import {PreludeCard} from '../../prelude/PreludeCard';
+import {IProjectCard} from '../../IProjectCard';
+import {Resources} from '../../../Resources';
+import {CardName} from '../../../CardName';
+import {CardRenderer} from '../../render/CardRenderer';
+import {Units} from '../../../Units';
 
-export class MartianIndustries extends PreludeCard implements IProjectCard {
+export class MartianIndustriesRebalanced extends PreludeCard implements IProjectCard {
   constructor() {
     super({
-      name: CardName.MARTIAN_INDUSTRIES,
-      tags: [Tags.BUILDING],
+      name: CardName.MARTIAN_INDUSTRIES_REBALANCED,
+      tags: [Tags.BUILDING, Tags.ENERGY],
       productionBox: Units.of({energy: 1, steel: 1}),
 
       metadata: {

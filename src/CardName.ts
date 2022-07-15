@@ -668,6 +668,7 @@ export enum CardName {
     HUGE_ASTEROID_REBALANCED = 'Huge Asteroid(⚖)',
     IO_RESEARCH_OUTPOST_REBALANCED = 'Io Research Outpost(⚖)',
     LOAN_REBALANCED = 'Loan(⚖)',
+    MARTIAN_INDUSTRIES_REBALANCED = 'Martian Industries(⚖)',
     METALS_COMPANY_REBALANCED = 'Metals Company(⚖)',
     MOHOLE_EXCAVATION_REBALANCED = 'Mohole Excavation(⚖)',
     MOHOLE_REBALANCED = 'Mohole(⚖)',

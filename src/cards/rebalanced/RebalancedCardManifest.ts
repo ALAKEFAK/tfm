@@ -88,6 +88,7 @@ import {UndergroundCityRebalanced} from './rebalanced_project/UndergroundCityReb
 import {ZeppelinsRebalanced} from './rebalanced_project/ZeppelinsRebalanced';
 import {RotatorImpactsRebalanced} from './rebalanced_project/RotatorImpactsRebalanced';
 import {OrbitalConstructionYardRebalanced} from './rebalanced_prelude/OrbitalConstructionYardRebalanced';
+import {MartianIndustriesRebalanced} from './rebalanced_prelude/MartianIndustriesRebalanced';
 
 export const REBALANCED_CARD_MANIFEST = new CardManifest({
   module: GameModule.Rebalanced,
@@ -172,6 +173,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.IO_RESEARCH_OUTPOST_REBALANCED, Factory: IoResearchOutpostRebalanced},
     {cardName: CardName.LOAN_REBALANCED, Factory: LoanRebalanced},
     {cardName: CardName.METALS_COMPANY_REBALANCED, Factory: MetalsCompanyRebalanced},
+    {cardName: CardName.MARTIAN_INDUSTRIES_REBALANCED, Factory: MartianIndustriesRebalanced},
     {cardName: CardName.MOHOLE_EXCAVATION_REBALANCED, Factory: MoholeExcavationRebalanced},
     {cardName: CardName.MOHOLE_REBALANCED, Factory: MoholeRebalanced},
     {cardName: CardName.NITROGEN_SHIPMENT_REBALANCED, Factory: NitrogenDeliveryRebalanced},
@@ -264,6 +266,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     CardName.HUGE_ASTEROID,
     CardName.IO_RESEARCH_OUTPOST,
     CardName.LOAN,
+    CardName.MARTIAN_INDUSTRIES,
     CardName.METALS_COMPANY,
     CardName.MOHOLE,
     CardName.MOHOLE_EXCAVATION,
