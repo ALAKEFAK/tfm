@@ -14,13 +14,13 @@ export class MorningStarIncRebalanced extends Card implements CorporationCard {
     super({
       name: CardName.MORNING_STAR_INC_REBALANCED,
       tags: [Tags.VENUS],
-      startingMegaCredits: 47,
+      startingMegaCredits: 50,
       cardType: CardType.CORPORATION,
       initialActionText: 'Draw 3 Venus-tag cards',
       cardDiscount: {tag: Tags.VENUS, amount: 1},
       metadata: {
         cardNumber: 'R06',
-        description: 'You start with 47 M€. As your first action, reveal cards from the deck until you have revealed 3 Venus-tag cards. Take those into hand and discard the rest.',
+        description: 'You start with 50 M€. As your first action, reveal cards from the deck until you have revealed 3 Venus-tag cards. Take those into hand and discard the rest.',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(47).nbsp.cards(3).secondaryTag(Tags.VENUS);
           b.corpBox('effect', (ce) => {
