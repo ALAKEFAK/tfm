@@ -22,7 +22,7 @@ export class MorningStarIncRebalanced extends Card implements CorporationCard {
         cardNumber: 'R06',
         description: 'You start with 50 M€. As your first action, reveal cards from the deck until you have revealed 3 Venus-tag cards. Take those into hand and discard the rest.',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(47).nbsp.cards(3).secondaryTag(Tags.VENUS);
+          b.megacredits(50).nbsp.cards(3).secondaryTag(Tags.VENUS);
           b.corpBox('effect', (ce) => {
             ce.vSpace(Size.LARGE);
             ce.effect('Your Venus requirements are +/- 3 steps, your choice in each case.', (eb) => {
