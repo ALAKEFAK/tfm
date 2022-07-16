@@ -27,7 +27,7 @@ export class VitorRebalanced extends Card implements CorporationCard {
           b.megacredits(52).nbsp.award();
           b.corpBox('effect', (ce) => {
             ce.effect('When you play a card with a NON-NEGATIVE VP icon, including this, gain 2 M€.', (eb) => {
-              eb.vpIcon().asterix().startEffect.megacredits(3);
+              eb.vpIcon().asterix().startEffect.megacredits(2);
             });
           });
         }),
