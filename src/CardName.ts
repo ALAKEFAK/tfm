@@ -721,4 +721,14 @@ export enum CardName {
 
     // Rebalanced standard project
     BUILD_COLONY_STANDARD_PROJECT_REBALANCED = 'Colony(⚖)',
+
+    // League cards - created by players
+    SAUNA_TICKET = 'Sauna Ticket',
+    MARS_HEAVY_INDUSTRY = 'Mars Heavy Industry',
+    INCINERATOR = 'Incinerator',
+    RECYCLED_PROJECTS = 'Recycled Projects',
+    DELAYED_ENTRY = 'Delayed Entry',
+    LABORATORY_MOUSE = 'Laboratory Mouse',
+    MATING_SEASON = 'Mating Season',
+    TARGETED_TURMOIL = 'Targeted Turmoil'
 }
