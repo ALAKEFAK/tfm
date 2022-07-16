@@ -118,6 +118,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
   // This generation / this round
   public actionsTakenThisRound: number = 0;
+  public maxActionsThisRound: number = 2;
   private actionsThisGeneration: Set<CardName> = new Set();
   public lastCardPlayed: IProjectCard | undefined;
   private corporationInitialActionDone: boolean = false;
@@ -1929,7 +1930,11 @@ export class Player implements ISerializable<SerializedPlayer> {
       this.hasTradedThisTurn = false;
     }
 
-    if (game.hasPassedThisActionPhase(this) || (allOtherPlayersHavePassed === false && this.actionsTakenThisRound >= 2)) {
+    if (game.hasPassedThisActionPhase(this) || (allOtherPlayersHavePassed === false && this.actionsTakenThisRound >= this.maxActionsThisRound)) {
+      // Delayed Entry handling
+      console.log(`${this.actionsTakenThisRound} actions taken with ${this.maxActionsThisRound} allowed.`);
+      if (this.actionsTakenThisRound === 3) this.maxActionsThisRound = 2;
+
       this.actionsTakenThisRound = 0;
       this.hasTradedThisTurn = false;
       game.playerIsFinishedTakingActions();
