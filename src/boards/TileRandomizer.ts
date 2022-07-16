@@ -118,6 +118,7 @@ export class TileRandomizer {
       });
       // Check oceans to have minimum value of 2
       for (let i = 0; i < oceans.length; i++) {
+        if (this.unshufflableSpaces.includes(i)) continue;
         // Only look at oceans
         if (!oceans[i]) continue;
         let oceanValue: number;
