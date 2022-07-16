@@ -30,6 +30,7 @@ export class MarsHeavyIndustry extends Card implements IProjectCard {
           }).br;
         }),
         description: 'Spend X (up to 5) steel to get X energy OR 2X heat.',
+        victoryPoints: 1,
       },
     });
   }
