@@ -7,6 +7,7 @@ import {CardRenderer} from '../../render/CardRenderer';
 import {Tags} from '../../Tags';
 import {CardRequirements} from '../../CardRequirements';
 import {CardRenderDynamicVictoryPoints} from '../../render/CardRenderDynamicVictoryPoints';
+import {ResourceType} from '../../../ResourceType';
 
 export class LaboratoryMouse extends Card implements IProjectCard {
   public resourceCount = 0;
@@ -17,6 +18,7 @@ export class LaboratoryMouse extends Card implements IProjectCard {
       name: CardName.LABORATORY_MOUSE,
       cost: 9,
       tags: [Tags.SCIENCE, Tags.ANIMAL],
+      resourceType: ResourceType.ANIMAL,
 
       requirements: CardRequirements.builder((b) => b.oxygen(4)),
       metadata: {
