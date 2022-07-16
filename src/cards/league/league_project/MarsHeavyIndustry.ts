@@ -11,6 +11,7 @@ import {OrOptions} from '../../../inputs/OrOptions';
 import {SelectOption} from '../../../inputs/SelectOption';
 
 export class MarsHeavyIndustry extends Card implements IProjectCard {
+  // author: ch0ka
   constructor() {
     super({
       cardType: CardType.ACTIVE,

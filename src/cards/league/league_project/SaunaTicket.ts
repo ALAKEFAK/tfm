@@ -8,6 +8,7 @@ import {CardRenderer} from '../../render/CardRenderer';
 import {CardRequirements} from '../../CardRequirements';
 
 export class SaunaTicket extends Card implements IProjectCard {
+  // author: markanarmi
   constructor() {
     super({
       cardType: CardType.EVENT,

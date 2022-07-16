@@ -8,6 +8,7 @@ import {Tags} from '../../Tags';
 import {CardRequirements} from '../../CardRequirements';
 
 export class RecycledProjects extends Card implements IProjectCard {
+  // author: ThreadPacifist
   constructor() {
     super({
       cardType: CardType.ACTIVE,

@@ -10,6 +10,7 @@ import {CardRenderDynamicVictoryPoints} from '../../render/CardRenderDynamicVict
 import {ResourceType} from '../../../ResourceType';
 
 export class LaboratoryMouse extends Card implements IProjectCard {
+  // author: yutaro
   public resourceCount = 0;
 
   constructor() {

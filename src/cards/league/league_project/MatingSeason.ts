@@ -7,6 +7,7 @@ import {CardRenderer} from '../../render/CardRenderer';
 import {Tags} from '../../Tags';
 
 export class MatingSeason extends Card implements IProjectCard {
+  // author: Kyshantry
   constructor() {
     super({
       cardType: CardType.EVENT,

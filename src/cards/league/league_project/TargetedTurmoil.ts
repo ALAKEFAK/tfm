@@ -19,6 +19,7 @@ import {SelectOption} from '../../../inputs/SelectOption';
 import {RemoveOceanTile} from '../../../deferredActions/RemoveOceanTile';
 
 export class TargetedTurmoil extends Card implements IProjectCard {
+  // author: Dids
   constructor() {
     super({
       cardType: CardType.EVENT,
