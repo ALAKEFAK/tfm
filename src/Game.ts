@@ -176,7 +176,7 @@ const DEFAULT_GAME_OPTIONS: GameOptions = {
   escapeVelocityPeriod: undefined,
   escapeVelocityPenalty: undefined,
   rebalancedExtension: false,
-  showAllGlobalEvents: false,
+  showAllGlobalEvents: true,
 };
 
 export class Game implements ISerializable<SerializedGame> {
