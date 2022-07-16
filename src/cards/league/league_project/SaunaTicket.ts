@@ -18,7 +18,7 @@ export class SaunaTicket extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'L301',
         renderData: CardRenderer.builder((b) => {
-          b.text('-X').heat(1).text('+').megacredits(0).multiplier;
+          b.text('x').heat(1).startAction.megacredits(0).multiplier;
         }),
         description: 'Convert all heat to M€.',
       },
