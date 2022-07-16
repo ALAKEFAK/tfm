@@ -6,6 +6,7 @@ import {MarsHeavyIndustry} from './league_project/MarsHeavyIndustry';
 import {Incinerator} from './league_project/Incinerator';
 import {RecycledProjects} from './league_project/RecycledProjects';
 import {LaboratoryMouse} from './league_project/LaboratoryMouse';
+import {MatingSeason} from './league_project/MatingSeason';
 
 export const LEAGUE_CARD_MANIFEST = new CardManifest({
   module: GameModule.League,
@@ -13,6 +14,7 @@ export const LEAGUE_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.INCINERATOR, Factory: Incinerator},
     {cardName: CardName.LABORATORY_MOUSE, Factory: LaboratoryMouse},
     {cardName: CardName.MARS_HEAVY_INDUSTRY, Factory: MarsHeavyIndustry},
+    {cardName: CardName.MATING_SEASON, Factory: MatingSeason},
     {cardName: CardName.RECYCLED_PROJECTS, Factory: RecycledProjects},
     {cardName: CardName.SAUNA_TICKET, Factory: SaunaTicket},
   ],
