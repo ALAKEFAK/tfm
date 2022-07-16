@@ -717,6 +717,7 @@ export enum CardName {
     TROPICAL_RESORT_REBALANCED = 'Tropical Resort(⚖)',
     UNDERGROUND_CITY_REBALANCED = 'Underground City(⚖)',
     ZEPPELINS_REBALANCED = 'Zeppelins(⚖)',
+    DEIMOS_DOWN_PROMO_REBALANCED = 'Deimos Down(⚖)',
 
     // Rebalanced standard project
     BUILD_COLONY_STANDARD_PROJECT_REBALANCED = 'Colony(⚖)',

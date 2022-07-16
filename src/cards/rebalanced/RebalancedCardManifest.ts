@@ -90,6 +90,7 @@ import {ZeppelinsRebalanced} from './rebalanced_project/ZeppelinsRebalanced';
 import {RotatorImpactsRebalanced} from './rebalanced_project/RotatorImpactsRebalanced';
 import {OrbitalConstructionYardRebalanced} from './rebalanced_prelude/OrbitalConstructionYardRebalanced';
 import {MartianIndustriesRebalanced} from './rebalanced_prelude/MartianIndustriesRebalanced';
+import {DeimosDownPromoRebalanced} from './rebalanced_project/DeimosDownPromoRebalanced';
 
 export const REBALANCED_CARD_MANIFEST = new CardManifest({
   module: GameModule.Rebalanced,
@@ -128,6 +129,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.UNDERGROUND_CITY_REBALANCED, Factory: UndergroundCityRebalanced},
     {cardName: CardName.UNDERGROUND_DETONATIONS_REBALANCED, Factory: UndergroundDetonationsRebalanced},
     {cardName: CardName.ZEPPELINS_REBALANCED, Factory: ZeppelinsRebalanced},
+    {cardName: CardName.DEIMOS_DOWN_PROMO_REBALANCED, Factory: DeimosDownPromoRebalanced},
   ],
   corporationCards: [
     {cardName: CardName.APHRODITE_REBALANCED, Factory: AphroditeRebalanced, compatibility: GameModule.Venus},
@@ -225,6 +227,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     CardName.UNDERGROUND_CITY,
     CardName.UNDERGROUND_DETONATIONS,
     CardName.ZEPPELINS,
+    CardName.DEIMOS_DOWN_PROMO,
     // corporations
     CardName.APHRODITE,
     CardName.ARCADIAN_COMMUNITIES,

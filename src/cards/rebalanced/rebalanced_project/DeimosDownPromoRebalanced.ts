@@ -1,25 +1,25 @@
-import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../Tags';
-import {Card} from '../Card';
-import {CardType} from '../CardType';
-import {Player} from '../../Player';
-import {CardName} from '../../CardName';
-import {SelectSpace} from '../../inputs/SelectSpace';
-import {TileType} from '../../TileType';
-import {ISpace} from '../../boards/ISpace';
-import {PartyHooks} from '../../turmoil/parties/PartyHooks';
-import {PartyName} from '../../turmoil/parties/PartyName';
-import {REDS_RULING_POLICY_COST, MAX_TEMPERATURE} from '../../constants';
-import {RemoveAnyPlants} from '../../deferredActions/RemoveAnyPlants';
-import {CardRenderer} from '../render/CardRenderer';
+import {IProjectCard} from '../../IProjectCard';
+import {Tags} from '../../Tags';
+import {Card} from '../../Card';
+import {CardType} from '../../CardType';
+import {Player} from '../../../Player';
+import {CardName} from '../../../CardName';
+import {SelectSpace} from '../../../inputs/SelectSpace';
+import {TileType} from '../../../TileType';
+import {ISpace} from '../../../boards/ISpace';
+import {PartyHooks} from '../../../turmoil/parties/PartyHooks';
+import {PartyName} from '../../../turmoil/parties/PartyName';
+import {REDS_RULING_POLICY_COST, MAX_TEMPERATURE} from '../../../constants';
+import {RemoveAnyPlants} from '../../../deferredActions/RemoveAnyPlants';
+import {CardRenderer} from '../../render/CardRenderer';
 
-export class DeimosDownPromo extends Card implements IProjectCard {
+export class DeimosDownPromoRebalanced extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.EVENT,
-      name: CardName.DEIMOS_DOWN_PROMO,
+      name: CardName.DEIMOS_DOWN_PROMO_REBALANCED,
       tags: [Tags.SPACE],
-      cost: 31,
+      cost: 33,
 
       metadata: {
         cardNumber: 'X31',
