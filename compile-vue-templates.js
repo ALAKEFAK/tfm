@@ -81,7 +81,7 @@ generateVueClass(
 generateVueClass(
   'src/components/DebugUI',
   require('./build/src/components/DebugUI').DebugUI,
-  ['filterText', 'filterDescription', 'sortById', 'base', 'corporateEra', 'prelude', 'venusNext', 'colonies', 'turmoil', 'community', 'ares', 'promo', 'moon', 'rebalanced'],
+  ['filterText', 'filterDescription', 'sortById', 'base', 'corporateEra', 'prelude', 'venusNext', 'colonies', 'turmoil', 'community', 'ares', 'promo', 'moon', 'rebalanced', 'league'],
 );
 generateVueClass(
   'src/components/GameHome',
@@ -179,7 +179,7 @@ generateVueClass(
   [
     'ui', 'hide_hand', 'hide_awards_and_milestones',
     'hide_top_bar', 'small_cards', 'remove_background', 'magnify_cards',
-    'show_alerts', 'lang', 'langs', 'enable_sounds', 'hide_tile_confirmation', 
+    'show_alerts', 'lang', 'langs', 'enable_sounds', 'hide_tile_confirmation',
     'show_card_number', 'hide_discount_on_cards', 'learner_mode', 'hide_animated_sidebar', 'hide_color_code_buttons',
     'spectator_pause',
   ],
