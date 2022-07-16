@@ -12,22 +12,22 @@ export class OrbitalCleanupRebalanced extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,
-      name: CardName.ORBITAL_CLEANUP_REBALANCED,
-      tags: [Tags.EARTH],
+      name: CardName.ORBITAL_CLEANUP,
+      tags: [Tags.EARTH, Tags.SPACE],
       cost: 14,
 
       metadata: {
         cardNumber: 'X08',
         renderData: CardRenderer.builder((b) => {
-          b.action('Gain 1 M€ per Science tag you have.', (eb) => {
-            eb.empty().startAction.megacredits(1).slash().science().played;
+          b.action('Gain 1 M€ per every two Science tag you have.', (eb) => {
+            eb.empty().startAction.megacredits(1).slash().science(2).played;
           }).br;
           b.production((pb) => {
             pb.megacredits(-2);
           });
         }),
         description: 'Decrease your M€ production 2 steps.',
-        victoryPoints: 1,
+        victoryPoints: 2,
       },
     });
   }
@@ -46,11 +46,11 @@ export class OrbitalCleanupRebalanced extends Card implements IProjectCard {
   }
 
   public action(player: Player) {
-    player.addResource(Resources.MEGACREDITS, player.getTagCount(Tags.SCIENCE), {log: true});
+    player.addResource(Resources.MEGACREDITS, Math.floor((player.getTagCount(Tags.SCIENCE) + 1) / 2), {log: true});
     return undefined;
   }
 
   public getVictoryPoints() {
-    return 1;
+    return 2;
   }
 }
