@@ -134,6 +134,7 @@ export interface GameOptions {
   escapeVelocityPeriod?: number;
   escapeVelocityPenalty?: number;
   rebalancedExtension: boolean;
+  leagueExtension: boolean;
   showAllGlobalEvents: boolean;
 }
 
@@ -176,6 +177,7 @@ const DEFAULT_GAME_OPTIONS: GameOptions = {
   escapeVelocityPeriod: undefined,
   escapeVelocityPenalty: undefined,
   rebalancedExtension: false,
+  leagueExtension: false,
   showAllGlobalEvents: true,
 };
 
