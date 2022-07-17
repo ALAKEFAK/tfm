@@ -14,10 +14,6 @@ import {CardRenderer} from '../../render/CardRenderer';
 import {Card} from '../../Card';
 
 export class TitanAirScrappingRebalanced extends Card implements IProjectCard, IResourceCard {
-  public resourceCount: number = 0;
-  // How many floaters should you receive for 1 ti?
-  private floatersToGet: number = 4;
-
   constructor() {
     super({
       cost: 21,
@@ -29,8 +25,8 @@ export class TitanAirScrappingRebalanced extends Card implements IProjectCard, I
       metadata: {
         cardNumber: 'C43',
         renderData: CardRenderer.builder((b) => {
-          b.action(`Spend 1 titanium to add ${this.floatersToGet} floaters here.`, (eb) => {
-            eb.titanium(1).startAction.floaters(this.floatersToGet);
+          b.action('Spend 1 titanium to add 4 floaters here.', (eb) => {
+            eb.titanium(1).startAction.floaters(4);
           }).br;
           b.or().br;
           b.action('Spend 2 floaters here to increase your TR 1 step.', (eb) => {
@@ -41,6 +37,8 @@ export class TitanAirScrappingRebalanced extends Card implements IProjectCard, I
       },
     });
   }
+
+  public resourceCount: number = 0;
 
   public canAct(player: Player): boolean {
     const hasTitanium = player.titanium > 0;
@@ -56,7 +54,7 @@ export class TitanAirScrappingRebalanced extends Card implements IProjectCard, I
   public action(player: Player) {
     const opts: Array<SelectOption> = [];
 
-    const addResource = new SelectOption(`Spend 1 titanium to add ${this.floatersToGet} floaters on this card`, 'Spend titanium', () => this.addResource(player));
+    const addResource = new SelectOption('Spend 1 titanium to add 4 floaters on this card', 'Spend titanium', () => this.addResource(player));
     const spendResource = new SelectOption('Remove 2 floaters on this card to increase your TR 1 step', 'Remove floaters', () => this.spendResource(player));
 
     if (this.resourceCount >= 2 && player.titanium > 0) {
@@ -74,16 +72,8 @@ export class TitanAirScrappingRebalanced extends Card implements IProjectCard, I
     return new OrOptions(...opts);
   }
 
-  public play() {
-    return undefined;
-  }
-
-  public getVictoryPoints(): number {
-    return 2;
-  }
-
   private addResource(player: Player) {
-    player.addResourceTo(this, this.floatersToGet);
+    player.addResourceTo(this, 4);
     player.titanium--;
     return undefined;
   }
@@ -92,5 +82,13 @@ export class TitanAirScrappingRebalanced extends Card implements IProjectCard, I
     player.removeResourceFrom(this, 2);
     player.increaseTerraformRating();
     return undefined;
+  }
+
+  public play() {
+    return undefined;
+  }
+
+  public getVictoryPoints(): number {
+    return 2;
   }
 }
