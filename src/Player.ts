@@ -1932,8 +1932,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
     if (game.hasPassedThisActionPhase(this) || (allOtherPlayersHavePassed === false && this.actionsTakenThisRound >= this.maxActionsThisRound)) {
       // Delayed Entry handling
-      console.log(`${this.actionsTakenThisRound} actions taken with ${this.maxActionsThisRound} allowed.`);
-      if (this.actionsTakenThisRound === 3) this.maxActionsThisRound = 2;
+      if (this.maxActionsThisRound === 3) this.maxActionsThisRound = 2;
 
       this.actionsTakenThisRound = 0;
       this.hasTradedThisTurn = false;
