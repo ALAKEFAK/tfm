@@ -11,7 +11,7 @@ export class DelayedEntry extends Card implements IProjectCard {
     super({
       cardType: CardType.EVENT,
       name: CardName.DELAYED_ENTRY,
-      cost: 5,
+      cost: 0,
 
       metadata: {
         cardNumber: 'L308',
