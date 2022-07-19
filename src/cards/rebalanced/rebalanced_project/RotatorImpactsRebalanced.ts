@@ -1,11 +1,11 @@
-import {IActionCard, IResourceCard} from '../../ICard';
+import {IActionCard, ICard, IResourceCard} from '../../ICard';
 import {Tags} from '../../Tags';
 import {CardType} from '../../CardType';
 import {Player} from '../../../Player';
 import {ResourceType} from '../../../ResourceType';
 import {OrOptions} from '../../../inputs/OrOptions';
 import {SelectOption} from '../../../inputs/SelectOption';
-import {MAX_VENUS_SCALE, REDS_RULING_POLICY_COST} from '../../../constants';
+import {MAX_TEMPERATURE, MAX_VENUS_SCALE, REDS_RULING_POLICY_COST} from '../../../constants';
 import {CardName} from '../../../CardName';
 import {PartyHooks} from '../../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../../turmoil/parties/PartyName';
@@ -13,10 +13,11 @@ import {SelectHowToPayDeferred} from '../../../deferredActions/SelectHowToPayDef
 import {CardRequirements} from '../../CardRequirements';
 import {CardRenderer} from '../../render/CardRenderer';
 import {Card} from '../../Card';
-import {ICard} from '../../ICard';
 import {SelectCard} from '../../../inputs/SelectCard';
 
 export class RotatorImpactsRebalanced extends Card implements IActionCard, IResourceCard {
+  public resourceCount: number = 0;
+
   constructor() {
     super({
       name: CardName.ROTATOR_IMPACTS_REBALANCED,
@@ -40,7 +41,6 @@ export class RotatorImpactsRebalanced extends Card implements IActionCard, IReso
       },
     });
   };
-  public resourceCount: number = 0;
 
   public play() {
     return undefined;
@@ -58,34 +58,48 @@ export class RotatorImpactsRebalanced extends Card implements IActionCard, IReso
   }
 
   public action(player: Player) {
-    const opts: Array<SelectOption | SelectCard<ICard>> = [];
     const asteroidCards = player.getResourceCards(ResourceType.ASTEROID);
+    const opts: Array<SelectOption> = [];
 
-    const addAsteroidToSelf = new SelectOption('Pay 6 to add 1 asteroid to this card', 'Pay', () => {
-      player.game.defer(new SelectHowToPayDeferred(player, 1, {title: 'Select how to pay for asteroid'}));
-      player.addResourceTo(this, {log: true});
-      return undefined;
-    });
-
-    const addAsteroidOption = new SelectCard('Select card to add 1 asteroid', 'Add asteroid', asteroidCards, (foundCards: Array<ICard>) => {
-      player.game.defer(new SelectHowToPayDeferred(player, 1, {title: 'Select how to pay for asteroid'}));
-      player.addResourceTo(foundCards[0], {log: true});
-      return undefined;
-    });
-
+    const addResource = new SelectOption('Pay 6 to add 1 asteroid to a card', 'Pay', () => this.addResource(player, asteroidCards));
     const spendResource = new SelectOption('Remove 1 asteroid to raise Venus 1 step', 'Remove asteroid', () => this.spendResource(player));
+    const redsAreRuling = PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS);
+    const temperatureIsMaxed = player.game.getTemperature() === MAX_TEMPERATURE;
 
-    if (this.resourceCount > 0 && player.game.getVenusScaleLevel() < MAX_VENUS_SCALE) {
-      opts.push(spendResource);
+    if (this.resourceCount > 0) {
+      if (!redsAreRuling || temperatureIsMaxed || (redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST))) {
+        opts.push(spendResource);
+      }
+    } else {
+      return this.addResource(player, asteroidCards);
     }
 
     if (player.canAfford(6, {titanium: true})) {
-      asteroidCards.length === 1 ? opts.push(addAsteroidToSelf) : opts.push(addAsteroidOption);
+      opts.push(addResource);
     } else {
       return this.spendResource(player);
     }
 
     return new OrOptions(...opts);
+  }
+
+  private addResource(player: Player, asteroidCards: ICard[]) {
+    player.game.defer(new SelectHowToPayDeferred(player, 6, {canUseTitanium: true, title: 'Select how to pay for Rotator Impacts action'}));
+
+    if (asteroidCards.length === 1) {
+      player.addResourceTo(this, {log: true});
+      return undefined;
+    }
+
+    return new SelectCard(
+      'Select card to add 1 asteroid',
+      'Add asteroid',
+      asteroidCards,
+      (foundCards: Array<ICard>) => {
+        player.addResourceTo(foundCards[0], {log: true});
+        return undefined;
+      },
+    );
   }
 
   private spendResource(player: Player) {
