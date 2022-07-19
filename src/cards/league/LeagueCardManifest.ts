@@ -7,7 +7,7 @@ import {LaboratoryMice} from './league_project/LaboratoryMice';
 import {MarsHeavyIndustry} from './league_project/MarsHeavyIndustry';
 import {MatingSeason} from './league_project/MatingSeason';
 import {RecycledProjects} from './league_project/RecycledProjects';
-import {SaunaTicket} from './league_project/SaunaTicket';
+import {FireSale} from './league_project/FireSale';
 import {TargetedTurmoil} from './league_project/TargetedTurmoil';
 
 export const LEAGUE_CARD_MANIFEST = new CardManifest({
@@ -19,7 +19,7 @@ export const LEAGUE_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.MARS_HEAVY_INDUSTRY, Factory: MarsHeavyIndustry},
     {cardName: CardName.MATING_SEASON, Factory: MatingSeason},
     {cardName: CardName.RECYCLED_PROJECTS, Factory: RecycledProjects},
-    {cardName: CardName.SAUNA_TICKET, Factory: SaunaTicket},
+    {cardName: CardName.FIRE_SALE, Factory: FireSale},
     {cardName: CardName.TARGETED_TURMOIL, Factory: TargetedTurmoil},
   ],
 });

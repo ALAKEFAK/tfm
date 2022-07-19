@@ -6,13 +6,15 @@ import {CardName} from '../../../CardName';
 import {Resources} from '../../../Resources';
 import {CardRenderer} from '../../render/CardRenderer';
 import {CardRequirements} from '../../CardRequirements';
+import {Tags} from '../../Tags';
 
-export class SaunaTicket extends Card implements IProjectCard {
+export class FireSale extends Card implements IProjectCard {
   // author: markanarmi
   constructor() {
     super({
-      cardType: CardType.EVENT,
-      name: CardName.SAUNA_TICKET,
+      cardType: CardType.AUTOMATED,
+      name: CardName.FIRE_SALE,
+      tags: [Tags.SPACE, Tags.EARTH],
       cost: 3,
 
       requirements: CardRequirements.builder((b) => b.temperature(6).max()),

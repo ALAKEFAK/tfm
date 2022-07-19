@@ -723,7 +723,7 @@ export enum CardName {
     BUILD_COLONY_STANDARD_PROJECT_REBALANCED = 'Colony(⚖)',
 
     // League cards - created by players
-    SAUNA_TICKET = 'Sauna Ticket',
+    FIRE_SALE = 'Fire Sale',
     MARS_HEAVY_INDUSTRY = 'Mars Heavy Industry',
     INCINERATOR = 'Incinerator',
     RECYCLED_PROJECTS = 'Recycled Projects',
