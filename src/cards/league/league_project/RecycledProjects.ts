@@ -44,4 +44,8 @@ export class RecycledProjects extends Card implements IProjectCard {
     if (numSpaceTags > 0) player.titanium += numSpaceTags;
     return undefined;
   }
+
+  public getVictoryPoints() {
+    return 1;
+  }
 }

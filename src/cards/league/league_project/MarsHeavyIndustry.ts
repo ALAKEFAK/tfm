@@ -44,6 +44,25 @@ export class MarsHeavyIndustry extends Card implements IProjectCard {
     return player.steel > 0;
   }
 
+  public getVictoryPoints() {
+    return 1;
+  }
+
+  public action(player: Player) {
+    const availableSteel = Math.min(5, player.steel);
+    if (availableSteel >= 1) {
+      return new OrOptions(
+        new SelectOption('Spend X (up to 5) steel to gain X energy', 'Get energy', () => {
+          return this.getEnergyOption(player, availableSteel);
+        }),
+        new SelectOption('Spend X (up to 5) steel to gain 2X heat', 'Get heat', () => {
+          return this.getHeatOption(player, availableSteel);
+        }),
+      );
+    }
+    return undefined;
+  }
+
   private getEnergyOption(player: Player, availableSteel: number): SelectAmount {
     return new SelectAmount(
       'Select amount of steel to spend',
@@ -74,20 +93,5 @@ export class MarsHeavyIndustry extends Card implements IProjectCard {
       1,
       availableSteel,
     );
-  }
-
-  public action(player: Player) {
-    const availableSteel = Math.min(5, player.steel);
-    if (availableSteel >= 1) {
-      return new OrOptions(
-        new SelectOption('Spend X (up to 5) steel to gain X energy', 'Get energy', () => {
-          return this.getEnergyOption(player, availableSteel);
-        }),
-        new SelectOption('Spend X (up to 5) steel to gain 2X heat', 'Get heat', () => {
-          return this.getHeatOption(player, availableSteel);
-        }),
-      );
-    }
-    return undefined;
   }
 }
