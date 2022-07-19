@@ -9,19 +9,19 @@ import {CardRequirements} from '../../CardRequirements';
 import {CardRenderDynamicVictoryPoints} from '../../render/CardRenderDynamicVictoryPoints';
 import {ResourceType} from '../../../ResourceType';
 
-export class LaboratoryMouse extends Card implements IProjectCard {
+export class LaboratoryMice extends Card implements IProjectCard {
   // author: yutaro
   public resourceCount = 0;
 
   constructor() {
     super({
       cardType: CardType.ACTIVE,
-      name: CardName.LABORATORY_MOUSE,
-      cost: 9,
+      name: CardName.LABORATORY_MICE,
+      cost: 5,
       tags: [Tags.SCIENCE, Tags.ANIMAL],
       resourceType: ResourceType.ANIMAL,
 
-      requirements: CardRequirements.builder((b) => b.oxygen(4)),
+      requirements: CardRequirements.builder((b) => b.oxygen(3)),
       metadata: {
         cardNumber: 'L305',
         renderData: CardRenderer.builder((b) => {

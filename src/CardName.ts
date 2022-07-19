@@ -728,7 +728,7 @@ export enum CardName {
     INCINERATOR = 'Incinerator',
     RECYCLED_PROJECTS = 'Recycled Projects',
     DELAYED_ENTRY = 'Delayed Entry',
-    LABORATORY_MOUSE = 'Laboratory Mouse',
+    LABORATORY_MICE = 'Laboratory Mice',
     MATING_SEASON = 'Mating Season',
     TARGETED_TURMOIL = 'Targeted Turmoil'
 }
