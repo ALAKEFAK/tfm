@@ -19,7 +19,9 @@ export class CheungShingMARSRebalanced extends Card implements CorporationCard {
       startingMegaCredits: 42,
       productionBox: Units.of({megacredits: 3}),
 
-      cardDiscount: {tag: Tags.BUILDING, amount: 1},
+      // TODO: Second discount can be found here: src/components/overview/PlayerTags.ts PRETTIFY PLEASE!
+      // Idea: Make cardDiscount accept a list of those dicts?
+      cardDiscount: {tag: Tags.BUILDING, amount: 2},
       metadata: {
         cardNumber: 'R16',
         description: 'You start with 3 M€ production and 42 M€.',
