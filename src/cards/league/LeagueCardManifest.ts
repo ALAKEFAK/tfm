@@ -20,7 +20,7 @@ export const LEAGUE_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.LABORATORY_MICE, Factory: LaboratoryMice},
     {cardName: CardName.MARS_HEAVY_INDUSTRY, Factory: MarsHeavyIndustry},
     {cardName: CardName.MATING_SEASON, Factory: MatingSeason},
-    {cardName: CardName.META_RECYCLING, Factory: MetalRecycling},
+    {cardName: CardName.METAL_RECYCLING, Factory: MetalRecycling},
     {cardName: CardName.RECYCLED_PROJECTS, Factory: RecycledProjects},
     {cardName: CardName.TARGETED_TURMOIL, Factory: TargetedTurmoil},
   ],

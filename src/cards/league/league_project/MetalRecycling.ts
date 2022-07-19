@@ -15,7 +15,7 @@ export class MetalRecycling extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,
-      name: CardName.META_RECYCLING,
+      name: CardName.METAL_RECYCLING,
       cost: 10,
       tags: [Tags.SCIENCE, Tags.BUILDING],
 
