@@ -39,7 +39,7 @@ export class HeatTrappersRebalanced extends Card implements IProjectCard {
     if (super.canPlay(player) && player.game.someoneElseHasResourceProduction(Resources.HEAT, 2, player) === false) {
       this.warning = 'You will have to decrease your own heat production because no other player has enough.';
     }
-    return player.game.someoneHasResourceProduction(Resources.HEAT, 2);
+    return super.canPlay(player) && player.game.someoneHasResourceProduction(Resources.HEAT, 2);
   }
 
   public produce(player: Player) {
