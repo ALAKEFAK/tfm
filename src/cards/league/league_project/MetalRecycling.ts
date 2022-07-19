@@ -9,6 +9,7 @@ import {OrOptions} from '../../../inputs/OrOptions';
 import {SelectOption} from '../../../inputs/SelectOption';
 import {SelectAmount} from '../../../inputs/SelectAmount';
 import {Resources} from '../../../Resources';
+import {CardRequirements} from '../../CardRequirements';
 
 export class MetalRecycling extends Card implements IProjectCard {
   // author: MartyM
@@ -17,8 +18,9 @@ export class MetalRecycling extends Card implements IProjectCard {
       cardType: CardType.ACTIVE,
       name: CardName.METAL_RECYCLING,
       cost: 10,
-      tags: [Tags.SCIENCE, Tags.BUILDING],
+      tags: [Tags.MICROBE, Tags.BUILDING],
 
+      requirements: CardRequirements.builder((b) => b.oxygen(10)),
       metadata: {
         cardNumber: 'L309',
         renderData: CardRenderer.builder((b) => {
