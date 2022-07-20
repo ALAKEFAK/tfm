@@ -17,7 +17,7 @@ export class LaboratoryMice extends Card implements IProjectCard {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.LABORATORY_MICE,
-      cost: 5,
+      cost: 8,
       tags: [Tags.SCIENCE, Tags.ANIMAL],
       resourceType: ResourceType.ANIMAL,
 
