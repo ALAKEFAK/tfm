@@ -307,7 +307,7 @@ export namespace MilestoneAwardSelector {
       bind(UrbanPlanner, Pioneer, 2);
 
       bind(Coordinator, Terraformer, 3);
-      bind(Coordinator, Legend, 5);
+      bind(Coordinator, Legend, 9);
       bind(Coordinator, Benefactor, 4);
 
       bind(Importer, Energizer, 1);
@@ -354,7 +354,7 @@ export namespace MilestoneAwardSelector {
       bind(Colonizer, Collector, 1);
 
       bind(Setter, Tycoon, 6);
-      bind(Setter, Legend, 6);
+      bind(Setter, Legend, 9);
       bind(Setter, Tactician, 2);
       bind(Setter, Magnate, 2);
 
