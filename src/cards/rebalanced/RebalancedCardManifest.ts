@@ -160,7 +160,6 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.THORGATE_REBALANCED, Factory: ThorgateRebalanced},
     {cardName: CardName.UNITED_NATIONS_MARS_INITIATIVE_REBALANCED, Factory: UnitedNationsMarsInitiativeRebalanced},
     {cardName: CardName.UTOPIA_INVEST_REBALANCED, Factory: UtopiaInvestRebalanced},
-    {cardName: CardName.VALLEY_TRUST_REBALANCED, Factory: ValleyTrustRebalanced},
     {cardName: CardName.VIRON_REBALANCED, Factory: VironRebalanced},
     {cardName: CardName.VITOR_REBALANCED, Factory: VitorRebalanced},
   ],
