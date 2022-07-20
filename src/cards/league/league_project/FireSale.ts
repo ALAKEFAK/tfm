@@ -14,16 +14,15 @@ export class FireSale extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.FIRE_SALE,
-      tags: [Tags.SPACE, Tags.EARTH],
+      tags: [Tags.EARTH],
       cost: 3,
 
       requirements: CardRequirements.builder((b) => b.temperature(6).max()),
       metadata: {
         cardNumber: 'L301',
+        // TODO: Find prettier layout
         renderData: CardRenderer.builder((b) => {
-          b.action(undefined, (eb) => {
-            eb.text('x').heat(1).startAction.megacredits(0).multiplier;
-          }).br;
+          b.text('-X').heat(1).nbsp.text('+').megacredits(0).multiplier;
         }),
         description: 'Convert all heat to M€.',
       },
