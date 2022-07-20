@@ -731,5 +731,5 @@ export enum CardName {
     LABORATORY_MICE = 'Laboratory Mice',
     MATING_SEASON = 'Mating Season',
     TARGETED_TURMOIL = 'Targeted Turmoil',
-    METAL_RECYCLING = 'Metal Recycling'
+    HEAVY_METAL_BIOREMEDIATION = 'Heavy Metal Bioremediation'
 }

@@ -11,14 +11,14 @@ import {SelectAmount} from '../../../inputs/SelectAmount';
 import {Resources} from '../../../Resources';
 import {CardRequirements} from '../../CardRequirements';
 
-export class MetalRecycling extends Card implements IProjectCard {
+export class HeavyMetalBioremediation extends Card implements IProjectCard {
   // author: MartyM
   constructor() {
     super({
       cardType: CardType.ACTIVE,
-      name: CardName.METAL_RECYCLING,
-      cost: 10,
-      tags: [Tags.MICROBE, Tags.BUILDING],
+      name: CardName.HEAVY_METAL_BIOREMEDIATION,
+      cost: 5,
+      tags: [Tags.MICROBE, Tags.SPACE, Tags.BUILDING],
 
       requirements: CardRequirements.builder((b) => b.oxygen(10)),
       metadata: {
