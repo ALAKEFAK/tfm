@@ -17,7 +17,7 @@ export class HeavyMetalBioremediation extends Card implements IProjectCard {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.HEAVY_METAL_BIOREMEDIATION,
-      cost: 5,
+      cost: 10,
       tags: [Tags.MICROBE, Tags.SPACE, Tags.BUILDING],
 
       requirements: CardRequirements.builder((b) => b.oxygen(5)),
