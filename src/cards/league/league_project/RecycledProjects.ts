@@ -14,7 +14,7 @@ export class RecycledProjects extends Card implements IProjectCard {
       cardType: CardType.ACTIVE,
       name: CardName.RECYCLED_PROJECTS,
       cost: 19,
-      tags: [Tags.SCIENCE, Tags.BUILDING, Tags.SPACE],
+      tags: [Tags.SCIENCE],
 
       requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 4)),
       metadata: {
@@ -27,7 +27,7 @@ export class RecycledProjects extends Card implements IProjectCard {
             eb.space().played.startEffect.titanium(1);
           }).br;
         }),
-        description: 'After playing a building or space tag, including these, receive a steel or titanium resource respectively.',
+        description: 'After playing a building or space tag, receive a steel or titanium resource respectively.',
         victoryPoints: 1,
       },
     });
