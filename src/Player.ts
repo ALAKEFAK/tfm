@@ -734,6 +734,12 @@ export class Player implements ISerializable<SerializedPlayer> {
       this.megaCredits += count * 2;
     }
 
+    // Stormcraft rebalanced hook
+    if (card.resourceType === ResourceType.FLOATER && this.playedCards.map((card) => card.name).includes(CardName.STORMCRAFT_INCORPORATED_REBALANCED)) {
+      this.megaCredits += count;
+      this.energy += count;
+    }
+
     if (typeof(options) !== 'number' && options.log === true) {
       LogHelper.logAddResource(this, card, count);
     }
@@ -1554,15 +1560,13 @@ export class Player implements ISerializable<SerializedPlayer> {
   public get availableHeat(): number {
     if (this.isCorporation(CardName.STORMCRAFT_INCORPORATED)) {
       return this.heat + (this.getResourcesOnCorporation() * 2);
-    } else if (this.isCorporation(CardName.STORMCRAFT_INCORPORATED_REBALANCED)) {
-      return this.heat + (this.getResourcesOnCorporation() * 3);
     } else {
       return this.heat;
     }
   }
 
   public spendHeat(amount: number, cb: () => (undefined | PlayerInput) = () => undefined) : PlayerInput | undefined {
-    const isStormcraft = this.isCorporation(CardName.STORMCRAFT_INCORPORATED) || this.isCorporation(CardName.STORMCRAFT_INCORPORATED_REBALANCED);
+    const isStormcraft = this.isCorporation(CardName.STORMCRAFT_INCORPORATED);
     if (isStormcraft && this.getResourcesOnCorporation() > 0 ) {
       return (<StormCraftIncorporated> this.corporationCard).spendHeat(this, amount, cb);
     }
@@ -1955,7 +1959,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     if (corporationCard !== undefined &&
           corporationCard.initialAction !== undefined &&
           corporationCard.initialActionText !== undefined &&
-          this.corporationInitialActionDone === false
+          !this.corporationInitialActionDone
     ) {
       const initialActionOption = new SelectOption(
         {
