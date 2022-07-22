@@ -93,6 +93,7 @@ export const SelectInitialCards = Vue.component('select-initial-cards', {
           result += 5;
           break;
         case CardName.MARTIAN_INDUSTRIES:
+        case CardName.MARTIAN_INDUSTRIES_REBALANCED:
         case CardName.VALUABLE_GASES:
           result += 6;
           break;

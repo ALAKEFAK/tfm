@@ -43,10 +43,11 @@ import {Hoverlord} from './milestones/Hoverlord';
 import {IMilestone} from './milestones/IMilestone';
 import {Legend} from './milestones/Legend';
 import {Mayor} from './milestones/Mayor';
-import {ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, Milestones, MOON_MILESTONES, ORIGINAL_MILESTONES, TRAJECTORY_MILESTONES, TRAJECTORY_VENUS_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
+import {ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, Milestones, MOON_MILESTONES, ORIGINAL_MILESTONES, REBALANCED_MILESTONES, TRAJECTORY_MILESTONES, TRAJECTORY_VENUS_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
 import {Networker} from './milestones/Networker';
 import {Planner} from './milestones/Planner';
 import {PolarExplorer} from './milestones/PolarExplorer';
+import {Firestarter} from './milestones/rebalancedMilestones/Firestarter';
 import {RimSettler} from './milestones/RimSettler';
 import {Specialist} from './milestones/Specialist';
 import {Tactician} from './milestones/Tactician';
@@ -131,6 +132,7 @@ export namespace MilestoneAwardSelector {
       bind(Lunarchitect, LunarMagnate, 9);
       bind(OneGiantStep, Lunarchitect, 9);
       bind(FullMoon, LunarMagnate, 9);
+      bind(Pioneer, Irrigator, 9);
       bind(EstateDealer, Cultivator, 8);
       bind(Landlord, Cultivator, 8);
       bind(Landlord, DesertSettler, 7);
@@ -305,7 +307,7 @@ export namespace MilestoneAwardSelector {
       bind(UrbanPlanner, Pioneer, 2);
 
       bind(Coordinator, Terraformer, 3);
-      bind(Coordinator, Legend, 5);
+      bind(Coordinator, Legend, 9);
       bind(Coordinator, Benefactor, 4);
 
       bind(Importer, Energizer, 1);
@@ -352,7 +354,7 @@ export namespace MilestoneAwardSelector {
       bind(Colonizer, Collector, 1);
 
       bind(Setter, Tycoon, 6);
-      bind(Setter, Legend, 6);
+      bind(Setter, Legend, 9);
       bind(Setter, Tactician, 2);
       bind(Setter, Magnate, 2);
 
@@ -385,7 +387,7 @@ export namespace MilestoneAwardSelector {
       bind(Microeconomist, Excentric, 2);
       bind(Microeconomist, Biologist, 2);
 
-      bind(Distributer, Generalist, 3);
+      bind(Distributer, Generalist, 9);
 
       bind(Originalist, Benefactor, 2);
 
@@ -399,6 +401,7 @@ export namespace MilestoneAwardSelector {
       bind(Tropicalist, EstateDealer, 6);
       bind(Tropicalist, Pioneer, 9);
       bind(Tropicalist, Equatorial, 9);
+      bind(Firestarter, Thermalist, 9);
 
       return synergies;
     }
@@ -555,6 +558,9 @@ export namespace MilestoneAwardSelector {
       if (gameOptions.venusNextExtension) {
         candidateMilestones.push(...TRAJECTORY_VENUS_MILESTONES.map(toName));
       }
+    }
+    if (gameOptions.rebalancedExtension) {
+      candidateMilestones.push(...REBALANCED_MILESTONES.map(toName));
     }
     const shuffledMilestones = shuffle(candidateMilestones);
     const shuffledAwards = shuffle(candidateAwards);

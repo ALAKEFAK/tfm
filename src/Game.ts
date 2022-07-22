@@ -134,6 +134,7 @@ export interface GameOptions {
   escapeVelocityPeriod?: number;
   escapeVelocityPenalty?: number;
   rebalancedExtension: boolean;
+  leagueExtension: boolean;
   showAllGlobalEvents: boolean;
 }
 
@@ -176,7 +177,8 @@ const DEFAULT_GAME_OPTIONS: GameOptions = {
   escapeVelocityPeriod: undefined,
   escapeVelocityPenalty: undefined,
   rebalancedExtension: false,
-  showAllGlobalEvents: false,
+  leagueExtension: false,
+  showAllGlobalEvents: true,
 };
 
 export class Game implements ISerializable<SerializedGame> {

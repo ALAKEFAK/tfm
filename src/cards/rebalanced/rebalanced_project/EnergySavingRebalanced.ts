@@ -13,8 +13,8 @@ export class EnergySavingRebalanced extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.ENERGY_SAVING_REBALANCED,
-      tags: [Tags.ENERGY],
-      cost: 14,
+      tags: [Tags.ENERGY, Tags.BUILDING],
+      cost: 15,
 
       metadata: {
         cardNumber: '189',

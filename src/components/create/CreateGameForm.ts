@@ -72,6 +72,7 @@ export interface CreateGameModel {
     escapeVelocityPeriod: number;
     escapeVelocityPenalty: number;
     rebalancedExtension: boolean;
+    leagueExtension: boolean;
     showAllGlobalEvents: boolean;
 }
 
@@ -156,6 +157,7 @@ const defaultGameSetting: CreateGameModel = {
   escapeVelocityPeriod: 1,
   escapeVelocityPenalty: 1,
   rebalancedExtension: true,
+  leagueExtension: true,
   showAllGlobalEvents: false,
 };
 
@@ -518,6 +520,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       const escapeVelocityPeriod = component.escapeVelocityMode ? component.escapeVelocityPeriod : undefined;
       const escapeVelocityPenalty = component.escapeVelocityMode ? component.escapeVelocityPenalty : undefined;
       const rebalancedExtension = component.rebalancedExtension;
+      const leagueExtension = component.leagueExtension;
       const showAllGlobalEvents = this.showAllGlobalEvents;
       let clonedGamedId: undefined | GameId = undefined;
 
@@ -601,6 +604,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
         escapeVelocityPeriod,
         escapeVelocityPenalty,
         rebalancedExtension,
+        leagueExtension,
         showAllGlobalEvents,
       }, undefined, 4);
       return dataToSend;
@@ -724,8 +728,14 @@ export const CreateGameForm = Vue.component('create-game-form', {
 
                             <input type="checkbox" name="rebalanced" id="rebalancedExtension-checkbox" v-model="rebalancedExtension">
                             <label for="rebalancedExtension-checkbox" class="expansion-button">
-                                <div class="create-game-expansion-icon expansion-icon-rebalanced"></div>
-                                <span v-i18n>Rebalanced</span>&nbsp;<a href="https://rebalanced-mars.notion.site/Rebalanced-Mars-36bdaa3aa2ce4beaac29f3c3adfd6df4" class="tooltip" target="_blank">&#9432;</a>
+                              <div class="create-game-expansion-icon expansion-icon-rebalanced"></div>
+                              <span v-i18n>Rebalanced</span>&nbsp;<a href="https://rebalanced-mars.notion.site/Rebalanced-Mars-36bdaa3aa2ce4beaac29f3c3adfd6df4" class="tooltip" target="_blank">&#9432;</a>
+                            </label>
+  
+                            <input type="checkbox" name="league" id="leagueExtension-checkbox" v-model="leagueExtension">
+                            <label for="leagueExtension-checkbox" class="expansion-button">
+                              <div class="create-game-expansion-icon expansion-icon-league"></div>
+                              <span v-i18n>League</span>&nbsp;<a href="" class="tooltip" target="_blank">&#9432;</a>
                             </label>
 
                             <template v-if="playersCount > 1">
@@ -1104,6 +1114,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
                   v-bind:communityCardsOption="communityCardsOption"
                   v-bind:moonExpansion="moonExpansion"
                   v-bind:rebalancedExtension="rebalancedExtension"
+                  v-bind:leagueExtension="leagueExtension"
               ></corporations-filter>
             </div>
 
@@ -1115,6 +1126,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
                   v-bind:turmoil="turmoil"
                   v-bind:communityCardsOption="communityCardsOption"
                   v-bind:rebalancedExtension="rebalancedExtension"
+                  v-bind:leagueExtension="leagueExtension"
               ></colonies-filter>
             </div>
 

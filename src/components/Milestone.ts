@@ -26,7 +26,7 @@ export const Milestone = Vue.component('milestone', {
   methods: {
     getNameCss: function(milestoneName: string): string {
       return (
-        'ma-name ma-name--' + milestoneName.replace(/ /g, '-').toLowerCase()
+        'ma-name ma-name--' + milestoneName.replace(/,/g, '').replace(/ /g, '-').toLowerCase()
       );
     },
     shouldShow: function(milestone: ClaimedMilestoneModel): boolean {

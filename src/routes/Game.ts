@@ -109,6 +109,7 @@ export class GameHandler extends Handler {
           escapeVelocityPeriod: gameReq.escapeVelocityPeriod,
           escapeVelocityPenalty: gameReq.escapeVelocityPenalty,
           rebalancedExtension: gameReq.rebalancedExtension,
+          leagueExtension: gameReq.leagueExtension,
           showAllGlobalEvents: gameReq.showAllGlobalEvents,
         };
 

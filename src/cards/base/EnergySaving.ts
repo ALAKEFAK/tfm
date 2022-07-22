@@ -1,4 +1,3 @@
-
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Tags} from '../Tags';
@@ -27,8 +26,12 @@ export class EnergySaving extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public produce(player: Player) {
     player.addProduction(Resources.ENERGY, player.game.getCitiesInPlay(), {log: true});
+  }
+
+  public play(player: Player) {
+    this.produce(player);
     return undefined;
   }
 }

@@ -46,6 +46,7 @@ export interface DebugUIModel {
   moon: boolean | unknown[],
   promo: boolean | unknown[],
   rebalanced: boolean | unknown[],
+  league: boolean | unknown[],
 }
 
 export const DebugUI = Vue.component('debug-ui', {
@@ -68,6 +69,7 @@ export const DebugUI = Vue.component('debug-ui', {
       moon: true,
       promo: true,
       rebalanced: true,
+      league: true,
     } as DebugUIModel;
   },
   mounted() {
@@ -99,6 +101,7 @@ export const DebugUI = Vue.component('debug-ui', {
       data.ares = !data.ares;
       data.moon = !data.moon;
       data.rebalanced = !data.rebalanced;
+      data.league = !data.league;
     },
     sort: function(names: Array<CardName>): Array<CardName> {
       if (this.$data.sortById) {
@@ -166,6 +169,8 @@ export const DebugUI = Vue.component('debug-ui', {
         return this.moon === true;
       case GameModule.Rebalanced:
         return this.rebalanced === true;
+      case GameModule.League:
+        return this.league === true;
       default:
         return true;
       }
@@ -261,6 +266,12 @@ export const DebugUI = Vue.component('debug-ui', {
               <label for="rebalanced-checkbox" class="expansion-button">
                 <div class="create-game-expansion-icon expansion-icon-rebalanced"></div>
                 <span v-i18n>Rebalanced</span>
+              </label><span/>
+
+              <input type="checkbox" name="league" id="league-checkbox" v-model="league">
+              <label for="league-checkbox" class="expansion-button">
+                <div class="create-game-expansion-icon expansion-icon-league"></div>
+                <span v-i18n>League</span>
               </label><span/>
             </div>
 

@@ -17,7 +17,7 @@ export class TitanAirScrappingRebalanced extends Card implements IProjectCard, I
   constructor() {
     super({
       cost: 21,
-      tags: [Tags.JOVIAN, Tags.SPACE],
+      tags: [Tags.JOVIAN],
       name: CardName.TITAN_AIRSCRAPPING_REBALANCED,
       cardType: CardType.ACTIVE,
       resourceType: ResourceType.FLOATER,
@@ -25,8 +25,8 @@ export class TitanAirScrappingRebalanced extends Card implements IProjectCard, I
       metadata: {
         cardNumber: 'C43',
         renderData: CardRenderer.builder((b) => {
-          b.action('Spend 1 titanium to add 2 floaters here.', (eb) => {
-            eb.titanium(1).startAction.floaters(2);
+          b.action('Spend 1 titanium to add 4 floaters here.', (eb) => {
+            eb.titanium(1).startAction.floaters(4);
           }).br;
           b.or().br;
           b.action('Spend 2 floaters here to increase your TR 1 step.', (eb) => {
@@ -54,7 +54,7 @@ export class TitanAirScrappingRebalanced extends Card implements IProjectCard, I
   public action(player: Player) {
     const opts: Array<SelectOption> = [];
 
-    const addResource = new SelectOption('Spend 1 titanium to add 2 floaters on this card', 'Spend titanium', () => this.addResource(player));
+    const addResource = new SelectOption('Spend 1 titanium to add 4 floaters on this card', 'Spend titanium', () => this.addResource(player));
     const spendResource = new SelectOption('Remove 2 floaters on this card to increase your TR 1 step', 'Remove floaters', () => this.spendResource(player));
 
     if (this.resourceCount >= 2 && player.titanium > 0) {
@@ -73,7 +73,7 @@ export class TitanAirScrappingRebalanced extends Card implements IProjectCard, I
   }
 
   private addResource(player: Player) {
-    player.addResourceTo(this, 2);
+    player.addResourceTo(this, 4);
     player.titanium--;
     return undefined;
   }

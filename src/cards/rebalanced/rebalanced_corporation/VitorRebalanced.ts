@@ -16,18 +16,18 @@ export class VitorRebalanced extends Card implements CorporationCard {
       cardType: CardType.CORPORATION,
       name: CardName.VITOR_REBALANCED,
       tags: [Tags.EARTH],
-      startingMegaCredits: 45, // It's 42 + 3 when this corp is played
+      startingMegaCredits: 52,
       initialActionText: 'Fund an award for free',
 
       metadata: {
         cardNumber: 'R35',
-        description: 'You start with 45 M€. As your first action, fund an award for free.',
+        description: 'You start with 52 M€. As your first action, fund an award for free.',
         renderData: CardRenderer.builder((b) => {
           b.br.br;
-          b.megacredits(42).nbsp.award();
+          b.megacredits(52).nbsp.award();
           b.corpBox('effect', (ce) => {
-            ce.effect('When you play a card with a NON-NEGATIVE VP icon, including this, gain 3 M€.', (eb) => {
-              eb.vpIcon().asterix().startEffect.megacredits(3);
+            ce.effect('When you play a card with a NON-NEGATIVE VP icon, including this, gain 2 M€.', (eb) => {
+              eb.vpIcon().asterix().startEffect.megacredits(2);
             });
           });
         }),
@@ -61,7 +61,7 @@ export class VitorRebalanced extends Card implements CorporationCard {
 
   public onCardPlayed(player: Player, card: IProjectCard) {
     if (player.isCorporation(this.name) && card.getVictoryPoints !== undefined && card.getVictoryPoints(player) >= 0) {
-      player.megaCredits += 3;
+      player.megaCredits += 2;
     }
   }
 

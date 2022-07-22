@@ -49,7 +49,7 @@ export class BoardBuilder {
 
     build(): Array<ISpace> {
       this.oceans = this.randomizer.randomizeOceans(this.oceans);
-      this.bonuses = this.randomizer.randomizeBonuses(this.bonuses);
+      this.bonuses = this.randomizer.randomizeBonuses(this.bonuses, this.oceans);
 
       const idOffset = this.spaces.length + 1;
       let idx = 0;

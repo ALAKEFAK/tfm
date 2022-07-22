@@ -128,6 +128,7 @@ function simpleGameOptions(): GameOptions {
     escapeVelocityPeriod: undefined,
     escapeVelocityPenalty: undefined,
     rebalancedExtension: false,
+    leagueExtension: false,
     showAllGlobalEvents: false,
 
     // The options that can change, should be parameters.
