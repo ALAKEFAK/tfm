@@ -225,6 +225,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     CardName.UNDERGROUND_CITY,
     CardName.UNDERGROUND_DETONATIONS,
     CardName.ZEPPELINS,
+    CardName.DEIMOS_DOWN,
     CardName.DEIMOS_DOWN_PROMO,
     // corporations
     CardName.APHRODITE,
