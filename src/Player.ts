@@ -735,7 +735,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     // Stormcraft rebalanced hook
-    if (card.resourceType === ResourceType.FLOATER && this.playedCards.map((card) => card.name).includes(CardName.STORMCRAFT_INCORPORATED_REBALANCED)) {
+    if (card.resourceType === ResourceType.FLOATER && this.corporationCard?.name === CardName.STORMCRAFT_INCORPORATED_REBALANCED) {
       this.megaCredits += count;
       this.energy += count;
     }
