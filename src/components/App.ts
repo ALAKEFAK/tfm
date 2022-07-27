@@ -63,7 +63,7 @@ export const mainAppSettings = {
       'pinned_player_3': false,
       'pinned_player_4': false,
       'turmoil_parties': false,
-      'global_event_deck': false,
+      'global_event_deck': true,
     } as {[x: string]: boolean},
     game: undefined as SimpleGameModel | undefined,
     logPaused: false,
