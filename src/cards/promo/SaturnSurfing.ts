@@ -36,7 +36,7 @@ export class SaturnSurfing extends Card implements IActionCard, IProjectCard, IR
     public resourceCount = 0;
 
     public play(player: Player) {
-      this.resourceCount = player.getTagCount(Tags.EARTH) + 1;
+      player.addResourceTo(this, player.getTagCount(Tags.EARTH) + 1);
       return undefined;
     }
 
