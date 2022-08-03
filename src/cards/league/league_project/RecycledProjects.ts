@@ -21,13 +21,10 @@ export class RecycledProjects extends Card implements IProjectCard {
         cardNumber: 'L304',
         renderData: CardRenderer.builder((b) => {
           b.effect(undefined, (eb) => {
-            eb.building(1).played.startEffect.steel(1);
-          }).br;
-          b.effect(undefined, (eb) => {
-            eb.space().played.startEffect.titanium(1);
+            eb.building(1).played.slash().space().played.startEffect.steel(1);
           }).br;
         }),
-        description: 'After playing a building or space tag, receive a steel or titanium resource respectively.',
+        description: 'After playing a building or space tag, receive a steel resource.',
         victoryPoints: 1,
       },
     });
@@ -40,8 +37,7 @@ export class RecycledProjects extends Card implements IProjectCard {
   public onCardPlayed(player: Player, card: IProjectCard): void {
     const numBuildingTags = card.tags.filter((tag) => tag === Tags.BUILDING).length;
     const numSpaceTags = card.tags.filter((tag) => tag === Tags.SPACE).length;
-    if (numBuildingTags > 0) player.steel += numBuildingTags;
-    if (numSpaceTags > 0) player.titanium += numSpaceTags;
+    if (numBuildingTags > 0 || numSpaceTags > 0) player.steel += numBuildingTags + numSpaceTags;
     return undefined;
   }
 
