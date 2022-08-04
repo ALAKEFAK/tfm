@@ -126,6 +126,7 @@ export class TileRandomizer {
           oceanValue = this.getHexValue(bonuses[i], i, oceans);
           if (oceanValue >= this.minOceanValue) break;
           const j = this.rng.nextInt(oceans.length);
+          if (this.unshufflableSpaces.includes(j)) continue;
           if (oceans[j]) continue;
           [bonuses[j], bonuses[i]] = [bonuses[i], bonuses[j]];
         }
