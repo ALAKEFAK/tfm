@@ -852,6 +852,19 @@ export class Player implements ISerializable<SerializedPlayer> {
     return tagCount + this.getTagCount(Tags.WILDCARD);
   }
 
+  // Return the total number of tags assocaited with these types.
+  // A wild tag are included, but only one wild tag.
+  public getMultipleTagCountWildtagOnce(tags: Array<Tags>): number {
+    let tagCount = 0;
+    tags.forEach((tag) => {
+      tagCount += this.getTagCount(tag, false, false);
+    });
+    if (this.getTagCount(Tags.WILDCARD) >= 1) {
+      return tagCount + 1;
+    }
+    return tagCount;
+  }
+
   // TODO(kberg): Describe this function.
   public getDistinctTagCount(countWild: boolean, extraTag?: Tags): number {
     const allTags: Tags[] = [];

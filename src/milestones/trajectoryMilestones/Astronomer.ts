@@ -7,7 +7,7 @@ export class Astronomer implements IMilestone {
   public description: string = 'Requires that you have 7 earth, venus, or jovian tags'
   public getScore(player: Player): number {
     const tags: Array<Tags> = [Tags.EARTH, Tags.VENUS, Tags.JOVIAN];
-    return player.getMultipleTagCount(tags);
+    return player.getMultipleTagCountWildtagOnce(tags);
   }
   public canClaim(player: Player): boolean {
     return this.getScore(player) >= 7;
