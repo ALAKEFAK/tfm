@@ -17,7 +17,8 @@ import {
 } from '../../../constants';
 import {SelectOption} from '../../../inputs/SelectOption';
 import {RemoveOceanTile} from '../../../deferredActions/RemoveOceanTile';
-
+import {CardRequirements} from '../../CardRequirements';
+import {PartyName} from '../../../turmoil/parties/PartyName';
 export class TargetedTurmoil extends Card implements IProjectCard {
   // author: Dids
   constructor() {
@@ -26,14 +27,14 @@ export class TargetedTurmoil extends Card implements IProjectCard {
       name: CardName.TARGETED_TURMOIL,
       cost: 0,
       tags: [Tags.SPACE],
+      requirements: CardRequirements.builder((b) => b.party(PartyName.REDS)),
 
       metadata: {
         cardNumber: 'L307',
         renderData: CardRenderer.builder((b) => {
-          b.minus().tr(1).br;
           b.minus().temperature(1).or().oceans(1).or().br.oxygen(1).or().venus(1);
         }),
-        description: 'Reduce your TR by one. Decrease any non-maxed global parameter by one.',
+        description: 'Requires that Reds are ruling or that you have 2 delegates there. Reduce your TR by one. Decrease any non-maxed global parameter by one.',
       },
     });
   }
@@ -49,7 +50,6 @@ export class TargetedTurmoil extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.decreaseTerraformRating();
     const orOptions = new OrOptions();
 
     if (player.game.getTemperature() > MIN_TEMPERATURE && player.game.getTemperature() < MAX_TEMPERATURE) {
