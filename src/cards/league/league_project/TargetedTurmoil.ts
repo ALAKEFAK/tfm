@@ -19,6 +19,7 @@ import {SelectOption} from '../../../inputs/SelectOption';
 import {RemoveOceanTile} from '../../../deferredActions/RemoveOceanTile';
 import {CardRequirements} from '../../CardRequirements';
 import {PartyName} from '../../../turmoil/parties/PartyName';
+
 export class TargetedTurmoil extends Card implements IProjectCard {
   // author: Dids
   constructor() {
@@ -34,7 +35,7 @@ export class TargetedTurmoil extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.minus().temperature(1).or().oceans(1).or().br.oxygen(1).or().venus(1);
         }),
-        description: 'Requires that Reds are ruling or that you have 2 delegates there. Reduce your TR by one. Decrease any non-maxed global parameter by one.',
+        description: 'Requires that Reds are ruling or that you have 2 delegates there. Decrease any non-maxed global parameter by one.',
       },
     });
   }
