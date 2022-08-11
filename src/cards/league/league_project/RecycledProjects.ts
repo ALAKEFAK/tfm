@@ -13,7 +13,7 @@ export class RecycledProjects extends Card implements IProjectCard {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.RECYCLED_PROJECTS,
-      cost: 19,
+      cost: 12,
       tags: [Tags.SCIENCE],
 
       requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 4)),

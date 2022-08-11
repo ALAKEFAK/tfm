@@ -26,7 +26,7 @@ export class TargetedTurmoil extends Card implements IProjectCard {
     super({
       cardType: CardType.EVENT,
       name: CardName.TARGETED_TURMOIL,
-      cost: 0,
+      cost: 4,
       tags: [Tags.SPACE],
       requirements: CardRequirements.builder((b) => b.party(PartyName.REDS)),
 
