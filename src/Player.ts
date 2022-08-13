@@ -1949,7 +1949,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
     if (game.hasPassedThisActionPhase(this) || (allOtherPlayersHavePassed === false && this.actionsTakenThisRound >= this.maxActionsThisRound)) {
       // Delayed Entry handling
-      if (this.actionsTakenThisRound === 3) this.maxActionsThisRound = 2;
+      if (game.hasPassedThisActionPhase(this) || this.actionsTakenThisRound === 3) this.maxActionsThisRound = 2;
 
       this.actionsTakenThisRound = 0;
       this.hasTradedThisTurn = false;
