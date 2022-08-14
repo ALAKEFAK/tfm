@@ -27,7 +27,7 @@ export class StormCraftIncorporatedRebalancedDeferredAction implements DeferredA
     const selectResources = new AndOptions(
       () => {
         if (
-          megacreditsAmount + energyAmount > this.count
+          megacreditsAmount + energyAmount !== this.count
         ) {
           throw new Error('Need to select ' + this.count + ' resource(s)');
         }
