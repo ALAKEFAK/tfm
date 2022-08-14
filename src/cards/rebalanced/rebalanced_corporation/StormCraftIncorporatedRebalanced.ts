@@ -27,18 +27,18 @@ export class StormCraftIncorporatedRebalanced extends Card implements Corporatio
     super({
       name: CardName.STORMCRAFT_INCORPORATED_REBALANCED,
       tags: [Tags.JOVIAN],
-      startingMegaCredits: 48,
+      startingMegaCredits: 50,
       cardType: CardType.CORPORATION,
       initialActionText: 'Draw 1 card with a floater icon on it',
       metadata: {
         cardNumber: 'R29',
-        description: 'You start with 48 M€. As your first action, reveal cards from the deck until you have revealed 1 card with a floater icon on it. Take that card into hand and discard the rest.',
+        description: 'You start with 50 M€. As your first action, reveal cards from the deck until you have revealed 1 card with a floater icon on it. Take that card into hand and discard the rest.',
         renderData: CardRenderer.builder((b) => {
           b.br.br.br;
-          b.megacredits(48).nbsp.cards(1).secondaryTag(AltSecondaryTag.FLOATER);
+          b.megacredits(50).nbsp.cards(1).secondaryTag(AltSecondaryTag.FLOATER);
           b.corpBox('effect', (ce) => {
-            ce.effect('When you gain a floater to ANY CARD, also gain 1MC and 1 Energy.', (eb) => {
-              eb.floaters(1).asterix().startEffect.megacredits(1).energy(1);
+            ce.effect('When you gain a floater to ANY CARD, also gain 1MC or 1 Energy.', (eb) => {
+              eb.floaters(1).asterix().startEffect.megacredits(1).slash().energy(1);
             });
             ce.vSpace(); // to offset the description to the top a bit so it can be readable
           });

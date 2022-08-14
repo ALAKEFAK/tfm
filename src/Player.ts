@@ -75,6 +75,7 @@ import {UndoActionOption} from './inputs/UndoActionOption';
 import {LawSuit} from './cards/promo/LawSuit';
 import {CrashSiteCleanup} from './cards/promo/CrashSiteCleanup';
 import {AridorRebalanced} from './cards/rebalanced/rebalanced_corporation/AridorRebalanced';
+import {StormCraftIncorporatedRebalancedDeferredAction} from './deferredActions/StormCraftIncorporatedRebalancedDeferredAction';
 
 export type PlayerId = string;
 export type Password = string;
@@ -736,8 +737,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
     // Stormcraft rebalanced hook
     if (card.resourceType === ResourceType.FLOATER && this.corporationCard?.name === CardName.STORMCRAFT_INCORPORATED_REBALANCED) {
-      this.megaCredits += count;
-      this.energy += count;
+      this.game.defer(new StormCraftIncorporatedRebalancedDeferredAction(this, count));
     }
 
     if (typeof(options) !== 'number' && options.log === true) {
