@@ -42,6 +42,7 @@ import {InterplanetaryCinematicsRebalanced} from './rebalanced_corporation/Inter
 import {InventrixRebalanced} from './rebalanced_corporation/InventrixRebalanced';
 import {IoResearchOutpostRebalanced} from './rebalanced_prelude/IoResearchOutpostRebalanced';
 import {JetStreamMicroscrappersRebalanced} from './rebalanced_project/JetStreamMicroscrappersRebalanced';
+import {LakefrontResortsRebalanced} from './rebalanced_corporation/LakefrontResortsRebalanced';
 import {LoanRebalanced} from './rebalanced_prelude/LoanRebalanced';
 import {MarsUniversityRebalanced} from './rebalanced_project/MarsUniversityRebalanced';
 import {MartianIndustriesRebalanced} from './rebalanced_prelude/MartianIndustriesRebalanced';
@@ -143,6 +144,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.HELION_REBALANCED, Factory: HelionRebalanced},
     {cardName: CardName.INTERPLANETARY_CINEMATICS_REBALANCED, Factory: InterplanetaryCinematicsRebalanced},
     {cardName: CardName.INVENTRIX_REBALANCED, Factory: InventrixRebalanced},
+    {cardName: CardName.LAKEFRONT_RESORTS_REBALANCED, Factory: LakefrontResortsRebalanced},
     {cardName: CardName.MINING_GUILD_REBALANCED, Factory: MiningGuildRebalanced},
     {cardName: CardName.MONS_INSURANCE_REBALANCED, Factory: MonsInsuranceRebalanced},
     {cardName: CardName.MORNING_STAR_INC_REBALANCED, Factory: MorningStarIncRebalanced, compatibility: GameModule.Venus},
@@ -240,6 +242,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     CardName.HELION,
     CardName.INTERPLANETARY_CINEMATICS,
     CardName.INVENTRIX,
+    CardName.LAKEFRONT_RESORTS,
     CardName.MINING_GUILD,
     CardName.MONS_INSURANCE,
     CardName.MORNING_STAR_INC,

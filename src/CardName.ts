@@ -637,6 +637,7 @@ export enum CardName {
     HELION_REBALANCED = 'Helion(⚖)',
     INTERPLANETARY_CINEMATICS_REBALANCED = 'Interplanetary Cinematics(⚖)',
     INVENTRIX_REBALANCED = 'Inventrix(⚖)',
+    LAKEFRONT_RESORTS_REBALANCED = 'Lakefront Resorts(⚖)',
     MINING_GUILD_REBALANCED = 'Mining Guild(⚖)',
     MONS_INSURANCE_REBALANCED = 'Mons Insurance(⚖)',
     MORNING_STAR_INC_REBALANCED = 'Morning Star Inc.(⚖)',

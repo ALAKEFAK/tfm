@@ -104,6 +104,7 @@ export const CardCorporationLogo = Vue.component('CardCorporationLogo', {
       case CardName.INCITE:
         return '<span class="card-incite-logo">Incite</span>';
       case CardName.LAKEFRONT_RESORTS:
+      case CardName.LAKEFRONT_RESORTS_REBALANCED:
         return '<div class="card-lakefront-logo">LAKEFRONT <br> &nbsp;&nbsp;RESORTS</div>';
       case CardName.MINING_GUILD:
       case CardName.MINING_GUILD_REBALANCED:
