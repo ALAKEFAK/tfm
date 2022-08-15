@@ -14,8 +14,11 @@ import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {AphroditeRebalanced} from '../rebalanced/rebalanced_corporation/AphroditeRebalanced';
+import {LogHelper} from '../../LogHelper';
 
 export class Thermophiles extends Card implements IActionCard, IResourceCard {
+  public resourceCount: number = 0;
+
   constructor() {
     super({
       name: CardName.THERMOPHILES,
@@ -40,14 +43,15 @@ export class Thermophiles extends Card implements IActionCard, IResourceCard {
       },
     });
   };
-  public resourceCount: number = 0;
 
   public play() {
     return undefined;
   }
+
   public canAct(): boolean {
     return true;
   }
+
   public action(player: Player) {
     const venusMicrobeCards = player.getResourceCards(ResourceType.MICROBE).filter((card) => card.tags.includes(Tags.VENUS));
     const canRaiseVenus = this.resourceCount > 1 && player.game.getVenusScaleLevel() < MAX_VENUS_SCALE;
@@ -63,6 +67,7 @@ export class Thermophiles extends Card implements IActionCard, IResourceCard {
     const spendResource = new SelectOption('Remove 2 microbes to raise Venus 1 step', 'Remove microbes', () => {
       player.removeResourceFrom(this, 2);
       player.game.increaseVenusScaleLevel(player, 1);
+      LogHelper.logVenusIncrease(player, 1);
       return undefined;
     });
 
