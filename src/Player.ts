@@ -2168,7 +2168,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     return action;
   }
 
-  private allOtherPlayersHavePassed(): boolean {
+  public allOtherPlayersHavePassed(): boolean {
     const game = this.game;
     if (game.isSoloMode()) return true;
     const players = game.getPlayers();

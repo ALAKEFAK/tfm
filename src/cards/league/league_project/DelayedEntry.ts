@@ -28,7 +28,7 @@ export class DelayedEntry extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player): boolean {
-    return super.canPlay(player) && player.actionsTakenThisRound === 0;
+    return super.canPlay(player) && (player.actionsTakenThisRound === 0 || player.allOtherPlayersHavePassed());
   }
 
   public play(player: Player) {
