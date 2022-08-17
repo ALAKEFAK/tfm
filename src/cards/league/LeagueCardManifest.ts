@@ -22,6 +22,6 @@ export const LEAGUE_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.MATING_SEASON, Factory: MatingSeason},
     {cardName: CardName.HEAVY_METAL_BIOREMEDIATION, Factory: HeavyMetalBioremediation},
     {cardName: CardName.RECYCLED_PROJECTS, Factory: RecycledProjects},
-    {cardName: CardName.TARGETED_TURMOIL, Factory: TargetedTurmoil},
+    {cardName: CardName.TARGETED_TURMOIL, Factory: TargetedTurmoil, compatibility: GameModule.Turmoil},
   ],
 });
