@@ -28,8 +28,8 @@ export class InterplanetaryTrade extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    // This card tag is counting as well
-    const availableTags = player.getDistinctTagCount(true, Tags.SPACE);
+    // This card tag is counting as well. Do not count the wild tag on its own. Only 11 avaialble tags.
+    const availableTags = Math.min(player.getDistinctTagCount(true, Tags.SPACE), 11);
     // Only count wildcards up to the max amount of tag types existing (minus events and wildcards)
     const existingTags = Object.keys(Tags).length - 2;
     player.addProduction(Resources.MEGACREDITS, Math.min(availableTags, existingTags), {log: true});
