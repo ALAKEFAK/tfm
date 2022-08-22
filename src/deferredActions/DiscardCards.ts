@@ -25,6 +25,7 @@ export class DiscardCards implements DeferredAction {
         for (const card of foundCards) {
           this.player.cardsInHand.splice(this.player.cardsInHand.indexOf(card), 1);
           this.player.game.dealer.discard(card);
+          this.player.game.log('You discarded ${0}', (b) => b.card(card), {reservedFor: this.player});
         }
         return undefined;
       },
