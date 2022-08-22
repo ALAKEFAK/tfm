@@ -59,6 +59,7 @@ export class TileRandomizer {
         while (true) {
           const j = this.rng.nextInt(oceans.length);
           if (oceans[j]) continue;
+          if (this.unshufflableSpaces.includes(j)) continue;
           const adjOceanPerc: number | undefined = this.getAdjacentOceanInfo(j, oceans, true);
           if ((adjOceanPerc !== undefined) && (adjOceanPerc <= (ocean_connection_value / 6))) {
             landWithNotManyOceans = j;
