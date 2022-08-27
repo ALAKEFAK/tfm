@@ -91,11 +91,13 @@ import {UtopiaInvestRebalanced} from './rebalanced_corporation/UtopiaInvestRebal
 import {VironRebalanced} from './rebalanced_corporation/VironRebalanced';
 import {VitorRebalanced} from './rebalanced_corporation/VitorRebalanced';
 import {ZeppelinsRebalanced} from './rebalanced_project/ZeppelinsRebalanced';
+import {AdvancedAlloysRebalanced} from './rebalanced_project/AdvancedAlloysRebalanced';
 
 export const REBALANCED_CARD_MANIFEST = new CardManifest({
   module: GameModule.Rebalanced,
   projectCards: [
     {cardName: CardName.ADAPTED_LICHEN_REBALANCED, Factory: AdaptedLichenRebalanced},
+    {cardName: CardName.ADVANCED_ALLOYS_REBALANCED, Factory: AdvancedAlloysRebalanced},
     {cardName: CardName.AEROBRAKED_AMMONIA_ASTEROID_REBALANCED, Factory: AerobrakedAmmoniaAsteroidRebalanced},
     {cardName: CardName.ASTEROID_HOLLOWING_REBALANCED, Factory: AsteroidHollowingRebalanced, compatibility: GameModule.Promo},
     {cardName: CardName.BACTOVIRAL_RESEARCH_REBALANCED, Factory: BactoviralResearchRebalanced, compatibility: GameModule.Promo},
