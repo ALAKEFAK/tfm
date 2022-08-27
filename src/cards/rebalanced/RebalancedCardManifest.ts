@@ -2,6 +2,7 @@ import {CardName} from '../../CardName';
 import {GameModule} from '../../GameModule';
 import {CardManifest} from '../CardManifest';
 import {AdaptedLichenRebalanced} from './rebalanced_project/AdaptedLichenRebalanced';
+import {AdvancedAlloysRebalanced} from './rebalanced_project/AdvancedAlloysRebalanced';
 import {AerobrakedAmmoniaAsteroidRebalanced} from './rebalanced_project/AerobrakedAmmoniaAsteroidRebalanced';
 import {AphroditeRebalanced} from './rebalanced_corporation/AphroditeRebalanced';
 import {ArcadianCommunitiesRebalanced} from './rebalanced_corporation/ArcadianCommunitiesRebalanced';
@@ -47,6 +48,7 @@ import {LoanRebalanced} from './rebalanced_prelude/LoanRebalanced';
 import {MarsUniversityRebalanced} from './rebalanced_project/MarsUniversityRebalanced';
 import {MartianIndustriesRebalanced} from './rebalanced_prelude/MartianIndustriesRebalanced';
 import {MartianRailsRebalanced} from './rebalanced_project/MartianRailsRebalanced';
+import {MassConverterRebalanced} from './rebalanced_project/MassConverterRebalanced';
 import {MetalsCompanyRebalanced} from './rebalanced_prelude/MetalsCompanyRebalanced';
 import {MicroMillsRebalanced} from './rebalanced_project/MicroMillsRebalanced';
 import {MiningGuildRebalanced} from './rebalanced_corporation/MiningGuildRebalanced';
@@ -87,12 +89,10 @@ import {UndergroundCityRebalanced} from './rebalanced_project/UndergroundCityReb
 import {UndergroundDetonationsRebalanced} from './rebalanced_project/UndergroundDetonationsRebalanced';
 import {UnitedNationsMarsInitiativeRebalanced} from './rebalanced_corporation/UnitedNationsMarsInitiativeRebalanced';
 import {UtopiaInvestRebalanced} from './rebalanced_corporation/UtopiaInvestRebalanced';
-// import {ValleyTrustRebalanced} from './rebalanced_corporation/ValleyTrustRebalanced';
 import {VironRebalanced} from './rebalanced_corporation/VironRebalanced';
 import {VitorRebalanced} from './rebalanced_corporation/VitorRebalanced';
+import {WarpDriveRebalanced} from './rebalanced_project/WarpDriveRebalanced';
 import {ZeppelinsRebalanced} from './rebalanced_project/ZeppelinsRebalanced';
-import {AdvancedAlloysRebalanced} from './rebalanced_project/AdvancedAlloysRebalanced';
-import {MassConverterRebalanced} from './rebalanced_project/MassConverterRebalanced';
 
 export const REBALANCED_CARD_MANIFEST = new CardManifest({
   module: GameModule.Rebalanced,
@@ -133,6 +133,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.TROPICAL_RESORT_REBALANCED, Factory: TropicalResortRebalanced},
     {cardName: CardName.UNDERGROUND_CITY_REBALANCED, Factory: UndergroundCityRebalanced},
     {cardName: CardName.UNDERGROUND_DETONATIONS_REBALANCED, Factory: UndergroundDetonationsRebalanced},
+    {cardName: CardName.WARP_DRIVE_REBALANCED, Factory: WarpDriveRebalanced},
     {cardName: CardName.ZEPPELINS_REBALANCED, Factory: ZeppelinsRebalanced},
   ],
   corporationCards: [
@@ -210,6 +211,8 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     CardName.CLOUD_SEEDING,
     CardName.COMMUNITY_SERVICES,
     CardName.CORPORATE_STRONGHOLD,
+    CardName.DEIMOS_DOWN,
+    CardName.DEIMOS_DOWN_PROMO,
     CardName.DESIGNED_MICRO_ORGANISMS,
     CardName.EARTH_CATAPULT,
     CardName.ENERGY_SAVING,
@@ -227,8 +230,8 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     CardName.ORBITAL_CLEANUP,
     CardName.RELEASE_OF_INERT_GASES,
     CardName.ROTATOR_IMPACTS,
-    CardName.SOLAR_POWER,
     CardName.SNOW_ALGAE,
+    CardName.SOLAR_POWER,
     CardName.SPINOFF_DEPARTMENT,
     CardName.STRATOPOLIS,
     CardName.TITAN_AIRSCRAPPING,
@@ -236,9 +239,8 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     CardName.TROPICAL_RESORT,
     CardName.UNDERGROUND_CITY,
     CardName.UNDERGROUND_DETONATIONS,
+    CardName.WARP_DRIVE,
     CardName.ZEPPELINS,
-    CardName.DEIMOS_DOWN,
-    CardName.DEIMOS_DOWN_PROMO,
     // corporations
     CardName.APHRODITE,
     CardName.ARCADIAN_COMMUNITIES,

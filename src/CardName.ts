@@ -736,7 +736,7 @@ export enum CardName {
     UNDERGROUND_CITY_REBALANCED = 'Underground City(⚖)',
     UNDERGROUND_DETONATIONS_REBALANCED = 'Underground Detonations(⚖)',
     // VIRAL_ENHANCERS_REBALANCED = 'Viral Enhancers(⚖)',
-    // WARP_DRIVE_REBALANCED = 'Warp Drive(⚖)',
+    WARP_DRIVE_REBALANCED = 'Warp Drive(⚖)',
     ZEPPELINS_REBALANCED = 'Zeppelins(⚖)',
 
     // Rebalanced standard project
