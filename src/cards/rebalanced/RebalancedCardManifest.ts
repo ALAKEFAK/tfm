@@ -96,6 +96,7 @@ import {ZeppelinsRebalanced} from './rebalanced_project/ZeppelinsRebalanced';
 import {MeatIndustryRebalanced} from './rebalanced_project/MeatIndustryRebalanced';
 import {TopsoilContractRebalanced} from './rebalanced_project/TopsoilContractRebalanced';
 import {CuttingEdgeTechnologyRebalanced} from './rebalanced_project/CuttingEdgeTechnologyRebalanced';
+import {SkyDocksRebalanced} from './rebalanced_project/SkyDocksRebalanced';
 
 export const REBALANCED_CARD_MANIFEST = new CardManifest({
   module: GameModule.Rebalanced,
@@ -129,6 +130,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.ORBITAL_CLEANUP_REBALANCED, Factory: OrbitalCleanupRebalanced, compatibility: GameModule.Promo},
     {cardName: CardName.RELEASE_OF_INERT_GASES_REBALANCED, Factory: ReleaseOfInertGasesRebalanced},
     {cardName: CardName.ROTATOR_IMPACTS_REBALANCED, Factory: RotatorImpactsRebalanced, compatibility: GameModule.Venus},
+    {cardName: CardName.SKY_DOCKS_REBALANCED, Factory: SkyDocksRebalanced, compatibility: GameModule.Colonies},
     {cardName: CardName.SNOW_ALGAE_REBALANCED, Factory: SnowAlgaeRebalanced, compatibility: GameModule.Promo},
     {cardName: CardName.SOLAR_POWER_REBALANCED, Factory: SolarPowerRebalanced},
     {cardName: CardName.SPINOFF_DEPARTMENT_REBALANCED, Factory: SpinoffDepartmentRebalanced},
@@ -238,6 +240,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     CardName.ORBITAL_CLEANUP,
     CardName.RELEASE_OF_INERT_GASES,
     CardName.ROTATOR_IMPACTS,
+    CardName.SKY_DOCKS,
     CardName.SNOW_ALGAE,
     CardName.SOLAR_POWER,
     CardName.SPINOFF_DEPARTMENT,

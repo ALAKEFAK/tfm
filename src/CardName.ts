@@ -722,7 +722,7 @@ export enum CardName {
     // RESEARCH_OUTPOST_REBALANCED = 'Research Outpost(⚖)',
     // RESTRICTED_AREA_REBALANCED = 'Restricted Area(⚖)',
     ROTATOR_IMPACTS_REBALANCED = 'Rotator Impacts(⚖)',
-    // SKY_DOCKS_REBALANCED = 'Sky Docks(⚖)',
+    SKY_DOCKS_REBALANCED = 'Sky Docks(⚖)',
     SNOW_ALGAE_REBALANCED = 'Snow Algae(⚖)',
     // SOIL_FACTORY_REBALANCED = 'Soil Factory(⚖)',
     SOLAR_POWER_REBALANCED = 'Solar Power(⚖)',
