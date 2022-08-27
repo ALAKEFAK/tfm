@@ -96,12 +96,13 @@ import {TropicalResortRebalanced} from './rebalanced_project/TropicalResortRebal
 import {UndergroundCityRebalanced} from './rebalanced_project/UndergroundCityRebalanced';
 import {UndergroundDetonationsRebalanced} from './rebalanced_project/UndergroundDetonationsRebalanced';
 import {UnitedNationsMarsInitiativeRebalanced} from './rebalanced_corporation/UnitedNationsMarsInitiativeRebalanced';
+import {CartelRebalanced} from './rebalanced_project/CartelRebalanced';
 import {UtopiaInvestRebalanced} from './rebalanced_corporation/UtopiaInvestRebalanced';
+import {ViralEnhancersRebalanced} from './rebalanced_project/ViralEnhancersRebalanced';
 import {VironRebalanced} from './rebalanced_corporation/VironRebalanced';
 import {VitorRebalanced} from './rebalanced_corporation/VitorRebalanced';
 import {WarpDriveRebalanced} from './rebalanced_project/WarpDriveRebalanced';
 import {ZeppelinsRebalanced} from './rebalanced_project/ZeppelinsRebalanced';
-import {CartelRebalanced} from './rebalanced_project/CartelRebalanced';
 
 export const REBALANCED_CARD_MANIFEST = new CardManifest({
   module: GameModule.Rebalanced,
@@ -151,6 +152,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.TROPICAL_RESORT_REBALANCED, Factory: TropicalResortRebalanced},
     {cardName: CardName.UNDERGROUND_CITY_REBALANCED, Factory: UndergroundCityRebalanced},
     {cardName: CardName.UNDERGROUND_DETONATIONS_REBALANCED, Factory: UndergroundDetonationsRebalanced},
+    {cardName: CardName.VIRAL_ENHANCERS_REBALANCED, Factory: ViralEnhancersRebalanced},
     {cardName: CardName.WARP_DRIVE_REBALANCED, Factory: WarpDriveRebalanced},
     {cardName: CardName.ZEPPELINS_REBALANCED, Factory: ZeppelinsRebalanced},
   ],
@@ -266,6 +268,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     CardName.TROPICAL_RESORT,
     CardName.UNDERGROUND_CITY,
     CardName.UNDERGROUND_DETONATIONS,
+    CardName.VIRAL_ENHANCERS,
     CardName.WARP_DRIVE,
     CardName.ZEPPELINS,
     // corporations
