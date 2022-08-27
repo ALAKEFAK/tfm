@@ -719,7 +719,7 @@ export enum CardName {
     MICRO_MILLS_REBALANCED = 'Micro-Mills(⚖)',
     ORBITAL_CLEANUP_REBALANCED = 'Orbital Cleanup(⚖)',
     RELEASE_OF_INERT_GASES_REBALANCED = 'Release of Inert Gases(⚖)',
-    // RESEARCH_OUTPOST_REBALANCED = 'Research Outpost(⚖)',
+    RESEARCH_OUTPOST_REBALANCED = 'Research Outpost(⚖)',
     // RESTRICTED_AREA_REBALANCED = 'Restricted Area(⚖)',
     ROTATOR_IMPACTS_REBALANCED = 'Rotator Impacts(⚖)',
     SKY_DOCKS_REBALANCED = 'Sky Docks(⚖)',

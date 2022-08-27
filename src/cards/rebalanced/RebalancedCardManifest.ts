@@ -20,6 +20,7 @@ import {CheungShingMARSRebalanced} from './rebalanced_corporation/CheungShingMAR
 import {CloudSeedingRebalanced} from './rebalanced_project/CloudSeedingRebalanced';
 import {CommunityServicesRebalanced} from './rebalanced_project/CommunityServicesRebalanced';
 import {CorporateStrongholdRebalanced} from './rebalanced_project/CorporateStrongholdRebalanced';
+import {CuttingEdgeTechnologyRebalanced} from './rebalanced_project/CuttingEdgeTechnologyRebalanced';
 import {DeimosDownPromoRebalanced} from './rebalanced_project/DeimosDownPromoRebalanced';
 import {DesignedMicroOrganismsRebalanced} from './rebalanced_project/DesignedMicroOrganismsRebalanced';
 import {DomeFarmingRebalanced} from './rebalanced_prelude/DomeFarmingRebalanced';
@@ -49,6 +50,7 @@ import {MarsUniversityRebalanced} from './rebalanced_project/MarsUniversityRebal
 import {MartianIndustriesRebalanced} from './rebalanced_prelude/MartianIndustriesRebalanced';
 import {MartianRailsRebalanced} from './rebalanced_project/MartianRailsRebalanced';
 import {MassConverterRebalanced} from './rebalanced_project/MassConverterRebalanced';
+import {MeatIndustryRebalanced} from './rebalanced_project/MeatIndustryRebalanced';
 import {MetalsCompanyRebalanced} from './rebalanced_prelude/MetalsCompanyRebalanced';
 import {MicroMillsRebalanced} from './rebalanced_project/MicroMillsRebalanced';
 import {MiningGuildRebalanced} from './rebalanced_corporation/MiningGuildRebalanced';
@@ -67,9 +69,11 @@ import {PoseidonRebalanced} from './rebalanced_corporation/PoseidonRebalanced';
 import {PristarRebalanced} from './rebalanced_corporation/PristarRebalanced';
 import {RecyclonRebalanced} from './rebalanced_corporation/RecyclonRebalanced';
 import {ReleaseOfInertGasesRebalanced} from './rebalanced_project/ReleaseOfInertGasesRebalanced';
+import {ResearchOutpostRebalanced} from './rebalanced_project/ResearchOutpostRebalanced';
 import {RobinsonIndustriesRebalanced} from './rebalanced_corporation/RobinsonIndustriesRebalanced';
 import {RotatorImpactsRebalanced} from './rebalanced_project/RotatorImpactsRebalanced';
 import {SelfSufficientSettlementRebalanced} from './rebalanced_prelude/SelfSufficientSettlementRebalanced';
+import {SkyDocksRebalanced} from './rebalanced_project/SkyDocksRebalanced';
 import {SmeltingPlantRebalanced} from './rebalanced_prelude/SmeltingPlantRebalanced';
 import {SnowAlgaeRebalanced} from './rebalanced_project/SnowAlgaeRebalanced';
 import {SocietySupportRebalanced} from './rebalanced_prelude/SocietySupportRebalanced';
@@ -84,6 +88,7 @@ import {TharsisRepublicRebalanced} from './rebalanced_corporation/TharsisRepubli
 import {ThorgateRebalanced} from './rebalanced_corporation/ThorgateRebalanced';
 import {TitanAirScrappingRebalanced} from './rebalanced_project/TitanAirScrappingRebalanced';
 import {TollStationRebalanced} from './rebalanced_project/TollStationRebalanced';
+import {TopsoilContractRebalanced} from './rebalanced_project/TopsoilContractRebalanced';
 import {TropicalResortRebalanced} from './rebalanced_project/TropicalResortRebalanced';
 import {UndergroundCityRebalanced} from './rebalanced_project/UndergroundCityRebalanced';
 import {UndergroundDetonationsRebalanced} from './rebalanced_project/UndergroundDetonationsRebalanced';
@@ -93,10 +98,6 @@ import {VironRebalanced} from './rebalanced_corporation/VironRebalanced';
 import {VitorRebalanced} from './rebalanced_corporation/VitorRebalanced';
 import {WarpDriveRebalanced} from './rebalanced_project/WarpDriveRebalanced';
 import {ZeppelinsRebalanced} from './rebalanced_project/ZeppelinsRebalanced';
-import {MeatIndustryRebalanced} from './rebalanced_project/MeatIndustryRebalanced';
-import {TopsoilContractRebalanced} from './rebalanced_project/TopsoilContractRebalanced';
-import {CuttingEdgeTechnologyRebalanced} from './rebalanced_project/CuttingEdgeTechnologyRebalanced';
-import {SkyDocksRebalanced} from './rebalanced_project/SkyDocksRebalanced';
 
 export const REBALANCED_CARD_MANIFEST = new CardManifest({
   module: GameModule.Rebalanced,
@@ -129,6 +130,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.MICRO_MILLS_REBALANCED, Factory: MicroMillsRebalanced},
     {cardName: CardName.ORBITAL_CLEANUP_REBALANCED, Factory: OrbitalCleanupRebalanced, compatibility: GameModule.Promo},
     {cardName: CardName.RELEASE_OF_INERT_GASES_REBALANCED, Factory: ReleaseOfInertGasesRebalanced},
+    {cardName: CardName.RESEARCH_OUTPOST_REBALANCED, Factory: ResearchOutpostRebalanced},
     {cardName: CardName.ROTATOR_IMPACTS_REBALANCED, Factory: RotatorImpactsRebalanced, compatibility: GameModule.Venus},
     {cardName: CardName.SKY_DOCKS_REBALANCED, Factory: SkyDocksRebalanced, compatibility: GameModule.Colonies},
     {cardName: CardName.SNOW_ALGAE_REBALANCED, Factory: SnowAlgaeRebalanced, compatibility: GameModule.Promo},
@@ -239,6 +241,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     CardName.MICRO_MILLS,
     CardName.ORBITAL_CLEANUP,
     CardName.RELEASE_OF_INERT_GASES,
+    CardName.RESEARCH_OUTPOST,
     CardName.ROTATOR_IMPACTS,
     CardName.SKY_DOCKS,
     CardName.SNOW_ALGAE,
