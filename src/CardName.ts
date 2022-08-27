@@ -731,7 +731,7 @@ export enum CardName {
     // STRIP_MINE_REBALANCED = 'Strip Mine(⚖)',
     TITAN_AIRSCRAPPING_REBALANCED = 'Titan Air-scrapping(⚖)',
     TOLL_STATION_REBALANCED = 'Toll Station(⚖)',
-    // TOPSOIL_CONTRACT_REBALANCED = 'Topsoil Contract(⚖)',
+    TOPSOIL_CONTRACT_REBALANCED = 'Topsoil Contract(⚖)',
     TROPICAL_RESORT_REBALANCED = 'Tropical Resort(⚖)',
     UNDERGROUND_CITY_REBALANCED = 'Underground City(⚖)',
     UNDERGROUND_DETONATIONS_REBALANCED = 'Underground Detonations(⚖)',

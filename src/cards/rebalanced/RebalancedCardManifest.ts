@@ -94,6 +94,7 @@ import {VitorRebalanced} from './rebalanced_corporation/VitorRebalanced';
 import {WarpDriveRebalanced} from './rebalanced_project/WarpDriveRebalanced';
 import {ZeppelinsRebalanced} from './rebalanced_project/ZeppelinsRebalanced';
 import {MeatIndustryRebalanced} from './rebalanced_project/MeatIndustryRebalanced';
+import {TopsoilContractRebalanced} from './rebalanced_project/TopsoilContractRebalanced';
 
 export const REBALANCED_CARD_MANIFEST = new CardManifest({
   module: GameModule.Rebalanced,
@@ -132,6 +133,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.STRATOPOLIS_REBALANCED, Factory: StratopolisRebalanced, compatibility: GameModule.Venus},
     {cardName: CardName.TITAN_AIRSCRAPPING_REBALANCED, Factory: TitanAirScrappingRebalanced, compatibility: GameModule.Colonies},
     {cardName: CardName.TOLL_STATION_REBALANCED, Factory: TollStationRebalanced},
+    {cardName: CardName.TOPSOIL_CONTRACT_REBALANCED, Factory: TopsoilContractRebalanced},
     {cardName: CardName.TROPICAL_RESORT_REBALANCED, Factory: TropicalResortRebalanced},
     {cardName: CardName.UNDERGROUND_CITY_REBALANCED, Factory: UndergroundCityRebalanced},
     {cardName: CardName.UNDERGROUND_DETONATIONS_REBALANCED, Factory: UndergroundDetonationsRebalanced},
@@ -239,6 +241,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     CardName.STRATOPOLIS,
     CardName.TITAN_AIRSCRAPPING,
     CardName.TOLL_STATION,
+    CardName.TOPSOIL_CONTRACT,
     CardName.TROPICAL_RESORT,
     CardName.UNDERGROUND_CITY,
     CardName.UNDERGROUND_DETONATIONS,
