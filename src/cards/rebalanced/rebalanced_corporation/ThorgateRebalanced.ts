@@ -31,7 +31,7 @@ export class ThorgateRebalanced extends Card implements CorporationCard {
             ce.vSpace(Size.LARGE);
             ce.action('Spend 2X M€ to gain X energy.', (eb) => {
               eb.megacredits(2).multiplier.startAction.text('x').energy(1);
-            });
+            }).or();
             ce.action('Decr. energy prod. gain 8 M€.', (eb) => {
               eb.production((pb) => pb.energy(1)).startAction.megacredits(8);
             });
