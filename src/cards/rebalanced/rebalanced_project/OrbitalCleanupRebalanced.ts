@@ -19,25 +19,16 @@ export class OrbitalCleanupRebalanced extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'X08',
         renderData: CardRenderer.builder((b) => {
-          b.action('Gain 1 M€ per every two Science tag you have (rounded up).', (eb) => {
+          b.action('Gain 1 M€ per every two Science tag you have.', (eb) => {
             eb.empty().startAction.megacredits(1).slash().science(2).played;
-          }).br;
-          b.production((pb) => {
-            pb.megacredits(-2);
           });
         }),
-        description: 'Decrease your M€ production 2 steps.',
         victoryPoints: 2,
       },
     });
   }
 
-  public canPlay(player: Player): boolean {
-    return player.getProduction(Resources.MEGACREDITS) >= -3;
-  }
-
-  public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, -2);
+  public play() {
     return undefined;
   }
 
@@ -46,7 +37,7 @@ export class OrbitalCleanupRebalanced extends Card implements IProjectCard {
   }
 
   public action(player: Player) {
-    player.addResource(Resources.MEGACREDITS, Math.floor((player.getTagCount(Tags.SCIENCE) + 1) / 2), {log: true});
+    player.addResource(Resources.MEGACREDITS, player.getTagCount(Tags.SCIENCE) / 2, {log: true});
     return undefined;
   }
 
