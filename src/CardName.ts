@@ -728,7 +728,7 @@ export enum CardName {
     SOLAR_POWER_REBALANCED = 'Solar Power(⚖)',
     SPINOFF_DEPARTMENT_REBALANCED = 'Spin-off Department(⚖)',
     STRATOPOLIS_REBALANCED = 'Stratopolis(⚖)',
-    // STRIP_MINE_REBALANCED = 'Strip Mine(⚖)',
+    STRIP_MINE_REBALANCED = 'Strip Mine(⚖)',
     TITAN_AIRSCRAPPING_REBALANCED = 'Titan Air-scrapping(⚖)',
     TOLL_STATION_REBALANCED = 'Toll Station(⚖)',
     TOPSOIL_CONTRACT_REBALANCED = 'Topsoil Contract(⚖)',

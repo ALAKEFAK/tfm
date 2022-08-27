@@ -37,6 +37,7 @@ import {EnergySavingRebalanced} from './rebalanced_project/EnergySavingRebalance
 import {ExtractorBalloonsRebalanced} from './rebalanced_project/ExtractorBalloonsRebalanced';
 import {FactorumRebalanced} from './rebalanced_corporation/FactorumRebalanced';
 import {ForcedPrecipitationRebalanced} from './rebalanced_project/ForcedPrecipitationRebalanced';
+import {FuelFactoryRebalanced} from './rebalanced_project/FuelFactoryRebalanced';
 import {GHGImportFromVenusRebalanced} from './rebalanced_project/GHGImportFromVenusRebalanced';
 import {GMOContractRebalanced} from './rebalanced_project/GMOContractRebalanced';
 import {GalileanMiningRebalanced} from './rebalanced_prelude/GalileanMiningRebalanced';
@@ -88,6 +89,7 @@ import {SpinoffDepartmentRebalanced} from './rebalanced_project/SpinoffDepartmen
 import {SpliceRebalanced} from './rebalanced_corporation/SpliceRebalanced';
 import {StormCraftIncorporatedRebalanced} from './rebalanced_corporation/StormCraftIncorporatedRebalanced';
 import {StratopolisRebalanced} from './rebalanced_project/StratopolisRebalanced';
+import {StripMineRebalanced} from './rebalanced_project/StripMineRebalanced';
 import {SupplyDropRebalanced} from './rebalanced_prelude/SupplyDropRebalanced';
 import {TerralabsResearchRebalanced} from './rebalanced_corporation/TerralabsResearchRebalanced';
 import {TharsisRepublicRebalanced} from './rebalanced_corporation/TharsisRepublicRebalanced';
@@ -105,7 +107,6 @@ import {VironRebalanced} from './rebalanced_corporation/VironRebalanced';
 import {VitorRebalanced} from './rebalanced_corporation/VitorRebalanced';
 import {WarpDriveRebalanced} from './rebalanced_project/WarpDriveRebalanced';
 import {ZeppelinsRebalanced} from './rebalanced_project/ZeppelinsRebalanced';
-import {FuelFactoryRebalanced} from './rebalanced_project/FuelFactoryRebalanced';
 
 export const REBALANCED_CARD_MANIFEST = new CardManifest({
   module: GameModule.Rebalanced,
@@ -152,6 +153,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.SOLAR_POWER_REBALANCED, Factory: SolarPowerRebalanced},
     {cardName: CardName.SPINOFF_DEPARTMENT_REBALANCED, Factory: SpinoffDepartmentRebalanced},
     {cardName: CardName.STRATOPOLIS_REBALANCED, Factory: StratopolisRebalanced, compatibility: GameModule.Venus},
+    {cardName: CardName.STRIP_MINE_REBALANCED, Factory: StripMineRebalanced},
     {cardName: CardName.TITAN_AIRSCRAPPING_REBALANCED, Factory: TitanAirScrappingRebalanced, compatibility: GameModule.Colonies},
     {cardName: CardName.TOLL_STATION_REBALANCED, Factory: TollStationRebalanced},
     {cardName: CardName.TOPSOIL_CONTRACT_REBALANCED, Factory: TopsoilContractRebalanced},
@@ -271,6 +273,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     CardName.SOLAR_POWER,
     CardName.SPINOFF_DEPARTMENT,
     CardName.STRATOPOLIS,
+    CardName.STRIP_MINE,
     CardName.TITAN_AIRSCRAPPING,
     CardName.TOLL_STATION,
     CardName.TOPSOIL_CONTRACT,
