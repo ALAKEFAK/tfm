@@ -107,6 +107,7 @@ import {VironRebalanced} from './rebalanced_corporation/VironRebalanced';
 import {VitorRebalanced} from './rebalanced_corporation/VitorRebalanced';
 import {WarpDriveRebalanced} from './rebalanced_project/WarpDriveRebalanced';
 import {ZeppelinsRebalanced} from './rebalanced_project/ZeppelinsRebalanced';
+import {SoilFactoryRebalanced} from './rebalanced_project/SoilFactoryRebalanced';
 
 export const REBALANCED_CARD_MANIFEST = new CardManifest({
   module: GameModule.Rebalanced,
@@ -150,6 +151,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.ROTATOR_IMPACTS_REBALANCED, Factory: RotatorImpactsRebalanced, compatibility: GameModule.Venus},
     {cardName: CardName.SKY_DOCKS_REBALANCED, Factory: SkyDocksRebalanced, compatibility: GameModule.Colonies},
     {cardName: CardName.SNOW_ALGAE_REBALANCED, Factory: SnowAlgaeRebalanced, compatibility: GameModule.Promo},
+    {cardName: CardName.SOIL_FACTORY_REBALANCED, Factory: SoilFactoryRebalanced},
     {cardName: CardName.SOLAR_POWER_REBALANCED, Factory: SolarPowerRebalanced},
     {cardName: CardName.SPINOFF_DEPARTMENT_REBALANCED, Factory: SpinoffDepartmentRebalanced},
     {cardName: CardName.STRATOPOLIS_REBALANCED, Factory: StratopolisRebalanced, compatibility: GameModule.Venus},
@@ -270,6 +272,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     CardName.ROTATOR_IMPACTS,
     CardName.SKY_DOCKS,
     CardName.SNOW_ALGAE,
+    CardName.SOIL_FACTORY,
     CardName.SOLAR_POWER,
     CardName.SPINOFF_DEPARTMENT,
     CardName.STRATOPOLIS,
