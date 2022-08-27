@@ -98,6 +98,7 @@ import {VironRebalanced} from './rebalanced_corporation/VironRebalanced';
 import {VitorRebalanced} from './rebalanced_corporation/VitorRebalanced';
 import {WarpDriveRebalanced} from './rebalanced_project/WarpDriveRebalanced';
 import {ZeppelinsRebalanced} from './rebalanced_project/ZeppelinsRebalanced';
+import {EnergyMarketRebalanced} from './rebalanced_project/EnergyMarketRebalanced';
 
 export const REBALANCED_CARD_MANIFEST = new CardManifest({
   module: GameModule.Rebalanced,
@@ -115,6 +116,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.DEIMOS_DOWN_PROMO_REBALANCED, Factory: DeimosDownPromoRebalanced},
     {cardName: CardName.DESIGNED_MICRO_ORGANISMS_REBALANCED, Factory: DesignedMicroOrganismsRebalanced},
     {cardName: CardName.EARTH_CATAPULT_REBALANCED, Factory: EarthCatapultRebalanced},
+    {cardName: CardName.ENERGY_MARKET_REBALANCED, Factory: EnergyMarketRebalanced},
     {cardName: CardName.ENERGY_SAVING_REBALANCED, Factory: EnergySavingRebalanced},
     {cardName: CardName.EXTRACTOR_BALLOONS_REBALANCED, Factory: ExtractorBalloonsRebalanced, compatibility: GameModule.Venus},
     {cardName: CardName.FORCED_PRECIPITATION_REBALANCED, Factory: ForcedPrecipitationRebalanced, compatibility: GameModule.Venus},
@@ -226,6 +228,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     CardName.DEIMOS_DOWN_PROMO,
     CardName.DESIGNED_MICRO_ORGANISMS,
     CardName.EARTH_CATAPULT,
+    CardName.ENERGY_MARKET,
     CardName.ENERGY_SAVING,
     CardName.EXTRACTOR_BALLOONS,
     CardName.FORCED_PRECIPITATION,

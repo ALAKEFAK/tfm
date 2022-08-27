@@ -700,7 +700,7 @@ export enum CardName {
     DESIGNED_MICRO_ORGANISMS_REBALANCED = 'Designed Micro-organisms(⚖)',
     EARTH_CATAPULT_REBALANCED = 'Earth Catapult(⚖)',
     // EARTH_OFFICE_REBALANCED = 'Earth Office(⚖)',
-    // ENERGY_MARKET_REBALANCED = 'Energy Market(⚖)',
+    ENERGY_MARKET_REBALANCED = 'Energy Market(⚖)',
     ENERGY_SAVING_REBALANCED = 'Energy Saving(⚖)',
     EXTRACTOR_BALLOONS_REBALANCED = 'Extractor Balloons(⚖)',
     // FLOATER_LEASING_REBALANCED = 'Floater Leasing(⚖)',
