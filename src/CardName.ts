@@ -713,7 +713,7 @@ export enum CardName {
     // INSECTS_REBALANCED = 'Insects(⚖)',
     JET_STREAM_MICROSCRAPPERS_REBALANCED = 'Jet Stream Microscrappers(⚖)',
     MARS_UNIVERSITY_REBALANCED = 'Mars University(⚖)',
-    // MASS_CONVERTER_REBALANCED = 'Mass Converter(⚖)',
+    MASS_CONVERTER_REBALANCED = 'Mass Converter(⚖)',
     MARTIAN_RAILS_REBALANCED = 'Martian Rails(⚖)',
     // MEAT_INDUSTRY_REBALANCED = 'Meat Industry(⚖)',
     MICRO_MILLS_REBALANCED = 'Micro-Mills(⚖)',

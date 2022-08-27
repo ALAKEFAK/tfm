@@ -92,6 +92,7 @@ import {VironRebalanced} from './rebalanced_corporation/VironRebalanced';
 import {VitorRebalanced} from './rebalanced_corporation/VitorRebalanced';
 import {ZeppelinsRebalanced} from './rebalanced_project/ZeppelinsRebalanced';
 import {AdvancedAlloysRebalanced} from './rebalanced_project/AdvancedAlloysRebalanced';
+import {MassConverterRebalanced} from './rebalanced_project/MassConverterRebalanced';
 
 export const REBALANCED_CARD_MANIFEST = new CardManifest({
   module: GameModule.Rebalanced,
@@ -118,6 +119,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.JET_STREAM_MICROSCRAPPERS_REBALANCED, Factory: JetStreamMicroscrappersRebalanced, compatibility: GameModule.Venus},
     {cardName: CardName.MARS_UNIVERSITY_REBALANCED, Factory: MarsUniversityRebalanced},
     {cardName: CardName.MARTIAN_RAILS_REBALANCED, Factory: MartianRailsRebalanced},
+    {cardName: CardName.MASS_CONVERTER_REBALANCED, Factory: MassConverterRebalanced},
     {cardName: CardName.MICRO_MILLS_REBALANCED, Factory: MicroMillsRebalanced},
     {cardName: CardName.ORBITAL_CLEANUP_REBALANCED, Factory: OrbitalCleanupRebalanced, compatibility: GameModule.Promo},
     {cardName: CardName.RELEASE_OF_INERT_GASES_REBALANCED, Factory: ReleaseOfInertGasesRebalanced},
@@ -191,7 +193,11 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.SUPPLY_DROP_REBALANCED, Factory: SupplyDropRebalanced},
   ],
   standardProjects: [
-    {cardName: CardName.BUILD_COLONY_STANDARD_PROJECT_REBALANCED, Factory: BuildColonyStandardProjectRebalanced, compatibility: GameModule.Colonies},
+    {
+      cardName: CardName.BUILD_COLONY_STANDARD_PROJECT_REBALANCED,
+      Factory: BuildColonyStandardProjectRebalanced,
+      compatibility: GameModule.Colonies,
+    },
   ],
   cardsToRemove: [
     // projects
@@ -215,6 +221,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     CardName.JET_STREAM_MICROSCRAPPERS,
     CardName.MARS_UNIVERSITY,
     CardName.MARTIAN_RAILS,
+    CardName.MASS_CONVERTER,
     CardName.MICRO_MILLS,
     CardName.ORBITAL_CLEANUP,
     CardName.RELEASE_OF_INERT_GASES,
