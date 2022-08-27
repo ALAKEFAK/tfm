@@ -703,7 +703,7 @@ export enum CardName {
     ENERGY_MARKET_REBALANCED = 'Energy Market(⚖)',
     ENERGY_SAVING_REBALANCED = 'Energy Saving(⚖)',
     EXTRACTOR_BALLOONS_REBALANCED = 'Extractor Balloons(⚖)',
-    // FLOATER_LEASING_REBALANCED = 'Floater Leasing(⚖)',
+    FLOATER_LEASING_REBALANCED = 'Floater Leasing(⚖)',
     FORCED_PRECIPITATION_REBALANCED = 'Forced Precipitation(⚖)',
     FUEL_FACTORY_REBALANCED = 'Fuel Factory(⚖)',
     GHG_IMPORT_FROM_VENUS_REBALANCED = 'GHG Import From Venus(⚖)',

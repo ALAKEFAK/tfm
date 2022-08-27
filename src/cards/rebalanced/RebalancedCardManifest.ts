@@ -36,6 +36,7 @@ import {EnergyMarketRebalanced} from './rebalanced_project/EnergyMarketRebalance
 import {EnergySavingRebalanced} from './rebalanced_project/EnergySavingRebalanced';
 import {ExtractorBalloonsRebalanced} from './rebalanced_project/ExtractorBalloonsRebalanced';
 import {FactorumRebalanced} from './rebalanced_corporation/FactorumRebalanced';
+import {FloaterLeasingRebalanced} from './rebalanced_project/FloaterLeasingRebalanced';
 import {ForcedPrecipitationRebalanced} from './rebalanced_project/ForcedPrecipitationRebalanced';
 import {FuelFactoryRebalanced} from './rebalanced_project/FuelFactoryRebalanced';
 import {GHGImportFromVenusRebalanced} from './rebalanced_project/GHGImportFromVenusRebalanced';
@@ -84,6 +85,7 @@ import {SkyDocksRebalanced} from './rebalanced_project/SkyDocksRebalanced';
 import {SmeltingPlantRebalanced} from './rebalanced_prelude/SmeltingPlantRebalanced';
 import {SnowAlgaeRebalanced} from './rebalanced_project/SnowAlgaeRebalanced';
 import {SocietySupportRebalanced} from './rebalanced_prelude/SocietySupportRebalanced';
+import {SoilFactoryRebalanced} from './rebalanced_project/SoilFactoryRebalanced';
 import {SolarPowerRebalanced} from './rebalanced_project/SolarPowerRebalanced';
 import {SpinoffDepartmentRebalanced} from './rebalanced_project/SpinoffDepartmentRebalanced';
 import {SpliceRebalanced} from './rebalanced_corporation/SpliceRebalanced';
@@ -107,7 +109,6 @@ import {VironRebalanced} from './rebalanced_corporation/VironRebalanced';
 import {VitorRebalanced} from './rebalanced_corporation/VitorRebalanced';
 import {WarpDriveRebalanced} from './rebalanced_project/WarpDriveRebalanced';
 import {ZeppelinsRebalanced} from './rebalanced_project/ZeppelinsRebalanced';
-import {SoilFactoryRebalanced} from './rebalanced_project/SoilFactoryRebalanced';
 
 export const REBALANCED_CARD_MANIFEST = new CardManifest({
   module: GameModule.Rebalanced,
@@ -131,6 +132,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.ENERGY_MARKET_REBALANCED, Factory: EnergyMarketRebalanced},
     {cardName: CardName.ENERGY_SAVING_REBALANCED, Factory: EnergySavingRebalanced},
     {cardName: CardName.EXTRACTOR_BALLOONS_REBALANCED, Factory: ExtractorBalloonsRebalanced, compatibility: GameModule.Venus},
+    {cardName: CardName.FLOATER_LEASING_REBALANCED, Factory: FloaterLeasingRebalanced, compatibility: GameModule.Venus},
     {cardName: CardName.FORCED_PRECIPITATION_REBALANCED, Factory: ForcedPrecipitationRebalanced, compatibility: GameModule.Venus},
     {cardName: CardName.FUEL_FACTORY_REBALANCED, Factory: FuelFactoryRebalanced},
     {cardName: CardName.GHG_IMPORT_FROM_VENUS_REBALANCED, Factory: GHGImportFromVenusRebalanced, compatibility: GameModule.Venus},
@@ -252,6 +254,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     CardName.ENERGY_MARKET,
     CardName.ENERGY_SAVING,
     CardName.EXTRACTOR_BALLOONS,
+    CardName.FLOATER_LEASING,
     CardName.FORCED_PRECIPITATION,
     CardName.FUEL_FACTORY,
     CardName.GHG_IMPORT_FROM_VENUS,
