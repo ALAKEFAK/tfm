@@ -699,7 +699,7 @@ export enum CardName {
     DEIMOS_DOWN_PROMO_REBALANCED = 'Deimos Down(⚖)',
     DESIGNED_MICRO_ORGANISMS_REBALANCED = 'Designed Micro-organisms(⚖)',
     EARTH_CATAPULT_REBALANCED = 'Earth Catapult(⚖)',
-    // EARTH_OFFICE_REBALANCED = 'Earth Office(⚖)',
+    EARTH_OFFICE_REBALANCED = 'Earth Office(⚖)',
     ENERGY_MARKET_REBALANCED = 'Energy Market(⚖)',
     ENERGY_SAVING_REBALANCED = 'Energy Saving(⚖)',
     EXTRACTOR_BALLOONS_REBALANCED = 'Extractor Balloons(⚖)',

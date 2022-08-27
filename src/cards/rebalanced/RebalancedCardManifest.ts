@@ -27,8 +27,10 @@ import {DomeFarmingRebalanced} from './rebalanced_prelude/DomeFarmingRebalanced'
 import {DonationRebalanced} from './rebalanced_prelude/DonationRebalanced';
 import {EarlySettlementRebalanced} from './rebalanced_prelude/EarlySettlementRebalanced';
 import {EarthCatapultRebalanced} from './rebalanced_project/EarthCatapultRebalanced';
+import {EarthOfficeRebalanced} from './rebalanced_project/EarthOfficeRebalanced';
 import {EccentricSponsorRebalanced} from './rebalanced_prelude/EccentricSponsorRebalanced';
 import {EcoLineRebalanced} from './rebalanced_corporation/EcoLineRebalanced';
+import {EnergyMarketRebalanced} from './rebalanced_project/EnergyMarketRebalanced';
 import {EnergySavingRebalanced} from './rebalanced_project/EnergySavingRebalanced';
 import {ExtractorBalloonsRebalanced} from './rebalanced_project/ExtractorBalloonsRebalanced';
 import {FactorumRebalanced} from './rebalanced_corporation/FactorumRebalanced';
@@ -70,6 +72,7 @@ import {PristarRebalanced} from './rebalanced_corporation/PristarRebalanced';
 import {RecyclonRebalanced} from './rebalanced_corporation/RecyclonRebalanced';
 import {ReleaseOfInertGasesRebalanced} from './rebalanced_project/ReleaseOfInertGasesRebalanced';
 import {ResearchOutpostRebalanced} from './rebalanced_project/ResearchOutpostRebalanced';
+import {RestrictedAreaRebalanced} from './rebalanced_project/RestrictedAreaRebalanced';
 import {RobinsonIndustriesRebalanced} from './rebalanced_corporation/RobinsonIndustriesRebalanced';
 import {RotatorImpactsRebalanced} from './rebalanced_project/RotatorImpactsRebalanced';
 import {SelfSufficientSettlementRebalanced} from './rebalanced_prelude/SelfSufficientSettlementRebalanced';
@@ -98,8 +101,6 @@ import {VironRebalanced} from './rebalanced_corporation/VironRebalanced';
 import {VitorRebalanced} from './rebalanced_corporation/VitorRebalanced';
 import {WarpDriveRebalanced} from './rebalanced_project/WarpDriveRebalanced';
 import {ZeppelinsRebalanced} from './rebalanced_project/ZeppelinsRebalanced';
-import {EnergyMarketRebalanced} from './rebalanced_project/EnergyMarketRebalanced';
-import {RestrictedAreaRebalanced} from './rebalanced_project/RestrictedAreaRebalanced';
 
 export const REBALANCED_CARD_MANIFEST = new CardManifest({
   module: GameModule.Rebalanced,
@@ -117,6 +118,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.DEIMOS_DOWN_PROMO_REBALANCED, Factory: DeimosDownPromoRebalanced},
     {cardName: CardName.DESIGNED_MICRO_ORGANISMS_REBALANCED, Factory: DesignedMicroOrganismsRebalanced},
     {cardName: CardName.EARTH_CATAPULT_REBALANCED, Factory: EarthCatapultRebalanced},
+    {cardName: CardName.EARTH_OFFICE_REBALANCED, Factory: EarthOfficeRebalanced},
     {cardName: CardName.ENERGY_MARKET_REBALANCED, Factory: EnergyMarketRebalanced},
     {cardName: CardName.ENERGY_SAVING_REBALANCED, Factory: EnergySavingRebalanced},
     {cardName: CardName.EXTRACTOR_BALLOONS_REBALANCED, Factory: ExtractorBalloonsRebalanced, compatibility: GameModule.Venus},
@@ -230,6 +232,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     CardName.DEIMOS_DOWN_PROMO,
     CardName.DESIGNED_MICRO_ORGANISMS,
     CardName.EARTH_CATAPULT,
+    CardName.EARTH_OFFICE,
     CardName.ENERGY_MARKET,
     CardName.ENERGY_SAVING,
     CardName.EXTRACTOR_BALLOONS,
