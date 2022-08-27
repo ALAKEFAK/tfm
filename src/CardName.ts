@@ -695,7 +695,7 @@ export enum CardName {
     CLOUD_SEEDING_REBALANCED = 'Cloud Seeding(⚖)',
     COMMUNITY_SERVICES_REBALANCED = 'Community Services(⚖)',
     CORPORATE_STRONGHOLD_REBALANCED = 'Corporate Stronghold(⚖)',
-    // CUTTING_EDGE_TECHNOLOGY_REBALANCED = 'Cutting Edge Technology(⚖)',
+    CUTTING_EDGE_TECHNOLOGY_REBALANCED = 'Cutting Edge Technology(⚖)',
     DEIMOS_DOWN_PROMO_REBALANCED = 'Deimos Down(⚖)',
     DESIGNED_MICRO_ORGANISMS_REBALANCED = 'Designed Micro-organisms(⚖)',
     EARTH_CATAPULT_REBALANCED = 'Earth Catapult(⚖)',

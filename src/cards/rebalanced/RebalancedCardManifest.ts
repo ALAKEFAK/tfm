@@ -95,6 +95,7 @@ import {WarpDriveRebalanced} from './rebalanced_project/WarpDriveRebalanced';
 import {ZeppelinsRebalanced} from './rebalanced_project/ZeppelinsRebalanced';
 import {MeatIndustryRebalanced} from './rebalanced_project/MeatIndustryRebalanced';
 import {TopsoilContractRebalanced} from './rebalanced_project/TopsoilContractRebalanced';
+import {CuttingEdgeTechnologyRebalanced} from './rebalanced_project/CuttingEdgeTechnologyRebalanced';
 
 export const REBALANCED_CARD_MANIFEST = new CardManifest({
   module: GameModule.Rebalanced,
@@ -108,6 +109,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.CLOUD_SEEDING_REBALANCED, Factory: CloudSeedingRebalanced},
     {cardName: CardName.COMMUNITY_SERVICES_REBALANCED, Factory: CommunityServicesRebalanced, compatibility: GameModule.Colonies},
     {cardName: CardName.CORPORATE_STRONGHOLD_REBALANCED, Factory: CorporateStrongholdRebalanced},
+    {cardName: CardName.CUTTING_EDGE_TECHNOLOGY_REBALANCED, Factory: CuttingEdgeTechnologyRebalanced},
     {cardName: CardName.DEIMOS_DOWN_PROMO_REBALANCED, Factory: DeimosDownPromoRebalanced},
     {cardName: CardName.DESIGNED_MICRO_ORGANISMS_REBALANCED, Factory: DesignedMicroOrganismsRebalanced},
     {cardName: CardName.EARTH_CATAPULT_REBALANCED, Factory: EarthCatapultRebalanced},
@@ -215,6 +217,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     CardName.CLOUD_SEEDING,
     CardName.COMMUNITY_SERVICES,
     CardName.CORPORATE_STRONGHOLD,
+    CardName.CUTTING_EDGE_TECHNOLOGY,
     CardName.DEIMOS_DOWN,
     CardName.DEIMOS_DOWN_PROMO,
     CardName.DESIGNED_MICRO_ORGANISMS,
