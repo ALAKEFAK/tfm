@@ -691,7 +691,7 @@ export enum CardName {
     BACTOVIRAL_RESEARCH_REBALANCED = 'Bactoviral Research(⚖)',
     BLACK_POLAR_DUST_REBALANCED = 'Black Polar Dust(⚖)',
     // BUILDING_INDUSTRIES_REBALANCED = 'Building Industries(⚖)',
-    // CARTEL_REBALANCED = 'Cartel(⚖)',
+    CARTEL_REBALANCED = 'Cartel(⚖)',
     CLOUD_SEEDING_REBALANCED = 'Cloud Seeding(⚖)',
     COMMUNITY_SERVICES_REBALANCED = 'Community Services(⚖)',
     CORPORATE_STRONGHOLD_REBALANCED = 'Corporate Stronghold(⚖)',
