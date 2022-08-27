@@ -105,6 +105,7 @@ import {VironRebalanced} from './rebalanced_corporation/VironRebalanced';
 import {VitorRebalanced} from './rebalanced_corporation/VitorRebalanced';
 import {WarpDriveRebalanced} from './rebalanced_project/WarpDriveRebalanced';
 import {ZeppelinsRebalanced} from './rebalanced_project/ZeppelinsRebalanced';
+import {FuelFactoryRebalanced} from './rebalanced_project/FuelFactoryRebalanced';
 
 export const REBALANCED_CARD_MANIFEST = new CardManifest({
   module: GameModule.Rebalanced,
@@ -129,6 +130,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.ENERGY_SAVING_REBALANCED, Factory: EnergySavingRebalanced},
     {cardName: CardName.EXTRACTOR_BALLOONS_REBALANCED, Factory: ExtractorBalloonsRebalanced, compatibility: GameModule.Venus},
     {cardName: CardName.FORCED_PRECIPITATION_REBALANCED, Factory: ForcedPrecipitationRebalanced, compatibility: GameModule.Venus},
+    {cardName: CardName.FUEL_FACTORY_REBALANCED, Factory: FuelFactoryRebalanced},
     {cardName: CardName.GHG_IMPORT_FROM_VENUS_REBALANCED, Factory: GHGImportFromVenusRebalanced, compatibility: GameModule.Venus},
     {cardName: CardName.GMO_CONTRACT_REBALANCED, Factory: GMOContractRebalanced, compatibility: GameModule.Turmoil},
     {cardName: CardName.HEAT_TRAPPERS_REBALANCED, Factory: HeatTrappersRebalanced},
@@ -247,6 +249,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     CardName.ENERGY_SAVING,
     CardName.EXTRACTOR_BALLOONS,
     CardName.FORCED_PRECIPITATION,
+    CardName.FUEL_FACTORY,
     CardName.GHG_IMPORT_FROM_VENUS,
     CardName.GMO_CONTRACT,
     CardName.HEAT_TRAPPERS,
