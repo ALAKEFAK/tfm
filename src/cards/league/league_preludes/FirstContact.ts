@@ -9,7 +9,7 @@ export class FirstContact extends PreludeCard {
   constructor() {
     super({
       name: CardName.FIRST_CONTACT,
-      tags: [Tags.SPACE],
+      tags: [Tags.SCIENCE],
 
       metadata: {
         cardNumber: 'L401',
