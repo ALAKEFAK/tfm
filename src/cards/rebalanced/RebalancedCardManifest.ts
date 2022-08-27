@@ -109,6 +109,7 @@ import {VironRebalanced} from './rebalanced_corporation/VironRebalanced';
 import {VitorRebalanced} from './rebalanced_corporation/VitorRebalanced';
 import {WarpDriveRebalanced} from './rebalanced_project/WarpDriveRebalanced';
 import {ZeppelinsRebalanced} from './rebalanced_project/ZeppelinsRebalanced';
+import {BuildingIndustriesRebalanced} from './rebalanced_project/BuildingIndustriesRebalanced';
 
 export const REBALANCED_CARD_MANIFEST = new CardManifest({
   module: GameModule.Rebalanced,
@@ -120,6 +121,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.ASTEROID_HOLLOWING_REBALANCED, Factory: AsteroidHollowingRebalanced, compatibility: GameModule.Promo},
     {cardName: CardName.BACTOVIRAL_RESEARCH_REBALANCED, Factory: BactoviralResearchRebalanced, compatibility: GameModule.Promo},
     {cardName: CardName.BLACK_POLAR_DUST_REBALANCED, Factory: BlackPolarDustRebalanced},
+    {cardName: CardName.BUILDING_INDUSTRIES_REBALANCED, Factory: BuildingIndustriesRebalanced},
     {cardName: CardName.CARTEL_REBALANCED, Factory: CartelRebalanced},
     {cardName: CardName.CLOUD_SEEDING_REBALANCED, Factory: CloudSeedingRebalanced},
     {cardName: CardName.COMMUNITY_SERVICES_REBALANCED, Factory: CommunityServicesRebalanced, compatibility: GameModule.Colonies},
@@ -241,6 +243,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     CardName.ASTEROID_HOLLOWING,
     CardName.BACTOVIRAL_RESEARCH,
     CardName.BLACK_POLAR_DUST,
+    CardName.BUILDING_INDUSTRIES,
     CardName.CARTEL,
     CardName.CLOUD_SEEDING,
     CardName.COMMUNITY_SERVICES,
