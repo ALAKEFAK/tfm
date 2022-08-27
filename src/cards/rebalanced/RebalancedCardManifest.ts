@@ -99,6 +99,7 @@ import {VitorRebalanced} from './rebalanced_corporation/VitorRebalanced';
 import {WarpDriveRebalanced} from './rebalanced_project/WarpDriveRebalanced';
 import {ZeppelinsRebalanced} from './rebalanced_project/ZeppelinsRebalanced';
 import {EnergyMarketRebalanced} from './rebalanced_project/EnergyMarketRebalanced';
+import {RestrictedAreaRebalanced} from './rebalanced_project/RestrictedAreaRebalanced';
 
 export const REBALANCED_CARD_MANIFEST = new CardManifest({
   module: GameModule.Rebalanced,
@@ -133,6 +134,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.ORBITAL_CLEANUP_REBALANCED, Factory: OrbitalCleanupRebalanced, compatibility: GameModule.Promo},
     {cardName: CardName.RELEASE_OF_INERT_GASES_REBALANCED, Factory: ReleaseOfInertGasesRebalanced},
     {cardName: CardName.RESEARCH_OUTPOST_REBALANCED, Factory: ResearchOutpostRebalanced},
+    {cardName: CardName.RESTRICTED_AREA_REBALANCED, Factory: RestrictedAreaRebalanced},
     {cardName: CardName.ROTATOR_IMPACTS_REBALANCED, Factory: RotatorImpactsRebalanced, compatibility: GameModule.Venus},
     {cardName: CardName.SKY_DOCKS_REBALANCED, Factory: SkyDocksRebalanced, compatibility: GameModule.Colonies},
     {cardName: CardName.SNOW_ALGAE_REBALANCED, Factory: SnowAlgaeRebalanced, compatibility: GameModule.Promo},
@@ -245,6 +247,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     CardName.ORBITAL_CLEANUP,
     CardName.RELEASE_OF_INERT_GASES,
     CardName.RESEARCH_OUTPOST,
+    CardName.RESTRICTED_AREA,
     CardName.ROTATOR_IMPACTS,
     CardName.SKY_DOCKS,
     CardName.SNOW_ALGAE,
