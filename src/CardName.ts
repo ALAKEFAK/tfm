@@ -686,7 +686,7 @@ export enum CardName {
     ADAPTED_LICHEN_REBALANCED = 'Adapted Lichen(⚖)',
     ADVANCED_ALLOYS_REBALANCED = 'Advanced Alloys(⚖)',
     AEROBRAKED_AMMONIA_ASTEROID_REBALANCED = 'Aerobraked Ammonia Asteroid(⚖)',
-    // ARCTIC_ALGAE_REBALANCED = 'Arctic Algae(⚖)',
+    ARCTIC_ALGAE_REBALANCED = 'Arctic Algae(⚖)',
     ASTEROID_HOLLOWING_REBALANCED = 'Asteroid Hollowing(⚖)',
     BACTOVIRAL_RESEARCH_REBALANCED = 'Bactoviral Research(⚖)',
     BLACK_POLAR_DUST_REBALANCED = 'Black Polar Dust(⚖)',

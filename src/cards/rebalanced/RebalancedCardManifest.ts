@@ -6,6 +6,7 @@ import {AdvancedAlloysRebalanced} from './rebalanced_project/AdvancedAlloysRebal
 import {AerobrakedAmmoniaAsteroidRebalanced} from './rebalanced_project/AerobrakedAmmoniaAsteroidRebalanced';
 import {AphroditeRebalanced} from './rebalanced_corporation/AphroditeRebalanced';
 import {ArcadianCommunitiesRebalanced} from './rebalanced_corporation/ArcadianCommunitiesRebalanced';
+import {ArcticAlgaeRebalanced} from './rebalanced_project/ArcticAlgaeRebalanced';
 import {AridorRebalanced} from './rebalanced_corporation/AridorRebalanced';
 import {ArklightRebalanced} from './rebalanced_corporation/ArklightRebalanced';
 import {AsteroidHollowingRebalanced} from './rebalanced_project/AsteroidHollowingRebalanced';
@@ -15,6 +16,7 @@ import {BiofuelsRebalanced} from './rebalanced_prelude/BiofuelsRebalanced';
 import {BiosphereSupportRebalanced} from './rebalanced_prelude/BiosphereSupportRebalanced';
 import {BlackPolarDustRebalanced} from './rebalanced_project/BlackPolarDustRebalanced';
 import {BuildColonyStandardProjectRebalanced} from './rebalanced_standardproject/BuildColonyStandardProjectRebalanced';
+import {CartelRebalanced} from './rebalanced_project/CartelRebalanced';
 import {CelesticRebalanced} from './rebalanced_corporation/CelesticRebalanced';
 import {CheungShingMARSRebalanced} from './rebalanced_corporation/CheungShingMARSRebalanced';
 import {CloudSeedingRebalanced} from './rebalanced_project/CloudSeedingRebalanced';
@@ -96,7 +98,6 @@ import {TropicalResortRebalanced} from './rebalanced_project/TropicalResortRebal
 import {UndergroundCityRebalanced} from './rebalanced_project/UndergroundCityRebalanced';
 import {UndergroundDetonationsRebalanced} from './rebalanced_project/UndergroundDetonationsRebalanced';
 import {UnitedNationsMarsInitiativeRebalanced} from './rebalanced_corporation/UnitedNationsMarsInitiativeRebalanced';
-import {CartelRebalanced} from './rebalanced_project/CartelRebalanced';
 import {UtopiaInvestRebalanced} from './rebalanced_corporation/UtopiaInvestRebalanced';
 import {ViralEnhancersRebalanced} from './rebalanced_project/ViralEnhancersRebalanced';
 import {VironRebalanced} from './rebalanced_corporation/VironRebalanced';
@@ -110,6 +111,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.ADAPTED_LICHEN_REBALANCED, Factory: AdaptedLichenRebalanced},
     {cardName: CardName.ADVANCED_ALLOYS_REBALANCED, Factory: AdvancedAlloysRebalanced},
     {cardName: CardName.AEROBRAKED_AMMONIA_ASTEROID_REBALANCED, Factory: AerobrakedAmmoniaAsteroidRebalanced},
+    {cardName: CardName.ARCTIC_ALGAE_REBALANCED, Factory: ArcticAlgaeRebalanced},
     {cardName: CardName.ASTEROID_HOLLOWING_REBALANCED, Factory: AsteroidHollowingRebalanced, compatibility: GameModule.Promo},
     {cardName: CardName.BACTOVIRAL_RESEARCH_REBALANCED, Factory: BactoviralResearchRebalanced, compatibility: GameModule.Promo},
     {cardName: CardName.BLACK_POLAR_DUST_REBALANCED, Factory: BlackPolarDustRebalanced},
@@ -225,6 +227,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     CardName.ADAPTED_LICHEN,
     CardName.ADVANCED_ALLOYS,
     CardName.AEROBRAKED_AMMONIA_ASTEROID,
+    CardName.ARCTIC_ALGAE,
     CardName.ASTEROID_HOLLOWING,
     CardName.BACTOVIRAL_RESEARCH,
     CardName.BLACK_POLAR_DUST,
