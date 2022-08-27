@@ -258,7 +258,7 @@ export class PartyCardRequirement extends CardRequirement {
   }
   public satisfies(player: Player): boolean {
     if (player.game.turmoil !== undefined) {
-      return player.game.turmoil.canPlay(player, this.party);
+      return player.game.turmoil.canPlay(player, this.party) || player.isManOfThePeople;
     }
     return false;
   }

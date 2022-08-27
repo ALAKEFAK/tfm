@@ -749,6 +749,7 @@ export enum CardName {
     HEAVY_METAL_BIOREMEDIATION = 'Heavy Metal Bioremediation',
     INCINERATOR = 'Incinerator',
     LABORATORY_MICE = 'Laboratory Mice',
+    MAN_OF_THE_PEOPLE = 'Man Of The People',
     MARS_HEAVY_INDUSTRY = 'Mars Heavy Industry',
     MATING_SEASON = 'Mating Season',
     RECYCLED_PROJECTS = 'Recycled Projects',

@@ -3,14 +3,15 @@ import {GameModule} from '../../GameModule';
 import {CardManifest} from '../CardManifest';
 import {DelayedEntry} from './league_project/DelayedEntry';
 import {FireSale} from './league_project/FireSale';
+import {FirstContact} from './league_preludes/FirstContact';
+import {HeavyMetalBioremediation} from './league_project/HeavyMetalBioremediation';
 import {Incinerator} from './league_project/Incinerator';
 import {LaboratoryMice} from './league_project/LaboratoryMice';
+import {ManOfThePeople} from './league_preludes/ManOfThePeople';
 import {MarsHeavyIndustry} from './league_project/MarsHeavyIndustry';
 import {MatingSeason} from './league_project/MatingSeason';
-import {HeavyMetalBioremediation} from './league_project/HeavyMetalBioremediation';
 import {RecycledProjects} from './league_project/RecycledProjects';
 import {TargetedTurmoil} from './league_project/TargetedTurmoil';
-import {FirstContact} from './league_preludes/FirstContact';
 
 export const LEAGUE_CARD_MANIFEST = new CardManifest({
   module: GameModule.League,
@@ -26,6 +27,7 @@ export const LEAGUE_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.TARGETED_TURMOIL, Factory: TargetedTurmoil, compatibility: GameModule.Turmoil},
   ],
   preludeCards: [
-    {cardName: CardName.FIRST_CONTACT, Factory: FirstContact},
+    {cardName: CardName.FIRST_CONTACT, Factory: FirstContact, compatibility: GameModule.Colonies},
+    {cardName: CardName.MAN_OF_THE_PEOPLE, Factory: ManOfThePeople, compatibility: GameModule.Turmoil},
   ],
 });
