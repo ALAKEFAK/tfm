@@ -37,7 +37,7 @@ export class OrbitalCleanupRebalanced extends Card implements IProjectCard {
   }
 
   public action(player: Player) {
-    player.addResource(Resources.MEGACREDITS, player.getTagCount(Tags.SCIENCE) / 2, {log: true});
+    player.addResource(Resources.MEGACREDITS, Math.floor(player.getTagCount(Tags.SCIENCE) / 2), {log: true});
     return undefined;
   }
 
