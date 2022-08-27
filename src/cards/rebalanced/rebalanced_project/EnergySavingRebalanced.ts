@@ -13,8 +13,8 @@ export class EnergySavingRebalanced extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.ENERGY_SAVING_REBALANCED,
-      tags: [Tags.ENERGY],
-      cost: 14,
+      tags: [Tags.ENERGY, Tags.BUILDING],
+      cost: 15,
 
       metadata: {
         cardNumber: '189',
@@ -26,8 +26,12 @@ export class EnergySavingRebalanced extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public produce(player: Player) {
     player.addProduction(Resources.ENERGY, player.game.getCitiesInPlay(), {log: true});
+  }
+
+  public play(player: Player) {
+    this.produce(player);
     return undefined;
   }
 }

@@ -52,7 +52,7 @@ export class DryDesertsDeferredAction implements DeferredAction {
                     titaniumAmount +
                     plantsAmount +
                     energyAmount +
-                    heatAmount > this.count
+                    heatAmount !== this.count
         ) {
           throw new Error('Need to select ' + this.count + ' resource(s)');
         }

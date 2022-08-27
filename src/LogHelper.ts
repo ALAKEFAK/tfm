@@ -67,6 +67,23 @@ export class LogHelper {
     player.game.log('${0} increased Venus scale ${1} step(s)', (b) => b.player(player).number(steps));
   }
 
+  static logTargetedTurmoilDecrease(player: Player, param: string) {
+    switch (param) {
+    case 'Ocean':
+      player.game.log('${0} removed an ocean', (b) => b.player(player));
+      break;
+    case 'Oxygen':
+      player.game.log('${0} decreased oxygen level', (b) => b.player(player));
+      break;
+    case 'Temperature':
+      player.game.log('${0} decreased temperature', (b) => b.player(player));
+      break;
+    case 'Venus':
+      player.game.log('${0} decreased Venus scale', (b) => b.player(player));
+      break;
+    }
+  }
+
   static logDiscardedCards(game: Game, cards: Array<ICard> | Array<CardName>) {
     game.log('${0} card(s) were discarded', (b) => {
       b.rawString(cards.length.toString());
@@ -217,17 +234,6 @@ export class LogHelper {
     game.log(message);
   }
 
-  private static createEventMessage(event: IGlobalEvent | undefined): string {
-    if (typeof(event) !== 'undefined' && event !== null) {
-      let message = event.name + ', Desc: ' + event.description;
-      message += ', ' + event.revealedDelegate;
-      message += ' / ' + event.currentDelegate;
-      return message;
-    } else {
-      return 'None';
-    }
-  }
-
   static logKnownEvents(game: Game, FutureEventsShown: number) {
     game.log('EventQueue: ');
     game.log('Cu: ' + LogHelper.createEventMessage(game.turmoil?.currentGlobalEvent));
@@ -266,5 +272,16 @@ export class LogHelper {
                         MC: ${player.megaCredits}, \
                         Time: ${player.timer.getElapsedTimeInMinute()}, \
                         Actions: ${player.actionsTakenThisGame}`);
+  }
+
+  private static createEventMessage(event: IGlobalEvent | undefined): string {
+    if (typeof (event) !== 'undefined' && event !== null) {
+      let message = event.name + ', Desc: ' + event.description;
+      message += ', ' + event.revealedDelegate;
+      message += ' / ' + event.currentDelegate;
+      return message;
+    } else {
+      return 'None';
+    }
   }
 }

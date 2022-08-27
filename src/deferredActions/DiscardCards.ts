@@ -5,11 +5,14 @@ import {DeferredAction, Priority} from './DeferredAction';
 
 export class DiscardCards implements DeferredAction {
   public priority = Priority.DISCARD_CARDS;
+
   constructor(
-        public player: Player,
-        public count: number = 1,
-        public title: string = 'Select ' + count + ' card' + (count > 1 ? 's' : '') + ' to discard',
-  ) {}
+    public player: Player,
+    public effectName: string,
+    public count: number = 1,
+    public title: string = 'Select ' + count + ' card' + (count > 1 ? 's' : '') + ' to discard',
+  ) {
+  }
 
   public execute() {
     if (this.player.cardsInHand.length <= this.count) {
@@ -25,6 +28,8 @@ export class DiscardCards implements DeferredAction {
         for (const card of foundCards) {
           this.player.cardsInHand.splice(this.player.cardsInHand.indexOf(card), 1);
           this.player.game.dealer.discard(card);
+          this.player.game.log('You discarded ${0} due to the ${1} effect.',
+            (b) => b.card(card).string(this.effectName), {reservedFor: this.player});
         }
         return undefined;
       },

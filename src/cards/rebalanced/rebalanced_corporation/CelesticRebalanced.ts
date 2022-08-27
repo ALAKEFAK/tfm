@@ -20,13 +20,13 @@ export class CelesticRebalanced extends Card implements IActionCard, Corporation
       startingMegaCredits: 42,
       resourceType: ResourceType.FLOATER,
       cardType: CardType.CORPORATION,
-      initialActionText: 'Draw 3 cards with a floater icon on it',
+      initialActionText: 'Draw 2 cards with a floater icon on it',
 
       metadata: {
         cardNumber: 'R05',
-        description: 'You start with 42 M€. As your first action, reveal cards from the deck until you have revealed 3 cards with a floater icon on it. Take them into hand and discard the rest.',
+        description: 'You start with 42 M€. As your first action, reveal cards from the deck until you have revealed 2 cards with a floater icon on it. Take them into hand and discard the rest.',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(42).nbsp.cards(3).secondaryTag(AltSecondaryTag.FLOATER);
+          b.megacredits(42).nbsp.cards(2).secondaryTag(AltSecondaryTag.FLOATER);
           b.corpBox('action', (ce) => {
             ce.action('Add a floater each to 1 or 2 different cards. 1 VP per 3 floaters on this card.', (eb) => {
               eb.empty().startAction.floaters(1).asterix().floaters(1).asterix();
@@ -56,7 +56,7 @@ export class CelesticRebalanced extends Card implements IActionCard, Corporation
     ]);
 
     public initialAction(player: Player) {
-      player.drawCard(3, {
+      player.drawCard(2, {
         include: (card) => CelesticRebalanced.floaterCards.has(card.name) || card.resourceType === ResourceType.FLOATER,
       });
       return undefined;

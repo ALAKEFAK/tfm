@@ -15,6 +15,7 @@ import {GameModule} from './GameModule';
 import {GameOptions} from './Game';
 import {MOON_CARD_MANIFEST} from './cards/moon/MoonCardManifest';
 import {REBALANCED_CARD_MANIFEST} from './cards/rebalanced/RebalancedCardManifest';
+import {LEAGUE_CARD_MANIFEST} from './cards/league/LeagueCardManifest';
 
 export class CardLoader {
   private readonly gameOptions: GameOptions;
@@ -35,6 +36,7 @@ export class CardLoader {
       [gameOptions.communityCardsOption, COMMUNITY_CARD_MANIFEST],
       [gameOptions.moonExpansion, MOON_CARD_MANIFEST],
       [gameOptions.rebalancedExtension, REBALANCED_CARD_MANIFEST],
+      [gameOptions.leagueExtension, LEAGUE_CARD_MANIFEST],
     ];
 
     this.manifests = manifests.filter((a) => a[0]).map((a) => a[1]);

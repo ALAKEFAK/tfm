@@ -1,88 +1,95 @@
 import {CardName} from '../../CardName';
 import {GameModule} from '../../GameModule';
 import {CardManifest} from '../CardManifest';
+import {AdaptedLichenRebalanced} from './rebalanced_project/AdaptedLichenRebalanced';
+import {AerobrakedAmmoniaAsteroidRebalanced} from './rebalanced_project/AerobrakedAmmoniaAsteroidRebalanced';
 import {AphroditeRebalanced} from './rebalanced_corporation/AphroditeRebalanced';
 import {ArcadianCommunitiesRebalanced} from './rebalanced_corporation/ArcadianCommunitiesRebalanced';
 import {AridorRebalanced} from './rebalanced_corporation/AridorRebalanced';
 import {ArklightRebalanced} from './rebalanced_corporation/ArklightRebalanced';
+import {AsteroidHollowingRebalanced} from './rebalanced_project/AsteroidHollowingRebalanced';
 import {AstrodrillRebalanced} from './rebalanced_corporation/AstrodrillRebalanced';
+import {BactoviralResearchRebalanced} from './rebalanced_project/BactoviralResearchRebalanced';
+import {BiofuelsRebalanced} from './rebalanced_prelude/BiofuelsRebalanced';
+import {BiosphereSupportRebalanced} from './rebalanced_prelude/BiosphereSupportRebalanced';
+import {BlackPolarDustRebalanced} from './rebalanced_project/BlackPolarDustRebalanced';
+import {BuildColonyStandardProjectRebalanced} from './rebalanced_standardproject/BuildColonyStandardProjectRebalanced';
 import {CelesticRebalanced} from './rebalanced_corporation/CelesticRebalanced';
 import {CheungShingMARSRebalanced} from './rebalanced_corporation/CheungShingMARSRebalanced';
+import {CloudSeedingRebalanced} from './rebalanced_project/CloudSeedingRebalanced';
+import {CommunityServicesRebalanced} from './rebalanced_project/CommunityServicesRebalanced';
+import {CorporateStrongholdRebalanced} from './rebalanced_project/CorporateStrongholdRebalanced';
+import {DeimosDownPromoRebalanced} from './rebalanced_project/DeimosDownPromoRebalanced';
+import {DesignedMicroOrganismsRebalanced} from './rebalanced_project/DesignedMicroOrganismsRebalanced';
+import {DomeFarmingRebalanced} from './rebalanced_prelude/DomeFarmingRebalanced';
+import {DonationRebalanced} from './rebalanced_prelude/DonationRebalanced';
+import {EarlySettlementRebalanced} from './rebalanced_prelude/EarlySettlementRebalanced';
+import {EarthCatapultRebalanced} from './rebalanced_project/EarthCatapultRebalanced';
+import {EccentricSponsorRebalanced} from './rebalanced_prelude/EccentricSponsorRebalanced';
 import {EcoLineRebalanced} from './rebalanced_corporation/EcoLineRebalanced';
+import {EnergySavingRebalanced} from './rebalanced_project/EnergySavingRebalanced';
+import {ExtractorBalloonsRebalanced} from './rebalanced_project/ExtractorBalloonsRebalanced';
 import {FactorumRebalanced} from './rebalanced_corporation/FactorumRebalanced';
+import {ForcedPrecipitationRebalanced} from './rebalanced_project/ForcedPrecipitationRebalanced';
+import {GHGImportFromVenusRebalanced} from './rebalanced_project/GHGImportFromVenusRebalanced';
+import {GMOContractRebalanced} from './rebalanced_project/GMOContractRebalanced';
+import {GalileanMiningRebalanced} from './rebalanced_prelude/GalileanMiningRebalanced';
+import {HeatTrappersRebalanced} from './rebalanced_project/HeatTrappersRebalanced';
 import {HelionRebalanced} from './rebalanced_corporation/HelionRebalanced';
+import {HugeAsteroidRebalanced} from './rebalanced_prelude/HugeAsteroidRebalanced';
+import {IndustrialCenterRebalanced} from './rebalanced_project/IndustrialCenterRebalanced';
 import {InterplanetaryCinematicsRebalanced} from './rebalanced_corporation/InterplanetaryCinematicsRebalanced';
 import {InventrixRebalanced} from './rebalanced_corporation/InventrixRebalanced';
+import {IoResearchOutpostRebalanced} from './rebalanced_prelude/IoResearchOutpostRebalanced';
+import {JetStreamMicroscrappersRebalanced} from './rebalanced_project/JetStreamMicroscrappersRebalanced';
+import {LakefrontResortsRebalanced} from './rebalanced_corporation/LakefrontResortsRebalanced';
+import {LoanRebalanced} from './rebalanced_prelude/LoanRebalanced';
+import {MarsUniversityRebalanced} from './rebalanced_project/MarsUniversityRebalanced';
+import {MartianIndustriesRebalanced} from './rebalanced_prelude/MartianIndustriesRebalanced';
+import {MartianRailsRebalanced} from './rebalanced_project/MartianRailsRebalanced';
+import {MetalsCompanyRebalanced} from './rebalanced_prelude/MetalsCompanyRebalanced';
+import {MicroMillsRebalanced} from './rebalanced_project/MicroMillsRebalanced';
 import {MiningGuildRebalanced} from './rebalanced_corporation/MiningGuildRebalanced';
+import {MoholeExcavationRebalanced} from './rebalanced_prelude/MoholeExcavationRebalanced';
+import {MoholeRebalanced} from './rebalanced_prelude/MoholeRebalanced';
 import {MonsInsuranceRebalanced} from './rebalanced_corporation/MonsInsuranceRebalanced';
 import {MorningStarIncRebalanced} from './rebalanced_corporation/MorningStarIncRebalanced';
+import {NitrogenDeliveryRebalanced} from './rebalanced_prelude/NitrogenDeliveryRebalanced';
+import {OrbitalCleanupRebalanced} from './rebalanced_project/OrbitalCleanupRebalanced';
+import {OrbitalConstructionYardRebalanced} from './rebalanced_prelude/OrbitalConstructionYardRebalanced';
 import {PhoboLogRebalanced} from './rebalanced_corporation/PhoboLogRebalanced';
 import {PointLunaRebalanced} from './rebalanced_corporation/PointLunaRebalanced';
+import {PolarIndustriesRebalanced} from './rebalanced_prelude/PolarIndustriesRebalanced';
 import {PolyphemosRebalanced} from './rebalanced_corporation/PolyphemosRebalanced';
 import {PoseidonRebalanced} from './rebalanced_corporation/PoseidonRebalanced';
 import {PristarRebalanced} from './rebalanced_corporation/PristarRebalanced';
 import {RecyclonRebalanced} from './rebalanced_corporation/RecyclonRebalanced';
+import {ReleaseOfInertGasesRebalanced} from './rebalanced_project/ReleaseOfInertGasesRebalanced';
 import {RobinsonIndustriesRebalanced} from './rebalanced_corporation/RobinsonIndustriesRebalanced';
+import {RotatorImpactsRebalanced} from './rebalanced_project/RotatorImpactsRebalanced';
+import {SelfSufficientSettlementRebalanced} from './rebalanced_prelude/SelfSufficientSettlementRebalanced';
+import {SmeltingPlantRebalanced} from './rebalanced_prelude/SmeltingPlantRebalanced';
+import {SnowAlgaeRebalanced} from './rebalanced_project/SnowAlgaeRebalanced';
+import {SocietySupportRebalanced} from './rebalanced_prelude/SocietySupportRebalanced';
+import {SolarPowerRebalanced} from './rebalanced_project/SolarPowerRebalanced';
+import {SpinoffDepartmentRebalanced} from './rebalanced_project/SpinoffDepartmentRebalanced';
 import {SpliceRebalanced} from './rebalanced_corporation/SpliceRebalanced';
 import {StormCraftIncorporatedRebalanced} from './rebalanced_corporation/StormCraftIncorporatedRebalanced';
+import {StratopolisRebalanced} from './rebalanced_project/StratopolisRebalanced';
+import {SupplyDropRebalanced} from './rebalanced_prelude/SupplyDropRebalanced';
 import {TerralabsResearchRebalanced} from './rebalanced_corporation/TerralabsResearchRebalanced';
 import {TharsisRepublicRebalanced} from './rebalanced_corporation/TharsisRepublicRebalanced';
 import {ThorgateRebalanced} from './rebalanced_corporation/ThorgateRebalanced';
-import {UnitedNationsMarsInitiativeRebalanced} from './rebalanced_corporation/UnitedNationsMarsInitiativeRebalanced';
-import {BiofuelsRebalanced} from './rebalanced_prelude/BiofuelsRebalanced';
-import {BiosphereSupportRebalanced} from './rebalanced_prelude/BiosphereSupportRebalanced';
-import {DomeFarmingRebalanced} from './rebalanced_prelude/DomeFarmingRebalanced';
-import {EarlySettlementRebalanced} from './rebalanced_prelude/EarlySettlementRebalanced';
-import {HugeAsteroidRebalanced} from './rebalanced_prelude/HugeAsteroidRebalanced';
-import {MoholeExcavationRebalanced} from './rebalanced_prelude/MoholeExcavationRebalanced';
-import {MoholeRebalanced} from './rebalanced_prelude/MoholeRebalanced';
-import {NitrogenDeliveryRebalanced} from './rebalanced_prelude/NitrogenDeliveryRebalanced';
-import {PolarIndustriesRebalanced} from './rebalanced_prelude/PolarIndustriesRebalanced';
-import {SelfSufficientSettlementRebalanced} from './rebalanced_prelude/SelfSufficientSettlementRebalanced';
-import {SmeltingPlantRebalanced} from './rebalanced_prelude/SmeltingPlantRebalanced';
-import {SocietySupportRebalanced} from './rebalanced_prelude/SocietySupportRebalanced';
-import {AerobrakedAmmoniaAsteroidRebalanced} from './rebalanced_project/AerobrakedAmmoniaAsteroidRebalanced';
-import {BactoviralResearchRebalanced} from './rebalanced_project/BactoviralResearchRebalanced';
-import {EarthCatapultRebalanced} from './rebalanced_project/EarthCatapultRebalanced';
-import {MarsUniversityRebalanced} from './rebalanced_project/MarsUniversityRebalanced';
-import {TollStationRebalanced} from './rebalanced_project/TollStationRebalanced';
-import {UndergroundDetonationsRebalanced} from './rebalanced_project/UndergroundDetonationsRebalanced';
-import {BuildColonyStandardProjectRebalanced} from './rebalanced_standardproject/BuildColonyStandardProjectRebalanced';
-import {VironRebalanced} from './rebalanced_corporation/VironRebalanced';
-import {VitorRebalanced} from './rebalanced_corporation/VitorRebalanced';
-import {UtopiaInvestRebalanced} from './rebalanced_corporation/UtopiaInvestRebalanced';
-import {MetalsCompanyRebalanced} from './rebalanced_prelude/MetalsCompanyRebalanced';
-import {SupplyDropRebalanced} from './rebalanced_prelude/SupplyDropRebalanced';
-import {LoanRebalanced} from './rebalanced_prelude/LoanRebalanced';
-import {DonationRebalanced} from './rebalanced_prelude/DonationRebalanced';
-import {ExtractorBalloonsRebalanced} from './rebalanced_project/ExtractorBalloonsRebalanced';
-import {ForcedPrecipitationRebalanced} from './rebalanced_project/ForcedPrecipitationRebalanced';
-import {GHGImportFromVenusRebalanced} from './rebalanced_project/GHGImportFromVenusRebalanced';
-import {OrbitalCleanupRebalanced} from './rebalanced_project/OrbitalCleanupRebalanced';
-import {StratopolisRebalanced} from './rebalanced_project/StratopolisRebalanced';
-import {GMOContractRebalanced} from './rebalanced_project/GMOContractRebalanced';
-import {SpinoffDepartmentRebalanced} from './rebalanced_project/SpinoffDepartmentRebalanced';
-import {EccentricSponsorRebalanced} from './rebalanced_prelude/EccentricSponsorRebalanced';
-import {GalileanMiningRebalanced} from './rebalanced_prelude/GalileanMiningRebalanced';
-import {IoResearchOutpostRebalanced} from './rebalanced_prelude/IoResearchOutpostRebalanced';
-import {AsteroidHollowingRebalanced} from './rebalanced_project/AsteroidHollowingRebalanced';
-import {JetStreamMicroscrappersRebalanced} from './rebalanced_project/JetStreamMicroscrappersRebalanced';
-
-import {AdaptedLichenRebalanced} from './rebalanced_project/AdaptedLichenRebalanced';
-import {BlackPolarDustRebalanced} from './rebalanced_project/BlackPolarDustRebalanced';
-import {CloudSeedingRebalanced} from './rebalanced_project/CloudSeedingRebalanced';
-import {CommunityServicesRebalanced} from './rebalanced_project/CommunityServicesRebalanced';
-import {CorporateStrongholdRebalanced} from './rebalanced_project/CorporateStrongholdRebalanced';
-import {DesignedMicroOrganismsRebalanced} from './rebalanced_project/DesignedMicroOrganismsRebalanced';
-import {EnergySavingRebalanced} from './rebalanced_project/EnergySavingRebalanced';
-import {IndustrialCenterRebalanced} from './rebalanced_project/IndustrialCenterRebalanced';
-import {MartianRailsRebalanced} from './rebalanced_project/MartianRailsRebalanced';
-import {MicroMillsRebalanced} from './rebalanced_project/MicroMillsRebalanced';
-import {ReleaseOfInertGasesRebalanced} from './rebalanced_project/ReleaseOfInertGasesRebalanced';
-import {SnowAlgaeRebalanced} from './rebalanced_project/SnowAlgaeRebalanced';
 import {TitanAirScrappingRebalanced} from './rebalanced_project/TitanAirScrappingRebalanced';
+import {TollStationRebalanced} from './rebalanced_project/TollStationRebalanced';
 import {TropicalResortRebalanced} from './rebalanced_project/TropicalResortRebalanced';
 import {UndergroundCityRebalanced} from './rebalanced_project/UndergroundCityRebalanced';
+import {UndergroundDetonationsRebalanced} from './rebalanced_project/UndergroundDetonationsRebalanced';
+import {UnitedNationsMarsInitiativeRebalanced} from './rebalanced_corporation/UnitedNationsMarsInitiativeRebalanced';
+import {UtopiaInvestRebalanced} from './rebalanced_corporation/UtopiaInvestRebalanced';
+// import {ValleyTrustRebalanced} from './rebalanced_corporation/ValleyTrustRebalanced';
+import {VironRebalanced} from './rebalanced_corporation/VironRebalanced';
+import {VitorRebalanced} from './rebalanced_corporation/VitorRebalanced';
 import {ZeppelinsRebalanced} from './rebalanced_project/ZeppelinsRebalanced';
 
 export const REBALANCED_CARD_MANIFEST = new CardManifest({
@@ -96,6 +103,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.CLOUD_SEEDING_REBALANCED, Factory: CloudSeedingRebalanced},
     {cardName: CardName.COMMUNITY_SERVICES_REBALANCED, Factory: CommunityServicesRebalanced, compatibility: GameModule.Colonies},
     {cardName: CardName.CORPORATE_STRONGHOLD_REBALANCED, Factory: CorporateStrongholdRebalanced},
+    {cardName: CardName.DEIMOS_DOWN_PROMO_REBALANCED, Factory: DeimosDownPromoRebalanced},
     {cardName: CardName.DESIGNED_MICRO_ORGANISMS_REBALANCED, Factory: DesignedMicroOrganismsRebalanced},
     {cardName: CardName.EARTH_CATAPULT_REBALANCED, Factory: EarthCatapultRebalanced},
     {cardName: CardName.ENERGY_SAVING_REBALANCED, Factory: EnergySavingRebalanced},
@@ -103,6 +111,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.FORCED_PRECIPITATION_REBALANCED, Factory: ForcedPrecipitationRebalanced, compatibility: GameModule.Venus},
     {cardName: CardName.GHG_IMPORT_FROM_VENUS_REBALANCED, Factory: GHGImportFromVenusRebalanced, compatibility: GameModule.Venus},
     {cardName: CardName.GMO_CONTRACT_REBALANCED, Factory: GMOContractRebalanced, compatibility: GameModule.Turmoil},
+    {cardName: CardName.HEAT_TRAPPERS_REBALANCED, Factory: HeatTrappersRebalanced},
     {cardName: CardName.INDUSTRIAL_CENTER_REBALANCED, Factory: IndustrialCenterRebalanced},
     {cardName: CardName.JET_STREAM_MICROSCRAPPERS_REBALANCED, Factory: JetStreamMicroscrappersRebalanced, compatibility: GameModule.Venus},
     {cardName: CardName.MARS_UNIVERSITY_REBALANCED, Factory: MarsUniversityRebalanced},
@@ -110,7 +119,9 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.MICRO_MILLS_REBALANCED, Factory: MicroMillsRebalanced},
     {cardName: CardName.ORBITAL_CLEANUP_REBALANCED, Factory: OrbitalCleanupRebalanced, compatibility: GameModule.Promo},
     {cardName: CardName.RELEASE_OF_INERT_GASES_REBALANCED, Factory: ReleaseOfInertGasesRebalanced},
+    {cardName: CardName.ROTATOR_IMPACTS_REBALANCED, Factory: RotatorImpactsRebalanced, compatibility: GameModule.Venus},
     {cardName: CardName.SNOW_ALGAE_REBALANCED, Factory: SnowAlgaeRebalanced, compatibility: GameModule.Promo},
+    {cardName: CardName.SOLAR_POWER_REBALANCED, Factory: SolarPowerRebalanced},
     {cardName: CardName.SPINOFF_DEPARTMENT_REBALANCED, Factory: SpinoffDepartmentRebalanced},
     {cardName: CardName.STRATOPOLIS_REBALANCED, Factory: StratopolisRebalanced, compatibility: GameModule.Venus},
     {cardName: CardName.TITAN_AIRSCRAPPING_REBALANCED, Factory: TitanAirScrappingRebalanced, compatibility: GameModule.Colonies},
@@ -122,28 +133,29 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
   ],
   corporationCards: [
     {cardName: CardName.APHRODITE_REBALANCED, Factory: AphroditeRebalanced, compatibility: GameModule.Venus},
-    {cardName: CardName.ARCADIAN_COMMUNITIES_REBALANCED, Factory: ArcadianCommunitiesRebalanced, compatibility: GameModule.Promo},
+    {cardName: CardName.ARCADIAN_COMMUNITIES_REBALANCED, Factory: ArcadianCommunitiesRebalanced},
     {cardName: CardName.ARIDOR_REBALANCED, Factory: AridorRebalanced, compatibility: GameModule.Colonies},
     {cardName: CardName.ARKLIGHT_REBALANCED, Factory: ArklightRebalanced},
-    {cardName: CardName.ASTRODRILL_REBALANCED, Factory: AstrodrillRebalanced, compatibility: GameModule.Promo},
+    {cardName: CardName.ASTRODRILL_REBALANCED, Factory: AstrodrillRebalanced},
     {cardName: CardName.CELESTIC_REBALANCED, Factory: CelesticRebalanced, compatibility: GameModule.Venus},
     {cardName: CardName.CHEUNG_SHING_MARS_REBALANCED, Factory: CheungShingMARSRebalanced},
     {cardName: CardName.ECOLINE_REBALANCED, Factory: EcoLineRebalanced},
-    {cardName: CardName.FACTORUM_REBALANCED, Factory: FactorumRebalanced, compatibility: GameModule.Promo},
+    {cardName: CardName.FACTORUM_REBALANCED, Factory: FactorumRebalanced},
     {cardName: CardName.HELION_REBALANCED, Factory: HelionRebalanced},
     {cardName: CardName.INTERPLANETARY_CINEMATICS_REBALANCED, Factory: InterplanetaryCinematicsRebalanced},
     {cardName: CardName.INVENTRIX_REBALANCED, Factory: InventrixRebalanced},
+    {cardName: CardName.LAKEFRONT_RESORTS_REBALANCED, Factory: LakefrontResortsRebalanced},
     {cardName: CardName.MINING_GUILD_REBALANCED, Factory: MiningGuildRebalanced},
-    {cardName: CardName.MONS_INSURANCE_REBALANCED, Factory: MonsInsuranceRebalanced, compatibility: GameModule.Promo},
+    {cardName: CardName.MONS_INSURANCE_REBALANCED, Factory: MonsInsuranceRebalanced},
     {cardName: CardName.MORNING_STAR_INC_REBALANCED, Factory: MorningStarIncRebalanced, compatibility: GameModule.Venus},
     {cardName: CardName.PHOBOLOG_REBALANCED, Factory: PhoboLogRebalanced},
     {cardName: CardName.POINT_LUNA_REBALANCED, Factory: PointLunaRebalanced},
     {cardName: CardName.POLYPHEMOS_REBALANCED, Factory: PolyphemosRebalanced},
     {cardName: CardName.POSEIDON_REBALANCED, Factory: PoseidonRebalanced, compatibility: GameModule.Colonies},
     {cardName: CardName.PRISTAR_REBALANCED, Factory: PristarRebalanced},
-    {cardName: CardName.RECYCLON_REBALANCED, Factory: RecyclonRebalanced, compatibility: GameModule.Promo},
+    {cardName: CardName.RECYCLON_REBALANCED, Factory: RecyclonRebalanced},
     {cardName: CardName.ROBINSON_INDUSTRIES_REBALANCED, Factory: RobinsonIndustriesRebalanced},
-    {cardName: CardName.SPLICE_REBALANCED, Factory: SpliceRebalanced, compatibility: GameModule.Promo},
+    {cardName: CardName.SPLICE_REBALANCED, Factory: SpliceRebalanced},
     {cardName: CardName.STORMCRAFT_INCORPORATED_REBALANCED, Factory: StormCraftIncorporatedRebalanced},
     {cardName: CardName.TERRALABS_RESEARCH_REBALANCED, Factory: TerralabsResearchRebalanced},
     {cardName: CardName.THARSIS_REPUBLIC_REBALANCED, Factory: TharsisRepublicRebalanced},
@@ -164,10 +176,12 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.HUGE_ASTEROID_REBALANCED, Factory: HugeAsteroidRebalanced},
     {cardName: CardName.IO_RESEARCH_OUTPOST_REBALANCED, Factory: IoResearchOutpostRebalanced},
     {cardName: CardName.LOAN_REBALANCED, Factory: LoanRebalanced},
+    {cardName: CardName.MARTIAN_INDUSTRIES_REBALANCED, Factory: MartianIndustriesRebalanced},
     {cardName: CardName.METALS_COMPANY_REBALANCED, Factory: MetalsCompanyRebalanced},
     {cardName: CardName.MOHOLE_EXCAVATION_REBALANCED, Factory: MoholeExcavationRebalanced},
     {cardName: CardName.MOHOLE_REBALANCED, Factory: MoholeRebalanced},
     {cardName: CardName.NITROGEN_SHIPMENT_REBALANCED, Factory: NitrogenDeliveryRebalanced},
+    {cardName: CardName.ORBITAL_CONSTRUCTION_YARD_REBALANCED, Factory: OrbitalConstructionYardRebalanced},
     {cardName: CardName.POLAR_INDUSTRIES_REBALANCED, Factory: PolarIndustriesRebalanced},
     {cardName: CardName.SELF_SUFFICIENT_SETTLEMENT_REBALANCED, Factory: SelfSufficientSettlementRebalanced},
     {cardName: CardName.SMELTING_PLANT_REBALANCED, Factory: SmeltingPlantRebalanced},
@@ -194,6 +208,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     CardName.FORCED_PRECIPITATION,
     CardName.GHG_IMPORT_FROM_VENUS,
     CardName.GMO_CONTRACT,
+    CardName.HEAT_TRAPPERS,
     CardName.INDUSTRIAL_CENTER,
     CardName.JET_STREAM_MICROSCRAPPERS,
     CardName.MARS_UNIVERSITY,
@@ -201,6 +216,8 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     CardName.MICRO_MILLS,
     CardName.ORBITAL_CLEANUP,
     CardName.RELEASE_OF_INERT_GASES,
+    CardName.ROTATOR_IMPACTS,
+    CardName.SOLAR_POWER,
     CardName.SNOW_ALGAE,
     CardName.SPINOFF_DEPARTMENT,
     CardName.STRATOPOLIS,
@@ -210,6 +227,8 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     CardName.UNDERGROUND_CITY,
     CardName.UNDERGROUND_DETONATIONS,
     CardName.ZEPPELINS,
+    CardName.DEIMOS_DOWN,
+    CardName.DEIMOS_DOWN_PROMO,
     // corporations
     CardName.APHRODITE,
     CardName.ARCADIAN_COMMUNITIES,
@@ -223,6 +242,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     CardName.HELION,
     CardName.INTERPLANETARY_CINEMATICS,
     CardName.INVENTRIX,
+    CardName.LAKEFRONT_RESORTS,
     CardName.MINING_GUILD,
     CardName.MONS_INSURANCE,
     CardName.MORNING_STAR_INC,
@@ -253,10 +273,12 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     CardName.HUGE_ASTEROID,
     CardName.IO_RESEARCH_OUTPOST,
     CardName.LOAN,
+    CardName.MARTIAN_INDUSTRIES,
     CardName.METALS_COMPANY,
     CardName.MOHOLE,
     CardName.MOHOLE_EXCAVATION,
     CardName.NITROGEN_SHIPMENT,
+    CardName.ORBITAL_CONSTRUCTION_YARD,
     CardName.POLAR_INDUSTRIES,
     CardName.SELF_SUFFICIENT_SETTLEMENT,
     CardName.SMELTING_PLANT,

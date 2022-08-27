@@ -6,7 +6,7 @@ export class Terran implements IMilestone {
   public name: string = 'Terran';
   public description: string = 'Requires that you have 6 earth tags'
   public getScore(player: Player): number {
-    return player.getTagCount(Tags.EARTH);
+    return player.getTagCount(Tags.EARTH, false, true, true);
   }
   public canClaim(player: Player): boolean {
     return this.getScore(player) >= 6;

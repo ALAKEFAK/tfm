@@ -13,17 +13,17 @@ export class InventrixRebalanced extends Card implements CorporationCard {
       name: CardName.INVENTRIX_REBALANCED,
       tags: [Tags.SCIENCE],
       initialActionText: 'Draw 3 cards',
-      startingMegaCredits: 50,
+      startingMegaCredits: 45,
 
       metadata: {
         cardNumber: 'R43',
-        description: 'As your first action in the game, draw 3 cards. Start with 50 M€.',
+        description: 'As your first action in the game, draw 3 cards. Start with 45 M€.',
         renderData: CardRenderer.builder((b) => {
           b.br;
-          b.megacredits(50).nbsp.cards(3);
+          b.megacredits(45).nbsp.cards(3);
           b.corpBox('effect', (ce) => {
-            ce.effect('Your temperature, oxygen, ocean, and Venus requirements are +3 or -3 steps, your choice in each case.', (eb) => {
-              eb.plate('Global requirements').startEffect.text('+/- 3');
+            ce.effect('Your temperature, oxygen, ocean, and Venus requirements are +4 or -4 steps, your choice in each case.', (eb) => {
+              eb.plate('Global requirements').startEffect.text('+/- 4');
             });
           });
         }),
@@ -35,7 +35,7 @@ export class InventrixRebalanced extends Card implements CorporationCard {
     return undefined;
   }
   public getRequirementBonus(): number {
-    return 3;
+    return 4;
   }
   public play() {
     return undefined;

@@ -637,6 +637,7 @@ export enum CardName {
     HELION_REBALANCED = 'Helion(⚖)',
     INTERPLANETARY_CINEMATICS_REBALANCED = 'Interplanetary Cinematics(⚖)',
     INVENTRIX_REBALANCED = 'Inventrix(⚖)',
+    LAKEFRONT_RESORTS_REBALANCED = 'Lakefront Resorts(⚖)',
     MINING_GUILD_REBALANCED = 'Mining Guild(⚖)',
     MONS_INSURANCE_REBALANCED = 'Mons Insurance(⚖)',
     MORNING_STAR_INC_REBALANCED = 'Morning Star Inc.(⚖)',
@@ -656,6 +657,7 @@ export enum CardName {
     UTOPIA_INVEST_REBALANCED = 'Utopia Invest(⚖)',
     VIRON_REBALANCED = 'Viron(⚖)',
     VITOR_REBALANCED = 'Vitor(⚖)',
+    VALLEY_TRUST_REBALANCED = 'Valley Trust(⚖)',
 
     // Rebalanced preludes
     BIOFUELS_REBALANCED = 'Biofuels(⚖)',
@@ -668,10 +670,12 @@ export enum CardName {
     HUGE_ASTEROID_REBALANCED = 'Huge Asteroid(⚖)',
     IO_RESEARCH_OUTPOST_REBALANCED = 'Io Research Outpost(⚖)',
     LOAN_REBALANCED = 'Loan(⚖)',
+    MARTIAN_INDUSTRIES_REBALANCED = 'Martian Industries(⚖)',
     METALS_COMPANY_REBALANCED = 'Metals Company(⚖)',
     MOHOLE_EXCAVATION_REBALANCED = 'Mohole Excavation(⚖)',
     MOHOLE_REBALANCED = 'Mohole(⚖)',
     NITROGEN_SHIPMENT_REBALANCED = 'Nitrogen Shipment(⚖)',
+    ORBITAL_CONSTRUCTION_YARD_REBALANCED = 'Orbital Construction Yard(⚖)',
     POLAR_INDUSTRIES_REBALANCED = 'Polar Industries(⚖)',
     SELF_SUFFICIENT_SETTLEMENT_REBALANCED = 'Self-Sufficient Settlement(⚖)',
     SMELTING_PLANT_REBALANCED = 'Smelting Plant(⚖)',
@@ -702,16 +706,31 @@ export enum CardName {
     CORPORATE_STRONGHOLD_REBALANCED = 'Corporate Stronghold(⚖)',
     DESIGNED_MICRO_ORGANISMS_REBALANCED = 'Designed Micro-organisms(⚖)',
     ENERGY_SAVING_REBALANCED = 'Energy Saving(⚖)',
+    HEAT_TRAPPERS_REBALANCED = 'Heat Trappers(⚖)',
     INDUSTRIAL_CENTER_REBALANCED = 'Industrial Center(⚖)',
     MARTIAN_RAILS_REBALANCED = 'Martian Rails(⚖)',
     MICRO_MILLS_REBALANCED = 'Micro-Mills(⚖)',
     RELEASE_OF_INERT_GASES_REBALANCED = 'Release of Inert Gases(⚖)',
+    ROTATOR_IMPACTS_REBALANCED = 'Rotator Impacts(⚖)',
+    SOLAR_POWER_REBALANCED = 'Solar Power(⚖)',
     SNOW_ALGAE_REBALANCED = 'Snow Algae(⚖)',
     TITAN_AIRSCRAPPING_REBALANCED = 'Titan Air-scrapping(⚖)',
     TROPICAL_RESORT_REBALANCED = 'Tropical Resort(⚖)',
     UNDERGROUND_CITY_REBALANCED = 'Underground City(⚖)',
     ZEPPELINS_REBALANCED = 'Zeppelins(⚖)',
+    DEIMOS_DOWN_PROMO_REBALANCED = 'Deimos Down(⚖)',
 
     // Rebalanced standard project
     BUILD_COLONY_STANDARD_PROJECT_REBALANCED = 'Colony(⚖)',
+
+    // League cards - created by players
+    FIRE_SALE = 'Fire Sale',
+    MARS_HEAVY_INDUSTRY = 'Mars Heavy Industry',
+    INCINERATOR = 'Incinerator',
+    RECYCLED_PROJECTS = 'Recycled Projects',
+    DELAYED_ENTRY = 'Delayed Entry',
+    LABORATORY_MICE = 'Laboratory Mice',
+    MATING_SEASON = 'Mating Season',
+    TARGETED_TURMOIL = 'Targeted Turmoil',
+    HEAVY_METAL_BIOREMEDIATION = 'Heavy Metal Bioremediation'
 }

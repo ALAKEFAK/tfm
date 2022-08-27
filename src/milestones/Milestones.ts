@@ -33,6 +33,7 @@ import {Sapling} from './trajectoryMilestones/Sapling';
 // import {Tropicalist} from './trajectoryMilestones/Tropicalist';
 // import {Terran} from './trajectoryMilestones/Terran';
 // import {Colonizer} from './trajectoryMilestones/Colonizer';
+import {Firestarter} from './rebalancedMilestones/Firestarter';
 
 export const ORIGINAL_MILESTONES: Array<IMilestone> = [
   new Terraformer(),
@@ -95,6 +96,10 @@ export const TRAJECTORY_COLONIES_MILESTONES: Array<IMilestone> = [
   // new Colonizer(),
 ];
 
+export const REBALANCED_MILESTONES: Array<IMilestone> = [
+  new Firestarter(),
+];
+
 export const ALL_MILESTONES: Array<IMilestone> = [
   ...ORIGINAL_MILESTONES,
   ...ELYSIUM_MILESTONES,
@@ -103,7 +108,8 @@ export const ALL_MILESTONES: Array<IMilestone> = [
   ...ARES_MILESTONES,
   ...MOON_MILESTONES,
   ...TRAJECTORY_MILESTONES,
-  ...TRAJECTORY_VENUS_MILESTONES];
+  ...TRAJECTORY_VENUS_MILESTONES,
+  ...REBALANCED_MILESTONES];
 
 export namespace Milestones {
   export const ALL = ALL_MILESTONES;

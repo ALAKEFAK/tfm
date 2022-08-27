@@ -15,10 +15,12 @@ export class CheungShingMARSRebalanced extends Card implements CorporationCard {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.CHEUNG_SHING_MARS_REBALANCED,
-      tags: [Tags.BUILDING],
+      tags: [Tags.BUILDING, Tags.SPACE],
       startingMegaCredits: 42,
       productionBox: Units.of({megacredits: 3}),
 
+      // TODO: Second discount can be found here: src/components/overview/PlayerTags.ts PRETTIFY PLEASE!
+      // Idea: Make cardDiscount accept a list of those dicts?
       cardDiscount: {tag: Tags.BUILDING, amount: 2},
       metadata: {
         cardNumber: 'R16',
@@ -28,11 +30,11 @@ export class CheungShingMARSRebalanced extends Card implements CorporationCard {
           b.production((pb) => pb.megacredits(3)).nbsp.megacredits(42);
           b.corpBox('effect', (ce) => {
             ce.vSpace(Size.LARGE);
+            ce.effect('When you play a space tag, you pay 1 M€ less for it.', (eb) => {
+              eb.space().played.startEffect.megacredits(-1);
+            });
             ce.effect('When you play a building tag, you pay 2 M€ less for it.', (eb) => {
               eb.building().played.startEffect.megacredits(-2);
-            });
-            ce.effect('When you play a space tag, you pay 2 M€ less for it.', (eb) => {
-              eb.space().played.startEffect.megacredits(-2);
             });
           });
         }),
@@ -42,9 +44,9 @@ export class CheungShingMARSRebalanced extends Card implements CorporationCard {
 
 
   public getCardDiscount(_player: Player, card: IProjectCard) {
+    const spaceDiscount = card.tags.filter((tag) => tag === Tags.SPACE).length * 1;
     const buildingDiscount = card.tags.filter((tag) => tag === Tags.BUILDING).length * 2;
-    const spaceDiscount = card.tags.filter((tag) => tag === Tags.SPACE).length * 2;
-    return buildingDiscount + spaceDiscount;
+    return spaceDiscount + buildingDiscount;
   }
 
   public play(player: Player) {

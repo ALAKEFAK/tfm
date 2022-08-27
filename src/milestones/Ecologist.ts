@@ -7,7 +7,7 @@ export class Ecologist implements IMilestone {
     public description: string = 'Requires that you have 5 bio tags (plant, microbe and animal tags count as bio tags)'
     public getScore(player: Player): number {
       const tags: Array<Tags> = [Tags.PLANT, Tags.ANIMAL, Tags.MICROBE];
-      return player.getMultipleTagCount(tags);
+      return player.getMultipleTagCountWildtagOnce(tags);
     }
     public canClaim(player: Player): boolean {
       return this.getScore(player) >= 5;

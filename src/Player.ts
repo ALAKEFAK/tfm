@@ -75,6 +75,7 @@ import {UndoActionOption} from './inputs/UndoActionOption';
 import {LawSuit} from './cards/promo/LawSuit';
 import {CrashSiteCleanup} from './cards/promo/CrashSiteCleanup';
 import {AridorRebalanced} from './cards/rebalanced/rebalanced_corporation/AridorRebalanced';
+import {StormCraftIncorporatedRebalancedDeferredAction} from './deferredActions/StormCraftIncorporatedRebalancedDeferredAction';
 
 export type PlayerId = string;
 export type Password = string;
@@ -118,6 +119,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
   // This generation / this round
   public actionsTakenThisRound: number = 0;
+  public maxActionsThisRound: number = 2;
   private actionsThisGeneration: Set<CardName> = new Set();
   public lastCardPlayed: IProjectCard | undefined;
   private corporationInitialActionDone: boolean = false;
@@ -733,6 +735,11 @@ export class Player implements ISerializable<SerializedPlayer> {
       this.megaCredits += count * 2;
     }
 
+    // Stormcraft rebalanced hook
+    if (card.resourceType === ResourceType.FLOATER && this.corporationCard?.name === CardName.STORMCRAFT_INCORPORATED_REBALANCED) {
+      this.game.defer(new StormCraftIncorporatedRebalancedDeferredAction(this, count));
+    }
+
     if (typeof(options) !== 'number' && options.log === true) {
       LogHelper.logAddResource(this, card, count);
     }
@@ -799,7 +806,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     ].filter((tag) => tag.count > 0);
   }
 
-  public getTagCount(tag: Tags, includeEventsTags:boolean = false, includeTagSubstitutions:boolean = true): number {
+  public getTagCount(tag: Tags, includeEventsTags:boolean = false, includeTagSubstitutions:boolean = true, wildCardLimit:boolean = false): number {
     let tagCount = 0;
 
     this.playedCards.forEach((card: IProjectCard) => {
@@ -824,7 +831,11 @@ export class Player implements ISerializable<SerializedPlayer> {
         tagCount += this.getTagCount(Tags.MOON, includeEventsTags, false);
       }
       if (tag !== Tags.WILDCARD) {
-        tagCount += this.getTagCount(Tags.WILDCARD, includeEventsTags, false);
+        if (wildCardLimit) {
+          tagCount += Math.min(this.getTagCount(Tags.WILDCARD, includeEventsTags, false), 1);
+        } else {
+          tagCount += this.getTagCount(Tags.WILDCARD, includeEventsTags, false);
+        }
       }
     } else {
     }
@@ -839,6 +850,19 @@ export class Player implements ISerializable<SerializedPlayer> {
       tagCount += this.getTagCount(tag, false, false);
     });
     return tagCount + this.getTagCount(Tags.WILDCARD);
+  }
+
+  // Return the total number of tags assocaited with these types.
+  // A wild tag are included, but only one wild tag.
+  public getMultipleTagCountWildtagOnce(tags: Array<Tags>): number {
+    let tagCount = 0;
+    tags.forEach((tag) => {
+      tagCount += this.getTagCount(tag, false, false);
+    });
+    if (this.getTagCount(Tags.WILDCARD) >= 1) {
+      return tagCount + 1;
+    }
+    return tagCount;
   }
 
   // TODO(kberg): Describe this function.
@@ -1549,15 +1573,13 @@ export class Player implements ISerializable<SerializedPlayer> {
   public get availableHeat(): number {
     if (this.isCorporation(CardName.STORMCRAFT_INCORPORATED)) {
       return this.heat + (this.getResourcesOnCorporation() * 2);
-    } else if (this.isCorporation(CardName.STORMCRAFT_INCORPORATED_REBALANCED)) {
-      return this.heat + (this.getResourcesOnCorporation() * 3);
     } else {
       return this.heat;
     }
   }
 
   public spendHeat(amount: number, cb: () => (undefined | PlayerInput) = () => undefined) : PlayerInput | undefined {
-    const isStormcraft = this.isCorporation(CardName.STORMCRAFT_INCORPORATED) || this.isCorporation(CardName.STORMCRAFT_INCORPORATED_REBALANCED);
+    const isStormcraft = this.isCorporation(CardName.STORMCRAFT_INCORPORATED);
     if (isStormcraft && this.getResourcesOnCorporation() > 0 ) {
       return (<StormCraftIncorporated> this.corporationCard).spendHeat(this, amount, cb);
     }
@@ -1925,7 +1947,10 @@ export class Player implements ISerializable<SerializedPlayer> {
       this.hasTradedThisTurn = false;
     }
 
-    if (game.hasPassedThisActionPhase(this) || (allOtherPlayersHavePassed === false && this.actionsTakenThisRound >= 2)) {
+    if (game.hasPassedThisActionPhase(this) || (allOtherPlayersHavePassed === false && this.actionsTakenThisRound >= this.maxActionsThisRound)) {
+      // Delayed Entry handling
+      if (game.hasPassedThisActionPhase(this) || this.actionsTakenThisRound === 3) this.maxActionsThisRound = 2;
+
       this.actionsTakenThisRound = 0;
       this.hasTradedThisTurn = false;
       game.playerIsFinishedTakingActions();
@@ -1947,7 +1972,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     if (corporationCard !== undefined &&
           corporationCard.initialAction !== undefined &&
           corporationCard.initialActionText !== undefined &&
-          this.corporationInitialActionDone === false
+          !this.corporationInitialActionDone
     ) {
       const initialActionOption = new SelectOption(
         {
@@ -2143,7 +2168,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     return action;
   }
 
-  private allOtherPlayersHavePassed(): boolean {
+  public allOtherPlayersHavePassed(): boolean {
     const game = this.game;
     if (game.isSoloMode()) return true;
     const players = game.getPlayers();

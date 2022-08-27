@@ -16,7 +16,7 @@ export class MarsUniversityRebalanced extends Card implements IProjectCard {
       cardType: CardType.ACTIVE,
       name: CardName.MARS_UNIVERSITY_REBALANCED,
       tags: [Tags.SCIENCE, Tags.BUILDING],
-      cost: 8,
+      cost: 12,
 
       metadata: {
         cardNumber: '073',

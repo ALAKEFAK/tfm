@@ -171,6 +171,7 @@ export const PlayerTags = Vue.component('player-tags', {
         return true;
       }
 
+      // TODO: Move out of here
       // Add second discount for Cheung Shing Mars rebalanced
       if (tag === Tags.SPACE && this.player.corporationCard?.name === CardName.CHEUNG_SHING_MARS_REBALANCED) {
         return true;
@@ -186,9 +187,10 @@ export const PlayerTags = Vue.component('player-tags', {
         }
       }
 
+      // TODO: Move out of here
       // Add second discount for Cheung Shing Mars rebalanced
       if (tag === Tags.SPACE && this.player.corporationCard?.name === CardName.CHEUNG_SHING_MARS_REBALANCED) {
-        discount += 2;
+        discount += 1;
       }
 
       if (tag === Tags.SPACE && this.player.game.turmoil?.ruling === PartyName.UNITY) {

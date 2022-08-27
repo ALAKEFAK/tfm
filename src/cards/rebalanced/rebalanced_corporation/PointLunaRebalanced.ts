@@ -36,13 +36,13 @@ export class PointLunaRebalanced extends Card implements CorporationCard {
     const tagCount = card.tags.filter((tag) => tag === Tags.EARTH).length;
     if (player.isCorporation(this.name) && card.tags.includes(Tags.EARTH)) {
       player.drawCard(tagCount);
-      player.game.defer(new DiscardCards(player, tagCount));
+      player.game.defer(new DiscardCards(player, this.name, tagCount));
     }
   }
   public play(player: Player) {
     player.addProduction(Resources.TITANIUM, 1);
     player.drawCard();
-    player.game.defer(new DiscardCards(player, 1));
+    player.game.defer(new DiscardCards(player, this.name, 1));
     return undefined;
   }
 }

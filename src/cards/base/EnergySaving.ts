@@ -1,4 +1,3 @@
-
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Tags} from '../Tags';

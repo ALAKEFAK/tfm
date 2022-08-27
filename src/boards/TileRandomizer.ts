@@ -10,6 +10,7 @@ export class TileRandomizer {
   private adjacentSpaceMap: Map<number, Array<number>> = new Map();
   private mustBeLandSpaces: Array<SpaceName> = [];
   private unshufflableSpaces: Array<number> = [];
+  private minOceanValue: number = 2;
 
   constructor(randomBoardOption: ShuffleTileOptionType, rng: Random) {
     this.rng = rng;
@@ -29,10 +30,13 @@ export class TileRandomizer {
   // Shuffle the ocean spaces and bonus spaces. But protect the land spaces supplied by
   // |lands| so that those IDs most definitely have land spaces.
   randomizeOceans(oceans: Array<boolean>): Array<boolean> {
+    // Not random
     if (this.randomBoardOption === ShuffleTileOptionType.NONE) {
       return oceans;
     }
+    // Always shuffled "full random" if no treatment afterwards
     this.shuffleArray(oceans);
+    // Limited Random
     if (this.randomBoardOption === ShuffleTileOptionType.LIMITED_RANDOM) {
       // Distribution for oceans: 10% clumping, 30% mid, 60% low clumping
       let ocean_connection_value: number = this.rng.next();
@@ -46,13 +50,21 @@ export class TileRandomizer {
       const idOrder = Array.from(Array(oceans.length).keys());
       this.shuffleArray(idOrder);
       idOrder.forEach((i) => {
+        // Only look at oceans
         if (!oceans[i]) return;
+        // Ignore unshufflable spaces
         if (this.unshufflableSpaces.includes(i)) return;
+        // Find a suitable spot to swap places with
         let landWithNotManyOceans: number | undefined = 0;
         while (true) {
-          const i = this.rng.nextInt(oceans.length);
-          landWithNotManyOceans = this.getNumAdjacentOceanSpaces(i, oceans);
-          if (landWithNotManyOceans !== undefined && landWithNotManyOceans < ocean_connection_value) break;
+          const j = this.rng.nextInt(oceans.length);
+          if (oceans[j]) continue;
+          if (this.unshufflableSpaces.includes(j)) continue;
+          const adjOceanPerc: number | undefined = this.getAdjacentOceanInfo(j, oceans, true);
+          if ((adjOceanPerc !== undefined) && (adjOceanPerc <= (ocean_connection_value / 6))) {
+            landWithNotManyOceans = j;
+            break;
+          }
         }
         [oceans[landWithNotManyOceans], oceans[i]] = [oceans[i], oceans[landWithNotManyOceans]];
       });
@@ -82,11 +94,14 @@ export class TileRandomizer {
   }
 
   // Shuffle the bonus spaces.
-  randomizeBonuses(bonuses: Array<Array<SpaceBonus>>): Array<Array<SpaceBonus>> {
+  randomizeBonuses(bonuses: Array<Array<SpaceBonus>>, oceans: Array<boolean>): Array<Array<SpaceBonus>> {
+    // Not random
     if (this.randomBoardOption === ShuffleTileOptionType.NONE) {
       return bonuses;
     }
+    // Always shuffled "full random" if no treatment afterwards
     this.shuffleArray(bonuses);
+    // Limited Random
     if (this.randomBoardOption === ShuffleTileOptionType.LIMITED_RANDOM) {
       const idOrder = Array.from(Array(bonuses.length).keys());
       this.shuffleArray(idOrder);
@@ -102,6 +117,21 @@ export class TileRandomizer {
         if (landWithTheMostAdjacentPlantBonus === undefined) return;
         [bonuses[landWithTheMostAdjacentPlantBonus], bonuses[i]] = [bonuses[i], bonuses[landWithTheMostAdjacentPlantBonus]];
       });
+      // Check oceans to have minimum value of 2
+      for (let i = 0; i < oceans.length; i++) {
+        if (this.unshufflableSpaces.includes(i)) continue;
+        // Only look at oceans
+        if (!oceans[i]) continue;
+        let oceanValue: number;
+        while (true) {
+          oceanValue = this.getHexValue(bonuses[i], i, oceans);
+          if (oceanValue >= this.minOceanValue) break;
+          const j = this.rng.nextInt(oceans.length);
+          if (this.unshufflableSpaces.includes(j)) continue;
+          if (oceans[j]) continue;
+          [bonuses[j], bonuses[i]] = [bonuses[i], bonuses[j]];
+        }
+      }
     }
     return bonuses;
   }
@@ -205,7 +235,7 @@ export class TileRandomizer {
       }
     }
 
-    const adjOceans = this.getNumAdjacentOceanSpaces(i, oceans);
+    const adjOceans = this.getAdjacentOceanInfo(i, oceans);
 
     if (typeof(adjOceans) !== 'undefined' && adjOceans !== null) {
       hexValue += 2 * adjOceans;
@@ -273,14 +303,15 @@ export class TileRandomizer {
     return candidates[idx];
   }
 
-  // calculate how many tile adjacent to i is ocean
-  getNumAdjacentOceanSpaces(i: number, oceans: Array<boolean>): number | undefined {
+  // calculate how many tile adjacent to i is ocean divided by num adj tiles
+  getAdjacentOceanInfo(i: number, oceans: Array<boolean>, get_perc: boolean=false): number | undefined {
     let oceanDeg = 0;
     const adjIds = this.adjacentSpaceMap.get(i);
     if (adjIds === undefined) return undefined;
     adjIds.forEach((idx) => {
       if (oceans[idx]) oceanDeg++;
     });
+    if (get_perc) return oceanDeg / adjIds.length;
     return oceanDeg;
   }
 
@@ -291,7 +322,7 @@ export class TileRandomizer {
     for (let i = 0; i < oceans.length; ++i) {
       if (this.unshufflableSpaces.includes(i)) continue;
       if (oceans[i]) continue;
-      const oceanDegree = this.getNumAdjacentOceanSpaces(i, oceans);
+      const oceanDegree = this.getAdjacentOceanInfo(i, oceans);
       if (oceanDegree === undefined) continue;
       if (oceanDegree > curOceanDegree) {
         curOceanDegree = oceanDegree;

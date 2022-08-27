@@ -9,6 +9,6 @@ export class Farmer implements IMilestone {
       return player.getProduction(Resources.PLANTS);
     }
     public canClaim(player: Player): boolean {
-      return this.getScore(player) >= 4;
+      return this.getScore(player) >= 5;
     }
 }

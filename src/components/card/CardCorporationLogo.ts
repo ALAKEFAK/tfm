@@ -104,6 +104,7 @@ export const CardCorporationLogo = Vue.component('CardCorporationLogo', {
       case CardName.INCITE:
         return '<span class="card-incite-logo">Incite</span>';
       case CardName.LAKEFRONT_RESORTS:
+      case CardName.LAKEFRONT_RESORTS_REBALANCED:
         return '<div class="card-lakefront-logo">LAKEFRONT <br> &nbsp;&nbsp;RESORTS</div>';
       case CardName.MINING_GUILD:
       case CardName.MINING_GUILD_REBALANCED:
@@ -148,6 +149,7 @@ export const CardCorporationLogo = Vue.component('CardCorporationLogo', {
         <div class="utopia-corp-name-2">INVEST</div>
         </div>`;
       case CardName.VALLEY_TRUST:
+      case CardName.VALLEY_TRUST_REBALANCED:
         return `<div class="card-valley-trust-logo">
         <div style="display:inline-block;margin-left:25px;padding-top: 2px;margin-bottom:0px;font-size:26px;text-shadow: 2px 2px #ccc;text-align:center">VALLEY<br/> TRUST</div>
         </div>`;
