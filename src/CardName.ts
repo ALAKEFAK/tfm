@@ -715,7 +715,7 @@ export enum CardName {
     MARS_UNIVERSITY_REBALANCED = 'Mars University(⚖)',
     MASS_CONVERTER_REBALANCED = 'Mass Converter(⚖)',
     MARTIAN_RAILS_REBALANCED = 'Martian Rails(⚖)',
-    // MEAT_INDUSTRY_REBALANCED = 'Meat Industry(⚖)',
+    MEAT_INDUSTRY_REBALANCED = 'Meat Industry(⚖)',
     MICRO_MILLS_REBALANCED = 'Micro-Mills(⚖)',
     ORBITAL_CLEANUP_REBALANCED = 'Orbital Cleanup(⚖)',
     RELEASE_OF_INERT_GASES_REBALANCED = 'Release of Inert Gases(⚖)',

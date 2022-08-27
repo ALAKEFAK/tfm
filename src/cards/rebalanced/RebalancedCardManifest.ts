@@ -93,6 +93,7 @@ import {VironRebalanced} from './rebalanced_corporation/VironRebalanced';
 import {VitorRebalanced} from './rebalanced_corporation/VitorRebalanced';
 import {WarpDriveRebalanced} from './rebalanced_project/WarpDriveRebalanced';
 import {ZeppelinsRebalanced} from './rebalanced_project/ZeppelinsRebalanced';
+import {MeatIndustryRebalanced} from './rebalanced_project/MeatIndustryRebalanced';
 
 export const REBALANCED_CARD_MANIFEST = new CardManifest({
   module: GameModule.Rebalanced,
@@ -120,6 +121,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.MARS_UNIVERSITY_REBALANCED, Factory: MarsUniversityRebalanced},
     {cardName: CardName.MARTIAN_RAILS_REBALANCED, Factory: MartianRailsRebalanced},
     {cardName: CardName.MASS_CONVERTER_REBALANCED, Factory: MassConverterRebalanced},
+    {cardName: CardName.MEAT_INDUSTRY_REBALANCED, Factory: MeatIndustryRebalanced},
     {cardName: CardName.MICRO_MILLS_REBALANCED, Factory: MicroMillsRebalanced},
     {cardName: CardName.ORBITAL_CLEANUP_REBALANCED, Factory: OrbitalCleanupRebalanced, compatibility: GameModule.Promo},
     {cardName: CardName.RELEASE_OF_INERT_GASES_REBALANCED, Factory: ReleaseOfInertGasesRebalanced},
@@ -226,6 +228,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     CardName.MARS_UNIVERSITY,
     CardName.MARTIAN_RAILS,
     CardName.MASS_CONVERTER,
+    CardName.MEAT_INDUSTRY,
     CardName.MICRO_MILLS,
     CardName.ORBITAL_CLEANUP,
     CardName.RELEASE_OF_INERT_GASES,
