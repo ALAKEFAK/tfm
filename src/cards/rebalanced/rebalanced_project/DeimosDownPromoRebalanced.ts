@@ -9,7 +9,7 @@ import {TileType} from '../../../TileType';
 import {ISpace} from '../../../boards/ISpace';
 import {PartyHooks} from '../../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../../turmoil/parties/PartyName';
-import {REDS_RULING_POLICY_COST, MAX_TEMPERATURE} from '../../../constants';
+import {MAX_TEMPERATURE, REDS_RULING_POLICY_COST} from '../../../constants';
 import {RemoveAnyPlants} from '../../../deferredActions/RemoveAnyPlants';
 import {CardRenderer} from '../../render/CardRenderer';
 
@@ -19,15 +19,15 @@ export class DeimosDownPromoRebalanced extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       name: CardName.DEIMOS_DOWN_PROMO_REBALANCED,
       tags: [Tags.SPACE],
-      cost: 33,
+      cost: 35,
 
       metadata: {
         cardNumber: 'X31',
-        description: 'Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. Remove up to 6 Plants from any player.',
+        description: 'Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. Remove up to 8 Plants from any player.',
         renderData: CardRenderer.builder((b) => {
           b.temperature(3).br;
           b.tile(TileType.DEIMOS_DOWN, true).asterix().br;
-          b.steel(4).digit.nbsp.minus().plants(-6).any;
+          b.steel(4).digit.nbsp.minus().plants(-8).any;
         }),
       },
     });
@@ -47,7 +47,7 @@ export class DeimosDownPromoRebalanced extends Card implements IProjectCard {
 
   public play(player: Player) {
     player.game.increaseTemperature(player, 3);
-    player.game.defer(new RemoveAnyPlants(player, 6));
+    player.game.defer(new RemoveAnyPlants(player, 8));
     player.steel += 4;
 
     const availableSpaces = player.game.board.getAvailableSpacesForCity(player);
