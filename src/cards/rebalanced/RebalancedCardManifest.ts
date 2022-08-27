@@ -44,6 +44,7 @@ import {HeatTrappersRebalanced} from './rebalanced_project/HeatTrappersRebalance
 import {HelionRebalanced} from './rebalanced_corporation/HelionRebalanced';
 import {HugeAsteroidRebalanced} from './rebalanced_prelude/HugeAsteroidRebalanced';
 import {IndustrialCenterRebalanced} from './rebalanced_project/IndustrialCenterRebalanced';
+import {InsectsRebalanced} from './rebalanced_project/InsectsRebalanced';
 import {InterplanetaryCinematicsRebalanced} from './rebalanced_corporation/InterplanetaryCinematicsRebalanced';
 import {InventrixRebalanced} from './rebalanced_corporation/InventrixRebalanced';
 import {IoResearchOutpostRebalanced} from './rebalanced_prelude/IoResearchOutpostRebalanced';
@@ -132,6 +133,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.GMO_CONTRACT_REBALANCED, Factory: GMOContractRebalanced, compatibility: GameModule.Turmoil},
     {cardName: CardName.HEAT_TRAPPERS_REBALANCED, Factory: HeatTrappersRebalanced},
     {cardName: CardName.INDUSTRIAL_CENTER_REBALANCED, Factory: IndustrialCenterRebalanced},
+    {cardName: CardName.INSECTS_REBALANCED, Factory: InsectsRebalanced},
     {cardName: CardName.JET_STREAM_MICROSCRAPPERS_REBALANCED, Factory: JetStreamMicroscrappersRebalanced, compatibility: GameModule.Venus},
     {cardName: CardName.MARS_UNIVERSITY_REBALANCED, Factory: MarsUniversityRebalanced},
     {cardName: CardName.MARTIAN_RAILS_REBALANCED, Factory: MartianRailsRebalanced},
@@ -249,6 +251,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     CardName.GMO_CONTRACT,
     CardName.HEAT_TRAPPERS,
     CardName.INDUSTRIAL_CENTER,
+    CardName.INSECTS,
     CardName.JET_STREAM_MICROSCRAPPERS,
     CardName.MARS_UNIVERSITY,
     CardName.MARTIAN_RAILS,
