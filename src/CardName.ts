@@ -743,13 +743,14 @@ export enum CardName {
     BUILD_COLONY_STANDARD_PROJECT_REBALANCED = 'Colony(⚖)',
 
     // League cards - created by players
-    FIRE_SALE = 'Fire Sale',
-    MARS_HEAVY_INDUSTRY = 'Mars Heavy Industry',
-    INCINERATOR = 'Incinerator',
-    RECYCLED_PROJECTS = 'Recycled Projects',
     DELAYED_ENTRY = 'Delayed Entry',
+    FIRE_SALE = 'Fire Sale',
+    FIRST_CONTACT = 'First Contact',
+    HEAVY_METAL_BIOREMEDIATION = 'Heavy Metal Bioremediation',
+    INCINERATOR = 'Incinerator',
     LABORATORY_MICE = 'Laboratory Mice',
+    MARS_HEAVY_INDUSTRY = 'Mars Heavy Industry',
     MATING_SEASON = 'Mating Season',
+    RECYCLED_PROJECTS = 'Recycled Projects',
     TARGETED_TURMOIL = 'Targeted Turmoil',
-    HEAVY_METAL_BIOREMEDIATION = 'Heavy Metal Bioremediation'
 }

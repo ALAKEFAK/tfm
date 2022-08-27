@@ -10,18 +10,22 @@ import {MatingSeason} from './league_project/MatingSeason';
 import {HeavyMetalBioremediation} from './league_project/HeavyMetalBioremediation';
 import {RecycledProjects} from './league_project/RecycledProjects';
 import {TargetedTurmoil} from './league_project/TargetedTurmoil';
+import {FirstContact} from './league_preludes/FirstContact';
 
 export const LEAGUE_CARD_MANIFEST = new CardManifest({
   module: GameModule.League,
   projectCards: [
     {cardName: CardName.DELAYED_ENTRY, Factory: DelayedEntry},
     {cardName: CardName.FIRE_SALE, Factory: FireSale},
+    {cardName: CardName.HEAVY_METAL_BIOREMEDIATION, Factory: HeavyMetalBioremediation},
     {cardName: CardName.INCINERATOR, Factory: Incinerator},
     {cardName: CardName.LABORATORY_MICE, Factory: LaboratoryMice},
     {cardName: CardName.MARS_HEAVY_INDUSTRY, Factory: MarsHeavyIndustry},
     {cardName: CardName.MATING_SEASON, Factory: MatingSeason},
-    {cardName: CardName.HEAVY_METAL_BIOREMEDIATION, Factory: HeavyMetalBioremediation},
     {cardName: CardName.RECYCLED_PROJECTS, Factory: RecycledProjects},
     {cardName: CardName.TARGETED_TURMOIL, Factory: TargetedTurmoil, compatibility: GameModule.Turmoil},
+  ],
+  preludeCards: [
+    {cardName: CardName.FIRST_CONTACT, Factory: FirstContact},
   ],
 });
