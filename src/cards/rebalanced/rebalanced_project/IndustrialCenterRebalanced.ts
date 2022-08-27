@@ -22,8 +22,8 @@ export class IndustrialCenterRebalanced extends Card implements IActionCard, IPr
     metadata: CardMetadata = {
       cardNumber: '123',
       renderData: CardRenderer.builder((b) => {
-        b.action('Spend 5 M€ to increase your steel production 1 step.', (eb) => {
-          eb.megacredits(5).startAction.production((pb) => pb.steel(1));
+        b.action('Spend 6 M€ to increase your steel production 1 step.', (eb) => {
+          eb.megacredits(6).steel(1).brackets.startAction.production((pb) => pb.steel(1));
         }).br;
         b.tile(TileType.INDUSTRIAL_CENTER, true, false).asterix();
       }),
@@ -33,20 +33,17 @@ export class IndustrialCenterRebalanced extends Card implements IActionCard, IPr
       cardType: CardType.ACTIVE,
       name,
       tags: [Tags.BUILDING],
-      cost: 6,
+      cost: 4,
       adjacencyBonus,
 
       metadata,
     });
   }
 
-  private getAvailableSpaces(player: Player): Array<ISpace> {
-    return player.game.board.getAvailableSpacesOnLand(player)
-      .filter((space) => player.game.board.getAdjacentSpaces(space).some((adjacentSpace) => Board.isCitySpace(adjacentSpace)));
-  }
   public canPlay(player: Player): boolean {
     return this.getAvailableSpaces(player).length > 0;
   }
+
   public play(player: Player) {
     return new SelectSpace('Select space adjacent to a city tile', this.getAvailableSpaces(player), (foundSpace: ISpace) => {
       player.game.addTile(player, foundSpace.spaceType, foundSpace, {tileType: TileType.INDUSTRIAL_CENTER});
@@ -54,12 +51,19 @@ export class IndustrialCenterRebalanced extends Card implements IActionCard, IPr
       return undefined;
     });
   }
+
   public canAct(player: Player): boolean {
-    return player.canAfford(5);
+    return player.canAfford(6, {steel: true});
   }
+
   public action(player: Player) {
-    player.game.defer(new SelectHowToPayDeferred(player, 5, {title: 'Select how to pay for action'}));
+    player.game.defer(new SelectHowToPayDeferred(player, 5, {canUseSteel: true, title: 'Select how to pay for action'}));
     player.addProduction(Resources.STEEL, 1);
     return undefined;
+  }
+
+  private getAvailableSpaces(player: Player): Array<ISpace> {
+    return player.game.board.getAvailableSpacesOnLand(player)
+      .filter((space) => player.game.board.getAdjacentSpaces(space).some((adjacentSpace) => Board.isCitySpace(adjacentSpace)));
   }
 }
