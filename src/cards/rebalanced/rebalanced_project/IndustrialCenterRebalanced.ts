@@ -57,7 +57,7 @@ export class IndustrialCenterRebalanced extends Card implements IActionCard, IPr
   }
 
   public action(player: Player) {
-    player.game.defer(new SelectHowToPayDeferred(player, 5, {canUseSteel: true, title: 'Select how to pay for action'}));
+    player.game.defer(new SelectHowToPayDeferred(player, 6, {canUseSteel: true, title: 'Select how to pay for action'}));
     player.addProduction(Resources.STEEL, 1);
     return undefined;
   }
