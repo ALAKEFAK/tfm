@@ -8,10 +8,6 @@ import {CardName} from '../../../CardName';
 import {CardType} from '../../CardType';
 import {CardRenderer} from '../../render/CardRenderer';
 import {Size} from '../../render/Size';
-import {SelectAmount} from '../../../inputs/SelectAmount';
-import {SelectHowToPayDeferred} from '../../../deferredActions/SelectHowToPayDeferred';
-import {OrOptions} from '../../../inputs/OrOptions';
-import {SelectOption} from '../../../inputs/SelectOption';
 
 export class ThorgateRebalanced extends Card implements CorporationCard {
   constructor() {
@@ -29,13 +25,11 @@ export class ThorgateRebalanced extends Card implements CorporationCard {
           b.production((pb) => pb.energy(1)).nbsp.megacredits(45);
           b.corpBox('action', (ce) => {
             ce.vSpace(Size.LARGE);
-            ce.action('Spend 2X M€ to gain X energy.', (eb) => {
-              eb.megacredits(2).multiplier.startAction.text('x').energy(1);
-            }).or();
             ce.action('Decr. energy prod. gain 8 M€.', (eb) => {
               eb.production((pb) => pb.energy(1)).startAction.megacredits(8);
             });
-            ce.effect(undefined, (eb) => {
+            ce.vSpace(Size.SMALL);
+            ce.effect('When playing a power card OR SP POWER OR TURMOIL KELVINISTS ACTION, you pay 3 M€ less for it.', (eb) => {
               // TODO(chosta): energy().played needs to be power() [same for space()]
               eb.energy(1).played.asterix().slash().production((pb) => {
                 pb.energy(1).heat(1);
@@ -64,43 +58,10 @@ export class ThorgateRebalanced extends Card implements CorporationCard {
   }
 
   public action(player: Player) {
-    const availableMC = player.spendableMegacredits();
-    if (availableMC >= 2 && player.getProduction(Resources.ENERGY) >= 1) {
-      return new OrOptions(
-        new SelectOption('Spend 2X M€ to gain X energy', 'Spend M€', () => {
-          return this.getEnergyOption(player, availableMC);
-        }),
-        new SelectOption('Decrease energy production 1 step to gain 8 M€', 'Decrease energy', () => {
-          return this.getMegacreditsOption(player);
-        }),
-      );
-    } else if (availableMC >= 2) {
-      return this.getEnergyOption(player, availableMC);
-    } else if (player.getProduction(Resources.ENERGY) >= 1) {
+    if (player.getProduction(Resources.ENERGY) >= 1) {
       return this.getMegacreditsOption(player);
     }
     return undefined;
-  }
-
-  private getEnergyOption(player: Player, availableMC: number): SelectAmount {
-    return new SelectAmount(
-      'Select amount of energy to gain',
-      'Gain energy',
-      (amount: number) => {
-        if (player.canUseHeatAsMegaCredits) {
-          player.addResource(Resources.ENERGY, amount);
-          player.game.defer(new SelectHowToPayDeferred(player, (amount * 2)));
-        } else {
-          player.addResource(Resources.ENERGY, amount);
-          player.deductResource(Resources.MEGACREDITS, (amount * 2));
-        }
-
-        player.game.log('${0} gained ${1} energy', (b) => b.player(player).number(amount));
-        return undefined;
-      },
-      1,
-      Math.floor(availableMC / 2),
-    );
   }
 
   private getMegacreditsOption(player: Player) {
