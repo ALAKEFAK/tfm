@@ -8,7 +8,7 @@ import {Tags} from '../../../cards/Tags';
 
 export class HeatedDiscussions implements IGlobalEvent {
     public name = GlobalEventName.HEATED_DISCUSSIONS;
-    public description = 'Lose 2 M€ for each science tag (max 5, then reduced by influence). Gain 1 heat per heat production.';
+    public description = 'Lose 2 M€ for each science tag (max 5, then reduced by influence). Gain 1 heat per heat production (max 5).';
     public revealedDelegate = PartyName.SCIENTISTS;
     public currentDelegate = PartyName.KELVINISTS;
     public resolve(game: Game, turmoil: Turmoil) {
