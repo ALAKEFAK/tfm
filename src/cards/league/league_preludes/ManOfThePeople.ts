@@ -3,6 +3,7 @@ import {Player} from '../../../Player';
 import {PreludeCard} from '../../prelude/PreludeCard';
 import {CardName} from '../../../CardName';
 import {CardRenderer} from '../../render/CardRenderer';
+import {SendDelegateToArea} from '../../../deferredActions/SendDelegateToArea';
 
 export class ManOfThePeople extends PreludeCard {
   constructor() {
@@ -13,6 +14,8 @@ export class ManOfThePeople extends PreludeCard {
       metadata: {
         cardNumber: 'L402',
         renderData: CardRenderer.builder((b) => {
+          b.delegates(1).br;
+          b.text('Place 1 delegate').br;
           b.effect('You have +1 influence.', (eb) => {
             eb.startEffect.influence(1);
           }).br;
@@ -26,6 +29,7 @@ export class ManOfThePeople extends PreludeCard {
 
   public play(player: Player) {
     if (player.game.turmoil) {
+      player.game.defer(new SendDelegateToArea(player, 'Select where to send delegate', {source: 'reserve'}));
       player.game.turmoil.addInfluenceBonus(player);
       player.isManOfThePeople = true;
     }
