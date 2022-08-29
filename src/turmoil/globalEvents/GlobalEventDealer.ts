@@ -1,49 +1,51 @@
 import {GlobalEventName} from './GlobalEventName';
 import {IGlobalEvent} from './IGlobalEvent';
 import {GlobalDustStorm} from './GlobalDustStorm';
-import {SponsoredProjects} from './SponsoredProjects';
+import {AquiferReleasedByPublicCouncil} from './AquiferReleasedByPublicCouncil';
 import {AsteroidMining} from './AsteroidMining';
-import {GenerousFunding} from './GenerousFunding';
-import {SuccessfulOrganisms} from './SuccessfulOrganisms';
-import {Productivity} from './Productivity';
+import {CelebrityLeaders} from './CelebrityLeaders';
+import {CloudSocieties} from './CloudSocieties';
+import {CorrosiveRainRebalanced} from './CorrosiveRainRebalanced';
+import {CorrosiveRain} from './CorrosiveRain';
+import {Diversity} from './Diversity';
+import {DryDeserts} from './DryDeserts';
+import {EcoSabotageRebalanced} from './EcoSabotageRebalanced';
 import {EcoSabotage} from './EcoSabotage';
+import {Election} from './Election';
+import {Game} from '../../Game';
+import {GenerousFunding} from './GenerousFunding';
+import {GlobalDustStormRebalanced} from './GlobalDustStormRebalanced';
+import {HeatedDiscussions} from './league/HeatedDiscussions';
 import {HomeworldSupport} from './HomeworldSupport';
+import {ISerializable} from '../../ISerializable';
+import {ImprovedEnergyTemplates} from './ImprovedEnergyTemplates';
+import {InterplanetaryTrade} from './InterplanetaryTrade';
+import {JovianTaxRights} from './JovianTaxRights';
+import {LeadershipSummit} from './LeadershipSummit';
+import {MicrogravityHealthProblems} from './MicrogravityHealthProblems';
 import {MinersOnStrike} from './MinersOnStrike';
 import {MudSlides} from './MudSlides';
+import {Pandemic} from './Pandemic';
+import {ParadigmBreakdown} from './ParadigmBreakdown';
+import {Productivity} from './Productivity';
+import {RedInfluence} from './RedInfluence';
 import {Revolution} from './Revolution';
 import {Riots} from './Riots';
 import {Sabotage} from './Sabotage';
-import {SnowCover} from './SnowCover';
-import {VolcanicEruptions} from './VolcanicEruptions';
-import {InterplanetaryTrade} from './InterplanetaryTrade';
-import {ImprovedEnergyTemplates} from './ImprovedEnergyTemplates';
-import {WarOnEarth} from './WarOnEarth';
-import {Pandemic} from './Pandemic';
-import {Diversity} from './Diversity';
-import {CelebrityLeaders} from './CelebrityLeaders';
-import {SpinoffProducts} from './SpinoffProducts';
-import {Election} from './Election';
-import {AquiferReleasedByPublicCouncil} from './AquiferReleasedByPublicCouncil';
-import {ParadigmBreakdown} from './ParadigmBreakdown';
-import {CorrosiveRain} from './CorrosiveRain';
-import {Game} from '../../Game';
-import {JovianTaxRights} from './JovianTaxRights';
-import {DryDeserts} from './DryDeserts';
-import {ScientificCommunity} from './ScientificCommunity';
-import {RedInfluence} from './RedInfluence';
-import {SolarnetShutdown} from './SolarnetShutdown';
-import {StrongSociety} from './StrongSociety';
-import {SolarFlare} from './SolarFlare';
-import {VenusInfrastructure} from './VenusInfrastructure';
-import {CloudSocieties} from './CloudSocieties';
-import {MicrogravityHealthProblems} from './MicrogravityHealthProblems';
-import {SerializedGlobalEventDealer} from './SerializedGlobalEventDealer';
-import {ISerializable} from '../../ISerializable';
-import {LeadershipSummit} from './LeadershipSummit';
-import {GlobalDustStormRebalanced} from './GlobalDustStormRebalanced';
-import {CorrosiveRainRebalanced} from './CorrosiveRainRebalanced';
-import {EcoSabotageRebalanced} from './EcoSabotageRebalanced';
 import {ScientificCommunityRebalanced} from './ScientificCommunityRebalanced';
+import {ScientificCommunity} from './ScientificCommunity';
+import {SealockedHolmes} from './league/SealockedHolmes';
+import {SerializedGlobalEventDealer} from './SerializedGlobalEventDealer';
+import {SnowCover} from './SnowCover';
+import {SolarFlare} from './SolarFlare';
+import {SolarnetShutdown} from './SolarnetShutdown';
+import {SpinoffProducts} from './SpinoffProducts';
+import {SponsoredProjects} from './SponsoredProjects';
+import {StrongSociety} from './StrongSociety';
+import {SuccessfulOrganisms} from './SuccessfulOrganisms';
+import {VenusInfrastructure} from './VenusInfrastructure';
+import {VolcanicEruptions} from './VolcanicEruptions';
+import {WarOnEarth} from './WarOnEarth';
 
 const COLONY_ONLY_POSITIVE_GLOBAL_EVENTS = new Map<GlobalEventName, new() => IGlobalEvent>([
   [GlobalEventName.JOVIAN_TAX_RIGHTS, JovianTaxRights],
@@ -65,43 +67,48 @@ const VENUS_POSITIVE_GLOBAL_EVENTS = new Map<GlobalEventName, new() => IGlobalEv
   [GlobalEventName.VENUS_INFRASTRUCTURE, VenusInfrastructure],
 ]);
 
+const LEAGUE_NEGATIVE_GLOBAL_EVENTS = new Map<GlobalEventName, new() => IGlobalEvent>([
+  [GlobalEventName.HEATED_DISCUSSIONS, HeatedDiscussions],
+  [GlobalEventName.SEALOCKED_HOLMES, SealockedHolmes],
+]);
+
 // ALL POSITIVE GLOBAL EVENTS
 const POSITIVE_GLOBAL_EVENTS = new Map<GlobalEventName, new() => IGlobalEvent>([
-  [GlobalEventName.SPONSORED_PROJECTS, SponsoredProjects],
+  [GlobalEventName.AQUIFER_RELEASED_BY_PUBLIC_COUNCIL, AquiferReleasedByPublicCouncil],
   [GlobalEventName.ASTEROID_MINING, AsteroidMining],
-  [GlobalEventName.GENEROUS_FUNDING, GenerousFunding],
-  [GlobalEventName.SUCCESSFUL_ORGANISMS, SuccessfulOrganisms],
-  [GlobalEventName.PRODUCTIVITY, Productivity],
-  [GlobalEventName.HOMEWORLD_SUPPORT, HomeworldSupport],
-  [GlobalEventName.VOLCANIC_ERUPTIONS, VolcanicEruptions],
+  [GlobalEventName.CELEBRITY_LEADERS, CelebrityLeaders],
   [GlobalEventName.DIVERSITY, Diversity],
+  [GlobalEventName.ELECTION, Election],
+  [GlobalEventName.GENEROUS_FUNDING, GenerousFunding],
+  [GlobalEventName.HOMEWORLD_SUPPORT, HomeworldSupport],
   [GlobalEventName.IMPROVED_ENERGY_TEMPLATES, ImprovedEnergyTemplates],
   [GlobalEventName.INTERPLANETARY_TRADE, InterplanetaryTrade],
-  [GlobalEventName.CELEBRITY_LEADERS, CelebrityLeaders],
-  [GlobalEventName.SPINOFF_PRODUCTS, SpinoffProducts],
-  [GlobalEventName.ELECTION, Election],
-  [GlobalEventName.AQUIFER_RELEASED_BY_PUBLIC_COUNCIL, AquiferReleasedByPublicCouncil],
+  [GlobalEventName.PRODUCTIVITY, Productivity],
   [GlobalEventName.SCIENTIFIC_COMMUNITY, ScientificCommunity],
+  [GlobalEventName.SPINOFF_PRODUCTS, SpinoffProducts],
+  [GlobalEventName.SPONSORED_PROJECTS, SponsoredProjects],
   [GlobalEventName.STRONG_SOCIETY, StrongSociety],
+  [GlobalEventName.SUCCESSFUL_ORGANISMS, SuccessfulOrganisms],
+  [GlobalEventName.VOLCANIC_ERUPTIONS, VolcanicEruptions],
 ]);
 
 // ALL NEGATIVE GLOBAL EVENTS
 const NEGATIVE_GLOBAL_EVENTS = new Map<GlobalEventName, new() => IGlobalEvent>([
-  [GlobalEventName.GLOBAL_DUST_STORM, GlobalDustStorm],
+  [GlobalEventName.DRY_DESERTS, DryDeserts],
   [GlobalEventName.ECO_SABOTAGE, EcoSabotage],
+  [GlobalEventName.GLOBAL_DUST_STORM, GlobalDustStorm],
   [GlobalEventName.MINERS_ON_STRIKE, MinersOnStrike],
   [GlobalEventName.MUD_SLIDES, MudSlides],
+  [GlobalEventName.PANDEMIC, Pandemic],
+  [GlobalEventName.PARADIGM_BREAKDOWN, ParadigmBreakdown],
+  [GlobalEventName.RED_INFLUENCE, RedInfluence],
   [GlobalEventName.REVOLUTION, Revolution],
   [GlobalEventName.RIOTS, Riots],
   [GlobalEventName.SABOTAGE, Sabotage],
   [GlobalEventName.SNOW_COVER, SnowCover],
-  [GlobalEventName.PANDEMIC, Pandemic],
-  [GlobalEventName.WAR_ON_EARTH, WarOnEarth],
-  [GlobalEventName.PARADIGM_BREAKDOWN, ParadigmBreakdown],
-  [GlobalEventName.DRY_DESERTS, DryDeserts],
-  [GlobalEventName.RED_INFLUENCE, RedInfluence],
   [GlobalEventName.SOLARNET_SHUTDOWN, SolarnetShutdown],
   [GlobalEventName.SOLAR_FLARE, SolarFlare],
+  [GlobalEventName.WAR_ON_EARTH, WarOnEarth],
 ]);
 
 const COMMUNITY_GLOBAL_EVENTS = new Map<GlobalEventName, new() => IGlobalEvent>([
@@ -166,7 +173,9 @@ export class GlobalEventDealer implements ISerializable<SerializedGlobalEventDea
 
       if (game.gameOptions.venusNextExtension && game.gameOptions.coloniesExtension) {
         events.push(...Array.from(VENUS_COLONY_NEGATIVE_GLOBAL_EVENTS));
-      };
+      }
+
+      if (game.gameOptions.leagueExtension) events.push(...Array.from(LEAGUE_NEGATIVE_GLOBAL_EVENTS));
     }
 
     if (game.gameOptions.venusNextExtension) events.push(...Array.from(VENUS_POSITIVE_GLOBAL_EVENTS));
