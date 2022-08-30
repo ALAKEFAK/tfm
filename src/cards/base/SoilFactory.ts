@@ -30,15 +30,22 @@ export class SoilFactory extends Card implements IProjectCard {
       },
     });
   }
+
   public canPlay(player: Player): boolean {
     return player.getProduction(Resources.ENERGY) >= 1;
   }
+
   public play(player: Player) {
-    player.addProduction(Resources.ENERGY, -1);
-    player.addProduction(Resources.PLANTS, 1);
+    this.produce(player);
     return undefined;
   }
+
   public getVictoryPoints() {
     return 1;
+  }
+
+  public produce(player: Player) {
+    player.addProduction(Resources.ENERGY, -1);
+    player.addProduction(Resources.PLANTS, 1);
   }
 }
