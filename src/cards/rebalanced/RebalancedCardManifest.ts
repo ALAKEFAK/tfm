@@ -16,6 +16,7 @@ import {BiofuelsRebalanced} from './rebalanced_prelude/BiofuelsRebalanced';
 import {BiosphereSupportRebalanced} from './rebalanced_prelude/BiosphereSupportRebalanced';
 import {BlackPolarDustRebalanced} from './rebalanced_project/BlackPolarDustRebalanced';
 import {BuildColonyStandardProjectRebalanced} from './rebalanced_standardproject/BuildColonyStandardProjectRebalanced';
+import {BuildingIndustriesRebalanced} from './rebalanced_project/BuildingIndustriesRebalanced';
 import {CartelRebalanced} from './rebalanced_project/CartelRebalanced';
 import {CelesticRebalanced} from './rebalanced_corporation/CelesticRebalanced';
 import {CheungShingMARSRebalanced} from './rebalanced_corporation/CheungShingMARSRebalanced';
@@ -68,6 +69,7 @@ import {MorningStarIncRebalanced} from './rebalanced_corporation/MorningStarIncR
 import {NitrogenDeliveryRebalanced} from './rebalanced_prelude/NitrogenDeliveryRebalanced';
 import {OrbitalCleanupRebalanced} from './rebalanced_project/OrbitalCleanupRebalanced';
 import {OrbitalConstructionYardRebalanced} from './rebalanced_prelude/OrbitalConstructionYardRebalanced';
+import {OutdoorSportsRebalanced} from './rebalanced_project/OutdoorSportsRebalanced';
 import {PhoboLogRebalanced} from './rebalanced_corporation/PhoboLogRebalanced';
 import {PointLunaRebalanced} from './rebalanced_corporation/PointLunaRebalanced';
 import {PolarIndustriesRebalanced} from './rebalanced_prelude/PolarIndustriesRebalanced';
@@ -109,7 +111,6 @@ import {VironRebalanced} from './rebalanced_corporation/VironRebalanced';
 import {VitorRebalanced} from './rebalanced_corporation/VitorRebalanced';
 import {WarpDriveRebalanced} from './rebalanced_project/WarpDriveRebalanced';
 import {ZeppelinsRebalanced} from './rebalanced_project/ZeppelinsRebalanced';
-import {BuildingIndustriesRebalanced} from './rebalanced_project/BuildingIndustriesRebalanced';
 
 export const REBALANCED_CARD_MANIFEST = new CardManifest({
   module: GameModule.Rebalanced,
@@ -118,8 +119,8 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.ADVANCED_ALLOYS_REBALANCED, Factory: AdvancedAlloysRebalanced},
     {cardName: CardName.AEROBRAKED_AMMONIA_ASTEROID_REBALANCED, Factory: AerobrakedAmmoniaAsteroidRebalanced},
     {cardName: CardName.ARCTIC_ALGAE_REBALANCED, Factory: ArcticAlgaeRebalanced},
-    {cardName: CardName.ASTEROID_HOLLOWING_REBALANCED, Factory: AsteroidHollowingRebalanced, compatibility: GameModule.Promo},
-    {cardName: CardName.BACTOVIRAL_RESEARCH_REBALANCED, Factory: BactoviralResearchRebalanced, compatibility: GameModule.Promo},
+    {cardName: CardName.ASTEROID_HOLLOWING_REBALANCED, Factory: AsteroidHollowingRebalanced},
+    {cardName: CardName.BACTOVIRAL_RESEARCH_REBALANCED, Factory: BactoviralResearchRebalanced},
     {cardName: CardName.BLACK_POLAR_DUST_REBALANCED, Factory: BlackPolarDustRebalanced},
     {cardName: CardName.BUILDING_INDUSTRIES_REBALANCED, Factory: BuildingIndustriesRebalanced},
     {cardName: CardName.CARTEL_REBALANCED, Factory: CartelRebalanced},
@@ -148,13 +149,14 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.MASS_CONVERTER_REBALANCED, Factory: MassConverterRebalanced},
     {cardName: CardName.MEAT_INDUSTRY_REBALANCED, Factory: MeatIndustryRebalanced},
     {cardName: CardName.MICRO_MILLS_REBALANCED, Factory: MicroMillsRebalanced},
-    {cardName: CardName.ORBITAL_CLEANUP_REBALANCED, Factory: OrbitalCleanupRebalanced, compatibility: GameModule.Promo},
+    {cardName: CardName.ORBITAL_CLEANUP_REBALANCED, Factory: OrbitalCleanupRebalanced},
+    {cardName: CardName.OUTDOOR_SPORTS_REBALANCED, Factory: OutdoorSportsRebalanced},
     {cardName: CardName.RELEASE_OF_INERT_GASES_REBALANCED, Factory: ReleaseOfInertGasesRebalanced},
     {cardName: CardName.RESEARCH_OUTPOST_REBALANCED, Factory: ResearchOutpostRebalanced},
     {cardName: CardName.RESTRICTED_AREA_REBALANCED, Factory: RestrictedAreaRebalanced},
     {cardName: CardName.ROTATOR_IMPACTS_REBALANCED, Factory: RotatorImpactsRebalanced, compatibility: GameModule.Venus},
     {cardName: CardName.SKY_DOCKS_REBALANCED, Factory: SkyDocksRebalanced, compatibility: GameModule.Colonies},
-    {cardName: CardName.SNOW_ALGAE_REBALANCED, Factory: SnowAlgaeRebalanced, compatibility: GameModule.Promo},
+    {cardName: CardName.SNOW_ALGAE_REBALANCED, Factory: SnowAlgaeRebalanced},
     {cardName: CardName.SOIL_FACTORY_REBALANCED, Factory: SoilFactoryRebalanced},
     {cardName: CardName.SOLAR_POWER_REBALANCED, Factory: SolarPowerRebalanced},
     {cardName: CardName.SPINOFF_DEPARTMENT_REBALANCED, Factory: SpinoffDepartmentRebalanced},
@@ -272,6 +274,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     CardName.MEAT_INDUSTRY,
     CardName.MICRO_MILLS,
     CardName.ORBITAL_CLEANUP,
+    CardName.OUTDOOR_SPORTS,
     CardName.RELEASE_OF_INERT_GASES,
     CardName.RESEARCH_OUTPOST,
     CardName.RESTRICTED_AREA,
