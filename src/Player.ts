@@ -727,12 +727,14 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     // Topsoil contract hook
-    if (card.resourceType === ResourceType.MICROBE && this.playedCards.map((card) => card.name).includes(CardName.TOPSOIL_CONTRACT)) {
+    if (card.resourceType === ResourceType.MICROBE &&
+      (this.playedCards.map((card) => card.name).includes(CardName.TOPSOIL_CONTRACT) || this.playedCards.map((card) => card.name).includes(CardName.TOPSOIL_CONTRACT_REBALANCED))) {
       this.megaCredits += count;
     }
 
     // Meat industry hook
-    if (card.resourceType === ResourceType.ANIMAL && this.playedCards.map((card) => card.name).includes(CardName.MEAT_INDUSTRY)) {
+    if (card.resourceType === ResourceType.ANIMAL &&
+      (this.playedCards.map((card) => card.name).includes(CardName.MEAT_INDUSTRY) || this.playedCards.map((card) => card.name).includes(CardName.MEAT_INDUSTRY_REBALANCED))) {
       this.megaCredits += count * 2;
     }
 
