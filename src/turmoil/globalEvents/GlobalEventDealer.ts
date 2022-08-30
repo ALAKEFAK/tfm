@@ -148,6 +148,7 @@ const ALL_EVENTS = new Map<GlobalEventName, new() => IGlobalEvent>([
   ...Array.from(COMMUNITY_GLOBAL_EVENTS),
   ...Array.from(RENAMED_GLOBAL_EVENTS),
   ...Array.from(REBALANCED_GLOBAL_EVENTS),
+  ...Array.from(LEAGUE_NEGATIVE_GLOBAL_EVENTS),
 ]);
 
 
