@@ -25,7 +25,7 @@ export class FloaterLeasingRebalanced extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, Math.max(Math.floor(player.getResourceCount(ResourceType.FLOATER) / 2), 10), {log: true});
+    player.addProduction(Resources.MEGACREDITS, Math.min(Math.floor(player.getResourceCount(ResourceType.FLOATER) / 2), 10), {log: true});
     return undefined;
   }
 }
