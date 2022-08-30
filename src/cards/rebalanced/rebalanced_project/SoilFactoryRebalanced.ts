@@ -15,7 +15,7 @@ export class SoilFactoryRebalanced extends Card implements IProjectCard {
       name: CardName.SOIL_FACTORY_REBALANCED,
       tags: [Tags.BUILDING],
       cost: 10,
-      productionBox: Units.of({energy: -1, plants: 1}),
+      productionBox: Units.of({energy: -1, plants: 2}),
 
       metadata: {
         cardNumber: '179',
