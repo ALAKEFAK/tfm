@@ -7,6 +7,7 @@ import {ResourceType} from '../ResourceType';
 import {TileType} from '../TileType';
 import {GlobalParameter} from '../GlobalParameter';
 import {MoonExpansion} from '../moon/MoonExpansion';
+import {CardName} from '../CardName';
 
 const firstLetterUpperCase = (s: string): string => s.charAt(0).toUpperCase() + s.slice(1);
 
@@ -258,7 +259,8 @@ export class PartyCardRequirement extends CardRequirement {
   }
   public satisfies(player: Player): boolean {
     if (player.game.turmoil !== undefined) {
-      return player.game.turmoil.canPlay(player, this.party) || player.isManOfThePeople;
+      // Man of the people hook
+      return player.game.turmoil.canPlay(player, this.party) || player.cardIsInEffect(CardName.MAN_OF_THE_PEOPLE);
     }
     return false;
   }

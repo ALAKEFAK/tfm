@@ -33,7 +33,6 @@ export class ManOfThePeople extends PreludeCard {
       player.game.defer(new SendDelegateToArea(player, 'Select where to send the 1st delegate', {source: 'lobby'}));
       player.game.defer(new SendDelegateToArea(player, 'Select where to send the 2nd delegate', {source: 'reserve'}));
       player.game.turmoil.addInfluenceBonus(player);
-      player.isManOfThePeople = true;
     }
     return undefined;
   }

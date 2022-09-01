@@ -151,7 +151,6 @@ export class Player implements ISerializable<SerializedPlayer> {
   public turmoilPolicyActionUsed: boolean = false;
   public politicalAgendasActionUsedCount: number = 0;
   private hasWarnedOfUnusedDelegate: boolean = false;
-  public isManOfThePeople: boolean = false;
 
   public oceanBonus: number = constants.OCEAN_BONUS;
 
