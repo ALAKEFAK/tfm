@@ -762,4 +762,5 @@ export enum CardName {
     TITANIUM_ISOTOPES = 'Titanium Isotopes',
     STEEL_CASTING = 'Steel Casting',
     INVESTMENT_BANKS = 'Investment Banks',
+    NOMON_NOCRY_INSURANCE = 'NoMon NoCry Insurance',
 }

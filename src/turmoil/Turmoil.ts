@@ -16,6 +16,7 @@ import {PLAYER_DELEGATES_COUNT} from '../constants';
 import {AgendaStyle, PoliticalAgendas, PoliticalAgendasData} from './PoliticalAgendas';
 import {CardName} from '../CardName';
 import {DeferredAction} from '../deferredActions/DeferredAction';
+import {Resources} from '../Resources';
 
 export type NeutralPlayer = 'NEUTRAL';
 
@@ -183,6 +184,11 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       this.delegateReserve.push(playerId);
       party.removeDelegate(playerId, game);
       this.checkDominantParty(party);
+
+      // NoMon NoCry Insurance hook
+      if (playerId !== 'NEUTRAL') {
+        game.getPlayerById(playerId).addResource(Resources.MEGACREDITS, 3, {log: true});
+      }
     } else {
       throw 'Party not found';
     }
