@@ -755,4 +755,11 @@ export enum CardName {
     MATING_SEASON = 'Mating Season',
     RECYCLED_PROJECTS = 'Recycled Projects',
     TARGETED_TURMOIL = 'Targeted Turmoil',
+    EDIBLE_FUNGI = 'Edible Fungi',
+    ASSEMBLY_LINES = 'Assembly Lines',
+    BANK_UNIONS = 'Bank Unions',
+    AMPHIBIAN_FARMING = 'Amphibian Farming',
+    TITANIUM_ISOTOPES = 'Titanium Isotopes',
+    STEEL_CASTING = 'Steel Casting',
+    INVESTMENT_BANKS = 'Investment Banks',
 }
