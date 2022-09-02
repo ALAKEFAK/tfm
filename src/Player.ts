@@ -717,6 +717,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
   public removeResourceFrom(card: ICard, count: number = 1, game? : Game, removingPlayer? : Player, shouldLogAction: boolean = true): void {
     if (card.resourceCount) {
+      const starting_resources = card.resourceCount;
       card.resourceCount = Math.max(card.resourceCount - count, 0);
       // Mons Insurance hook
       if (game !== undefined && removingPlayer !== undefined) {
@@ -730,7 +731,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         if (shouldLogAction) {
           game.log('${0} removed ${1} resource(s) from ${2}\'s ${3}', (b) =>
             b.player(removingPlayer)
-              .number(count)
+              .number(Math.min(starting_resources, count))
               .player(this)
               .card(card));
         }
