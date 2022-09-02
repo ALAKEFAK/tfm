@@ -11,11 +11,11 @@ import {CardRenderer} from '../../render/CardRenderer';
 import {PlaceOceanTile} from '../../../deferredActions/PlaceOceanTile';
 import {Resources} from '../../../Resources';
 
-export class AnonymousEventTwo extends Card implements IProjectCard {
+export class SulfuricImport extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.EVENT,
-      name: CardName.ANONYMOUS_EVENT_TWO,
+      name: CardName.SULFURIC_IMPORT,
       tags: [Tags.EARTH, Tags.SPACE],
       cost: 28,
 

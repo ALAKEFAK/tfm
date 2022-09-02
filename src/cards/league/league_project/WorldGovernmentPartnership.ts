@@ -18,11 +18,11 @@ import {RemoveAnyPlants} from '../../../deferredActions/RemoveAnyPlants';
 import {SelectCard} from '../../../inputs/SelectCard';
 import {ICard} from '../../ICard';
 
-export class AnonymousEventThree extends Card implements IProjectCard {
+export class WorldGovernmentPartnership extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.EVENT,
-      name: CardName.ANONYMOUS_EVENT_THREE,
+      name: CardName.WORLD_GOVERNMENT_PARTNERSHIP,
       tags: [Tags.SPACE],
       cost: 11,
 

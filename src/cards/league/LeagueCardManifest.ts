@@ -20,17 +20,17 @@ import {RecycledProjects} from './league_project/RecycledProjects';
 import {SteelCasting} from './league_project/SteelCasting';
 import {TargetedTurmoil} from './league_project/TargetedTurmoil';
 import {TitaniumIsotopes} from './league_project/TitaniumIsotopes';
-import {AnonymousEventOne} from './league_project/AnonymousEventOne';
-import {AnonymousEventTwo} from './league_project/AnonymousEventTwo';
-import {AnonymousEventThree} from './league_project/AnonymousEventThree';
+import {DactylAndIda} from './league_project/DactylAndIda';
+import {SulfuricImport} from './league_project/SulfuricImport';
+import {WorldGovernmentPartnership} from './league_project/WorldGovernmentPartnership';
 
 export const LEAGUE_CARD_MANIFEST = new CardManifest({
   module: GameModule.League,
   projectCards: [
     {cardName: CardName.AMPHIBIAN_FARMING, Factory: AmphibianFarming},
-    {cardName: CardName.ANONYMOUS_EVENT_ONE, Factory: AnonymousEventOne},
-    {cardName: CardName.ANONYMOUS_EVENT_TWO, Factory: AnonymousEventTwo},
-    {cardName: CardName.ANONYMOUS_EVENT_THREE, Factory: AnonymousEventThree},
+    {cardName: CardName.DACTYL_AND_IDA, Factory: DactylAndIda},
+    {cardName: CardName.SULFURIC_IMPORT, Factory: SulfuricImport},
+    {cardName: CardName.WORLD_GOVERNMENT_PARTNERSHIP, Factory: WorldGovernmentPartnership},
     {cardName: CardName.ASSEMBLY_LINES, Factory: AssemblyLines},
     {cardName: CardName.BANK_UNIONS, Factory: BankUnions},
     {cardName: CardName.DELAYED_ENTRY, Factory: DelayedEntry},

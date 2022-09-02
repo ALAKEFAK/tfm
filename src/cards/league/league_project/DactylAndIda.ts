@@ -12,11 +12,11 @@ import {ResourceType} from '../../../ResourceType';
 import {SelectCard} from '../../../inputs/SelectCard';
 import {ICard} from '../../ICard';
 
-export class AnonymousEventOne extends Card implements IProjectCard {
+export class DactylAndIda extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.EVENT,
-      name: CardName.ANONYMOUS_EVENT_ONE,
+      name: CardName.DACTYL_AND_IDA,
       tags: [Tags.SPACE],
       cost: 18,
 

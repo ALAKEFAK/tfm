@@ -763,7 +763,7 @@ export enum CardName {
     STEEL_CASTING = 'Steel Casting',
     INVESTMENT_BANKS = 'Investment Banks',
     NOMON_NOCRY_INSURANCE = 'NoMon NoCry Insurance',
-    ANONYMOUS_EVENT_ONE = 'Anonymous Event One',
-    ANONYMOUS_EVENT_TWO = 'Anonymous Event Two',
-    ANONYMOUS_EVENT_THREE = 'Anonymous Event Three',
+    DACTYL_AND_IDA = 'Dactyl and Ida',
+    SULFURIC_IMPORT = 'Sulfuric Import',
+    WORLD_GOVERNMENT_PARTNERSHIP = 'World Government Partnership',
 }
