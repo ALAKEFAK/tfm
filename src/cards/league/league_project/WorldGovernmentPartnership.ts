@@ -4,34 +4,27 @@ import {Card} from '../../Card';
 import {CardType} from '../../CardType';
 import {Player} from '../../../Player';
 import {CardName} from '../../../CardName';
-import * as constants from '../../../constants';
-import {MAX_TEMPERATURE, MAX_VENUS_SCALE, REDS_RULING_POLICY_COST} from '../../../constants';
+import {MAX_OCEAN_TILES, MAX_OXYGEN_LEVEL, MAX_TEMPERATURE, REDS_RULING_POLICY_COST} from '../../../constants';
 import {PartyHooks} from '../../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../../turmoil/parties/PartyName';
 import {CardRenderer} from '../../render/CardRenderer';
-import {Game} from '../../../Game';
-import {SelectOption} from '../../../inputs/SelectOption';
-import {OrOptions} from '../../../inputs/OrOptions';
-import {ResourceType} from '../../../ResourceType';
-import {RemoveResourcesFromCard} from '../../../deferredActions/RemoveResourcesFromCard';
-import {RemoveAnyPlants} from '../../../deferredActions/RemoveAnyPlants';
-import {SelectCard} from '../../../inputs/SelectCard';
-import {ICard} from '../../ICard';
+import {PlaceOceanTile} from '../../../deferredActions/PlaceOceanTile';
+import {Resources} from '../../../Resources';
 
 export class WorldGovernmentPartnership extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.EVENT,
       name: CardName.WORLD_GOVERNMENT_PARTNERSHIP,
-      tags: [Tags.SPACE],
-      cost: 11,
+      tags: [Tags.EARTH, Tags.SPACE],
+      cost: 28,
 
       metadata: {
-        description: 'Raise Venus 1 step OR raise temperature 1 step. Remove up to 3 plants, 3 microbes or 2 animals from ANOTHER CARD owned by ANY player.',
-        cardNumber: 'L413',
+        description: 'Raise temperature 1 step, raise oxygen 1 step and place an ocean tile. Remove up to 3 plants from EACH opponent.',
+        cardNumber: 'L412',
         renderData: CardRenderer.builder((b) => {
-          b.venus(1).or().temperature(1).br;
-          b.minus().plants(-3).digit.slash().microbes(3).digit.any.asterix().slash().animals(2).digit.any.asterix();
+          b.temperature(1).oxygen(1).oceans(1).br;
+          b.minus().plants(-3).any.asterix();
         }),
       },
     });
@@ -39,8 +32,9 @@ export class WorldGovernmentPartnership extends Card implements IProjectCard {
 
   public canPlay(player: Player): boolean {
     const temperatureSteps = player.game.getTemperature() < MAX_TEMPERATURE ? 1 : 0;
-    const venusMaxed = player.game.getVenusScaleLevel() < MAX_VENUS_SCALE ? 1 : 0;
-    const totalSteps = Math.max(temperatureSteps, venusMaxed);
+    const oxygenSteps = player.game.getTemperature() < MAX_OXYGEN_LEVEL ? 1 : 0;
+    const oceansSteps = player.game.board.getOceansOnBoard() < MAX_OCEAN_TILES ? 1 : 0;
+    const totalSteps = temperatureSteps + oxygenSteps + oceansSteps;
 
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
       return player.canAfford(player.getCardCost(this) + totalSteps * REDS_RULING_POLICY_COST, {titanium: true});
@@ -50,77 +44,12 @@ export class WorldGovernmentPartnership extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    const game = player.game;
-    const availableMicrobeCards = RemoveResourcesFromCard.getAvailableTargetCards(player, ResourceType.MICROBE);
-    const availableAnimalCards = RemoveResourcesFromCard.getAvailableTargetCards(player, ResourceType.ANIMAL);
-
-    const temperatureSteps = player.game.getTemperature() < MAX_TEMPERATURE ? 1 : 0;
-    const venusMaxed = player.game.getVenusScaleLevel() < MAX_VENUS_SCALE ? 1 : 0;
-    const totalSteps = Math.max(temperatureSteps, venusMaxed);
-
-    // Step 2: Get Plant / Microbe / Animal removal option
-    const removePlants = function() {
-      player.game.defer(new RemoveAnyPlants(player, 3));
-      return undefined;
-    };
-
-    const availableRemovalActions: Array<SelectOption | SelectCard<ICard>> = [];
-
-    const removePlantsOption = new SelectOption('Remove 3 plants', 'Remove plants', removePlants);
-    availableRemovalActions.push(removePlantsOption);
-
-    if (availableMicrobeCards.length > 0) {
-      availableRemovalActions.push(new SelectOption('Remove 3 microbes from a card', 'Remove microbes', () => {
-        player.game.defer(new RemoveResourcesFromCard(player, ResourceType.MICROBE, 3));
-        return undefined;
-      }));
-    }
-
-    if (availableAnimalCards.length > 0) {
-      availableRemovalActions.push(new SelectOption('Remove 2 animals from a card', 'Remove animals', () => {
-        player.game.defer(new RemoveResourcesFromCard(player, ResourceType.ANIMAL, 2));
-        return undefined;
-      }));
-    }
-
-    // Step 1: Choose Temp or Venus bump
-    const availableBumpActions: Array<SelectOption | SelectCard<ICard>> = [];
-    const increaseTemp = new SelectOption('Raise temperature 1 step', 'Raise temperature', () => {
-      game.increaseTemperature(player, 1);
-      return new OrOptions(...availableRemovalActions);
+    player.game.increaseTemperature(player, 1);
+    player.game.increaseOxygenLevel(player, 1);
+    player.game.defer(new PlaceOceanTile(player));
+    player.game.getPlayers().forEach((p) => {
+      if (p.id !== player.id) p.deductResource(Resources.PLANTS, 3, {log: true, from: player});
     });
-    if (!this.temperatureIsMaxed(game)) availableBumpActions.push(increaseTemp);
-
-    const increaseVenus = new SelectOption('Raise Venus 1 step', 'Raise venus', () => {
-      game.increaseVenusScaleLevel(player, 1);
-      return new OrOptions(...availableRemovalActions);
-    });
-    if (!this.venusIsMaxed(game)) availableBumpActions.push(increaseVenus);
-
-    const increaseTempOrVenus = new OrOptions(increaseTemp, increaseVenus);
-    increaseTempOrVenus.title = 'Choose global parameter to raise';
-
-    // Select what to do
-    switch (totalSteps) {
-    case 0:
-      return new OrOptions(...availableRemovalActions);
-    case 1:
-      if (this.temperatureIsMaxed(game)) {
-        game.increaseVenusScaleLevel(player, 1);
-      } else {
-        game.increaseTemperature(player, 1);
-      }
-      return new OrOptions(...availableRemovalActions);
-    default:
-      return increaseTempOrVenus;
-    }
-  }
-
-  private temperatureIsMaxed(game: Game) {
-    return game.getTemperature() === constants.MAX_TEMPERATURE;
-  }
-
-  private venusIsMaxed(game: Game) {
-    return game.getVenusScaleLevel() === constants.MAX_VENUS_SCALE;
+    return undefined;
   }
 }

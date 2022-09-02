@@ -21,18 +21,16 @@ import {SteelCasting} from './league_project/SteelCasting';
 import {TargetedTurmoil} from './league_project/TargetedTurmoil';
 import {TitaniumIsotopes} from './league_project/TitaniumIsotopes';
 import {DactylAndIda} from './league_project/DactylAndIda';
-import {SulfuricImport} from './league_project/SulfuricImport';
 import {WorldGovernmentPartnership} from './league_project/WorldGovernmentPartnership';
+import {SulfuricImport} from './league_project/SulfuricImport';
 
 export const LEAGUE_CARD_MANIFEST = new CardManifest({
   module: GameModule.League,
   projectCards: [
     {cardName: CardName.AMPHIBIAN_FARMING, Factory: AmphibianFarming},
-    {cardName: CardName.DACTYL_AND_IDA, Factory: DactylAndIda},
-    {cardName: CardName.SULFURIC_IMPORT, Factory: SulfuricImport},
-    {cardName: CardName.WORLD_GOVERNMENT_PARTNERSHIP, Factory: WorldGovernmentPartnership},
     {cardName: CardName.ASSEMBLY_LINES, Factory: AssemblyLines},
     {cardName: CardName.BANK_UNIONS, Factory: BankUnions},
+    {cardName: CardName.DACTYL_AND_IDA, Factory: DactylAndIda},
     {cardName: CardName.DELAYED_ENTRY, Factory: DelayedEntry},
     {cardName: CardName.EDIBLE_FUNGI, Factory: EdibleFungi},
     {cardName: CardName.FIRE_SALE, Factory: FireSale},
@@ -45,8 +43,10 @@ export const LEAGUE_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.NOMON_NOCRY_INSURANCE, Factory: NoMonNoCryInsurance},
     {cardName: CardName.RECYCLED_PROJECTS, Factory: RecycledProjects},
     {cardName: CardName.STEEL_CASTING, Factory: SteelCasting},
+    {cardName: CardName.SULFURIC_IMPORT, Factory: SulfuricImport},
     {cardName: CardName.TARGETED_TURMOIL, Factory: TargetedTurmoil, compatibility: GameModule.Turmoil},
     {cardName: CardName.TITANIUM_ISOTOPES, Factory: TitaniumIsotopes},
+    {cardName: CardName.WORLD_GOVERNMENT_PARTNERSHIP, Factory: WorldGovernmentPartnership},
   ],
   preludeCards: [
     {cardName: CardName.FIRST_CONTACT, Factory: FirstContact, compatibility: GameModule.Colonies},
