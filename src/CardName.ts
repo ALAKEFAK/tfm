@@ -762,7 +762,6 @@ export enum CardName {
     TITANIUM_ISOTOPES = 'Titanium Isotopes',
     STEEL_CASTING = 'Steel Casting',
     INVESTMENT_BANKS = 'Investment Banks',
-    NOMON_NOCRY_INSURANCE = 'NoMon NoCry Insurance',
     DACTYL_AND_IDA = 'Dactyl and Ida',
     SULFURIC_IMPORT = 'Sulfuric Import',
     WORLD_GOVERNMENT_PARTNERSHIP = 'World Government Partnership',

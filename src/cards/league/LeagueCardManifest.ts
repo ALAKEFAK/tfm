@@ -15,7 +15,6 @@ import {LaboratoryMice} from './league_project/LaboratoryMice';
 import {ManOfThePeople} from './league_preludes/ManOfThePeople';
 import {MarsHeavyIndustry} from './league_project/MarsHeavyIndustry';
 import {MatingSeason} from './league_project/MatingSeason';
-import {NoMonNoCryInsurance} from './league_project/NoMonNoCryInsurance';
 import {RecycledProjects} from './league_project/RecycledProjects';
 import {SteelCasting} from './league_project/SteelCasting';
 import {TargetedTurmoil} from './league_project/TargetedTurmoil';
@@ -40,7 +39,6 @@ export const LEAGUE_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.LABORATORY_MICE, Factory: LaboratoryMice},
     {cardName: CardName.MARS_HEAVY_INDUSTRY, Factory: MarsHeavyIndustry},
     {cardName: CardName.MATING_SEASON, Factory: MatingSeason},
-    {cardName: CardName.NOMON_NOCRY_INSURANCE, Factory: NoMonNoCryInsurance},
     {cardName: CardName.RECYCLED_PROJECTS, Factory: RecycledProjects},
     {cardName: CardName.STEEL_CASTING, Factory: SteelCasting},
     {cardName: CardName.SULFURIC_IMPORT, Factory: SulfuricImport},
