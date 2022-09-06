@@ -47,8 +47,11 @@ export class WorldGovernmentPartnership extends Card implements IProjectCard {
     player.game.increaseTemperature(player, 1);
     player.game.increaseOxygenLevel(player, 1);
     player.game.defer(new PlaceOceanTile(player));
-    player.game.getPlayers().forEach((p) => {
-      if (p.id !== player.id) p.deductResource(Resources.PLANTS, 3, {log: true, from: player});
+
+    const candidates = player.game.getPlayers().filter((p) => p.id !== player.id && !p.plantsAreProtected() && p.plants > 0);
+    candidates.forEach((p) => {
+      p.deductResource(Resources.PLANTS, 3, {log: true, from: player});
+      return undefined;
     });
     return undefined;
   }
