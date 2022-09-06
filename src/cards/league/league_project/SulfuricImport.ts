@@ -4,12 +4,10 @@ import {Card} from '../../Card';
 import {CardType} from '../../CardType';
 import {Player} from '../../../Player';
 import {CardName} from '../../../CardName';
-import * as constants from '../../../constants';
 import {MAX_TEMPERATURE, MAX_VENUS_SCALE, REDS_RULING_POLICY_COST} from '../../../constants';
 import {PartyHooks} from '../../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../../turmoil/parties/PartyName';
 import {CardRenderer} from '../../render/CardRenderer';
-import {Game} from '../../../Game';
 import {SelectOption} from '../../../inputs/SelectOption';
 import {OrOptions} from '../../../inputs/OrOptions';
 import {ResourceType} from '../../../ResourceType';
@@ -55,8 +53,8 @@ export class SulfuricImport extends Card implements IProjectCard {
     const availableAnimalCards = RemoveResourcesFromCard.getAvailableTargetCards(player, ResourceType.ANIMAL);
 
     const temperatureSteps = player.game.getTemperature() < MAX_TEMPERATURE ? 1 : 0;
-    const venusMaxed = player.game.getVenusScaleLevel() < MAX_VENUS_SCALE ? 1 : 0;
-    const totalSteps = Math.max(temperatureSteps, venusMaxed);
+    const venusSteps = player.game.getVenusScaleLevel() < MAX_VENUS_SCALE ? 1 : 0;
+    const totalSteps = temperatureSteps + venusSteps;
 
     // Step 2: Get Plant / Microbe / Animal removal option
     const removePlants = function() {
@@ -84,18 +82,17 @@ export class SulfuricImport extends Card implements IProjectCard {
     }
 
     // Step 1: Choose Temp or Venus bump
-    const availableBumpActions: Array<SelectOption | SelectCard<ICard>> = [];
     const increaseTemp = new SelectOption('Raise temperature 1 step', 'Raise temperature', () => {
       game.increaseTemperature(player, 1);
+      player.game.log('${0} increased Temperature 1 step', (b) => b.player(player));
       return new OrOptions(...availableRemovalActions);
     });
-    if (!this.temperatureIsMaxed(game)) availableBumpActions.push(increaseTemp);
 
     const increaseVenus = new SelectOption('Raise Venus 1 step', 'Raise venus', () => {
       game.increaseVenusScaleLevel(player, 1);
+      player.game.log('${0} increased Venus 1 step', (b) => b.player(player));
       return new OrOptions(...availableRemovalActions);
     });
-    if (!this.venusIsMaxed(game)) availableBumpActions.push(increaseVenus);
 
     const increaseTempOrVenus = new OrOptions(increaseTemp, increaseVenus);
     increaseTempOrVenus.title = 'Choose global parameter to raise';
@@ -105,22 +102,16 @@ export class SulfuricImport extends Card implements IProjectCard {
     case 0:
       return new OrOptions(...availableRemovalActions);
     case 1:
-      if (this.temperatureIsMaxed(game)) {
+      if (temperatureSteps === 0) {
         game.increaseVenusScaleLevel(player, 1);
+        player.game.log('${0} increased Venus 1 step', (b) => b.player(player));
       } else {
         game.increaseTemperature(player, 1);
+        player.game.log('${0} increased Temperature 1 step', (b) => b.player(player));
       }
       return new OrOptions(...availableRemovalActions);
     default:
       return increaseTempOrVenus;
     }
-  }
-
-  private temperatureIsMaxed(game: Game) {
-    return game.getTemperature() === constants.MAX_TEMPERATURE;
-  }
-
-  private venusIsMaxed(game: Game) {
-    return game.getVenusScaleLevel() === constants.MAX_VENUS_SCALE;
   }
 }
