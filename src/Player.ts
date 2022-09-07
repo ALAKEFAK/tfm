@@ -424,6 +424,11 @@ export class Player implements ISerializable<SerializedPlayer> {
     if (options?.from !== undefined && delta < 0 && (options.from instanceof Player && options.from.id !== this.id)) {
       this.resolveMonsInsurance();
     }
+
+    // NoMon NoCry Insurance hook
+    if (options?.from !== undefined && delta < 0 && this.cardIsInEffect(CardName.NOMON_NOCRY_INSURANCE)) {
+      this.addResource(Resources.MEGACREDITS, 3, {log: true});
+    }
   }
 
   public addProduction(resource: Resources, amount : number, options? : { log: boolean, from? : Player | GlobalEventName}) {
@@ -451,6 +456,11 @@ export class Player implements ISerializable<SerializedPlayer> {
     // Mons Insurance hook
     if (options?.from !== undefined && delta < 0 && (options.from instanceof Player && options.from.id !== this.id)) {
       this.resolveMonsInsurance();
+    }
+
+    // NoMon NoCry Insurance hook
+    if (options?.from !== undefined && delta < 0 && this.cardIsInEffect(CardName.NOMON_NOCRY_INSURANCE)) {
+      this.addResource(Resources.MEGACREDITS, 3, {log: true});
     }
 
     // Manutech hook
@@ -702,7 +712,14 @@ export class Player implements ISerializable<SerializedPlayer> {
       card.resourceCount = Math.max(card.resourceCount - count, 0);
       // Mons Insurance hook
       if (game !== undefined && removingPlayer !== undefined) {
-        if (removingPlayer !== this) this.resolveMonsInsurance();
+        if (removingPlayer !== this) {
+          this.resolveMonsInsurance();
+
+          // NoMon NoCry Insurance hook
+          if (this.cardIsInEffect(CardName.NOMON_NOCRY_INSURANCE)) {
+            this.addResource(Resources.MEGACREDITS, 3, {log: true});
+          }
+        }
 
         if (shouldLogAction) {
           game.log('${0} removed ${1} resource(s) from ${2}\'s ${3}', (b) =>

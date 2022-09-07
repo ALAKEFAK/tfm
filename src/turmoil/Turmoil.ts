@@ -16,6 +16,7 @@ import {PLAYER_DELEGATES_COUNT} from '../constants';
 import {AgendaStyle, PoliticalAgendas, PoliticalAgendasData} from './PoliticalAgendas';
 import {CardName} from '../CardName';
 import {DeferredAction} from '../deferredActions/DeferredAction';
+import {Resources} from '../Resources';
 
 export type NeutralPlayer = 'NEUTRAL';
 
@@ -177,12 +178,17 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
   }
 
   // Use to remove a delegate from a specific party
-  public removeDelegateFromParty(playerId: PlayerId | NeutralPlayer, partyName: PartyName, game: Game): void {
+  public removeDelegateFromParty(playerId: PlayerId | NeutralPlayer, partyName: PartyName, game: Game, removingPlayer: PlayerId): void {
     const party = this.getPartyByName(partyName);
     if (party) {
       this.delegateReserve.push(playerId);
       party.removeDelegate(playerId, game);
       this.checkDominantParty(party);
+
+      // NoMon NoCry Insurance hook
+      if (playerId !== 'NEUTRAL' && playerId !== removingPlayer && game.getPlayerById(playerId).cardIsInEffect(CardName.NOMON_NOCRY_INSURANCE)) {
+        game.getPlayerById(playerId).addResource(Resources.MEGACREDITS, 3, {log: true});
+      }
     } else {
       throw 'Party not found';
     }
