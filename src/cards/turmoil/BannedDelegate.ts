@@ -54,7 +54,7 @@ export class BannedDelegate extends Card implements IProjectCard {
                 } else {
                   playerToRemove = selectedPlayer.id;
                 }
-                player.game.turmoil!.removeDelegateFromParty(playerToRemove, party.name, player.game);
+                player.game.turmoil!.removeDelegateFromParty(playerToRemove, party.name, player.game, player.id);
                 this.log(player, party, selectedPlayer);
                 return undefined;
               });
