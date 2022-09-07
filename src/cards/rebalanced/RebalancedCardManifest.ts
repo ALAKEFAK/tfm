@@ -6,7 +6,7 @@ import {AdvancedAlloysRebalanced} from './rebalanced_project/AdvancedAlloysRebal
 import {AerobrakedAmmoniaAsteroidRebalanced} from './rebalanced_project/AerobrakedAmmoniaAsteroidRebalanced';
 import {AphroditeRebalanced} from './rebalanced_corporation/AphroditeRebalanced';
 import {ArcadianCommunitiesRebalanced} from './rebalanced_corporation/ArcadianCommunitiesRebalanced';
-import {ArcticAlgaeRebalanced} from './rebalanced_project/ArcticAlgaeRebalanced';
+// import {ArcticAlgaeRebalanced} from './rebalanced_project/ArcticAlgaeRebalanced';
 import {AridorRebalanced} from './rebalanced_corporation/AridorRebalanced';
 import {ArklightRebalanced} from './rebalanced_corporation/ArklightRebalanced';
 import {AsteroidHollowingRebalanced} from './rebalanced_project/AsteroidHollowingRebalanced';
@@ -118,7 +118,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.ADAPTED_LICHEN_REBALANCED, Factory: AdaptedLichenRebalanced},
     {cardName: CardName.ADVANCED_ALLOYS_REBALANCED, Factory: AdvancedAlloysRebalanced},
     {cardName: CardName.AEROBRAKED_AMMONIA_ASTEROID_REBALANCED, Factory: AerobrakedAmmoniaAsteroidRebalanced},
-    {cardName: CardName.ARCTIC_ALGAE_REBALANCED, Factory: ArcticAlgaeRebalanced},
+    // {cardName: CardName.ARCTIC_ALGAE_REBALANCED, Factory: ArcticAlgaeRebalanced},
     {cardName: CardName.ASTEROID_HOLLOWING_REBALANCED, Factory: AsteroidHollowingRebalanced},
     {cardName: CardName.BACTOVIRAL_RESEARCH_REBALANCED, Factory: BactoviralResearchRebalanced},
     {cardName: CardName.BLACK_POLAR_DUST_REBALANCED, Factory: BlackPolarDustRebalanced},
@@ -241,7 +241,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     CardName.ADAPTED_LICHEN,
     CardName.ADVANCED_ALLOYS,
     CardName.AEROBRAKED_AMMONIA_ASTEROID,
-    CardName.ARCTIC_ALGAE,
+    // CardName.ARCTIC_ALGAE,
     CardName.ASTEROID_HOLLOWING,
     CardName.BACTOVIRAL_RESEARCH,
     CardName.BLACK_POLAR_DUST,
