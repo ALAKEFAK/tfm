@@ -4,6 +4,8 @@ import {CardType} from '../../CardType';
 import {CardName} from '../../../CardName';
 import {CardRenderer} from '../../render/CardRenderer';
 import {Tags} from '../../Tags';
+import {Resources} from '../../../Resources';
+import {Player} from '../../../Player';
 
 export class NoMonNoCryInsurance extends Card implements IProjectCard {
   // author: markanarmi
@@ -27,7 +29,12 @@ export class NoMonNoCryInsurance extends Card implements IProjectCard {
     });
   }
 
-  public play() {
+  public canPlay(player: Player): boolean {
+    return player.getProduction(Resources.MEGACREDITS) >= -4;
+  }
+
+  public play(player: Player) {
+    player.addProduction(Resources.MEGACREDITS, -1);
     return undefined;
   }
 }
