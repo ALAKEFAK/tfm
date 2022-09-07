@@ -56,8 +56,8 @@ export const LEAGUE_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.FIRST_CONTACT, Factory: FirstContact, compatibility: GameModule.Colonies},
     {cardName: CardName.MAN_OF_THE_PEOPLE, Factory: ManOfThePeople, compatibility: GameModule.Turmoil},
   ],
-  cardsToRemove: [
-    // projects
-    CardName.PHOBOS_SPACE_HAVEN,
-  ],
+  // cardsToRemove: [
+  //   // projects
+  //   CardName.PHOBOS_SPACE_HAVEN,
+  // ],
 });
