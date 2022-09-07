@@ -621,6 +621,10 @@ export class Player implements ISerializable<SerializedPlayer> {
     return this.cardIsInEffect(CardName.PROTECTED_HABITATS);
   }
 
+  public hasPhobosSpaceHavenLeague(): boolean {
+    return this.cardIsInEffect(CardName.PHOBOS_SPACE_HAVEN_LEAGUE);
+  }
+
   public plantsAreProtected(): boolean {
     return this.hasProtectedHabitats() || this.cardIsInEffect(CardName.ASTEROID_DEFLECTION_SYSTEM);
   }

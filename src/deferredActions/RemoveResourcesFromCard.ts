@@ -80,11 +80,11 @@ export class RemoveResourcesFromCard implements DeferredAction {
       player.game.getPlayers().forEach((p) => {
         switch (resourceType) {
         case ResourceType.ANIMAL:
-          if (p.hasProtectedHabitats() && player.id !== p.id) return;
+          if ((p.hasProtectedHabitats() || p.hasPhobosSpaceHavenLeague()) && player.id !== p.id) return;
           resourceCards.push(...p.getCardsWithResources(resourceType).filter((card) => animalsProtectedCards.includes(card.name) === false));
           break;
         case ResourceType.MICROBE:
-          if (p.hasProtectedHabitats() && player.id !== p.id) return;
+          if ((p.hasProtectedHabitats() || p.hasPhobosSpaceHavenLeague()) && player.id !== p.id) return;
         default:
           resourceCards.push(...p.getCardsWithResources(resourceType));
         }

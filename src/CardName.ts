@@ -766,6 +766,6 @@ export enum CardName {
     DACTYL_AND_IDA = 'Dactyl and Ida',
     SULFURIC_IMPORT = 'Sulfuric Import',
     WORLD_GOVERNMENT_PARTNERSHIP = 'World Government Partnership',
-    // PHOBOS_FALLS = 'Phobos Falls',
-    // PHOBOS_SPACE_HAVEN_LEAGUE = 'Phobos Space Haven(L)',
+    PHOBOS_FALLS = 'Phobos Falls',
+    PHOBOS_SPACE_HAVEN_LEAGUE = 'Phobos Space Haven(L)',
 }
