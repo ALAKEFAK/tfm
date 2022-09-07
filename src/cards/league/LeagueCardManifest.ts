@@ -17,8 +17,8 @@ import {ManOfThePeople} from './league_preludes/ManOfThePeople';
 import {MarsHeavyIndustry} from './league_project/MarsHeavyIndustry';
 import {MatingSeason} from './league_project/MatingSeason';
 import {NoMonNoCryInsurance} from './league_project/NoMonNoCryInsurance';
-import {PhobosFalls} from './league_project/PhobosFalls';
-import {PhobosSpaceHavenLeague} from './league_project/PhobosSpaceHavenLeague';
+// import {PhobosFalls} from './league_project/PhobosFalls';
+// import {PhobosSpaceHavenLeague} from './league_project/PhobosSpaceHavenLeague';
 import {RecycledProjects} from './league_project/RecycledProjects';
 import {SteelCasting} from './league_project/SteelCasting';
 import {SulfuricImport} from './league_project/SulfuricImport';
@@ -43,8 +43,8 @@ export const LEAGUE_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.MARS_HEAVY_INDUSTRY, Factory: MarsHeavyIndustry},
     {cardName: CardName.MATING_SEASON, Factory: MatingSeason},
     {cardName: CardName.NOMON_NOCRY_INSURANCE, Factory: NoMonNoCryInsurance},
-    {cardName: CardName.PHOBOS_FALLS, Factory: PhobosFalls},
-    {cardName: CardName.PHOBOS_SPACE_HAVEN_LEAGUE, Factory: PhobosSpaceHavenLeague},
+    // {cardName: CardName.PHOBOS_FALLS, Factory: PhobosFalls},
+    // {cardName: CardName.PHOBOS_SPACE_HAVEN_LEAGUE, Factory: PhobosSpaceHavenLeague},
     {cardName: CardName.RECYCLED_PROJECTS, Factory: RecycledProjects},
     {cardName: CardName.STEEL_CASTING, Factory: SteelCasting},
     {cardName: CardName.SULFURIC_IMPORT, Factory: SulfuricImport},
