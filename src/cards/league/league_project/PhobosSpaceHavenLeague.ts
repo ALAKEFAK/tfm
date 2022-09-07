@@ -19,7 +19,7 @@ export class PhobosSpaceHavenLeague extends Card implements IProjectCard {
       cost: 25,
 
       metadata: {
-        cardNumber: '021',
+        cardNumber: 'L415',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.titanium(1)).nbsp.city().asterix().br;
           b.text('Opponents may not remove your', Size.TINY, true).br;
