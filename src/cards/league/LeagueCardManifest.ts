@@ -4,6 +4,7 @@ import {CardManifest} from '../CardManifest';
 import {AmphibianFarming} from './league_project/AmphibianFarming';
 import {AssemblyLines} from './league_project/AssemblyLines';
 import {BankUnions} from './league_project/BankUnions';
+import {DNAExtractionFromSoil} from './league_project/DNAExtractionFromSoil';
 import {DactylAndIda} from './league_project/DactylAndIda';
 import {DelayedEntry} from './league_project/DelayedEntry';
 import {EdibleFungi} from './league_project/EdibleFungi';
@@ -16,14 +17,18 @@ import {LaboratoryMice} from './league_project/LaboratoryMice';
 import {ManOfThePeople} from './league_preludes/ManOfThePeople';
 import {MarsHeavyIndustry} from './league_project/MarsHeavyIndustry';
 import {MatingSeason} from './league_project/MatingSeason';
+import {MediaAndTechnologyStudies} from './league_project/MediaAndTechnologyStudies';
 import {NoMonNoCryInsurance} from './league_project/NoMonNoCryInsurance';
 import {PhobosFalls} from './league_project/PhobosFalls';
 import {PhobosSpaceHavenLeague} from './league_project/PhobosSpaceHavenLeague';
 import {RecycledProjects} from './league_project/RecycledProjects';
+import {SaveOurShip} from './league_project/SaveOurShip';
+import {SpaceDebrisCollection} from './league_project/SpaceDebrisCollection';
 import {SteelCasting} from './league_project/SteelCasting';
 import {SulfuricImport} from './league_project/SulfuricImport';
 import {TargetedTurmoil} from './league_project/TargetedTurmoil';
 import {TitaniumIsotopes} from './league_project/TitaniumIsotopes';
+import {WellFundedRnDDepartment} from './league_project/WellFundedRnDDepartment';
 import {WorldGovernmentPartnership} from './league_project/WorldGovernmentPartnership';
 
 export const LEAGUE_CARD_MANIFEST = new CardManifest({
@@ -34,6 +39,7 @@ export const LEAGUE_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.BANK_UNIONS, Factory: BankUnions},
     {cardName: CardName.DACTYL_AND_IDA, Factory: DactylAndIda},
     {cardName: CardName.DELAYED_ENTRY, Factory: DelayedEntry},
+    {cardName: CardName.DNA_EXTRACTION_FROM_SOIL, Factory: DNAExtractionFromSoil},
     {cardName: CardName.EDIBLE_FUNGI, Factory: EdibleFungi},
     {cardName: CardName.FIRE_SALE, Factory: FireSale},
     {cardName: CardName.HEAVY_METAL_BIOREMEDIATION, Factory: HeavyMetalBioremediation},
@@ -42,14 +48,18 @@ export const LEAGUE_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.LABORATORY_MICE, Factory: LaboratoryMice},
     {cardName: CardName.MARS_HEAVY_INDUSTRY, Factory: MarsHeavyIndustry},
     {cardName: CardName.MATING_SEASON, Factory: MatingSeason},
+    {cardName: CardName.MEDIA_AND_TECHNOLOGY_STUDIES, Factory: MediaAndTechnologyStudies},
     {cardName: CardName.NOMON_NOCRY_INSURANCE, Factory: NoMonNoCryInsurance},
     {cardName: CardName.PHOBOS_FALLS, Factory: PhobosFalls},
     {cardName: CardName.PHOBOS_SPACE_HAVEN_LEAGUE, Factory: PhobosSpaceHavenLeague},
     {cardName: CardName.RECYCLED_PROJECTS, Factory: RecycledProjects},
+    {cardName: CardName.SAVE_OUR_SHIP, Factory: SaveOurShip},
+    {cardName: CardName.SPACE_DEBRIS_COLLECTION, Factory: SpaceDebrisCollection},
     {cardName: CardName.STEEL_CASTING, Factory: SteelCasting},
     {cardName: CardName.SULFURIC_IMPORT, Factory: SulfuricImport},
     {cardName: CardName.TARGETED_TURMOIL, Factory: TargetedTurmoil, compatibility: GameModule.Turmoil},
     {cardName: CardName.TITANIUM_ISOTOPES, Factory: TitaniumIsotopes},
+    {cardName: CardName.WELL_FUNDED_RND_DEPARTMENT, Factory: WellFundedRnDDepartment},
     {cardName: CardName.WORLD_GOVERNMENT_PARTNERSHIP, Factory: WorldGovernmentPartnership},
   ],
   preludeCards: [

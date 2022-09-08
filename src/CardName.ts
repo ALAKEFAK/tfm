@@ -768,4 +768,9 @@ export enum CardName {
     WORLD_GOVERNMENT_PARTNERSHIP = 'World Government Partnership',
     PHOBOS_FALLS = 'Phobos Falls',
     PHOBOS_SPACE_HAVEN_LEAGUE = 'Phobos Space Haven(L)',
+    DNA_EXTRACTION_FROM_SOIL = 'DNA Extraction from Soil',
+    WELL_FUNDED_RND_DEPARTMENT = 'Well-funded R&D Department',
+    SPACE_DEBRIS_COLLECTION = 'Space Debris Collection',
+    MEDIA_AND_TECHNOLOGY_STUDIES = 'Media and Technology Studies',
+    SAVE_OUR_SHIP = 'Save our Ship',
 }
