@@ -19,7 +19,7 @@ export class FloaterLeasingRebalanced extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(1)).slash().floaters(2).digit;
         }),
-        description: 'Increase your M€ production 1 step PER 2 floaters you have (max 10).',
+        description: 'Increase your M€ production 1 step PER 2 floaters you have (max 10 production).',
       },
     });
   }
