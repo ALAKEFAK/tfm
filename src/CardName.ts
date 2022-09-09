@@ -743,6 +743,9 @@ export enum CardName {
     BUILD_COLONY_STANDARD_PROJECT_REBALANCED = 'Colony(⚖)',
 
     // League cards
+    // Corps
+    // APOPHIS = 'Apophis',
+    // SCAVENGERS = 'Scavengers',
     // Projects
     DELAYED_ENTRY = 'Delayed Entry',
     FIRE_SALE = 'Fire Sale',
@@ -769,7 +772,6 @@ export enum CardName {
     PHOBOS_FALLS = 'Phobos Falls',
     PHOBOS_SPACE_HAVEN_LEAGUE = 'Phobos Space Haven(L)',
     DNA_EXTRACTION_FROM_SOIL = 'DNA Extraction from Soil',
-    WELL_FUNDED_RND_DEPARTMENT = 'Well-funded R&D Department',
     SPACE_DEBRIS_COLLECTION = 'Space Debris Collection',
     MEDIA_AND_TECHNOLOGY_STUDIES = 'Media and Technology Studies',
     SAVE_OUR_SHIP = 'Save our Ship',

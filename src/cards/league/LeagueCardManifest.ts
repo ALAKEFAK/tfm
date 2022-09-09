@@ -28,8 +28,9 @@ import {SteelCasting} from './league_project/SteelCasting';
 import {SulfuricImport} from './league_project/SulfuricImport';
 import {TargetedTurmoil} from './league_project/TargetedTurmoil';
 import {TitaniumIsotopes} from './league_project/TitaniumIsotopes';
-import {WellFundedRnDDepartment} from './league_project/WellFundedRnDDepartment';
 import {WorldGovernmentPartnership} from './league_project/WorldGovernmentPartnership';
+// import {Apophis} from './league_corporation/Apophis';
+// import {Scavengers} from './league_corporation/Scavengers';
 
 export const LEAGUE_CARD_MANIFEST = new CardManifest({
   module: GameModule.League,
@@ -59,13 +60,16 @@ export const LEAGUE_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.SULFURIC_IMPORT, Factory: SulfuricImport},
     {cardName: CardName.TARGETED_TURMOIL, Factory: TargetedTurmoil, compatibility: GameModule.Turmoil},
     {cardName: CardName.TITANIUM_ISOTOPES, Factory: TitaniumIsotopes},
-    {cardName: CardName.WELL_FUNDED_RND_DEPARTMENT, Factory: WellFundedRnDDepartment},
     {cardName: CardName.WORLD_GOVERNMENT_PARTNERSHIP, Factory: WorldGovernmentPartnership},
   ],
   preludeCards: [
     {cardName: CardName.FIRST_CONTACT, Factory: FirstContact, compatibility: GameModule.Colonies},
     {cardName: CardName.MAN_OF_THE_PEOPLE, Factory: ManOfThePeople, compatibility: GameModule.Turmoil},
   ],
+  // corporationCards: [
+  //   {cardName: CardName.APOPHIS, Factory: Apophis},
+  //   {cardName: CardName.SCAVENGERS, Factory: Scavengers},
+  // ],
   cardsToRemove: [
     // projects
     CardName.PHOBOS_SPACE_HAVEN,
