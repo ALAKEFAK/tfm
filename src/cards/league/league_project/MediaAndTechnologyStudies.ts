@@ -24,7 +24,7 @@ export class MediaAndTechnologyStudies extends Card implements IProjectCard, IRe
 
       metadata: {
         cardNumber: 'L418',
-        description: 'When you play an event, including this, either add a Data resource to this card, or remove a Data resource from this card to draw a card.',
+        description: 'When you play an event, either add a Data resource to this card, or remove a Data resource from this card to draw a card.',
         renderData: CardRenderer.builder((b) => {
           b.event().played.colon().data().br;
           b.or().br;
