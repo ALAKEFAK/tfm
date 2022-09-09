@@ -15,14 +15,14 @@ export class ThorgateRebalanced extends Card implements CorporationCard {
       cardType: CardType.CORPORATION,
       name: CardName.THORGATE_REBALANCED,
       tags: [Tags.SCIENCE, Tags.ENERGY],
-      startingMegaCredits: 45,
+      startingMegaCredits: 40,
 
       cardDiscount: {tag: Tags.ENERGY, amount: 3},
       metadata: {
         cardNumber: 'R13',
-        description: 'You start with 1 energy production and 45 M€.',
+        description: 'You start with 1 energy production and 40 M€.',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => pb.energy(1)).nbsp.megacredits(45);
+          b.production((pb) => pb.energy(1)).nbsp.megacredits(40);
           b.corpBox('action', (ce) => {
             ce.vSpace(Size.LARGE);
             ce.action('Decr. energy prod. gain 8 M€.', (eb) => {

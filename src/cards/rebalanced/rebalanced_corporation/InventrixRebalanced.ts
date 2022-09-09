@@ -16,13 +16,13 @@ export class InventrixRebalanced extends Card implements CorporationCard {
       name: CardName.INVENTRIX_REBALANCED,
       tags: [Tags.SCIENCE],
       initialActionText: 'Draw 3 cards',
-      startingMegaCredits: 45,
+      startingMegaCredits: 40,
 
       metadata: {
         cardNumber: 'R43',
         description: 'As first action, draw 3 cards.',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(45).nbsp.cards(3);
+          b.megacredits(40).nbsp.cards(3);
           b.corpBox('effect', (ce) => {
             ce.vSpace(Size.LARGE);
             ce.effect('Cards with a req. cost 2 M€ less.', (eb) => {
