@@ -9,6 +9,7 @@ import {Player} from '../../../Player';
 import {OrOptions} from '../../../inputs/OrOptions';
 import {SelectOption} from '../../../inputs/SelectOption';
 import {CardRenderer} from '../../render/CardRenderer';
+import {CardRequirements} from '../../CardRequirements';
 
 export class SpaceDebrisCollection extends Card implements IActionCard, IProjectCard, IResourceCard {
   public resourceCount = 0;
@@ -21,6 +22,7 @@ export class SpaceDebrisCollection extends Card implements IActionCard, IProject
       cost: 10,
       resourceType: ResourceType.ASTEROID,
 
+      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 3).max()),
       metadata: {
         cardNumber: 'L417',
         description: 'Add 3 asteroids to this card.',
@@ -35,6 +37,10 @@ export class SpaceDebrisCollection extends Card implements IActionCard, IProject
         }),
       },
     });
+  }
+
+  public canPlay(player: Player): boolean {
+    return player.getTagCount(Tags.SCIENCE) <= 3;
   }
 
   public play() {
