@@ -21,6 +21,7 @@ export class Apophis extends Card implements CorporationCard, IResourceCard {
       cardType: CardType.CORPORATION,
       name: CardName.APOPHIS,
       startingMegaCredits: 35,
+      tags: [Tags.SPACE],
       resourceType: ResourceType.ASTEROID,
       initialActionText: 'Draw a Space Event',
 
