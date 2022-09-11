@@ -8,6 +8,7 @@ import {TileType} from '../../../TileType';
 import {ISpace} from '../../../boards/ISpace';
 import {SelectSpace} from '../../../inputs/SelectSpace';
 import {Resources} from '../../../Resources';
+import {SelectScavengersStartingProd} from '../../../deferredActions/SelectScavengersStartingProd';
 
 export class Scavengers extends Card implements CorporationCard {
   // burner
@@ -21,9 +22,9 @@ export class Scavengers extends Card implements CorporationCard {
 
       metadata: {
         cardNumber: 'L421',
-        description: 'You start with 46 M€ and 1 of every other resource. As your first action, place the crashed space ship tile on mars.',
+        description: 'You start with 46 M€ and 1 of every other resource. Choose 2 different production types. As your first action, place the crashed space ship tile on mars.',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(46).production((pb) => pb.megacredits(-3)).wild(1).tile(TileType.SCAVENGERS, true);
+          b.megacredits(46).production((pb) => pb.megacredits(-3).wild(2)).wild(1).tile(TileType.SCAVENGERS, true);
           b.corpBox('effect', (ce) => {
             ce.effect('When you place a tile on mars, gain an additional bonus of each type printed on the tile.', (eb) => {
               eb.text('n').wild(1).startEffect.text('(n+1)').wild(1);
@@ -49,6 +50,7 @@ export class Scavengers extends Card implements CorporationCard {
     player.plants++;
     player.energy++;
     player.heat++;
+    player.game.defer(new SelectScavengersStartingProd(player));
     return undefined;
   }
 }
