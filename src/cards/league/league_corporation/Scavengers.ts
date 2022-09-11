@@ -10,6 +10,7 @@ import {SelectSpace} from '../../../inputs/SelectSpace';
 import {Resources} from '../../../Resources';
 
 export class Scavengers extends Card implements CorporationCard {
+  // burner
   // SCAVENGERS TilePlacement hook in Game.grantSpaceBonus()
   constructor() {
     super({
