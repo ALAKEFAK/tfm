@@ -30,7 +30,7 @@ import {TargetedTurmoil} from './league_project/TargetedTurmoil';
 import {TitaniumIsotopes} from './league_project/TitaniumIsotopes';
 import {WorldGovernmentPartnership} from './league_project/WorldGovernmentPartnership';
 // import {Apophis} from './league_corporation/Apophis';
-// import {Scavengers} from './league_corporation/Scavengers';
+import {Scavengers} from './league_corporation/Scavengers';
 
 export const LEAGUE_CARD_MANIFEST = new CardManifest({
   module: GameModule.League,
@@ -66,10 +66,10 @@ export const LEAGUE_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.FIRST_CONTACT, Factory: FirstContact, compatibility: GameModule.Colonies},
     {cardName: CardName.MAN_OF_THE_PEOPLE, Factory: ManOfThePeople, compatibility: GameModule.Turmoil},
   ],
-  // corporationCards: [
-  //   {cardName: CardName.APOPHIS, Factory: Apophis},
-  //   {cardName: CardName.SCAVENGERS, Factory: Scavengers},
-  // ],
+  corporationCards: [
+    // {cardName: CardName.APOPHIS, Factory: Apophis},
+    {cardName: CardName.SCAVENGERS, Factory: Scavengers},
+  ],
   cardsToRemove: [
     // projects
     CardName.PHOBOS_SPACE_HAVEN,

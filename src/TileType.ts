@@ -45,6 +45,7 @@ export enum TileType {
 
     // League
     PHOBOS_FALLS,
+    SCAVENGERS,
 }
 
 const TO_STRING_MAP: Map<TileType, string> = new Map([
@@ -86,6 +87,7 @@ const TO_STRING_MAP: Map<TileType, string> = new Map([
   [TileType.LUNA_TRAIN_STATION, 'Luna Train Station'],
   [TileType.LUNAR_MINE_URBANIZATION, 'Lunar Mine Urbanization'],
   [TileType.PHOBOS_FALLS, 'Phobos Falls'],
+  [TileType.SCAVENGERS, 'Scavengers'],
 ]);
 
 export namespace TileType {

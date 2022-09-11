@@ -744,8 +744,8 @@ export enum CardName {
 
     // League cards
     // Corps
-    // APOPHIS = 'Apophis',
-    // SCAVENGERS = 'Scavengers',
+    APOPHIS = 'Apophis',
+    SCAVENGERS = 'Scavengers',
     // Projects
     DELAYED_ENTRY = 'Delayed Entry',
     FIRE_SALE = 'Fire Sale',

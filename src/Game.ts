@@ -1497,6 +1497,9 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   public grantSpaceBonus(player: Player, spaceBonus: SpaceBonus, count: number = 1) {
+    // Scanvengers league corp hook
+    if (player.isCorporation(CardName.SCAVENGERS)) count += 1;
+
     if (spaceBonus === SpaceBonus.DRAW_CARD) {
       player.drawCard(count);
     } else if (spaceBonus === SpaceBonus.PLANT) {

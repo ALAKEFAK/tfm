@@ -193,6 +193,15 @@ export const CardCorporationLogo = Vue.component('CardCorporationLogo', {
         return '<div class="card-the-archaic-foundation-institute-logo"></div>';
       case CardName.CURIOSITY_II:
         return '<div class="card-curiosity-ii-logo">Curiosity II</div>';
+      // League Corps
+      case CardName.SCAVENGERS:
+        // return '<span class="card-scavengers-logo">SCAVENGERS</span>';
+        return `<div class="card-scavengers-logo">
+        <div class="scav0">SCANVENGERS</div>
+        <div class="scav1">the survivors of SS Hope</div>
+        </div>`;
+      // case CardName.APOPHIS:
+      //   return '<span class="card-apophis-logo">APOPHIS</span>';
       }
       return '';
     },
