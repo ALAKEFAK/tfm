@@ -6,6 +6,7 @@ import {CardName} from '../../../CardName';
 import {Resources} from '../../../Resources';
 import {Card} from '../../Card';
 import {CardRenderer} from '../../render/CardRenderer';
+import {Units} from '../../../Units';
 
 export class AssemblyLines extends Card implements IProjectCard {
   constructor() {
@@ -14,6 +15,7 @@ export class AssemblyLines extends Card implements IProjectCard {
       tags: [Tags.BUILDING],
       name: CardName.ASSEMBLY_LINES,
       cardType: CardType.AUTOMATED,
+      productionBox: Units.of({megacredits: 2}),
 
       metadata: {
         cardNumber: 'L404',
