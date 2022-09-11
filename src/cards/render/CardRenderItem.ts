@@ -17,6 +17,8 @@ export enum AltSecondaryTag {
   FLOATER = 'floater',
   // 'blue' => used in Project Workshop
   BLUE = 'blue',
+  // SpaceEvent used for Apophis
+  SPACE_EVENT = 'spaceevent',
 
   MOON_MINING_RATE = 'moon-mine',
   MOON_COLONY_RATE = 'moon-colony',

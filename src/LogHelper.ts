@@ -63,6 +63,10 @@ export class LogHelper {
     player.game.log('${0}\'s TR decreased ${1} step(s) due to global event', (b) => b.player(player).number(steps));
   }
 
+  static logTemperatureIncrease(player: Player, steps: number) {
+    player.game.log('${0} increased temperature ${1} step(s)', (b) => b.player(player).number(steps));
+  }
+
   static logVenusIncrease(player: Player, steps: number) {
     player.game.log('${0} increased Venus scale ${1} step(s)', (b) => b.player(player).number(steps));
   }

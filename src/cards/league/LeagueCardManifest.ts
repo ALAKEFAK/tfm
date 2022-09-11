@@ -29,7 +29,7 @@ import {SulfuricImport} from './league_project/SulfuricImport';
 import {TargetedTurmoil} from './league_project/TargetedTurmoil';
 import {TitaniumIsotopes} from './league_project/TitaniumIsotopes';
 import {WorldGovernmentPartnership} from './league_project/WorldGovernmentPartnership';
-// import {Apophis} from './league_corporation/Apophis';
+import {Apophis} from './league_corporation/Apophis';
 import {Scavengers} from './league_corporation/Scavengers';
 
 export const LEAGUE_CARD_MANIFEST = new CardManifest({
@@ -67,7 +67,7 @@ export const LEAGUE_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.MAN_OF_THE_PEOPLE, Factory: ManOfThePeople, compatibility: GameModule.Turmoil},
   ],
   corporationCards: [
-    // {cardName: CardName.APOPHIS, Factory: Apophis},
+    {cardName: CardName.APOPHIS, Factory: Apophis},
     {cardName: CardName.SCAVENGERS, Factory: Scavengers},
   ],
   cardsToRemove: [
