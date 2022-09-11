@@ -14,12 +14,13 @@ import {ISpace} from '../../../boards/ISpace';
 import {SpaceType} from '../../../SpaceType';
 
 export class PhobosFalls extends Card implements IProjectCard {
+  // markanarmi
   constructor() {
     super({
       cardType: CardType.EVENT,
       name: CardName.PHOBOS_FALLS,
       tags: [Tags.SPACE],
-      cost: 48,
+      cost: 60,
 
       metadata: {
         cardNumber: 'L414',
