@@ -20,16 +20,16 @@ export class Apophis extends Card implements CorporationCard, IResourceCard {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.APOPHIS,
-      startingMegaCredits: 35,
+      startingMegaCredits: 40,
       tags: [Tags.SPACE],
       resourceType: ResourceType.ASTEROID,
       initialActionText: 'Draw a Space Event',
 
       metadata: {
         cardNumber: 'L420',
-        description: 'You start with 35 M€.',
+        description: 'You start with 40 M€.',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(35).nbsp.cards(1).secondaryTag(AltSecondaryTag.SPACE_EVENT).br;
+          b.megacredits(40).nbsp.cards(1).secondaryTag(AltSecondaryTag.SPACE_EVENT).br;
           b.titanium(3).asteroids(2);
           b.corpBox('effect', (ce) => {
             ce.text('When any player plays a space event, you gain 2 M€. When you play a space event, add 1 asteroid resource to this card OR remove 1 asteroid resource from this card and raise either temperature or Venus 1 step.', Size.TINY, true);
