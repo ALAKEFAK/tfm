@@ -53,11 +53,14 @@ export class PhobosFalls extends Card implements IProjectCard {
     player.titanium += 4;
 
     const availableSpaces = this.getAvailableSpaces(player);
-    return new SelectSpace('Select space for tile', availableSpaces, (foundSpace: ISpace) => {
-      player.game.removeTile(foundSpace.id);
-      player.game.addTile(player, foundSpace.spaceType, foundSpace, {tileType: TileType.PHOBOS_FALLS});
-      return undefined;
-    });
+    if (availableSpaces.length > 0) {
+      return new SelectSpace('Select space for tile', availableSpaces, (foundSpace: ISpace) => {
+        player.game.removeTile(foundSpace.id);
+        player.game.addTile(player, foundSpace.spaceType, foundSpace, {tileType: TileType.PHOBOS_FALLS});
+        return undefined;
+      });
+    }
+    return undefined;
   }
 
   private getAvailableSpaces(player: Player): Array<ISpace> {
