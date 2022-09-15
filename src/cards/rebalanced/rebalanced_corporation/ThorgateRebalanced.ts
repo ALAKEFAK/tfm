@@ -54,7 +54,7 @@ export class ThorgateRebalanced extends Card implements CorporationCard {
   }
 
   public canAct(player: Player): boolean {
-    return player.canAfford(2) || player.getProduction(Resources.ENERGY) >= 1;
+    return player.getProduction(Resources.ENERGY) >= 1;
   }
 
   public action(player: Player) {
