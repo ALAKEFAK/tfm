@@ -40,7 +40,7 @@ export class SpaceDebrisCollection extends Card implements IActionCard, IProject
   }
 
   public canPlay(player: Player): boolean {
-    return player.getTagCount(Tags.SCIENCE) <= 3;
+    return player.getTagCount(Tags.SCIENCE, false, false) <= 3;
   }
 
   public play() {
