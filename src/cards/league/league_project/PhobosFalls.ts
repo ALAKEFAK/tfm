@@ -20,13 +20,13 @@ export class PhobosFalls extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       name: CardName.PHOBOS_FALLS,
       tags: [Tags.SPACE],
-      cost: 60,
+      cost: 45,
 
       metadata: {
         cardNumber: 'L414',
-        description: 'Raise temperature 4 steps and gain 4 titanium. Remove ANY greenery tile and replace it with the special tile. Cannot be played if PHOBOS SPACE HAVEN is in play.',
+        description: 'Raise temperature 3 steps and gain 4 titanium. Remove ANY greenery tile and replace it with the special tile. Cannot be played if PHOBOS SPACE HAVEN is in play.',
         renderData: CardRenderer.builder((b) => {
-          b.temperature(4).br;
+          b.temperature(3).br;
           b.tile(TileType.PHOBOS_FALLS, true).asterix().br;
           b.titanium(4);
         }),
@@ -39,7 +39,7 @@ export class PhobosFalls extends Card implements IProjectCard {
     if (player.game.getPlayers().some((p) => p.cardIsInEffect(CardName.PHOBOS_SPACE_HAVEN_LEAGUE))) return false;
 
     const remainingTemperatureSteps = (MAX_TEMPERATURE - player.game.getTemperature()) / 2;
-    const stepsRaised = Math.min(remainingTemperatureSteps, 4);
+    const stepsRaised = Math.min(remainingTemperatureSteps, 3);
 
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
       return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * stepsRaised, {titanium: true});
@@ -49,7 +49,7 @@ export class PhobosFalls extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.game.increaseTemperature(player, 4);
+    player.game.increaseTemperature(player, 3);
     player.titanium += 4;
 
     const availableSpaces = this.getAvailableSpaces(player);
