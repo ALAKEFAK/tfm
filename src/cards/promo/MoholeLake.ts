@@ -54,8 +54,9 @@ export class MoholeLake extends Card implements IActionCard, IProjectCard {
     return undefined;
   }
 
-  public canAct(): boolean {
-    return true;
+  public canAct(player: Player): boolean {
+    const availableCards = player.getResourceCards(ResourceType.MICROBE).concat(player.getResourceCards(ResourceType.ANIMAL));
+    return availableCards.length > 0;
   }
 
   public action(player: Player) {
