@@ -25,7 +25,7 @@ import {RecycledProjects} from './league_project/RecycledProjects';
 import {SaveOurShip} from './league_project/SaveOurShip';
 import {SpaceDebrisCollection} from './league_project/SpaceDebrisCollection';
 import {SteelCasting} from './league_project/SteelCasting';
-import {SulfuricImport} from './league_project/SulfuricImport';
+import {SulphuricImport} from './league_project/SulphuricImport';
 import {TargetedTurmoil} from './league_project/TargetedTurmoil';
 import {TitaniumIsotopes} from './league_project/TitaniumIsotopes';
 import {WorldGovernmentPartnership} from './league_project/WorldGovernmentPartnership';
@@ -59,7 +59,7 @@ export const LEAGUE_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.SOIL_ENHANCERS, Factory: SoilEnhancers},
     {cardName: CardName.SPACE_DEBRIS_COLLECTION, Factory: SpaceDebrisCollection},
     {cardName: CardName.STEEL_CASTING, Factory: SteelCasting},
-    {cardName: CardName.SULFURIC_IMPORT, Factory: SulfuricImport},
+    {cardName: CardName.SULPHURIC_IMPORT, Factory: SulphuricImport},
     {cardName: CardName.TARGETED_TURMOIL, Factory: TargetedTurmoil, compatibility: GameModule.Turmoil},
     {cardName: CardName.TITANIUM_ISOTOPES, Factory: TitaniumIsotopes},
     {cardName: CardName.WORLD_GOVERNMENT_PARTNERSHIP, Factory: WorldGovernmentPartnership},
