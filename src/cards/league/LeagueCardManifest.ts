@@ -31,6 +31,7 @@ import {TitaniumIsotopes} from './league_project/TitaniumIsotopes';
 import {WorldGovernmentPartnership} from './league_project/WorldGovernmentPartnership';
 import {Apophis} from './league_corporation/Apophis';
 import {Scavengers} from './league_corporation/Scavengers';
+import {SoilEnhancers} from './league_project/SoilEnhancers';
 
 export const LEAGUE_CARD_MANIFEST = new CardManifest({
   module: GameModule.League,
@@ -55,6 +56,7 @@ export const LEAGUE_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.PHOBOS_SPACE_HAVEN_LEAGUE, Factory: PhobosSpaceHavenLeague},
     {cardName: CardName.RECYCLED_PROJECTS, Factory: RecycledProjects},
     {cardName: CardName.SAVE_OUR_SHIP, Factory: SaveOurShip},
+    {cardName: CardName.SOIL_ENHANCERS, Factory: SoilEnhancers},
     {cardName: CardName.SPACE_DEBRIS_COLLECTION, Factory: SpaceDebrisCollection},
     {cardName: CardName.STEEL_CASTING, Factory: SteelCasting},
     {cardName: CardName.SULFURIC_IMPORT, Factory: SulfuricImport},

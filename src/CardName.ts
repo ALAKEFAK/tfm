@@ -775,4 +775,5 @@ export enum CardName {
     SPACE_DEBRIS_COLLECTION = 'Space Debris Collection',
     MEDIA_AND_TECHNOLOGY_STUDIES = 'Media and Technology Studies',
     SAVE_OUR_SHIP = 'Save our Ship',
+    SOIL_ENHANCERS = 'Soil Enhancers',
 }
