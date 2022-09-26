@@ -708,6 +708,7 @@ export enum CardName {
     GHG_IMPORT_FROM_VENUS_REBALANCED = 'GHG Import From Venus(⚖)',
     GMO_CONTRACT_REBALANCED = 'GMO Contract(⚖)',
     HEAT_TRAPPERS_REBALANCED = 'Heat Trappers(⚖)',
+    HACKERS_REBALANCED = 'Hackers(⚖)',
     INDUSTRIAL_CENTER_REBALANCED = 'Industrial Center(⚖)',
     INSECTS_REBALANCED = 'Insects(⚖)',
     JET_STREAM_MICROSCRAPPERS_REBALANCED = 'Jet Stream Microscrappers(⚖)',

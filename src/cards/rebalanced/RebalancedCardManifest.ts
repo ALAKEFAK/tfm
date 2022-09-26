@@ -111,6 +111,8 @@ import {VironRebalanced} from './rebalanced_corporation/VironRebalanced';
 import {VitorRebalanced} from './rebalanced_corporation/VitorRebalanced';
 import {WarpDriveRebalanced} from './rebalanced_project/WarpDriveRebalanced';
 import {ZeppelinsRebalanced} from './rebalanced_project/ZeppelinsRebalanced';
+// import {SecurityFleetRebalanced} from './rebalanced_project/SecurityFleetRebalanced';
+import {HackersRebalanced} from './rebalanced_project/HackersRebalanced';
 
 export const REBALANCED_CARD_MANIFEST = new CardManifest({
   module: GameModule.Rebalanced,
@@ -140,6 +142,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.FUEL_FACTORY_REBALANCED, Factory: FuelFactoryRebalanced},
     {cardName: CardName.GHG_IMPORT_FROM_VENUS_REBALANCED, Factory: GHGImportFromVenusRebalanced, compatibility: GameModule.Venus},
     {cardName: CardName.GMO_CONTRACT_REBALANCED, Factory: GMOContractRebalanced, compatibility: GameModule.Turmoil},
+    {cardName: CardName.HACKERS_REBALANCED, Factory: HackersRebalanced},
     {cardName: CardName.HEAT_TRAPPERS_REBALANCED, Factory: HeatTrappersRebalanced},
     {cardName: CardName.INDUSTRIAL_CENTER_REBALANCED, Factory: IndustrialCenterRebalanced},
     {cardName: CardName.INSECTS_REBALANCED, Factory: InsectsRebalanced},
@@ -155,6 +158,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.RESEARCH_OUTPOST_REBALANCED, Factory: ResearchOutpostRebalanced},
     {cardName: CardName.RESTRICTED_AREA_REBALANCED, Factory: RestrictedAreaRebalanced},
     {cardName: CardName.ROTATOR_IMPACTS_REBALANCED, Factory: RotatorImpactsRebalanced, compatibility: GameModule.Venus},
+    // {cardName: CardName.SECURITY_FLEET_REBALANCED, Factory: SecurityFleetRebalanced},
     {cardName: CardName.SKY_DOCKS_REBALANCED, Factory: SkyDocksRebalanced, compatibility: GameModule.Colonies},
     {cardName: CardName.SNOW_ALGAE_REBALANCED, Factory: SnowAlgaeRebalanced},
     {cardName: CardName.SOIL_FACTORY_REBALANCED, Factory: SoilFactoryRebalanced},
@@ -264,6 +268,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     CardName.FUEL_FACTORY,
     CardName.GHG_IMPORT_FROM_VENUS,
     CardName.GMO_CONTRACT,
+    CardName.HACKERS,
     CardName.HEAT_TRAPPERS,
     CardName.INDUSTRIAL_CENTER,
     CardName.INSECTS,
@@ -279,6 +284,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     CardName.RESEARCH_OUTPOST,
     CardName.RESTRICTED_AREA,
     CardName.ROTATOR_IMPACTS,
+    // CardName.SECURITY_FLEET,
     CardName.SKY_DOCKS,
     CardName.SNOW_ALGAE,
     CardName.SOIL_FACTORY,
