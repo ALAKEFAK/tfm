@@ -687,6 +687,7 @@ export enum CardName {
     AEROBRAKED_AMMONIA_ASTEROID_REBALANCED = 'Aerobraked Ammonia Asteroid(⚖)',
     ARCTIC_ALGAE_REBALANCED = 'Arctic Algae(⚖)',
     ASTEROID_HOLLOWING_REBALANCED = 'Asteroid Hollowing(⚖)',
+    ASTEROID_MINING_CONSORTIUM_REBALANCED = 'Asteroid Mining Consortium(⚖)',
     BACTOVIRAL_RESEARCH_REBALANCED = 'Bactoviral Research(⚖)',
     BLACK_POLAR_DUST_REBALANCED = 'Black Polar Dust(⚖)',
     BUILDING_INDUSTRIES_REBALANCED = 'Building Industries(⚖)',
