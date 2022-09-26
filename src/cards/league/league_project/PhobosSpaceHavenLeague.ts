@@ -13,7 +13,7 @@ import {Size} from '../../render/Size';
 export class PhobosSpaceHavenLeague extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      cardType: CardType.ACTIVE,
       name: CardName.PHOBOS_SPACE_HAVEN_LEAGUE,
       tags: [Tags.SPACE, Tags.CITY],
       cost: 25,
@@ -25,15 +25,14 @@ export class PhobosSpaceHavenLeague extends Card implements IProjectCard {
           b.text('Opponents may not remove your', Size.TINY, true).br;
           b.animals(1).microbes(1);
         }),
-        description: 'Increase your titanium production 1 step and place a City tile ON THE RESERVED AREA. Cannot be played if PHOBOS FALLS has been played.',
+        description: 'Increase your titanium production 1 step and place a City tile ON THE RESERVED AREA',
         victoryPoints: 3,
       },
     });
   }
 
-  public canPlay(player: Player): boolean {
-    // Only playable if Phobos Falls has not been played yet
-    return !player.game.getPlayers().some((p) => p.cardIsInEffect(CardName.PHOBOS_FALLS));
+  public canPlay(): boolean {
+    return true;
   }
 
   public play(player: Player) {
