@@ -751,6 +751,10 @@ export enum CardName {
     // Corps
     APOPHIS = 'Apophis',
     SCAVENGERS = 'Scavengers',
+    // Preludes
+    FIRST_CONTACT = 'First Contact',
+    MAN_OF_THE_PEOPLE = 'Man Of The People',
+    JOVIAN_OUTPOST = 'Jovian Outpost',
     // Projects
     AMPHIBIAN_FARMING = 'Amphibian Farming',
     ASSEMBLY_LINES = 'Assembly Lines',
@@ -760,12 +764,10 @@ export enum CardName {
     DNA_EXTRACTION_FROM_SOIL = 'DNA Extraction from Soil',
     EDIBLE_FUNGI = 'Edible Fungi',
     FIRE_SALE = 'Fire Sale',
-    FIRST_CONTACT = 'First Contact',
     HEAVY_METAL_BIOREMEDIATION = 'Heavy Metal Bioremediation',
     INCINERATOR = 'Incinerator',
     INVESTMENT_BANKS = 'Investment Banks',
     LABORATORY_MICE = 'Laboratory Mice',
-    MAN_OF_THE_PEOPLE = 'Man Of The People',
     MARS_HEAVY_INDUSTRY = 'Mars Heavy Industry',
     MATING_SEASON = 'Mating Season',
     OUTER_RIM_RESEARCH_FACILITY = 'Outer Rim Research Facility',
