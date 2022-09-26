@@ -11,24 +11,24 @@ import {SelectOption} from '../../../inputs/SelectOption';
 import {CardRenderer} from '../../render/CardRenderer';
 import {DeferredAction} from '../../../deferredActions/DeferredAction';
 
-export class MediaAndTechnologyStudies extends Card implements IProjectCard, IResourceCard {
+export class JovianStudies extends Card implements IProjectCard, IResourceCard {
   public resourceCount = 0;
 
   constructor() {
     super({
       cardType: CardType.ACTIVE,
-      name: CardName.MEDIA_AND_TECHNOLOGY_STUDIES,
-      tags: [Tags.EARTH],
+      name: CardName.JOVIAN_STUDIES,
+      tags: [Tags.JOVIAN],
       cost: 10,
-      resourceType: ResourceType.DATA,
+      resourceType: ResourceType.SCIENCE,
 
       metadata: {
         cardNumber: 'L418',
-        description: 'When you play an event, either add a Data resource to this card, or remove a Data resource from this card to draw a card.',
+        description: 'When you play a Jovian tag, including this, either add a Science resource to this card, or remove a Science resource from this card to draw a card.',
         renderData: CardRenderer.builder((b) => {
-          b.event().played.colon().data().br;
+          b.jovian().played.colon().science().br;
           b.or().br;
-          b.minus().data().plus().cards(1);
+          b.minus().science().plus().cards(1);
         }),
       },
     });
@@ -39,7 +39,8 @@ export class MediaAndTechnologyStudies extends Card implements IProjectCard, IRe
   }
 
   public onCardPlayed(player: Player, card: IProjectCard) {
-    if (card.cardType === CardType.EVENT) {
+    const jovianTags = card.tags.filter((tag) => tag === Tags.JOVIAN).length;
+    for (let i = 0; i < jovianTags; i++) {
       player.game.defer(new DeferredAction(
         player,
         () => {
@@ -49,12 +50,12 @@ export class MediaAndTechnologyStudies extends Card implements IProjectCard, IRe
             return undefined;
           }
           return new OrOptions(
-            new SelectOption('Remove a Data resource from this card to draw a card', 'Remove resource', () => {
+            new SelectOption('Remove a science resource from this card to draw a card', 'Remove resource', () => {
               player.removeResourceFrom(this);
               player.drawCard();
               return undefined;
             }),
-            new SelectOption('Add a Data resource to this card', 'Add resource', () => {
+            new SelectOption('Add a science resource to this card', 'Add resource', () => {
               player.addResourceTo(this, 1);
               return undefined;
             }),
