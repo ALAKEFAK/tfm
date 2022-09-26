@@ -21,7 +21,7 @@ export class AsteroidMiningConsortiumRebalanced extends Card implements IProject
 
       requirements: CardRequirements.builder((b) => b.generation(4)),
       metadata: {
-        description: 'Requires that you have titanium production. Decrease any titanium production 1 step and increase your own 1 step.',
+        description: 'Decrease any titanium production 1 step and increase your own 1 step.',
         cardNumber: '002',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
