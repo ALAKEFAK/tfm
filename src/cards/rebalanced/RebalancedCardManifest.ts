@@ -114,6 +114,7 @@ import {ZeppelinsRebalanced} from './rebalanced_project/ZeppelinsRebalanced';
 // import {SecurityFleetRebalanced} from './rebalanced_project/SecurityFleetRebalanced';
 import {HackersRebalanced} from './rebalanced_project/HackersRebalanced';
 import {EnergyTappingRebalanced} from './rebalanced_project/EnergyTappingRebalanced';
+import {SabotageRebalanced} from './rebalanced_project/SabotageRebalanced';
 
 export const REBALANCED_CARD_MANIFEST = new CardManifest({
   module: GameModule.Rebalanced,
@@ -161,6 +162,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.RESTRICTED_AREA_REBALANCED, Factory: RestrictedAreaRebalanced},
     {cardName: CardName.ROTATOR_IMPACTS_REBALANCED, Factory: RotatorImpactsRebalanced, compatibility: GameModule.Venus},
     // {cardName: CardName.SECURITY_FLEET_REBALANCED, Factory: SecurityFleetRebalanced},
+    {cardName: CardName.SABOTAGE_REBALANCED, Factory: SabotageRebalanced},
     {cardName: CardName.SKY_DOCKS_REBALANCED, Factory: SkyDocksRebalanced, compatibility: GameModule.Colonies},
     {cardName: CardName.SNOW_ALGAE_REBALANCED, Factory: SnowAlgaeRebalanced},
     {cardName: CardName.SOIL_FACTORY_REBALANCED, Factory: SoilFactoryRebalanced},
@@ -287,6 +289,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     CardName.RESEARCH_OUTPOST,
     CardName.RESTRICTED_AREA,
     CardName.ROTATOR_IMPACTS,
+    CardName.SABOTAGE,
     // CardName.SECURITY_FLEET,
     CardName.SKY_DOCKS,
     CardName.SNOW_ALGAE,
