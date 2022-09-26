@@ -5,6 +5,7 @@ import {AmphibianFarming} from './league_project/AmphibianFarming';
 import {Apophis} from './league_corporation/Apophis';
 import {AssemblyLines} from './league_project/AssemblyLines';
 import {BankUnions} from './league_project/BankUnions';
+import {BoringvillePopulationYou} from './league_project/BoringvillePopulationYou';
 import {DNAExtractionFromSoil} from './league_project/DNAExtractionFromSoil';
 import {DactylAndIda} from './league_project/DactylAndIda';
 import {DelayedEntry} from './league_project/DelayedEntry';
@@ -39,6 +40,7 @@ export const LEAGUE_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.AMPHIBIAN_FARMING, Factory: AmphibianFarming},
     {cardName: CardName.ASSEMBLY_LINES, Factory: AssemblyLines},
     {cardName: CardName.BANK_UNIONS, Factory: BankUnions},
+    {cardName: CardName.BORINGVILLE_POPULATION_YOU, Factory: BoringvillePopulationYou},
     {cardName: CardName.DACTYL_AND_IDA, Factory: DactylAndIda},
     {cardName: CardName.DELAYED_ENTRY, Factory: DelayedEntry},
     {cardName: CardName.DNA_EXTRACTION_FROM_SOIL, Factory: DNAExtractionFromSoil},
