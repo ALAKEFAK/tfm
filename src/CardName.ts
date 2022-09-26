@@ -759,7 +759,7 @@ export enum CardName {
     AMPHIBIAN_FARMING = 'Amphibian Farming',
     ASSEMBLY_LINES = 'Assembly Lines',
     BANK_UNIONS = 'Bank Unions',
-    BORINGVILLE_POPULATION_YOU = 'Boringville, Population You',
+    BORINGVILLE_POPULATION_YOU = 'Boringville. Population You',
     DACTYL_AND_IDA = 'Dactyl and Ida',
     DELAYED_ENTRY = 'Delayed Entry',
     DNA_EXTRACTION_FROM_SOIL = 'DNA Extraction from Soil',
