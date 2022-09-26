@@ -11,24 +11,24 @@ import {SelectOption} from '../../../inputs/SelectOption';
 import {CardRenderer} from '../../render/CardRenderer';
 import {DeferredAction} from '../../../deferredActions/DeferredAction';
 
-export class JovianStudies extends Card implements IProjectCard, IResourceCard {
+export class OuterRimResearchFacility extends Card implements IProjectCard, IResourceCard {
   public resourceCount = 0;
 
   constructor() {
     super({
       cardType: CardType.ACTIVE,
-      name: CardName.JOVIAN_STUDIES,
+      name: CardName.OUTER_RIM_RESEARCH_FACILITY,
       tags: [Tags.JOVIAN],
       cost: 10,
-      resourceType: ResourceType.SCIENCE,
+      resourceType: ResourceType.ASTEROID,
 
       metadata: {
         cardNumber: 'L418',
-        description: 'When you play a Jovian tag, including this, either add a Science resource to this card, or remove a Science resource from this card to draw a card.',
+        description: 'When you play a Jovian tag, including this, either add an asteroid to this card, or remove an asteroid from this card to draw a card.',
         renderData: CardRenderer.builder((b) => {
-          b.jovian().played.colon().science().br;
+          b.jovian().played.colon().asteroids(1).br;
           b.or().br;
-          b.minus().science().plus().cards(1);
+          b.minus().asteroids(1).plus().cards(1);
         }),
       },
     });
