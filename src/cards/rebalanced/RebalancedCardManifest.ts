@@ -113,6 +113,7 @@ import {WarpDriveRebalanced} from './rebalanced_project/WarpDriveRebalanced';
 import {ZeppelinsRebalanced} from './rebalanced_project/ZeppelinsRebalanced';
 // import {SecurityFleetRebalanced} from './rebalanced_project/SecurityFleetRebalanced';
 import {HackersRebalanced} from './rebalanced_project/HackersRebalanced';
+import {EnergyTappingRebalanced} from './rebalanced_project/EnergyTappingRebalanced';
 
 export const REBALANCED_CARD_MANIFEST = new CardManifest({
   module: GameModule.Rebalanced,
@@ -136,6 +137,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.EARTH_OFFICE_REBALANCED, Factory: EarthOfficeRebalanced},
     {cardName: CardName.ENERGY_MARKET_REBALANCED, Factory: EnergyMarketRebalanced},
     {cardName: CardName.ENERGY_SAVING_REBALANCED, Factory: EnergySavingRebalanced},
+    {cardName: CardName.ENERGY_TAPPING_REBALANCED, Factory: EnergyTappingRebalanced},
     {cardName: CardName.EXTRACTOR_BALLOONS_REBALANCED, Factory: ExtractorBalloonsRebalanced, compatibility: GameModule.Venus},
     {cardName: CardName.FLOATER_LEASING_REBALANCED, Factory: FloaterLeasingRebalanced, compatibility: GameModule.Venus},
     {cardName: CardName.FORCED_PRECIPITATION_REBALANCED, Factory: ForcedPrecipitationRebalanced, compatibility: GameModule.Venus},
@@ -262,6 +264,7 @@ export const REBALANCED_CARD_MANIFEST = new CardManifest({
     CardName.EARTH_OFFICE,
     CardName.ENERGY_MARKET,
     CardName.ENERGY_SAVING,
+    CardName.ENERGY_TAPPING,
     CardName.EXTRACTOR_BALLOONS,
     CardName.FLOATER_LEASING,
     CardName.FORCED_PRECIPITATION,

@@ -701,6 +701,7 @@ export enum CardName {
     EARTH_OFFICE_REBALANCED = 'Earth Office(⚖)',
     ENERGY_MARKET_REBALANCED = 'Energy Market(⚖)',
     ENERGY_SAVING_REBALANCED = 'Energy Saving(⚖)',
+    ENERGY_TAPPING_REBALANCED = 'Energy Tapping(⚖)',
     EXTRACTOR_BALLOONS_REBALANCED = 'Extractor Balloons(⚖)',
     FLOATER_LEASING_REBALANCED = 'Floater Leasing(⚖)',
     FORCED_PRECIPITATION_REBALANCED = 'Forced Precipitation(⚖)',
