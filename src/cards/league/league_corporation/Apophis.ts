@@ -26,7 +26,7 @@ export class Apophis extends Card implements CorporationCard, IResourceCard {
       initialActionText: 'Draw a Space Event',
 
       metadata: {
-        cardNumber: 'L420',
+        cardNumber: 'L422',
         description: 'You start with 40 M€.',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(40).nbsp.cards(1).secondaryTag(AltSecondaryTag.SPACE_EVENT).br;
