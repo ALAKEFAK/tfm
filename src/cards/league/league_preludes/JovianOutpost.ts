@@ -18,7 +18,7 @@ export class JovianOutpost extends PreludeCard {
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(1).titanium(1)).br;
           b.titanium(2).br;
-          b.vpText('1/2 VP per Jovian tag you have.');
+          b.vpText('1 VP per 2 Jovian tags you have.');
         }),
         victoryPoints: CardRenderDynamicVictoryPoints.jovians(1, 2),
       },
