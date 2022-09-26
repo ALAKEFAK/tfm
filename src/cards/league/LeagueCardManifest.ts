@@ -19,7 +19,6 @@ import {MarsHeavyIndustry} from './league_project/MarsHeavyIndustry';
 import {MatingSeason} from './league_project/MatingSeason';
 import {MediaAndTechnologyStudies} from './league_project/MediaAndTechnologyStudies';
 import {NoMonNoCryInsurance} from './league_project/NoMonNoCryInsurance';
-import {PhobosFalls} from './league_project/PhobosFalls';
 import {PhobosSpaceHavenLeague} from './league_project/PhobosSpaceHavenLeague';
 import {RecycledProjects} from './league_project/RecycledProjects';
 import {SaveOurShip} from './league_project/SaveOurShip';
@@ -52,7 +51,6 @@ export const LEAGUE_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.MATING_SEASON, Factory: MatingSeason},
     {cardName: CardName.MEDIA_AND_TECHNOLOGY_STUDIES, Factory: MediaAndTechnologyStudies},
     {cardName: CardName.NOMON_NOCRY_INSURANCE, Factory: NoMonNoCryInsurance},
-    {cardName: CardName.PHOBOS_FALLS, Factory: PhobosFalls},
     {cardName: CardName.PHOBOS_SPACE_HAVEN_LEAGUE, Factory: PhobosSpaceHavenLeague},
     {cardName: CardName.RECYCLED_PROJECTS, Factory: RecycledProjects},
     {cardName: CardName.SAVE_OUR_SHIP, Factory: SaveOurShip},
