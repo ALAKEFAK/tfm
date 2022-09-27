@@ -426,7 +426,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     // NoMon NoCry Insurance hook
-    if (options?.from !== undefined && delta < 0 && this.cardIsInEffect(CardName.NOMON_NOCRY_INSURANCE)) {
+    if (options?.from !== undefined && delta < 0 && options.from instanceof Player && this.cardIsInEffect(CardName.NOMON_NOCRY_INSURANCE)) {
       this.addResource(Resources.MEGACREDITS, 3, {log: true});
     }
   }
@@ -459,7 +459,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     // NoMon NoCry Insurance hook
-    if (options?.from !== undefined && delta < 0 && this.cardIsInEffect(CardName.NOMON_NOCRY_INSURANCE)) {
+    if (options?.from !== undefined && delta < 0 && options.from instanceof Player && this.cardIsInEffect(CardName.NOMON_NOCRY_INSURANCE)) {
       this.addResource(Resources.MEGACREDITS, 3, {log: true});
     }
 
