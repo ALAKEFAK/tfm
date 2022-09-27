@@ -17,6 +17,7 @@ export class SaveOurShip extends Card implements IProjectCard {
 
       metadata: {
         cardNumber: 'L419',
+        victoryPoints: -1,
         description: 'Discard 2 cards, then draw 3 cards.',
         renderData: CardRenderer.builder((b) => {
           b.minus().cards(2).br;
@@ -29,6 +30,10 @@ export class SaveOurShip extends Card implements IProjectCard {
   public canPlay(player: Player): boolean {
     // Only playable if you have 2 cards to discard + this card in hand
     return super.canPlay(player) && player.cardsInHand.length > 2;
+  }
+
+  public getVictoryPoints(): number {
+    return -1;
   }
 
   public play(player: Player) {
