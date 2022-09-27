@@ -771,7 +771,7 @@ export enum CardName {
     LABORATORY_MICE = 'Laboratory Mice',
     MARS_HEAVY_INDUSTRY = 'Mars Heavy Industry',
     MATING_SEASON = 'Mating Season',
-    OUTER_RIM_RESEARCH_FACILITY = 'Outer Rim Research Facility',
+    OUTER_RIM_UNIVERSITY = 'Outer Rim University',
     NOMON_NOCRY_INSURANCE = 'NoMon NoCry Insurance',
     PHOBOS_FALLS = 'Phobos Falls',
     PHOBOS_SPACE_HAVEN_LEAGUE = 'Phobos Space Haven(L)',

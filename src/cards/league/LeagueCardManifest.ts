@@ -21,7 +21,7 @@ import {ManOfThePeople} from './league_preludes/ManOfThePeople';
 import {MarsHeavyIndustry} from './league_project/MarsHeavyIndustry';
 import {MatingSeason} from './league_project/MatingSeason';
 import {NoMonNoCryInsurance} from './league_project/NoMonNoCryInsurance';
-import {OuterRimResearchFacility} from './league_project/OuterRimResearchFacility';
+import {OuterRimUniversity} from './league_project/OuterRimUniversity';
 import {PhobosSpaceHavenLeague} from './league_project/PhobosSpaceHavenLeague';
 import {RecycledProjects} from './league_project/RecycledProjects';
 import {SaveOurShip} from './league_project/SaveOurShip';
@@ -52,7 +52,7 @@ export const LEAGUE_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.LABORATORY_MICE, Factory: LaboratoryMice},
     {cardName: CardName.MARS_HEAVY_INDUSTRY, Factory: MarsHeavyIndustry},
     {cardName: CardName.MATING_SEASON, Factory: MatingSeason},
-    {cardName: CardName.OUTER_RIM_RESEARCH_FACILITY, Factory: OuterRimResearchFacility},
+    {cardName: CardName.OUTER_RIM_UNIVERSITY, Factory: OuterRimUniversity},
     {cardName: CardName.NOMON_NOCRY_INSURANCE, Factory: NoMonNoCryInsurance},
     {cardName: CardName.PHOBOS_SPACE_HAVEN_LEAGUE, Factory: PhobosSpaceHavenLeague},
     {cardName: CardName.RECYCLED_PROJECTS, Factory: RecycledProjects},

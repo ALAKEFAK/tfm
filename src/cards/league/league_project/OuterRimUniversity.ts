@@ -11,24 +11,28 @@ import {SelectOption} from '../../../inputs/SelectOption';
 import {CardRenderer} from '../../render/CardRenderer';
 import {DeferredAction} from '../../../deferredActions/DeferredAction';
 
-export class OuterRimResearchFacility extends Card implements IProjectCard, IResourceCard {
+export class OuterRimUniversity extends Card implements IProjectCard, IResourceCard {
   public resourceCount = 0;
 
   constructor() {
     super({
       cardType: CardType.ACTIVE,
-      name: CardName.OUTER_RIM_RESEARCH_FACILITY,
-      tags: [Tags.JOVIAN],
+      name: CardName.OUTER_RIM_UNIVERSITY,
+      tags: [Tags.JOVIAN, Tags.SPACE],
       cost: 10,
       resourceType: ResourceType.ASTEROID,
 
       metadata: {
         cardNumber: 'L418',
-        description: 'When you play a Jovian tag, including this, either add an asteroid to this card, or remove an asteroid from this card to draw a card.',
+        victoryPoints: 1,
+        // description: 'When you play a Jovian tag, including this, you may discard a card from hand to draw a card.',
         renderData: CardRenderer.builder((b) => {
-          b.jovian().played.colon().asteroids(1).br;
-          b.or().br;
-          b.minus().asteroids(1).plus().cards(1);
+          // b.jovian().played.colon().asteroids(1).br;
+          // b.or().br;
+          // b.minus().asteroids(1).plus().cards(1);
+          b.effect('When you play a Jovian tag, including this, you may discard a card from hand to draw a card.', (eb) => {
+            eb.jovian().played.startEffect.minus().cards(1).nbsp.plus().cards(1);
+          });
         }),
       },
     });
@@ -36,6 +40,10 @@ export class OuterRimResearchFacility extends Card implements IProjectCard, IRes
 
   public play() {
     return undefined;
+  }
+
+  public getVictoryPoints(): number {
+    return 1;
   }
 
   public onCardPlayed(player: Player, card: IProjectCard) {
