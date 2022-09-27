@@ -25,7 +25,7 @@ export class SpaceDebrisCollection extends Card implements IActionCard, IProject
       requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 3).max()),
       metadata: {
         cardNumber: 'L417',
-        description: 'Add 3 asteroids to this card.',
+        description: 'Add 2 asteroids to this card.',
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 asteroid to this card.', (eb) => {
             eb.empty().startAction.asteroids(1).nbsp.or();
@@ -33,7 +33,7 @@ export class SpaceDebrisCollection extends Card implements IActionCard, IProject
           b.action('Spend 1 asteroid here to draw a card.', (eb) => {
             eb.asteroids(1).startAction.cards(1);
           }).br;
-          b.asteroids(3);
+          b.asteroids(2);
         }),
       },
     });
@@ -44,7 +44,7 @@ export class SpaceDebrisCollection extends Card implements IActionCard, IProject
   }
 
   public play() {
-    this.resourceCount = 3;
+    this.resourceCount = 2;
     return undefined;
   }
 
