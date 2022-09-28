@@ -18,14 +18,14 @@ export class LakefrontResortsRebalanced extends Card implements CorporationCard 
       cardType: CardType.CORPORATION,
       name: CardName.LAKEFRONT_RESORTS_REBALANCED,
       tags: [Tags.BUILDING],
-      startingMegaCredits: 50,
+      startingMegaCredits: 46,
 
       metadata: {
         cardNumber: 'R38',
-        description: 'You start with 50 M€.',
+        description: 'You start with 46 M€.',
         renderData: CardRenderer.builder((b) => {
           b.br.br.br;
-          b.megacredits(50);
+          b.megacredits(46);
           b.corpBox('effect', (ce) => {
             ce.vSpace(Size.MEDIUM);
             ce.effect('When any ocean tile is placed, increase your M€ production 1 step. Your bonus for placing adjacent to oceans is 3M€ instead of 2 M€.', (eb) => {
