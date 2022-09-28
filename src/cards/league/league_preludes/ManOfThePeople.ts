@@ -16,7 +16,7 @@ export class ManOfThePeople extends PreludeCard {
         cardNumber: 'L402',
         renderData: CardRenderer.builder((b) => {
           b.delegates(2);
-          b.text('Place 2 delegates from the reserve.', Size.SMALL).br;
+          b.text('Place 2 delegates from the reserve in 1 party.', Size.SMALL).br;
           b.effect('You have +1 influence.', (eb) => {
             eb.startEffect.influence(1);
           }).br;
@@ -30,8 +30,7 @@ export class ManOfThePeople extends PreludeCard {
 
   public play(player: Player) {
     if (player.game.turmoil) {
-      player.game.defer(new SendDelegateToArea(player, 'Select where to send the 1st delegate', {source: 'reserve'}));
-      player.game.defer(new SendDelegateToArea(player, 'Select where to send the 2nd delegate', {source: 'reserve'}));
+      player.game.defer(new SendDelegateToArea(player, 'Select where to send the 2 delegates', {count: 2, source: 'reserve'}));
       player.game.turmoil.addInfluenceBonus(player);
     }
     return undefined;
