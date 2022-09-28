@@ -15,7 +15,11 @@ import {CardModel} from '../../models/CardModel';
 
 type InterfaceTagsType = Tags | SpecialTags | 'all' | 'separator';
 
-const JOVIAN_MULTIPLIERS: Array<CardName> = [
+const JOVIAN_HALF_MULTIPLIERS: Array<CardName> = [
+  CardName.JOVIAN_OUTPOST,
+];
+
+const JOVIAN_FULL_MULTIPLIERS: Array<CardName> = [
   CardName.IO_MINING_INDUSTRIES,
   CardName.GANYMEDE_COLONY,
   CardName.WATER_IMPORT_FROM_EUROPA,
@@ -233,8 +237,11 @@ export const PlayerTags = Vue.component('player-tags', {
     playerJovianMultipliersCount: function(): number {
       let multipliers = 0;
       for (const card of this.player.playedCards) {
-        if (card !== undefined && JOVIAN_MULTIPLIERS.includes(card.name as CardName)) {
+        if (card !== undefined && JOVIAN_FULL_MULTIPLIERS.includes(card.name as CardName)) {
           multipliers += 1;
+        }
+        if (card !== undefined && JOVIAN_HALF_MULTIPLIERS.includes(card.name as CardName)) {
+          multipliers += 0.5;
         }
       }
       return multipliers;
