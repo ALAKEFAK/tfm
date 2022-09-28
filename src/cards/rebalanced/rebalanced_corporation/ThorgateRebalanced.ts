@@ -25,8 +25,8 @@ export class ThorgateRebalanced extends Card implements CorporationCard {
           b.production((pb) => pb.energy(1)).nbsp.megacredits(40);
           b.corpBox('action', (ce) => {
             ce.vSpace(Size.LARGE);
-            ce.action('Decr. energy prod. gain 8 M€.', (eb) => {
-              eb.production((pb) => pb.energy(1)).startAction.megacredits(8);
+            ce.action('Decr. energy prod. gain 6 M€.', (eb) => {
+              eb.production((pb) => pb.energy(1)).startAction.megacredits(6);
             });
             ce.vSpace(Size.SMALL);
             ce.effect('When playing a power card OR SP POWER OR TURMOIL KELVINISTS ACTION, you pay 3 M€ less for it.', (eb) => {
@@ -66,8 +66,8 @@ export class ThorgateRebalanced extends Card implements CorporationCard {
 
   private getMegacreditsOption(player: Player) {
     player.addProduction(Resources.ENERGY, -1);
-    player.addResource(Resources.MEGACREDITS, 8);
-    player.game.log('${0} decreased energy production 1 step to gain 8 M€', (b) => b.player(player));
+    player.addResource(Resources.MEGACREDITS, 6);
+    player.game.log('${0} decreased energy production 1 step to gain 6 M€', (b) => b.player(player));
     return undefined;
   }
 }
