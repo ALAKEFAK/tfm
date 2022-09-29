@@ -16,14 +16,14 @@ export class FactorumRebalanced extends Card implements IActionCard, Corporation
       cardType: CardType.CORPORATION,
       name: CardName.FACTORUM_REBALANCED,
       tags: [Tags.ENERGY, Tags.BUILDING],
-      startingMegaCredits: 37,
-      productionBox: Units.of({steel: 1}),
+      startingMegaCredits: 40,
+      productionBox: Units.of({steel: 2}),
 
       metadata: {
         cardNumber: 'R22',
-        description: 'You start with 37 M€. Increase your steel production 1 step.',
+        description: 'You start with 40 M€. Increase your steel production 2 steps.',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(37).nbsp.production((pb) => pb.steel(1));
+          b.megacredits(40).nbsp.production((pb) => pb.steel(2));
           b.corpBox('action', (ce) => {
             ce.vSpace(Size.LARGE);
             ce.action('Increase your energy production 1 step IF YOU HAVE NO ENERGY RESOURCES, or spend 1 energy to draw a building card.', (eb) => {
