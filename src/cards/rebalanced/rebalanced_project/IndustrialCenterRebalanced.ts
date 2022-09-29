@@ -23,7 +23,7 @@ export class IndustrialCenterRebalanced extends Card implements IActionCard, IPr
       cardNumber: '123',
       renderData: CardRenderer.builder((b) => {
         b.action('Spend 6 M€ to increase your steel production 1 step.', (eb) => {
-          eb.megacredits(6).steel(1).brackets.startAction.production((pb) => pb.steel(1));
+          eb.megacredits(6).startAction.production((pb) => pb.steel(1));
         }).br;
         b.tile(TileType.INDUSTRIAL_CENTER, true, false).asterix();
       }),
@@ -53,11 +53,11 @@ export class IndustrialCenterRebalanced extends Card implements IActionCard, IPr
   }
 
   public canAct(player: Player): boolean {
-    return player.canAfford(6, {steel: true});
+    return player.canAfford(6);
   }
 
   public action(player: Player) {
-    player.game.defer(new SelectHowToPayDeferred(player, 6, {canUseSteel: true, title: 'Select how to pay for action'}));
+    player.game.defer(new SelectHowToPayDeferred(player, 6, {title: 'Select how to pay for action'}));
     player.addProduction(Resources.STEEL, 1);
     return undefined;
   }
