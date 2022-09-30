@@ -37,7 +37,7 @@ export class FactorumRebalanced extends Card implements IActionCard, Corporation
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.STEEL, 1);
+    player.addProduction(Resources.STEEL, 2);
     return undefined;
   }
 
