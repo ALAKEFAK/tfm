@@ -40,12 +40,6 @@ export class CheungShingMARSRebalanced extends Card implements CorporationCard {
     }
   }
 
-  public getCardDiscount(_player: Player, card: IProjectCard) {
-    const spaceDiscount = card.tags.filter((tag) => tag === Tags.SPACE).length * 1;
-    const buildingDiscount = card.tags.filter((tag) => tag === Tags.BUILDING).length * 2;
-    return spaceDiscount + buildingDiscount;
-  }
-
   public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS, 3);
     return undefined;
