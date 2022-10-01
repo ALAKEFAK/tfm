@@ -32,7 +32,6 @@ export class JovianOutpost extends PreludeCard {
   public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS, 1);
     player.addProduction(Resources.TITANIUM, 1);
-    player.titanium += 2;
     return undefined;
   }
 }
