@@ -54,6 +54,7 @@ export class OuterRimUniversity extends Card implements IProjectCard, IResourceC
             player.game.dealer.discard(foundCards[0]);
             player.game.log('${0} is using their ${1} effect to draw a card.', (b) => b.player(player).card(this));
             player.game.log('You discarded ${0}', (b) => b.card(foundCards[0]), {reservedFor: player});
+            player.drawCard();
             return undefined;
           });
           selectCardtoDiscard.buttonDanger = true;
