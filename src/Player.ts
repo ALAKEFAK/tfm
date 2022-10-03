@@ -2109,22 +2109,31 @@ export class Player implements ISerializable<SerializedPlayer> {
       }
     }
 
-    // If you can pay to add a delegate to a party.
+    // Options to send delegates from lobby or from reserve
     if (this.game.gameOptions.turmoilExtension && this.game.turmoil !== undefined) {
-      let sendDelegate;
+      const sendDelegateActions: Array<SendDelegateToArea> = [];
       if (this.game.turmoil?.lobby.has(this.id)) {
-        sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (from lobby)');
-      } else if (this.isCorporation(CardName.INCITE) && this.canAfford(3) && this.game.turmoil.getDelegatesInReserve(this.id) > 0) {
-        sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (3 M€)', {cost: 3});
-      } else if (this.canAfford(5) && this.game.turmoil.getDelegatesInReserve(this.id) > 0) {
-        sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (5 M€)', {cost: 5});
+        sendDelegateActions.push(new SendDelegateToArea(this, 'Send a delegate in an area (from lobby)'));
       }
-      if (sendDelegate) {
-        const input = sendDelegate.execute();
-        if (input !== undefined) {
-          action.options.push(input);
+      if (this.isCorporation(CardName.INCITE) && this.canAfford(3) && this.game.turmoil.getDelegatesInReserve(this.id) > 0) {
+        sendDelegateActions.push(new SendDelegateToArea(this, 'Send a delegate in an area (3 M€)', {cost: 3, source: 'reserve'}));
+      }
+      if (this.canAfford(5) && this.game.turmoil.getDelegatesInReserve(this.id) > 0) {
+        if (this.game.turmoil?.lobby.has(this.id)) {
+          sendDelegateActions.push(new SendDelegateToArea(this, 'Send a delegate in an area (5 M€, from reserve). WARNING: You also have a free delegate (from lobby).',
+            {cost: 5, source: 'reserve'}));
+        } else {
+          sendDelegateActions.push(new SendDelegateToArea(this, 'Send a delegate in an area (5 M€)', {cost: 5, source: 'reserve'}));
         }
       }
+      sendDelegateActions.forEach((sendDelegateAction) => {
+        if (sendDelegateAction) {
+          const input = sendDelegateAction.execute();
+          if (input !== undefined) {
+            action.options.push(input);
+          }
+        }
+      });
     }
 
     if (this.game.getPlayers().length > 1 &&
