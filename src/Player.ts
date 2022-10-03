@@ -1,5 +1,14 @@
 import * as constants from './constants';
-import {DEFAULT_FLOATERS_VALUE, DEFAULT_MICROBES_VALUE, ENERGY_TRADE_COST, MAX_FLEET_SIZE, MC_TRADE_COST, MILESTONE_COST, REDS_RULING_POLICY_COST, TITANIUM_TRADE_COST} from './constants';
+import {
+  DEFAULT_FLOATERS_VALUE,
+  DEFAULT_MICROBES_VALUE,
+  ENERGY_TRADE_COST,
+  MAX_FLEET_SIZE,
+  MC_TRADE_COST,
+  MILESTONE_COST,
+  REDS_RULING_POLICY_COST,
+  TITANIUM_TRADE_COST,
+} from './constants';
 import {AndOptions} from './inputs/AndOptions';
 import {Aridor} from './cards/colonies/Aridor';
 import {Board} from './boards/Board';
@@ -189,8 +198,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     beginner: boolean,
     handicap: number = 0,
     id: PlayerId): Player {
-    const player = new Player(name, color, beginner, handicap, id);
-    return player;
+    return new Player(name, color, beginner, handicap, id);
   }
 
   public set game(game: Game) {
@@ -378,7 +386,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     }) {
     // When amount is negative, sometimes the amount being asked to be removed is more than the player has.
     // delta represents an adjusted amount which basically declares that a player cannot lose more resources
-    // then they have.
+    // than they have.
     const playerAmount = this.getResource(resource);
     const delta = (amount >= 0) ? amount : Math.max(amount, -playerAmount);
 
@@ -930,10 +938,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         distinctCount++;
       }
     });
-    if (distinctCount + this.getTagCount(Tags.WILDCARD) >= tags.length) {
-      return true;
-    }
-    return false;
+    return distinctCount + this.getTagCount(Tags.WILDCARD) >= tags.length;
   }
 
   private runInputCb(result: PlayerInput | undefined): void {
@@ -1780,7 +1785,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
   private passOption(): PlayerInput {
     return new SelectOption('Pass for this generation', 'Pass', () => {
-      if (this.game.turmoil?.lobby.has(this.id) && this.hasWarnedOfUnusedDelegate === false) {
+      if (this.game.turmoil?.lobby.has(this.id) && !this.hasWarnedOfUnusedDelegate) {
         this.hasWarnedOfUnusedDelegate = true;
         throw new Error('You have an unused delegate in the lobby. <br>(Select \'Pass for this generation\' again to confirm passing.)');
       }
@@ -1967,11 +1972,11 @@ export class Player implements ISerializable<SerializedPlayer> {
       game.phase = Phase.ACTION;
     }
 
-    if (this.allOtherPlayersHavePassed() && this.hasTradedThisTurn === true) {
+    if (this.allOtherPlayersHavePassed() && this.hasTradedThisTurn) {
       this.hasTradedThisTurn = false;
     }
 
-    if (game.hasPassedThisActionPhase(this) || (allOtherPlayersHavePassed === false && this.actionsTakenThisRound >= this.maxActionsThisRound)) {
+    if (game.hasPassedThisActionPhase(this) || (!allOtherPlayersHavePassed && this.actionsTakenThisRound >= this.maxActionsThisRound)) {
       // Delayed Entry handling
       if (game.hasPassedThisActionPhase(this) || this.actionsTakenThisRound === 3) this.maxActionsThisRound = 2;
 
@@ -2061,7 +2066,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     // If Reds is not ruling, offer convert plants and heat with high priority.
-    if (PartyHooks.shouldApplyPolicy(this.game, PartyName.REDS) === false) {
+    if (!PartyHooks.shouldApplyPolicy(this.game, PartyName.REDS)) {
       // Convert Plants
       const convertPlants = new ConvertPlants();
       if (convertPlants.canAct(this)) {
@@ -2139,7 +2144,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     if (this.game.getPlayers().length > 1 &&
       this.actionsTakenThisRound > 0 &&
       !this.game.gameOptions.fastModeOption &&
-      this.allOtherPlayersHavePassed() === false) {
+      !this.allOtherPlayersHavePassed()) {
       action.options.push(
         this.endTurnOption(),
       );
@@ -2150,12 +2155,12 @@ export class Player implements ISerializable<SerializedPlayer> {
       remainingAwards.title = 'Fund an award';
       remainingAwards.buttonLabel = 'Confirm';
       remainingAwards.options = this.game.awards
-        .filter((award: IAward) => this.game.hasBeenFunded(award) === false)
+        .filter((award: IAward) => !this.game.hasBeenFunded(award))
         .map((award: IAward) => this.fundAward(award));
       action.options.push(remainingAwards);
     }
 
-    if (PartyHooks.shouldApplyPolicy(this.game, PartyName.SCIENTISTS) === false) {
+    if (!PartyHooks.shouldApplyPolicy(this.game, PartyName.SCIENTISTS)) {
       TurmoilHandler.addPlayerAction(this, action.options);
     }
 
@@ -2488,7 +2493,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   public hasAvailableColonyTileToBuildOn(): boolean {
-    if (this.game.gameOptions.coloniesExtension === false) return false;
+    if (!this.game.gameOptions.coloniesExtension) return false;
 
     const availableColonyTiles = this.game.colonies.filter((colony) => colony.isActive);
     let colonyTilesAlreadyBuiltOn: number = 0;
