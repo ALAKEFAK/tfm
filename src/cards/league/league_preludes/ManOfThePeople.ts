@@ -20,7 +20,7 @@ export class ManOfThePeople extends PreludeCard {
           b.effect('You have +1 influence.', (eb) => {
             eb.startEffect.influence(1);
           }).br;
-          b.effect('You may ignore all turmoil party requirements.', (eb) => {
+          b.effect('You may ignore all turmoil ruling party requirements.', (eb) => {
             eb.plate('Party requirements').startEffect.text('None');
           });
         }),
