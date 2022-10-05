@@ -35,13 +35,15 @@ export class CheungShingMARSRebalanced extends Card implements CorporationCard {
   }
 
   public onCardPlayed(player: Player, card: IProjectCard) {
-    if (card.tags.includes(Tags.BUILDING)) {
+    if (player.isCorporation(this.name) && card.tags.includes(Tags.BUILDING)) {
       player.megaCredits += 2;
     }
   }
 
   public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS, 3);
+    // tags are counted before card is played
+    player.megaCredits += 2;
     return undefined;
   }
 }
