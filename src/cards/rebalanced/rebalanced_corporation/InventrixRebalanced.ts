@@ -25,11 +25,11 @@ export class InventrixRebalanced extends Card implements CorporationCard {
           b.megacredits(45).nbsp.cards(3);
           b.corpBox('effect', (ce) => {
             ce.vSpace(Size.LARGE);
-            ce.effect('Cards with a req. cost 2 M€ less.', (eb) => {
-              eb.cards(1).secondaryTag(AltSecondaryTag.REQ).startEffect.megacredits(-1);
-            });
             ce.effect('Your temperature, oxygen, ocean, and Venus requirements are +/-3 steps.', (eb) => {
               eb.plate('Global requirements').startEffect.text('+/- 3');
+            });
+            ce.effect('Cards with a req. cost 1 M€ less.', (eb) => {
+              eb.cards(1).secondaryTag(AltSecondaryTag.REQ).startEffect.megacredits(-1);
             });
           });
         }),
