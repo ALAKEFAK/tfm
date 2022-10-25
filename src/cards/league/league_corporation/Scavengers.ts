@@ -28,7 +28,7 @@ export class Scavengers extends Card implements CorporationCard {
           b.megacredits(46).wild(1).tile(TileType.SCAVENGERS, true);
           // b.megacredits(46).production((pb) => pb.megacredits(-3).wild(2)).wild(1).tile(TileType.SCAVENGERS, true);
           b.corpBox('effect', (ce) => {
-            ce.effect('When you place a tile on mars, gain an additional bonus of each type printed on the tile.', (eb) => {
+            ce.effect('When you place a standard (non ocean) tile on mars, gain an additional bonus of each type printed on the tile.', (eb) => {
               eb.text('n').wild(1).startEffect.text('(n+1)').wild(1);
             });
           });

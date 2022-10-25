@@ -1455,7 +1455,7 @@ export class Game implements ISerializable<SerializedGame> {
       if (!coveringExistingTile) {
         const bonuses = new Multiset(space.bonus);
         bonuses.entries().forEach(([bonus, count]) => {
-          this.grantSpaceBonus(player, bonus, count);
+          this.grantSpaceBonus(player, bonus, count, space);
         });
       }
 
@@ -1496,9 +1496,9 @@ export class Game implements ISerializable<SerializedGame> {
     LogHelper.logTilePlacement(player, space, tile.tileType);
   }
 
-  public grantSpaceBonus(player: Player, spaceBonus: SpaceBonus, count: number = 1) {
+  public grantSpaceBonus(player: Player, spaceBonus: SpaceBonus, count: number = 1, space?: ISpace) {
     // Scanvengers league corp hook
-    if (player.isCorporation(CardName.SCAVENGERS)) count += 1;
+    if (player.isCorporation(CardName.SCAVENGERS) && space?.tile?.tileType !== TileType.OCEAN) count += 1;
 
     if (spaceBonus === SpaceBonus.DRAW_CARD) {
       player.drawCard(count);
