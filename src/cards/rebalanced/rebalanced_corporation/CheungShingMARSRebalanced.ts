@@ -25,8 +25,8 @@ export class CheungShingMARSRebalanced extends Card implements CorporationCard {
           b.br.br;
           b.production((pb) => pb.megacredits(3)).nbsp.megacredits(44);
           b.corpBox('effect', (ce) => {
-            ce.effect('When you play a building tag, including this, you gain 2 M€.', (eb) => {
-              eb.building().played.startEffect.megacredits(2);
+            ce.effect('When you play a building tag, including this, you gain 3 M€.', (eb) => {
+              eb.building().played.startEffect.megacredits(3);
             });
           });
         }),
@@ -36,14 +36,14 @@ export class CheungShingMARSRebalanced extends Card implements CorporationCard {
 
   public onCardPlayed(player: Player, card: IProjectCard) {
     if (player.isCorporation(this.name) && card.tags.includes(Tags.BUILDING)) {
-      player.megaCredits += 2;
+      player.megaCredits += 3;
     }
   }
 
   public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS, 3);
     // tags are counted before card is played
-    player.megaCredits += 2;
+    player.megaCredits += 3;
     return undefined;
   }
 }
