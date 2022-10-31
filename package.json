@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Terraforming Mars Game",
   "private": true,
+  "engines": {
+    "node": "16.13.1"
+},
   "dependencies": {
     "@types/node": "^10.17.47",
     "@types/pg": "^7.14.7",
