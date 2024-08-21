@@ -39,4 +39,8 @@ export class OutdoorSportsRebalanced extends Card implements IProjectCard {
     player.addProduction(Resources.MEGACREDITS, 3);
     return undefined;
   }
+
+  public getVictoryPoints() {
+    return 1;
+  }
 }
