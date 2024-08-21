@@ -53,15 +53,12 @@ export const REBALANCED_COLONIES_TILES: Array<IColonyFactory<Colony>> = [
   {colonyName: ColonyName.GANYMEDE_REBALANCED, Factory: GanymedeRebalanced},
   {colonyName: ColonyName.IO_REBALANCED, Factory: IoRebalanced},
   {colonyName: ColonyName.LUNA_REBALANCED, Factory: LunaRebalanced},
-];
-
-const REBALANCED_PLUTO_TILE: Array<IColonyFactory<Colony>> = [
   {colonyName: ColonyName.PLUTO_REBALANCED, Factory: PlutoRebalanced},
 ];
 
 // Colonies to be removed upon rebalanced
 const REBALANCED_REPLACEMENT_COLONIES_TILES: Array<ColonyName> = [
-  ColonyName.CERES, ColonyName.EUROPA, ColonyName.GANYMEDE, ColonyName.IO, ColonyName.LUNA,
+  ColonyName.CERES, ColonyName.EUROPA, ColonyName.GANYMEDE, ColonyName.IO, ColonyName.LUNA, ColonyName.PLUTO,
 ];
 
 export const COMMUNITY_COLONIES_TILES: Array<IColonyFactory<Colony>> = [
@@ -76,7 +73,7 @@ export const COMMUNITY_COLONIES_TILES: Array<IColonyFactory<Colony>> = [
 
 // Function to return a card object by its name
 export function getColonyByName(colonyName: string): Colony | undefined {
-  const colonyTiles = ALL_COLONIES_TILES.concat(COMMUNITY_COLONIES_TILES).concat(REBALANCED_COLONIES_TILES).concat(REBALANCED_PLUTO_TILE);
+  const colonyTiles = ALL_COLONIES_TILES.concat(COMMUNITY_COLONIES_TILES).concat(REBALANCED_COLONIES_TILES);
   const colonyFactory = colonyTiles.find((colonyFactory) => colonyFactory.colonyName === colonyName);
   if (colonyFactory !== undefined) {
     return new colonyFactory.Factory();
@@ -127,10 +124,10 @@ export class ColonyDealer {
         // Add new colonies
         colonyTiles = colonyTiles.concat(REBALANCED_COLONIES_TILES);
         // If rebalanced two players, replace pluto.
-        if (players === 2) {
-          colonyTiles = colonyTiles.filter((c) => c.colonyName !== ColonyName.PLUTO);
-          colonyTiles = colonyTiles.concat(REBALANCED_PLUTO_TILE);
-        }
+        // if (players === 2) {
+        //   colonyTiles = colonyTiles.filter((c) => c.colonyName !== ColonyName.PLUTO);
+        //   colonyTiles = colonyTiles.concat(REBALANCED_PLUTO_TILE);
+        // }
       }
       if (!venusNextExtension) colonyTiles = colonyTiles.filter((c) => c.colonyName !== ColonyName.VENUS);
       if (!turmoilExtension) colonyTiles = colonyTiles.filter((c) => c.colonyName !== ColonyName.PALLAS);

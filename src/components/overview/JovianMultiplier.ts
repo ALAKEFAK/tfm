@@ -8,6 +8,6 @@ export const JovianMultiplier = Vue.component('JovianMultiplier', {
   },
   methods: {},
   template: `
-    <div class="player-jovian-multiplier">{{ amount }}</div>
+    <div class="player-jovian-multiplier" style="font-size:13px">{{ amount }}</div>
   `,
 });

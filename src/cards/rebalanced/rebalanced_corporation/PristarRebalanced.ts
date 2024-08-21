@@ -24,8 +24,8 @@ export class PristarRebalanced extends Card implements CorporationCard, IResourc
           b.br.br.br;
           b.megacredits(53).nbsp.nbsp.minus().tr(2, Size.SMALL);
           b.corpBox('effect', (ce) => {
-            ce.effect('During production phase, if you did not get TR so far this generation, add one preservation resource here, gain 6 M€, and draw a card.', (eb) => {
-              eb.tr(1, Size.SMALL, true).startEffect.preservation(1).megacredits(6).cards(1);
+            ce.effect('During production phase, if you did not get TR so far this generation, add one preservation resource here, gain 6 M€, and get one influence.', (eb) => {
+              eb.tr(1, Size.SMALL, true).startEffect.preservation(1).megacredits(6).influence(1);
             });
           });
         }),
@@ -49,7 +49,6 @@ export class PristarRebalanced extends Card implements CorporationCard, IResourc
       if (!(player.hasIncreasedTerraformRatingThisGeneration)) {
         player.megaCredits += 6;
         player.addResourceTo(this, 1);
-        player.drawCard(1);
       }
       return undefined;
     }

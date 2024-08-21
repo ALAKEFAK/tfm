@@ -31,7 +31,7 @@ export class RotatorImpactsRebalanced extends Card implements IActionCard, IReso
         cardNumber: '243',
         renderData: CardRenderer.builder((b) => {
           b.action('Spend 6 M€ to add an asteroid resource to ANY card [TITANIUM MAY BE USED].', (eb) => {
-            eb.megacredits(6).titanium(1).brackets.startAction.asteroids(1);
+            eb.megacredits(6).titanium(1).brackets.startAction.asteroids(1).asterix();
           }).br;
           b.action('Spend 1 resource from this card to increase Venus 1 step.', (eb) => {
             eb.or().asteroids(1).startAction.venus(1);

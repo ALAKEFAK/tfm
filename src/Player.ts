@@ -1,5 +1,14 @@
 import * as constants from './constants';
-import {DEFAULT_FLOATERS_VALUE, DEFAULT_MICROBES_VALUE, ENERGY_TRADE_COST, MAX_FLEET_SIZE, MC_TRADE_COST, MILESTONE_COST, REDS_RULING_POLICY_COST, TITANIUM_TRADE_COST} from './constants';
+import {
+  DEFAULT_FLOATERS_VALUE,
+  DEFAULT_MICROBES_VALUE,
+  ENERGY_TRADE_COST,
+  MAX_FLEET_SIZE,
+  MC_TRADE_COST,
+  MILESTONE_COST,
+  REDS_RULING_POLICY_COST,
+  TITANIUM_TRADE_COST,
+} from './constants';
 import {AndOptions} from './inputs/AndOptions';
 import {Aridor} from './cards/colonies/Aridor';
 import {Board} from './boards/Board';
@@ -189,8 +198,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     beginner: boolean,
     handicap: number = 0,
     id: PlayerId): Player {
-    const player = new Player(name, color, beginner, handicap, id);
-    return player;
+    return new Player(name, color, beginner, handicap, id);
   }
 
   public set game(game: Game) {
@@ -378,7 +386,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     }) {
     // When amount is negative, sometimes the amount being asked to be removed is more than the player has.
     // delta represents an adjusted amount which basically declares that a player cannot lose more resources
-    // then they have.
+    // than they have.
     const playerAmount = this.getResource(resource);
     const delta = (amount >= 0) ? amount : Math.max(amount, -playerAmount);
 
@@ -424,6 +432,11 @@ export class Player implements ISerializable<SerializedPlayer> {
     if (options?.from !== undefined && delta < 0 && (options.from instanceof Player && options.from.id !== this.id)) {
       this.resolveMonsInsurance();
     }
+
+    // NoMon NoCry Insurance hook
+    if (options?.from !== undefined && delta < 0 && options.from instanceof Player && this.cardIsInEffect(CardName.NOMON_NOCRY_INSURANCE)) {
+      this.addResource(Resources.MEGACREDITS, 3, {log: true});
+    }
   }
 
   public addProduction(resource: Resources, amount : number, options? : { log: boolean, from? : Player | GlobalEventName}) {
@@ -451,6 +464,11 @@ export class Player implements ISerializable<SerializedPlayer> {
     // Mons Insurance hook
     if (options?.from !== undefined && delta < 0 && (options.from instanceof Player && options.from.id !== this.id)) {
       this.resolveMonsInsurance();
+    }
+
+    // NoMon NoCry Insurance hook
+    if (options?.from !== undefined && delta < 0 && options.from instanceof Player && this.cardIsInEffect(CardName.NOMON_NOCRY_INSURANCE)) {
+      this.addResource(Resources.MEGACREDITS, 3, {log: true});
     }
 
     // Manutech hook
@@ -611,6 +629,10 @@ export class Player implements ISerializable<SerializedPlayer> {
     return this.cardIsInEffect(CardName.PROTECTED_HABITATS);
   }
 
+  public hasPhobosSpaceHavenLeague(): boolean {
+    return this.cardIsInEffect(CardName.PHOBOS_SPACE_HAVEN_LEAGUE);
+  }
+
   public plantsAreProtected(): boolean {
     return this.hasProtectedHabitats() || this.cardIsInEffect(CardName.ASTEROID_DEFLECTION_SYSTEM);
   }
@@ -698,15 +720,23 @@ export class Player implements ISerializable<SerializedPlayer> {
 
   public removeResourceFrom(card: ICard, count: number = 1, game? : Game, removingPlayer? : Player, shouldLogAction: boolean = true): void {
     if (card.resourceCount) {
+      const starting_resources = card.resourceCount;
       card.resourceCount = Math.max(card.resourceCount - count, 0);
       // Mons Insurance hook
       if (game !== undefined && removingPlayer !== undefined) {
-        if (removingPlayer !== this) this.resolveMonsInsurance();
+        if (removingPlayer !== this) {
+          this.resolveMonsInsurance();
+
+          // NoMon NoCry Insurance hook
+          if (this.cardIsInEffect(CardName.NOMON_NOCRY_INSURANCE)) {
+            this.addResource(Resources.MEGACREDITS, 3, {log: true});
+          }
+        }
 
         if (shouldLogAction) {
           game.log('${0} removed ${1} resource(s) from ${2}\'s ${3}', (b) =>
             b.player(removingPlayer)
-              .number(count)
+              .number(Math.min(starting_resources, count))
               .player(this)
               .card(card));
         }
@@ -726,12 +756,14 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     // Topsoil contract hook
-    if (card.resourceType === ResourceType.MICROBE && this.playedCards.map((card) => card.name).includes(CardName.TOPSOIL_CONTRACT)) {
+    if (card.resourceType === ResourceType.MICROBE &&
+      (this.playedCards.map((card) => card.name).includes(CardName.TOPSOIL_CONTRACT) || this.playedCards.map((card) => card.name).includes(CardName.TOPSOIL_CONTRACT_REBALANCED))) {
       this.megaCredits += count;
     }
 
     // Meat industry hook
-    if (card.resourceType === ResourceType.ANIMAL && this.playedCards.map((card) => card.name).includes(CardName.MEAT_INDUSTRY)) {
+    if (card.resourceType === ResourceType.ANIMAL &&
+      (this.playedCards.map((card) => card.name).includes(CardName.MEAT_INDUSTRY) || this.playedCards.map((card) => card.name).includes(CardName.MEAT_INDUSTRY_REBALANCED))) {
       this.megaCredits += count * 2;
     }
 
@@ -906,10 +938,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         distinctCount++;
       }
     });
-    if (distinctCount + this.getTagCount(Tags.WILDCARD) >= tags.length) {
-      return true;
-    }
-    return false;
+    return distinctCount + this.getTagCount(Tags.WILDCARD) >= tags.length;
   }
 
   private runInputCb(result: PlayerInput | undefined): void {
@@ -1756,7 +1785,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
   private passOption(): PlayerInput {
     return new SelectOption('Pass for this generation', 'Pass', () => {
-      if (this.game.turmoil?.lobby.has(this.id) && this.hasWarnedOfUnusedDelegate === false) {
+      if (this.game.turmoil?.lobby.has(this.id) && !this.hasWarnedOfUnusedDelegate) {
         this.hasWarnedOfUnusedDelegate = true;
         throw new Error('You have an unused delegate in the lobby. <br>(Select \'Pass for this generation\' again to confirm passing.)');
       }
@@ -1943,11 +1972,11 @@ export class Player implements ISerializable<SerializedPlayer> {
       game.phase = Phase.ACTION;
     }
 
-    if (this.allOtherPlayersHavePassed() && this.hasTradedThisTurn === true) {
+    if (this.allOtherPlayersHavePassed() && this.hasTradedThisTurn) {
       this.hasTradedThisTurn = false;
     }
 
-    if (game.hasPassedThisActionPhase(this) || (allOtherPlayersHavePassed === false && this.actionsTakenThisRound >= this.maxActionsThisRound)) {
+    if (game.hasPassedThisActionPhase(this) || (!allOtherPlayersHavePassed && this.actionsTakenThisRound >= this.maxActionsThisRound)) {
       // Delayed Entry handling
       if (game.hasPassedThisActionPhase(this) || this.actionsTakenThisRound === 3) this.maxActionsThisRound = 2;
 
@@ -2037,7 +2066,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     // If Reds is not ruling, offer convert plants and heat with high priority.
-    if (PartyHooks.shouldApplyPolicy(this.game, PartyName.REDS) === false) {
+    if (!PartyHooks.shouldApplyPolicy(this.game, PartyName.REDS)) {
       // Convert Plants
       const convertPlants = new ConvertPlants();
       if (convertPlants.canAct(this)) {
@@ -2085,28 +2114,37 @@ export class Player implements ISerializable<SerializedPlayer> {
       }
     }
 
-    // If you can pay to add a delegate to a party.
+    // Options to send delegates from lobby or from reserve
     if (this.game.gameOptions.turmoilExtension && this.game.turmoil !== undefined) {
-      let sendDelegate;
+      const sendDelegateActions: Array<SendDelegateToArea> = [];
       if (this.game.turmoil?.lobby.has(this.id)) {
-        sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (from lobby)');
-      } else if (this.isCorporation(CardName.INCITE) && this.canAfford(3) && this.game.turmoil.getDelegatesInReserve(this.id) > 0) {
-        sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (3 M€)', {cost: 3});
-      } else if (this.canAfford(5) && this.game.turmoil.getDelegatesInReserve(this.id) > 0) {
-        sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (5 M€)', {cost: 5});
+        sendDelegateActions.push(new SendDelegateToArea(this, 'Send a delegate in an area (from lobby)'));
       }
-      if (sendDelegate) {
-        const input = sendDelegate.execute();
-        if (input !== undefined) {
-          action.options.push(input);
+      if (this.isCorporation(CardName.INCITE) && this.canAfford(3) && this.game.turmoil.getDelegatesInReserve(this.id) > 0) {
+        sendDelegateActions.push(new SendDelegateToArea(this, 'Send a delegate in an area (3 M€)', {cost: 3, source: 'reserve'}));
+      }
+      if (this.canAfford(5) && this.game.turmoil.getDelegatesInReserve(this.id) > 0) {
+        if (this.game.turmoil?.lobby.has(this.id)) {
+          sendDelegateActions.push(new SendDelegateToArea(this, 'Send a delegate in an area (5 M€, from reserve). WARNING: You also have a free delegate (from lobby).',
+            {cost: 5, source: 'reserve'}));
+        } else {
+          sendDelegateActions.push(new SendDelegateToArea(this, 'Send a delegate in an area (5 M€)', {cost: 5, source: 'reserve'}));
         }
       }
+      sendDelegateActions.forEach((sendDelegateAction) => {
+        if (sendDelegateAction) {
+          const input = sendDelegateAction.execute();
+          if (input !== undefined) {
+            action.options.push(input);
+          }
+        }
+      });
     }
 
     if (this.game.getPlayers().length > 1 &&
       this.actionsTakenThisRound > 0 &&
       !this.game.gameOptions.fastModeOption &&
-      this.allOtherPlayersHavePassed() === false) {
+      !this.allOtherPlayersHavePassed()) {
       action.options.push(
         this.endTurnOption(),
       );
@@ -2117,12 +2155,12 @@ export class Player implements ISerializable<SerializedPlayer> {
       remainingAwards.title = 'Fund an award';
       remainingAwards.buttonLabel = 'Confirm';
       remainingAwards.options = this.game.awards
-        .filter((award: IAward) => this.game.hasBeenFunded(award) === false)
+        .filter((award: IAward) => !this.game.hasBeenFunded(award))
         .map((award: IAward) => this.fundAward(award));
       action.options.push(remainingAwards);
     }
 
-    if (PartyHooks.shouldApplyPolicy(this.game, PartyName.SCIENTISTS) === false) {
+    if (!PartyHooks.shouldApplyPolicy(this.game, PartyName.SCIENTISTS)) {
       TurmoilHandler.addPlayerAction(this, action.options);
     }
 
@@ -2455,7 +2493,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   public hasAvailableColonyTileToBuildOn(): boolean {
-    if (this.game.gameOptions.coloniesExtension === false) return false;
+    if (!this.game.gameOptions.coloniesExtension) return false;
 
     const availableColonyTiles = this.game.colonies.filter((colony) => colony.isActive);
     let colonyTilesAlreadyBuiltOn: number = 0;

@@ -19,6 +19,7 @@ const tileTypeToCssClass = new Map<TileType, string>([
   [TileType.NUCLEAR_ZONE, 'nuclear_zone'],
   [TileType.RESTRICTED_AREA, 'restricted_area'],
   [TileType.DEIMOS_DOWN, 'deimos_down'],
+  [TileType.PHOBOS_FALLS, 'deimos_down'],
   [TileType.GREAT_DAM, 'great_dam'],
   [TileType.MAGNETIC_FIELD_GENERATORS, 'magnetic_field_generators'],
   [TileType.BIOFERTILIZER_FACILITY, 'biofertilizer-facility'],
@@ -33,6 +34,7 @@ const tileTypeToCssClass = new Map<TileType, string>([
   [TileType.EROSION_SEVERE, 'erosion-severe'],
   [TileType.MINING_STEEL_BONUS, 'mining-steel'],
   [TileType.MINING_TITANIUM_BONUS, 'mining-titanium'],
+  [TileType.SCAVENGERS, 'deimos_down'],
 ]);
 
 const tileTypeToCssClassAresOverride = new Map<TileType, string>([

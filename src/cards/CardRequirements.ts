@@ -7,7 +7,8 @@ import {Player} from '../Player';
 import {
   MAX_OCEAN_TILES,
   MAX_OXYGEN_LEVEL,
-  MAX_TEMPERATURE, MAX_VENUS_SCALE,
+  MAX_TEMPERATURE,
+  MAX_VENUS_SCALE,
   MIN_OXYGEN_LEVEL,
   MIN_TEMPERATURE,
   MIN_VENUS_SCALE,
@@ -36,6 +37,9 @@ export class CardRequirements {
   }
   public hasParty(): boolean {
     return this.requirements.some((req) => req instanceof PartyCardRequirement);
+  }
+  public isGenerationReq(): boolean {
+    return this.requirements.some((req) => req.type === RequirementType.GENERATION);
   }
   public hasPlantsRemoved(): boolean {
     return this.requirements.some((req) => req.type === RequirementType.REMOVED_PLANTS);
@@ -149,6 +153,11 @@ class Builder {
 
   public plantsRemoved(): Builder {
     this.reqs.push(new CardRequirement(RequirementType.REMOVED_PLANTS));
+    return this;
+  }
+
+  public generation(amount: number): Builder {
+    this.reqs.push(new CardRequirement(RequirementType.GENERATION, amount));
     return this;
   }
 

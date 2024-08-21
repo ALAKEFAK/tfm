@@ -271,16 +271,19 @@ export const Colony = Vue.component('colony', {
 
     <div v-if="colony.name === getPluto() || colony.name === getPlutoRebalanced()" class="colony-grid-container">
       <div>
-        <div class="resource card card-with-border" style="margin-top: 0px; margin-left: -5px; transform: scale(0.8);"></div>
-        <div class="resource card card-with-border" style="position absolute; margin: 0 0 0 -30px; transform: scale(0.8);"></div>
+        <div class="resource card card-with-border" style="position: absolute; margin: 0 0 0 -25px; transform: scale(0.8);"></div>
+        <div class="resource card card-with-border" style="position: absolute; margin: 5px 0 0 -15px; transform: scale(0.8);"></div>
+        <div class="resource card card-with-border" style="position: absolute; margin: 10px 0 0 -5px; transform: scale(0.8);"></div>
       </div>
       <div>
-        <div class="resource card card-with-border" style="margin-top: 0px; margin-left: -5px; transform: scale(0.8);"></div>
-        <div class="resource card card-with-border" style="position absolute; margin: 0 0 0 -30px; transform: scale(0.8);"></div>
+        <div class="resource card card-with-border" style="position: absolute; margin: 0 0 0 -25px; transform: scale(0.8);"></div>
+        <div class="resource card card-with-border" style="position: absolute; margin: 5px 0 0 -15px; transform: scale(0.8);"></div>
+        <div class="resource card card-with-border" style="position: absolute; margin: 10px 0 0 -5px; transform: scale(0.8);"></div>
       </div>
       <div>
-        <div class="resource card card-with-border" style="margin-top: 0px; margin-left: -5px; transform: scale(0.8);"></div>
-        <div class="resource card card-with-border" style="position absolute; margin: 0 0 0 -30px; transform: scale(0.8);"></div>
+        <div class="resource card card-with-border" style="position: absolute; margin: 0 0 0 -25px; transform: scale(0.8);"></div>
+        <div class="resource card card-with-border" style="position: absolute; margin: 5px 0 0 -15px; transform: scale(0.8);"></div>
+        <div class="resource card card-with-border" style="position: absolute; margin: 10px 0 0 -5px; transform: scale(0.8);"></div>
       </div>
       <div></div>
       <div></div>
@@ -298,13 +301,13 @@ export const Colony = Vue.component('colony', {
     </div>
 
     <div v-if="colony.name === getPlutoRebalanced()" class="colony-grid-container2">
+      <div>0</div>
+      <div>1</div>
       <div>1</div>
       <div>2</div>
       <div>2</div>
-      <div>2</div>
       <div>3</div>
       <div>3</div>
-      <div>4</div>
     </div>
 
     <div v-if="colony.name === getMiranda()" class="colony-grid-container">

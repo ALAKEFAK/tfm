@@ -40,9 +40,12 @@ export enum GlobalEventName {
     LEADERSHIP_SUMMIT = 'Leadership Summit',
 
     // Rebalanced
-
     GLOBAL_DUST_STORM_REBALANCED = 'Global Dust Storm(⚖)',
     CORROSIVE_RAIN_REBALANCED = 'Corrosive Rain(⚖)',
     ECO_SABOTAGE_REBALANCED = 'Eco Sabotage(⚖)',
     SCIENTIFIC_COMMUNITY_REBALANCED = 'Scientific Community(⚖)',
+
+    // League
+    HEATED_DISCUSSIONS = 'Heated Discussions',
+    SEALOCKED_HOLMES = 'Sealocked Holmes',
 }

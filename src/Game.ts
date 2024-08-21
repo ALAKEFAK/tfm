@@ -1298,7 +1298,7 @@ export class Game implements ISerializable<SerializedGame> {
     return this.venusScaleLevel;
   }
 
-  public increaseTemperature(player: Player, increments: -2 | -1 | 1 | 2 | 3): undefined {
+  public increaseTemperature(player: Player, increments: -2 | -1 | 1 | 2 | 3 | 4): undefined {
     if (increments === -2 || increments === -1) {
       this.temperature = Math.max(constants.MIN_TEMPERATURE, this.temperature + increments * 2);
       return undefined;
@@ -1451,11 +1451,11 @@ export class Game implements ISerializable<SerializedGame> {
     this.simpleAddTile(player, space, tile);
 
     // Part 5. Collect the bonuses
-    if (this.phase !== Phase.SOLAR) {
+    if (this.phase !== Phase.SOLAR && tile.tileType !== TileType.PHOBOS_FALLS) {
       if (!coveringExistingTile) {
         const bonuses = new Multiset(space.bonus);
         bonuses.entries().forEach(([bonus, count]) => {
-          this.grantSpaceBonus(player, bonus, count);
+          this.grantSpaceBonus(player, bonus, count, space);
         });
       }
 
@@ -1496,7 +1496,10 @@ export class Game implements ISerializable<SerializedGame> {
     LogHelper.logTilePlacement(player, space, tile.tileType);
   }
 
-  public grantSpaceBonus(player: Player, spaceBonus: SpaceBonus, count: number = 1) {
+  public grantSpaceBonus(player: Player, spaceBonus: SpaceBonus, count: number = 1, space?: ISpace) {
+    // Scanvengers league corp hook
+    if (player.isCorporation(CardName.SCAVENGERS) && space?.tile?.tileType !== TileType.OCEAN) count += 1;
+
     if (spaceBonus === SpaceBonus.DRAW_CARD) {
       player.drawCard(count);
     } else if (spaceBonus === SpaceBonus.PLANT) {

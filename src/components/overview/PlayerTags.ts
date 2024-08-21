@@ -8,6 +8,7 @@ import {SpecialTags} from '../../cards/SpecialTags';
 import {isTagsViewConcise} from './OverviewSettings';
 import {PlayerTagDiscount} from './PlayerTagDiscount';
 import {JovianMultiplier} from './JovianMultiplier';
+import {AnimalMicrobeProtection} from './AnimalMicrobeProtection';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {TurmoilPolicy} from '../../turmoil/TurmoilPolicy';
 import {ColonyName} from '../../colonies/ColonyName';
@@ -15,10 +16,19 @@ import {CardModel} from '../../models/CardModel';
 
 type InterfaceTagsType = Tags | SpecialTags | 'all' | 'separator';
 
-const JOVIAN_MULTIPLIERS: Array<CardName> = [
+const JOVIAN_HALF_MULTIPLIERS: Array<CardName> = [
+  CardName.JOVIAN_OUTPOST,
+];
+
+const JOVIAN_FULL_MULTIPLIERS: Array<CardName> = [
   CardName.IO_MINING_INDUSTRIES,
   CardName.GANYMEDE_COLONY,
   CardName.WATER_IMPORT_FROM_EUROPA,
+];
+
+const ANIMAL_MICROBE_PROTECTION: Array<CardName> = [
+  CardName.PROTECTED_HABITATS,
+  CardName.PHOBOS_SPACE_HAVEN_LEAGUE,
 ];
 
 const hasDiscount = (tag: InterfaceTagsType, card: CardModel): boolean => {
@@ -62,16 +72,16 @@ export const PLAYER_INTERFACE_TAGS_ORDER: Array<InterfaceTagsType> = [
 ];
 
 export const checkTagUsed = (tag: InterfaceTagsType, player: PlayerModel) => {
-  if (player.game.gameOptions.coloniesExtension === false && tag === SpecialTags.COLONY_COUNT) {
+  if (!player.game.gameOptions.coloniesExtension && tag === SpecialTags.COLONY_COUNT) {
     return false;
   }
   if (player.game.turmoil === undefined && tag === SpecialTags.INFLUENCE) {
     return false;
   }
-  if (player.game.gameOptions.venusNextExtension === false && tag === Tags.VENUS) {
+  if (!player.game.gameOptions.venusNextExtension && tag === Tags.VENUS) {
     return false;
   }
-  if (player.game.gameOptions.moonExpansion === false && tag === Tags.MOON) {
+  if (!player.game.gameOptions.moonExpansion && tag === Tags.MOON) {
     return false;
   }
   return true;
@@ -93,6 +103,7 @@ export const PlayerTags = Vue.component('player-tags', {
     'tag-count': TagCount,
     PlayerTagDiscount,
     JovianMultiplier,
+    AnimalMicrobeProtection,
   },
 
   methods: {
@@ -171,12 +182,6 @@ export const PlayerTags = Vue.component('player-tags', {
         return true;
       }
 
-      // TODO: Move out of here
-      // Add second discount for Cheung Shing Mars rebalanced
-      if (tag === Tags.SPACE && this.player.corporationCard?.name === CardName.CHEUNG_SHING_MARS_REBALANCED) {
-        return true;
-      }
-
       return false;
     },
     getTagDiscountAmount: function(tag: InterfaceTagsType): number {
@@ -185,12 +190,6 @@ export const PlayerTags = Vue.component('player-tags', {
         if (card !== undefined) {
           discount += getDiscountAmount(tag, card);
         }
-      }
-
-      // TODO: Move out of here
-      // Add second discount for Cheung Shing Mars rebalanced
-      if (tag === Tags.SPACE && this.player.corporationCard?.name === CardName.CHEUNG_SHING_MARS_REBALANCED) {
-        discount += 1;
       }
 
       if (tag === Tags.SPACE && this.player.game.turmoil?.ruling === PartyName.UNITY) {
@@ -227,14 +226,28 @@ export const PlayerTags = Vue.component('player-tags', {
 
       return 0;
     },
+    showAnimalMicrobeProtection: function(tag: InterfaceTagsType): boolean {
+      return (tag === Tags.ANIMAL || tag === Tags.MICROBE) && this.hasAnimalMicrobeProtection();
+    },
+    hasAnimalMicrobeProtection: function(): boolean {
+      for (const card of this.player.playedCards) {
+        if (card !== undefined && ANIMAL_MICROBE_PROTECTION.includes(card.name as CardName)) {
+          return true;
+        }
+      }
+      return false;
+    },
     showJovianMultipliers: function(tag: InterfaceTagsType): boolean {
       return tag === Tags.JOVIAN && this.playerJovianMultipliersCount() > 0;
     },
     playerJovianMultipliersCount: function(): number {
       let multipliers = 0;
       for (const card of this.player.playedCards) {
-        if (card !== undefined && JOVIAN_MULTIPLIERS.includes(card.name as CardName)) {
+        if (card !== undefined && JOVIAN_FULL_MULTIPLIERS.includes(card.name as CardName)) {
           multipliers += 1;
+        }
+        if (card !== undefined && JOVIAN_HALF_MULTIPLIERS.includes(card.name as CardName)) {
+          multipliers += 0.5;
         }
       }
       return multipliers;
@@ -259,6 +272,7 @@ export const PlayerTags = Vue.component('player-tags', {
                     <div class="tag-and-discount" :key="tag.tag">
                       <PlayerTagDiscount v-if="hasTagDiscount(tag.tag)" :amount="getTagDiscountAmount(tag.tag)" :color="player.color" />
                       <JovianMultiplier v-if="showJovianMultipliers(tag.tag)" :amount="playerJovianMultipliersCount()" />
+                      <AnimalMicrobeProtection v-if="showAnimalMicrobeProtection(tag.tag)" />
                       <tag-count :tag="tag.tag" :count="tag.count" :size="'big'" :type="'secondary'"/>
                     </div>
                   </div>
@@ -268,6 +282,7 @@ export const PlayerTags = Vue.component('player-tags', {
                       <div class="tag-and-discount" v-if="tagName !== 'separator'">
                         <PlayerTagDiscount v-if="hasTagDiscount(tagName)" :color="player.color" :amount="getTagDiscountAmount(tagName)"/>
                         <JovianMultiplier v-if="showJovianMultipliers(tagName)" :amount="playerJovianMultipliersCount()" />
+                        <AnimalMicrobeProtection v-if="showAnimalMicrobeProtection(tagName)" />
                         <tag-count :tag="tagName" :count="getTagCount(tagName)" :size="'big'" :type="'secondary'"/>
                       </div>
                       <div v-else class="tag-separator"></div>

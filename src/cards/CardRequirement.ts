@@ -7,30 +7,28 @@ import {ResourceType} from '../ResourceType';
 import {TileType} from '../TileType';
 import {GlobalParameter} from '../GlobalParameter';
 import {MoonExpansion} from '../moon/MoonExpansion';
+import {CardName} from '../CardName';
 
 const firstLetterUpperCase = (s: string): string => s.charAt(0).toUpperCase() + s.slice(1);
 
 export class CardRequirement {
-  constructor(private _type: RequirementType, protected _amount: number = 1, private _isMax: boolean = false, private _isAny: boolean = false) {}
-
-  private amountToString(): string {
-    if (this._type === RequirementType.OXYGEN || this._type === RequirementType.VENUS) {
-      return `${this._amount}%`;
-    } else if (this._type === RequirementType.TEMPERATURE) {
-      return `${this._amount}°`;
-    } else {
-      return (this._amount !== 1 || this._isMax) ? this._amount.toString() : '';
-    }
+  constructor(private _type: RequirementType, protected _amount: number = 1, private _isMax: boolean = false, private _isAny: boolean = false) {
   }
 
-  protected parseType(): string {
-    const withPlural: Array<string> = [RequirementType.OCEANS, RequirementType.FLOATERS, RequirementType.GREENERIES, RequirementType.CITIES, RequirementType.COLONIES, RequirementType.RESOURCE_TYPES, RequirementType.PARTY_LEADERS];
+  public get isMax(): boolean {
+    return this._isMax;
+  }
 
-    if (this._amount > 1 && withPlural.includes(this._type)) {
-      return this.getTypePlural();
-    }
+  public get isAny(): boolean {
+    return this._isAny;
+  }
 
+  public get type(): RequirementType {
     return this._type;
+  }
+
+  public get amount(): number {
+    return this._amount;
   }
 
   // TODO (chosta): add to a top level class - preferrably translatable
@@ -49,6 +47,11 @@ export class CardRequirement {
   public getLabel(): string {
     let result: string = this._isMax ? 'max ' : '';
     const amount = this.amountToString();
+
+    if (this._type === RequirementType.GENERATION) {
+      return `Generation ${this.amount}`;
+    }
+
     if (amount !== '') {
       result += amount;
       result += ' ';
@@ -66,26 +69,6 @@ export class CardRequirement {
   public any(): CardRequirement {
     this._isAny = true;
     return this;
-  }
-
-  public get isMax(): boolean {
-    return this._isMax;
-  }
-  public get isAny(): boolean {
-    return this._isAny;
-  }
-  public get type(): RequirementType {
-    return this._type;
-  }
-  public get amount(): number {
-    return this._amount;
-  }
-
-  protected satisfiesInequality(calculated: number) : boolean {
-    if (this.isMax) {
-      return calculated <= this.amount;
-    }
-    return calculated >= this.amount;
   }
 
   public satisfies(player: Player): boolean {
@@ -111,8 +94,8 @@ export class CardRequirement {
     case RequirementType.GREENERIES:
       const greeneries = player.game.board.spaces.filter(
         (space) => space.tile !== undefined &&
-            space.tile.tileType === TileType.GREENERY &&
-            (space.player === player || this._isAny),
+          space.tile.tileType === TileType.GREENERY &&
+          (space.player === player || this._isAny),
       ).length;
       return this.satisfiesInequality(greeneries);
 
@@ -122,6 +105,9 @@ export class CardRequirement {
         return this.satisfiesInequality(parties);
       }
       return false;
+
+    case RequirementType.GENERATION:
+      return this.satisfiesInequality(player.game.getGeneration());
 
     case RequirementType.OCEANS:
       return this.checkGlobalRequirement(player, GlobalParameter.OCEANS, this.amount, this.isMax);
@@ -171,7 +157,35 @@ export class CardRequirement {
     case RequirementType.TAG:
     case RequirementType.PARTY:
     case RequirementType.PRODUCTION:
+      // case RequirementType.GENERATION:
       throw `Use subclass satisfies() for requirement type ${this.type}`;
+    }
+  }
+
+  protected parseType(): string {
+    const withPlural: Array<string> = [RequirementType.OCEANS, RequirementType.FLOATERS, RequirementType.GREENERIES, RequirementType.CITIES, RequirementType.COLONIES, RequirementType.RESOURCE_TYPES, RequirementType.PARTY_LEADERS];
+
+    if (this._amount > 1 && withPlural.includes(this._type)) {
+      return this.getTypePlural();
+    }
+
+    return this._type;
+  }
+
+  protected satisfiesInequality(calculated: number): boolean {
+    if (this.isMax) {
+      return calculated <= this.amount;
+    }
+    return calculated >= this.amount;
+  }
+
+  private amountToString(): string {
+    if (this._type === RequirementType.OXYGEN || this._type === RequirementType.VENUS) {
+      return `${this._amount}%`;
+    } else if (this._type === RequirementType.TEMPERATURE) {
+      return `${this._amount}°`;
+    } else {
+      return (this._amount !== 1 || this._isMax) ? this._amount.toString() : '';
     }
   }
 
@@ -224,15 +238,16 @@ export class TagCardRequirement extends CardRequirement {
     super(RequirementType.TAG, amount);
   }
 
-  protected parseType(): string {
-    return firstLetterUpperCase(this.tag);
-  }
   public satisfies(player: Player): boolean {
     let tagCount = player.getTagCount(this.tag);
     // PoliticalAgendas Scientists P4 hook
     if (this.tag === Tags.SCIENCE && player.hasTurmoilScienceTagBonus) tagCount += 1;
 
     return this.satisfiesInequality(tagCount);
+  }
+
+  protected parseType(): string {
+    return firstLetterUpperCase(this.tag);
   }
 }
 
@@ -241,11 +256,12 @@ export class ProductionCardRequirement extends CardRequirement {
     super(RequirementType.RESOURCE_TYPES, amount);
   }
 
-  protected parseType(): string {
-    return `${firstLetterUpperCase(this.resource)} production`;
-  }
   public satisfies(player: Player): boolean {
     return this.satisfiesInequality(player.getProduction(this.resource));
+  }
+
+  protected parseType(): string {
+    return `${firstLetterUpperCase(this.resource)} production`;
   }
 }
 
@@ -253,13 +269,16 @@ export class PartyCardRequirement extends CardRequirement {
   constructor(private party: PartyName) {
     super(RequirementType.PARTY);
   }
-  protected parseType(): string {
-    return this.party.toLowerCase();
-  }
+
   public satisfies(player: Player): boolean {
     if (player.game.turmoil !== undefined) {
-      return player.game.turmoil.canPlay(player, this.party);
+      // Man of the people hook
+      return player.game.turmoil.canPlay(player, this.party) || player.cardIsInEffect(CardName.MAN_OF_THE_PEOPLE);
     }
     return false;
+  }
+
+  protected parseType(): string {
+    return this.party.toLowerCase();
   }
 }

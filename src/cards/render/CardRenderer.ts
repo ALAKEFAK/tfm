@@ -256,6 +256,11 @@ class Builder {
     return this;
   }
 
+  public space_event(): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.SPACE_EVENT));
+    return this;
+  }
+
   public space(): Builder {
     this._addRowItem(new CardRenderItem(CardRenderItemType.SPACE));
     return this;
